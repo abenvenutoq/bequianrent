@@ -1,0 +1,58 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+        <h2 class="fw-bold"><i class="fa-solid fa-car-on me-2"></i>Nuestra Flota</h2>
+        <p class="text-white">Encuentra el vehículo perfecto para ti</p>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            <aside class="col-12 col-md-4 col-lg-3">
+                <div class="filtros-box shadow-sm p-4 border">
+                    <h5 class="fw-bold mb-3 d-flex justify-content-between align-items-center">
+                        Filtros
+                        <button class="btn btn-sm btn-outline-secondary" id="btn-limpiar">Limpiar</button>
+                    </h5>
+                    
+                    <form id="formFiltros">
+                        <div class="mb-3">
+                            <label for="filtro-marca" class="form-label small fw-bold text-muted">Marca</label>
+                            <select id="filtro-marca" class="form-select">
+                                <option value="">Todas las marcas</option>
+                                </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="filtro-anio" class="form-label small fw-bold text-muted">Año</label>
+                            <select id="filtro-anio" class="form-select">
+                                <option value="">Cualquier año</option>
+                                </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="filtro-disponible" class="form-label small fw-bold text-muted">Disponibilidad</label>
+                            <select id="filtro-disponible" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="true">Solo Disponibles</option>
+                                <option value="false">No Disponibles</option>
+                            </select>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-4 text-muted small border-top pt-2" id="contador-resultados">
+                        Cargando vehículos...
+                    </div>
+                </div>
+            </aside>
+
+            <main class="col-12 col-md-8 col-lg-9">
+                <div class="row g-4 mb-4" id="contenedor-autos">
+                    
+                    <div class="col-12 text-center py-5 d-none" id="sin-resultados">
+                        <p class="fs-4 text-muted">No se encontraron vehículos con estos filtros.</p>
+                        <button class="btn btn-outline-primary mt-2" onclick="document.getElementById('btn-limpiar').click()">Ver todos los vehículos</button>
+                    </div>
+
+                </div>
+            </main>
+
+        </div>
+    </div>

@@ -1,0 +1,58 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-sliders me-2"></i>Configura tu Reserva</h2>
+    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p>
+</div>
+
+<div class="container mb-5 flex-grow-1">
+    <div class="row g-4" id="reserva-contenedor-principal">
+        
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100" id="detalle-vehiculo-card">
+                <div class="text-center p-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando vehículo...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 10px;">
+                <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>
+                
+                <div class="alert alert-danger d-none" id="reserva-error-alerta" role="alert"></div>
+
+                <form id="formReserva">
+                    <div class="mb-3">
+                        <label for="fechaDesde" class="form-label fw-semibold">Fecha de Retiro (Inicio)</label>
+                        <input type="date" class="form-control form-control-lg" id="fechaDesde" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>
+                        <input type="date" class="form-control form-control-lg" id="fechaHasta" required>
+                    </div>
+
+                    <div class="bg-light rounded p-3 mb-4 border text-dark">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Cantidad de Días:</span>
+                            <span id="resumen-dias" class="fw-bold">0 días</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">
+                            <span class="fs-5 fw-semibold">Total a Pagar:</span>
+                            <span id="resumen-total" class="fs-4 fw-bold text-success">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" id="btnConfirmarReserva">
+                            <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar
+                        </button>
+                        <a routerLink="ver-autos" class="btn btn-outline-secondary btn-sm mt-2">Volver a la galería</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

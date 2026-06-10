@@ -1,0 +1,102 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-user-lock me-2"></i>Bienvenido de  nuevo!</h2>
+    <p class="text-white">Ingresa a tu cuenta de BequianRent</p>
+</div>
+
+<div class="container my-1 py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6 col-md-10"> 
+            <div class="card shadow-lg border-0 login-container">
+                                    
+                <div class="card-body p-4 p-md-5">
+                    
+                    <div id="login-error" class="alert alert-danger d-none text-center" role="alert">
+                        Correo o contraseña incorrectos.
+                    </div>
+
+                    <form id="formLogin" novalidate>
+                        
+                        <div class="mb-4">
+                            <label for="login-correo" class="form-label fw-semibold">Correo Electrónico</label>
+                            <input type="email" class="form-control form-control-lg" id="login-correo" placeholder="ejemplo@correo.com" required>
+                            <div class="invalid-feedback">Por favor ingresa tu correo.</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label for="login-password" class="form-label fw-semibold mb-0">Contraseña</label>
+                                <a href="#" class="text-decoration-underline" onclick="abrirModalRecuperar()">¿Olvidaste tu contraseña?</a>
+                            </div>
+                            
+                            <div class="input-group input-group-lg">
+                                <input type="password" class="form-control" id="login-password" placeholder="••••••••" required>
+                                <span class="input-group-text user-select-none" id="ojo-login-password" style="cursor: pointer;">
+                                    <i class="fa-solid fa-eye"></i>
+                                </span>
+                                <div class="invalid-feedback">Por favor ingresa tu contraseña.</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" class="form-check-input" id="recordarme">
+                            <label class="form-check-label" for="recordarme">Recordar mi sesión</label>
+                        </div>
+
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg btn-login text-white">Ingresar</button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="mb-0 text-muted">¿No tienes una cuenta? <a href="registro.html" class="text-decoration-none fw-bold">Regístrate aquí</a></p>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="modalRecuperarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalRecuperarLabel">Recuperar Contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formRecuperar">
+                    <div id="recuperar-alerta" class="alert d-none" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label for="recuperar-correo" class="form-label fw-semibold">Correo Electrónico registrado</label>
+                        <input type="email" class="form-control" id="recuperar-correo" placeholder="tu@correo.cl">
+                        <div class="invalid-feedback" id="recuperar-correo-error"></div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="recuperar-password" class="form-label fw-semibold">Nueva Contraseña</label>
+                        <div class="input-group has-validation">
+                            <input type="password" class="form-control" id="recuperar-password" placeholder="••••••••">
+                            <span class="input-group-text user-select-none" id="ojo-recup-pass" style="cursor: pointer;"><i class="fa-solid fa-eye"></i></span>
+                            <div class="invalid-feedback" id="recuperar-password-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="recuperar-confirmPassword" class="form-label fw-semibold">Repetir Nueva Contraseña</label>
+                        <div class="input-group has-validation">
+                            <input type="password" class="form-control" id="recuperar-confirmPassword" placeholder="••••••••">
+                            <span class="input-group-text user-select-none" id="ojo-recup-confirm" style="cursor: pointer;"><i class="fa-solid fa-eye"></i></span>
+                            <div class="invalid-feedback" id="recuperar-confirmPassword-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary">Recuperar Contraseña</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

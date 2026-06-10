@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+/* ESTILOS GLOBALES*/
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #dfdfdf;
+    color: #212529;
+    min-height: 100dvh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header_rent {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/img/header.jpg') no-repeat center center;
+    background-size: cover;
+    height: 40vh;
+    min-height: 400px;
+}
+
+/* ESTILOS PARA TARJETAS DE AUTOS */
+.car-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+}
+
+.car-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    background-color: #e9ecef; 
+}
+
+/*ESTILOS LOGIN*/
+.login-container {
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+.card-header-login {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+.btn-login {
+    background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-login:hover {
+    background: linear-gradient(135deg, #1e3c72 0%, #122546 100%);
+    transform: translateY(-1px);
+}
+
+/*ESTILOS PARA HEADERS*/
+.header-global {
+    background: linear-gradient(135deg, #2cafe3 0%, #2a5298 100%) !important;
+}
+
+.filtros-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    position: sticky;
+    top: 100px; /* Para que baje junto con el scroll */
+    z-index: 10;
+}
+
+.car-card.no-disponible {
+    opacity: 0.75;
+}
+
+img.card-img-top.no-disponible {
+    filter: grayscale(100%);
+}
+
+
+/* ESTILOS PARA TARJETA DE PERFIL */
+.avatar-circle {
+    width: 150px;
+    height: 150px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    color: #0d6efd;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 4px solid white;
+}
+
+.bg-admin {
+    background-color: #ff0033;
+}
+
+.bg-cliente {
+    background-color: #0d6efd;
+}

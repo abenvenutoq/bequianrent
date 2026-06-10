@@ -1,3 +1,7 @@
+# COMANDOS NECESARIO PARA CORRER EN LA OFICINA, INGRESAR EN CONSOLA 
+$env:PATH = "C:\Users\angelo.benvenuto\node-v24.16.0;" + $env:PATH
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
 # Bequianrent
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.

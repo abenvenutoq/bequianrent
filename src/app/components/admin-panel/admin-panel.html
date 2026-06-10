@@ -1,0 +1,45 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-users-gear me-2"></i>Panel Administración</h2>
+    <p class="text-white">Panel administración de BequianRent</p>
+</div>
+
+
+<div class="container my-5 flex-grow-1">
+    <div class="row">
+        
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">
+                <div class="d-flex flex-column gap-2">
+                    <button class="btn btn-light w-100 text-start fw-semibold" id="btn-usuarios" onclick="cambiarVista('usuarios')">
+                        <i class="fa-solid fa-users me-2"></i>Usuarios Registrados
+                    </button>
+                    <button class="btn btn-light w-100 text-start fw-semibold" id="btn-reservas" onclick="cambiarVista('reservas')">
+                        <i class="fa-solid fa-calendar-days me-2"></i>Reservas Realizadas
+                    </button>
+                    
+                    <button class="btn btn-light w-100 text-start fw-semibold" id="btn-vehiculos" onclick="cambiarVista('vehiculos')">
+                        <i class="fa-solid fa-car me-2"></i>Vehículos en Flota
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card shadow-sm border-0 p-4 bg-white" style="border-radius: 10px;">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+                    <h2 class="h4 fw-bold mb-0 text-dark" id="panel-titulo">Usuarios Registrados</h2>
+                    <span class="badge bg-primary fs-6" id="panel-contador">0</span>
+                </div>
+
+                <div class="table-responsive" id="panel-tabla-contenedor">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
