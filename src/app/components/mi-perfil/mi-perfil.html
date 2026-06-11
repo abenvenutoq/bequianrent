@@ -1,0 +1,59 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>MI Perfil</h2>
+    <p class="text-white">Gestiona tu información personal</p>
+</div>
+
+<main class="container my-5 flex-grow-1">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="card shadow rounded-4 overflow-hidden border-0">
+                <div class="row g-0">
+                    
+                    <div class="col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-5">
+                        <div class="avatar-circle mb-3 mx-auto">
+                            <i class="fa-solid fa-user" id="avatarIcon"></i>
+                        </div>
+                        <h4 class="fw-bold mb-1 text-center" id="resumenNombre">Cargando...</h4>
+                        <span class="badge bg-primary px-3 py-2 rounded-pill mt-2" id="resumenRol">Cargando...</span>
+                    </div>
+
+                    <div class="col-md-8 p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                            <h4 class="fw-bold text-primary mb-0">Información Personal</h4>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="text-muted small fw-bold text-uppercase mb-1">Nombre Completo</label>
+                                <p class="fs-5 mb-0" id="perfilNombre">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>
+                                <p class="fs-5 mb-0" id="perfilRut">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>
+                                <p class="fs-5 mb-0" id="perfilCorreo">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-muted small fw-bold text-uppercase mb-1">Teléfono</label>
+                                <p class="fs-5 mb-0" id="perfilTelefono">-</p>
+                            </div>
+                            <div class="col-12">
+                                <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>
+                                <p class="fs-5 mb-0" id="perfilDireccion">-</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 pt-3">
+                            <button onclick="window.location.href='editar_perfil.html'" class="btn btn-outline-primary px-4">
+                                <i class="fa-solid fa-pen me-2"></i> Editar Datos
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

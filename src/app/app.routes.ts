@@ -8,6 +8,7 @@ import { MisReservas } from './components/mis-reservas/mis-reservas';
 import { AdminPanel } from './components/admin-panel/admin-panel';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
+import { MiPerfil } from './components/mi-perfil/mi-perfil';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: 'ver-autos', component: VerAutos },
     { path: 'app-navbar', component: Navbar},
     { path: 'app-footer', component: Footer},
+    { path: 'mi-perfil', component: MiPerfil},
     // La ruta dinámica sigue igual, lista para recibir el ID del vehículo
     { path: 'reservar-auto/:id', component: ReservarAuto }, 
     { path: 'mis-reservas', component: MisReservas },

@@ -1,0 +1,15 @@
+.filtros-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    position: sticky;
+    top: 120px; /* Para que baje junto con el scroll */
+    z-index: 10;
+}
+
+.car-card.no-disponible {
+    opacity: 0.75;
+}
+
+img.card-img-top.no-disponible {
+    filter: grayscale(100%);
+}

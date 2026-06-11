@@ -1,0 +1,18 @@
+/*ESTILOS LOGIN*/
+.login-container {
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+.card-header-login {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+.btn-login {
+    background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-login:hover {
+    background: linear-gradient(135deg, #1e3c72 0%, #122546 100%);
+    transform: translateY(-1px);
+}
