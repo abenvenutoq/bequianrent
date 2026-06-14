@@ -1,0 +1,167 @@
+1. Comandos para verificar versiones
+
+Sirven para revisar si tienes Node, npm y Angular instalados.
+
+node -v
+npm -v
+ng version
+
+Si ng no funciona, prueba:
+
+npx ng versión
+
+2. Comandos para verificar la carpeta del proyecto
+
+Sirven para confirmar que estás parado en la carpeta correcta.
+
+dir
+
+O también:
+
+ls
+
+Para ver archivos ocultos, como .npmrc:
+
+dir -Force
+
+Debes revisar que existan estos archivos:
+
+package.json
+angular.json
+src
+
+El más importante para instalar es:
+
+package.json
+
+3. Comandos para verificar el registry de npm
+
+Sirven para saber desde dónde está descargando npm.
+
+npm config get registry
+
+Debe responder:
+
+https://registry.npmjs.org/
+
+Si aparece otra URL, corrígelo con:
+
+npm config set registry https://registry.npmjs.org/
+
+4. Comandos para revisar si el package-lock tiene rutas raras
+
+Sirve para detectar si el package-lock.json quedó apuntando a una URL problemática.
+
+Select-String -Path package-lock.json -Pattern "applied-caas|artifactory"
+
+Si aparece algo, conviene borrar package-lock.json y reconstruir la instalación.
+
+5. Comandos para limpiar el proyecto
+
+Estos comandos se usan cuando npm install queda pegado, falla o node_modules quedó incompleto.
+
+Limpiar node_modules
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
+Borrar package-lock.json
+Remove-Item -Force package-lock.json -ErrorAction SilentlyContinue
+Alternativa si PowerShell no puede borrar node_modules
+cmd /c rmdir /s /q node_modules
+
+Y luego:
+
+del package-lock.json
+Limpiar caché de npm
+npm cache clean --force
+
+Importante: no borres estos archivos/carpetas:
+
+src
+package.json
+angular.json
+tsconfig.json
+
+6. Comando normal para instalar dependencias
+
+Este es el comando básico:
+
+npm install
+
+Se usa cuando el proyecto ya existe y necesita reconstruir node_modules.
+
+7. Comando recomendado si npm se queda pegado o da timeout
+
+Este fue el que te funcionó:
+
+npm install --registry=https://registry.npmjs.org/ --fetch-timeout=120000 --fetch-retries=5
+
+Este comando hace tres cosas:
+
+--registry=https://registry.npmjs.org/ fuerza a npm a usar el registry oficial.
+
+--fetch-timeout=120000 le da más tiempo antes de cortar la descarga.
+
+--fetch-retries=5 permite varios reintentos si una descarga falla.
+
+
+8. Comando para validar que la instalación quedó bien
+
+Después de instalar, revisa que exista node_modules:
+
+dir
+
+También puedes validar dependencias con:
+
+npm list --depth=0
+
+Si quieres ver auditoría de seguridad:
+
+npm audit
+
+Pero por ahora no recomiendo usar:
+
+npm audit fix --force
+
+porque puede cambiar versiones importantes y romper el proyecto Angular.
+
+9. Comandos para ejecutar Angular
+
+Comando normal:
+
+ng serve
+
+Para abrir automáticamente en el navegador:
+
+ng serve -o
+
+Si ng no se reconoce:
+
+npx ng serve -o
+
+La aplicación normalmente queda en:
+
+http://localhost:4200
+
+10. Comando para detener Angular o cancelar npm
+
+Cuando algo queda ejecutándose y quieres detenerlo:
+
+Ctrl + C
+
+Sirve para detener:
+
+npm install
+ng serve
+
+11. Comandos si aparece problema con esbuild
+
+Primero prueba ejecutar Angular. Si aparece error relacionado con esbuild, recién ahí usa:
+
+npm approve-scripts --allow-scripts-pending
+
+Después:
+
+npm rebuild esbuild
+
+Y luego:
+
+ng serve -o

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common'; // 👈 Necesario para usar *ngIf
-
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { Sesion } from '../../models/modelos';
+import { AuthService } from '../../services/auth.services.';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -9,19 +11,33 @@ import { CommonModule } from '@angular/common'; // 👈 Necesario para usar *ngI
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
-export class Navbar {
-  // Simulamos el objeto 'sesion' idéntico al tuyo. 
-  // Modifica estos valores estáticos para probar los distintos estados:
-  sesion = {
-    loged: true,       // true o false
-    rol: 'admin',      // 'admin' o 'cliente'
-    nombre: 'Juan Pérez'
-  };
+export class Navbar implements OnInit, OnDestroy {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
-  cerrarSesion() {
-    // Al hacer clic, cambiamos los datos estáticos de la sesión
-    this.sesion.loged = false;
-    this.sesion.rol = '';
-    this.sesion.nombre = '';
+  sesion: Sesion | null = null;
+  
+  private sesionSub!: Subscription;
+
+  ngOnInit(): void {
+
+    this.sesionSub = this.authService.Sesion$.subscribe({
+      next: (datosSesion) => {
+        this.sesion = datosSesion;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  cerrarSesion(): void {
+    this.authService.cerrarSesion();
+    this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.sesionSub) {
+      this.sesionSub.unsubscribe();
+    }
   }
 }
