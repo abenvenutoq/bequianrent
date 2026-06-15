@@ -1,14 +1,75 @@
 <div class="bg-primary text-white py-4 mb-4 text-center header-global">
     <h2 class="fw-bold"><i class="fa-solid fa-list-check me-2"></i>Mis Reservas</h2>
-    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p>
+    <p class="text-white">Revisa el historial y estado de tus arriendos</p>
 </div>
 
 <div class="container mb-5 flex-grow-1">
-    <div class="row g-4" id="contenedor-mis-reservas">
-        <div class="text-center py-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando reservas...</span>
+    
+    <div *ngIf="cargando" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando reservas...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!cargando">
+        
+        <div *ngIf="misReservas.length === 0" class="text-center py-5 bg-light rounded-4 border border-dashed">
+            <i class="fa-solid fa-car-side fa-4x text-muted mb-3"></i>
+            <h3 class="text-secondary fw-bold">Aún no tienes reservas</h3>
+            <p class="text-muted mb-4">¡Explora nuestra flota y planifica tu próximo viaje!</p>
+            <a routerLink="/ver-autos" class="btn btn-primary px-4 fw-bold">Ver Catálogo de Autos</a>
+        </div>
+
+        <div *ngIf="misReservas.length > 0" class="row g-4">
+            
+            <div class="col-12 col-md-6 col-xl-4" *ngFor="let reserva of misReservas">
+                <div class="card shadow-sm border-0 h-100 rounded-4 overflow-hidden position-relative">
+                    
+                    <span class="badge position-absolute top-0 end-0 m-3 fs-6 z-1 shadow-sm"
+                          [ngClass]="{
+                            'bg-success': reserva.estado === 'Confirmada',
+                            'bg-secondary': reserva.estado === 'Completada',
+                            'bg-danger': reserva.estado === 'Cancelada',
+                            'bg-warning text-dark': reserva.estado === 'Pendiente'
+                          }">
+                        {{ reserva.estado | uppercase }}
+                    </span>
+
+                    <img *ngIf="reserva.vehiculo" [src]="reserva.vehiculo.imagen" class="card-img-top object-fit-cover" alt="Vehículo" style="height: 220px; border-bottom: 3px solid #f8f9fa;">
+                    
+                    <div *ngIf="!reserva.vehiculo" class="bg-secondary d-flex justify-content-center align-items-center text-white" style="height: 220px;">
+                        <i class="fa-solid fa-image fa-3x"></i>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <h4 class="card-title fw-bold text-dark mt-1" *ngIf="reserva.vehiculo">
+                            {{ reserva.vehiculo.marca }} {{ reserva.vehiculo.modelo }}
+                        </h4>
+                        <h4 class="card-title fw-bold text-dark mt-1" *ngIf="!reserva.vehiculo">
+                            Vehículo No Disponible
+                        </h4>
+                        
+                        <p class="text-muted small mb-3">ID Reserva: #{{ reserva.id }}</p>
+
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item bg-transparent px-0 text-secondary">
+                                <i class="fa-regular fa-calendar me-2 text-primary"></i> 
+                                <strong>Desde:</strong> {{ reserva.fechaDesde | date:'dd/MM/yyyy' }}
+                            </li>
+                            <li class="list-group-item bg-transparent px-0 text-secondary">
+                                <i class="fa-regular fa-calendar-check me-2 text-primary"></i> 
+                                <strong>Hasta:</strong> {{ reserva.fechaHasta | date:'dd/MM/yyyy' }}
+                            </li>
+                        </ul>
+
+                        <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded text-dark mt-auto border">
+                            <span class="fw-semibold">Total Pagado:</span>
+                            <span class="fw-bold fs-5 text-success">{{ reserva.total | currency:'CLP':'symbol-narrow':'1.0-0' }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

@@ -22,6 +22,7 @@ export class ReservarAuto implements OnInit {
   fechaHasta: string = '';
   diasReserva: number = 0;
   totalPagar: number = 0;
+  fechaMinima!: string;
 
   constructor(
   private authService: AuthService,
@@ -32,6 +33,10 @@ export class ReservarAuto implements OnInit {
 ) {}
 
   ngOnInit(): void {
+
+    const hoy = new Date();
+
+    this.fechaMinima = hoy.toISOString().split('T')[0];
 
     if (!this.authService.estaLogueado()) {
       this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });

@@ -18,8 +18,8 @@ export class AuthService {
         this.inicializarUsuario();
     }
 
-    private isBrowser(): boolean {
-        return typeof window !== 'undefined' && typeof sessionStorage !== 'undefined';
+    isBrowser(): boolean {
+        return typeof window !== 'undefined';
     }
 
     inicializarUsuario(): void {
@@ -111,6 +111,29 @@ export class AuthService {
         return {
             ok: true,
             mensaje: `Bienvenido/a ${usuario.nombre}, redireccionando ...`
+        };
+    }
+
+    cambiarPassword(correo: string, nuevaClave: string): ResultadoOperacion {
+        if (!this.isBrowser()) return { ok: false, mensaje: "Error del sistema" };
+
+        const usuarios = this.obtenerUsusario();
+        const index = usuarios.findIndex(u => u.correo.toLowerCase() === correo.trim().toLowerCase());
+
+        if (index === -1) {
+            return {
+                ok: false,
+                mensaje: "El correo electrónico no se encuentra registrado."
+            };
+        }
+
+        // Actualizamos la contraseña y guardamos
+        usuarios[index].password = nuevaClave;
+        this.guardarUsuario(usuarios);
+
+        return {
+            ok: true,
+            mensaje: "¡Contraseña actualizada con éxito! Ya puedes iniciar sesión."
         };
     }
 

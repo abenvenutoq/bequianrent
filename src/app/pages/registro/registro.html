@@ -7,87 +7,113 @@
     <div class="row justify-content-center">
         <div class="col-12 col-xl-10">
             <div class="card shadow-lg border-0 form-container">
-                <div class="card-body p-4 p-md-3">
+                <div class="card-body p-4 p-md-5">
                     
-                    <div id="alert-success" class="alert alert-success d-none text-center animate-fade" role="alert">
-                        <span id="success-message"></span>
+                    <div *ngIf="mensajeExito" class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">
+                        <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}
                     </div>
 
-                    <div id="alert-error" class="alert alert-danger d-none text-center animate-fade" role="alert">
-                        Verifica los valores ingresados y los campos obligatorios
+                    <div *ngIf="mensajeError" class="alert alert-danger text-center animate__animated animate__fadeIn" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeError }}
+                        <span *ngIf="mensajeError.includes('registrado')">
+                            <a routerLink="/login" class="alert-link ms-1">Puedes iniciar sesión aquí.</a>
+                        </span>
                     </div>
 
-                    <form id="formRegistro" novalidate>
+                    <form (ngSubmit)="registrar()" #formRegistro="ngForm" novalidate>
                         <div class="row g-4">
                             
                             <div class="col-12 col-md-6">
                                 <label for="nombre" class="form-label fw-semibold">Nombre *</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Juan">
-                                <div class="invalid-feedback" id="nombre-error"></div>
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan" 
+                                    required [(ngModel)]="nombre" #nombreInput="ngModel"
+                                    [ngClass]="{'is-invalid': nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)}">
+                                <div class="invalid-feedback">El nombre es obligatorio.</div>
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <label for="apellido" class="form-label fw-semibold">Apellido *</label>
-                                <input type="text" class="form-control" id="apellido" placeholder="Pérez">
-                                <div class="invalid-feedback" id="apellido-error"></div>
+                                <label for="apellido" class="form-label fw-semibold">Apellidos *</label>
+                                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Pérez" 
+                                    required [(ngModel)]="apellido" #apellidoInput="ngModel"
+                                    [ngClass]="{'is-invalid': apellidoInput.invalid && (apellidoInput.dirty || apellidoInput.touched)}">
+                                <div class="invalid-feedback">El apellido es obligatorio.</div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <label for="rut" class="form-label fw-semibold">RUT *</label>
-                                <input type="text" class="form-control" id="rut" placeholder="12345678-K" maxlength="12">
-                                <div class="invalid-feedback" id="rut-error"></div>
+                                <input type="text" class="form-control" id="rut" name="rut" placeholder="12345678-9" 
+                                    required [(ngModel)]="rut" #rutInput="ngModel"
+                                    [ngClass]="{'is-invalid': rutInput.invalid && (rutInput.dirty || rutInput.touched)}">
+                                <div class="invalid-feedback">El RUT es obligatorio.</div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <label for="correo" class="form-label fw-semibold">Correo Electrónico *</label>
-                                <input type="email" class="form-control" id="correo" placeholder="juan.perez@example.com">
-                                <div class="invalid-feedback" id="correo-error"></div>
+                                <input type="email" class="form-control" id="correo" name="correo" placeholder="juan@correo.cl" 
+                                    required email [(ngModel)]="correo" #correoInput="ngModel"
+                                    [ngClass]="{'is-invalid': correoInput.invalid && (correoInput.dirty || correoInput.touched)}">
+                                <div class="invalid-feedback" *ngIf="correoInput.errors?.['required']">El correo es obligatorio.</div>
+                                <div class="invalid-feedback" *ngIf="correoInput.errors?.['email']">Introduce un formato válido.</div>
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <label for="telefono" class="form-label fw-semibold">Teléfono *</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">+56</span>
-                                    <input type="tel" class="form-control" id="telefono" placeholder="912345678" maxlength="9">
-                                    <div class="invalid-feedback" id="telefono-error"></div>
+                                <label for="telefono" class="form-label fw-semibold">Teléfono Móvil *</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text bg-light">+56 9</span>
+                                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="87654321" 
+                                        required [(ngModel)]="telefono" #telefonoInput="ngModel"
+                                        [ngClass]="{'is-invalid': telefonoInput.invalid && (telefonoInput.dirty || telefonoInput.touched)}">
+                                    <div class="invalid-feedback">El teléfono es obligatorio.</div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <label for="direccion" class="form-label fw-semibold">Dirección (Opcional)</label>
-                                <input type="text" class="form-control" id="direccion" placeholder="Av. Siempre Viva 742">
-                                <div class="invalid-feedback" id="direccion-error"></div>
+                                <label for="direccion" class="form-label fw-semibold">Dirección *</label>
+                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Av. Principal 123" 
+                                    required [(ngModel)]="direccion" #direccionInput="ngModel"
+                                    [ngClass]="{'is-invalid': direccionInput.invalid && (direccionInput.dirty || direccionInput.touched)}">
+                                <div class="invalid-feedback">La dirección es obligatoria.</div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <label for="password" class="form-label fw-semibold">Contraseña *</label>
                                 <div class="input-group has-validation">
-                                    <input type="password" class="form-control" id="password" placeholder="••••••••">
-                                    <span class="input-group-text user-select-none" id="ojo-password" style="cursor: pointer;"><i class="fa-solid fa-eye"></i></span>
+                                    <input [type]="verPass ? 'text' : 'password'" class="form-control" id="password" name="password" placeholder="••••••••" 
+                                        required minlength="8" [(ngModel)]="password" #passInput="ngModel"
+                                        [ngClass]="{'is-invalid': passInput.invalid && (passInput.dirty || passInput.touched)}">
                                     
-                                    <div class="invalid-feedback" id="password-error">
-                                        Debe ser entre 8 y 16 caracteres, incluir 1 mayúscula, 1 número y 1 carácter especial (!@#$%&*).
-                                    </div>
+                                    <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">
+                                        <i class="fa-solid" [ngClass]="verPass ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                    </span>
+                                    <div class="invalid-feedback" *ngIf="passInput.errors?.['required']">La contraseña es obligatoria.</div>
+                                    <div class="invalid-feedback" *ngIf="passInput.errors?.['minlength']">Mínimo 8 caracteres.</div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <label for="confirmPassword" class="form-label fw-semibold">Repetir Contraseña *</label>
                                 <div class="input-group has-validation">
-                                    <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••">
-                                    <span class="input-group-text user-select-none" id="ojo-confirmPassword" style="cursor: pointer;"><i class="fa-solid fa-eye"></i></span>
+                                    <input [type]="verConfirm ? 'text' : 'password'" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="••••••••" 
+                                        required [(ngModel)]="confirmPassword" #confirmInput="ngModel"
+                                        [ngClass]="{'is-invalid': confirmInput.invalid && (confirmInput.dirty || confirmInput.touched)}">
                                     
-                                    <div class="invalid-feedback" id="confirmPassword-error">Las contraseñas no coinciden.</div>
+                                    <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">
+                                        <i class="fa-solid" [ngClass]="verConfirm ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                    </span>
+                                    <div class="invalid-feedback">Debes confirmar tu contraseña.</div>
                                 </div>
                             </div>
 
-                        </div> <div class="mt-3 mb-4">
-                            <small class="text-muted">* Campos obligatorios</small>
+                        </div> 
+                        
+                        <div class="mt-3 mb-4">
+                            <small class="text-muted">* Todos los campos son obligatorios</small>
                         </div>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-3">
-                            <button type="button" id="btnLimpiar" class="btn btn-outline-secondary px-4 me-md-2">Limpiar formulario</button>
-                            <button type="submit" class="btn btn-primary px-5 btn-registrar">Registrar</button>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-4">
+                            <button type="button" class="btn btn-outline-secondary px-4 me-md-2" (click)="limpiarFormulario(formRegistro)">Limpiar formulario</button>
+                            
+                            <button type="submit" class="btn btn-primary px-5 fw-bold" [disabled]="formRegistro.invalid">Registrarme</button>
                         </div>
 
                     </form>

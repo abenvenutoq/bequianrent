@@ -41,13 +41,13 @@
                 <form (ngSubmit)="confirmarReserva()" #formReserva="ngForm">
                     <div class="mb-3">
                         <label for="fechaDesde" class="form-label fw-semibold">Fecha de Recogida (Inicio)</label>
-                        <input type="date" class="form-control form-control-lg" name="fechaDesde" 
+                        <input type="date" class="form-control form-control-lg" name="fechaDesde" [min]="fechaMinima" 
                             [(ngModel)]="fechaDesde" (change)="calcularTotal()" required>
                     </div>
                     
                     <div class="mb-4">
                         <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>
-                        <input type="date" class="form-control form-control-lg" name="fechaHasta" 
+                        <input type="date" class="form-control form-control-lg" name="fechaHasta" [min]="fechaMinima" 
                             [(ngModel)]="fechaHasta" (change)="calcularTotal()" required>
                     </div>
 

@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { Navbar } from "./components/navbar/navbar";
 import { Footer } from "./components/footer/footer";
 
+import { ReservaService } from './services/reservas.services';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer],
@@ -11,4 +13,6 @@ import { Footer } from "./components/footer/footer";
 })
 export class App {
   protected readonly title = signal('bequianrent');
+
+  constructor(private reservaService: ReservaService) {}
 }

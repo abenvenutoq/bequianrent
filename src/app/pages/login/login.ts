@@ -14,9 +14,17 @@ import { FormsModule } from '@angular/forms';
 export class Login {
   correo = '';
   password = '';
-
   mensaje = '';
   enviado = false;
+
+  recupCorreo = '';
+  recupPassword = '';
+  recupConfirmPassword = '';
+  mensajeRecup = '';
+  recupExito = false;
+
+  verRecupPass = false;
+  verRecupConfirm = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -58,4 +66,40 @@ export class Login {
       }
     }, 1500);
   }
+
+  toggleRecupPass(): void {
+    this.verRecupPass = !this.verRecupPass;
+  }
+
+  toggleRecupConfirm(): void {
+    this.verRecupConfirm = !this.verRecupConfirm;
+  }
+
+  recuperarPassword(): void {
+    if (!this.recupCorreo || !this.recupPassword || !this.recupConfirmPassword) {
+      this.mensajeRecup = 'Por favor, completa todos los campos.';
+      this.recupExito = false;
+      return;
+    }
+
+    if (this.recupPassword !== this.recupConfirmPassword) {
+      this.mensajeRecup = 'Las contraseñas no coinciden.';
+      this.recupExito = false;
+      return;
+    }
+
+    const resultado = this.authService.cambiarPassword(this.recupCorreo, this.recupPassword);
+    
+    this.mensajeRecup = resultado.mensaje;
+    this.recupExito = resultado.ok;
+
+    if (resultado.ok) {
+      this.recupCorreo = '';
+      this.recupPassword = '';
+      this.recupConfirmPassword = '';
+      this.verRecupPass = false;
+      this.verRecupConfirm = false;
+    }
+  }
+
 }

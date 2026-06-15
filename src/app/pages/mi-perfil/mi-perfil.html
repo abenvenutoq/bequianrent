@@ -1,9 +1,9 @@
 <div class="bg-primary text-white py-4 mb-4 text-center header-global">
-    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>MI Perfil</h2>
+    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>Mi Perfil</h2>
     <p class="text-white">Gestiona tu información personal</p>
 </div>
 
-<main class="container my-5 flex-grow-1">
+<main class="container my-5 flex-grow-1" *ngIf="usuario">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
             <div class="card shadow rounded-4 overflow-hidden border-0">
@@ -13,43 +13,116 @@
                         <div class="avatar-circle mb-3 mx-auto">
                             <i class="fa-solid fa-user" id="avatarIcon"></i>
                         </div>
-                        <h4 class="fw-bold mb-1 text-center" id="resumenNombre">Cargando...</h4>
-                        <span class="badge bg-primary px-3 py-2 rounded-pill mt-2" id="resumenRol">Cargando...</span>
+                        <h4 class="fw-bold mb-1 text-center">{{ usuario.nombre }} {{ usuario.apellido }}</h4>
+                        <span class="badge px-3 py-2 rounded-pill mt-2" 
+                              [ngClass]="usuario.rol === 'admin' ? 'bg-danger' : 'bg-primary'">
+                            {{ usuario.rol | uppercase }}
+                        </span>
                     </div>
 
                     <div class="col-md-8 p-5">
-                        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-                            <h4 class="fw-bold text-primary mb-0">Información Personal</h4>
+                        
+                        <div *ngIf="!editando">
+                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                                <h4 class="fw-bold text-primary mb-0">Información Personal</h4>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>
+                                    <p class="fs-5 mb-0 fw-semibold">{{ usuario.rut }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>
+                                    <p class="fs-5 mb-0">{{ usuario.correo }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-muted small fw-bold text-uppercase mb-1">Teléfono</label>
+                                    <p class="fs-5 mb-0">{{ usuario.telefono || 'No registrado' }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>
+                                    <p class="fs-5 mb-0">{{ usuario.direccion || 'No registrada' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 pt-3">
+                                <button (click)="activarEdicion()" class="btn btn-outline-primary px-4">
+                                    <i class="fa-solid fa-pen me-2"></i> Editar Datos
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-bold text-uppercase mb-1">Nombre Completo</label>
-                                <p class="fs-5 mb-0" id="perfilNombre">-</p>
+                        <div *ngIf="editando">
+                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                                <h4 class="fw-bold text-primary mb-0">Editar Información</h4>
                             </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>
-                                <p class="fs-5 mb-0" id="perfilRut">-</p>
+
+                            <div *ngIf="mensajeError" class="alert alert-danger text-center animate__animated animate__fadeIn mb-3" role="alert">
+                                <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeError }}
                             </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>
-                                <p class="fs-5 mb-0" id="perfilCorreo">-</p>
+                            <div *ngIf="mensajeExito" class="alert alert-success text-center animate__animated animate__fadeIn mb-3" role="alert">
+                                <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}
                             </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-bold text-uppercase mb-1">Teléfono</label>
-                                <p class="fs-5 mb-0" id="perfilTelefono">-</p>
-                            </div>
-                            <div class="col-12">
-                                <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>
-                                <p class="fs-5 mb-0" id="perfilDireccion">-</p>
-                            </div>
+
+                            <form (ngSubmit)="guardarCambios()" #formEditar="ngForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small text-muted">Nombre *</label>
+                                        <input type="text" class="form-control" name="nombre" [(ngModel)]="nombreEdit" required #nInput="ngModel"
+                                            [ngClass]="{'is-invalid': nInput.invalid && (nInput.dirty || nInput.touched)}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small text-muted">Apellido *</label>
+                                        <input type="text" class="form-control" name="apellido" [(ngModel)]="apellidoEdit" required #aInput="ngModel"
+                                            [ngClass]="{'is-invalid': aInput.invalid && (aInput.dirty || aInput.touched)}">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small text-muted">Teléfono *</label>
+                                        <input type="text" class="form-control" name="telefono" [(ngModel)]="telefonoEdit" required #tInput="ngModel"
+                                            [ngClass]="{'is-invalid': tInput.invalid && (tInput.dirty || tInput.touched)}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small text-muted">Dirección *</label>
+                                        <input type="text" class="form-control" name="direccion" [(ngModel)]="direccionEdit" required #dInput="ngModel"
+                                            [ngClass]="{'is-invalid': dInput.invalid && (dInput.dirty || dInput.touched)}">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small text-muted">Nueva Contraseña *</label>
+                                        <div class="input-group has-validation">
+                                            <input [type]="verPass ? 'text' : 'password'" class="form-control" name="password" minlength="8" [(ngModel)]="passwordEdit" required #pInput="ngModel"
+                                                [ngClass]="{'is-invalid': pInput.invalid && (pInput.dirty || pInput.touched)}">
+                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">
+                                                <i class="fa-solid" [ngClass]="verPass ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                            </span>
+                                            <div class="invalid-feedback">Mínimo 8 caracteres.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>
+                                        <div class="input-group has-validation">
+                                            <input [type]="verConfirm ? 'text' : 'password'" class="form-control" name="confirmPassword" [(ngModel)]="confirmPasswordEdit" required #cpInput="ngModel"
+                                                [ngClass]="{'is-invalid': cpInput.invalid && (cpInput.dirty || cpInput.touched)}">
+                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">
+                                                <i class="fa-solid" [ngClass]="verConfirm ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 pt-3 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary px-4" [disabled]="formEditar.invalid">
+                                        <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios
+                                    </button>
+                                    <button type="button" (click)="cancelarEdicion()" class="btn btn-outline-secondary px-4">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="mt-5 pt-3">
-                            <button onclick="window.location.href='editar_perfil.html'" class="btn btn-outline-primary px-4">
-                                <i class="fa-solid fa-pen me-2"></i> Editar Datos
-                            </button>
-                        </div>
                     </div>
 
                 </div>
