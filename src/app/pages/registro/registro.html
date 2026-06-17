@@ -71,7 +71,7 @@
                             <div class="col-12 col-md-6">
                                 <label for="password" class="form-label fw-semibold">Contraseña *</label>
                                 <div class="input-group has-validation">
-                                    <input [type]="verPass ? 'text' : 'password'" class="form-control" id="password" formControlName="password" placeholder="••••••••" 
+                                    <input [type]="verPass ? 'text' : 'password'" class="form-control" id="password" formControlName="password" autocomplete="new-password" placeholder="••••••••" 
                                         [ngClass]="{'is-invalid': f['password'].invalid && (f['password'].dirty || f['password'].touched)}">
                                     <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">
                                         <i class="fa-solid" [ngClass]="verPass ? 'fa-eye-slash' : 'fa-eye'"></i>

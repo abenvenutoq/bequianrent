@@ -34,7 +34,7 @@ export class AdminPanel implements OnInit {
 
     // Validación de seguridad: Si no es admin, lo expulsamos al inicio
     if (!this.authService.esAdmin()) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       return;
     }
 

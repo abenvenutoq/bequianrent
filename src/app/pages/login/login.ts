@@ -1,45 +1,71 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.services.';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, ReactiveFormsModule], 
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {
-  correo = '';
-  password = '';
+export class Login implements OnInit {
+  
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private fb = inject(FormBuilder);
+
+  loginForm!: FormGroup;
+  recupForm!: FormGroup;
+
   mensaje = '';
   enviado = false;
-
-  recupCorreo = '';
-  recupPassword = '';
-  recupConfirmPassword = '';
   mensajeRecup = '';
   recupExito = false;
 
+  verPass = false;
   verRecupPass = false;
   verRecupConfirm = false;
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
-  ) {}
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      correo: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
+
+    this.recupForm = this.fb.group({
+      recupCorreo: ['', [Validators.required, Validators.email]],
+      recupPassword: ['', [Validators.required, 
+        Validators.minLength(6),
+        Validators.maxLength(18),
+        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
+      recupConfirmPassword: ['', [Validators.required]]
+    }, {
+      validators: this.passwordsIguales
+    });
+  }
+
+  get f() { return this.loginForm.controls; }
+  get fr() { return this.recupForm.controls; }
+
+  togglePass(): void { this.verPass = !this.verPass; }
+  toggleRecupPass(): void { this.verRecupPass = !this.verRecupPass; }
+  toggleRecupConfirm(): void { this.verRecupConfirm = !this.verRecupConfirm; }
 
   iniciarSesion(): void {
-    if (!this.correo || !this.password) {
-      this.mensaje = 'Por favor, completa todos los campos.';
-      this.enviado = false;
+    this.mensaje = '';
+    this.enviado = false;
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 
-    const resultado = this.authService.iniciarSesion(this.correo, this.password);
+    const { correo, password } = this.loginForm.value;
+    const resultado = this.authService.iniciarSesion(correo, password);
 
     if (!resultado.ok) {
       this.mensaje = resultado.mensaje;
@@ -48,7 +74,7 @@ export class Login {
     }
 
     this.enviado = true;
-    this.mensaje = resultado.mensaje; 
+    this.mensaje = resultado.mensaje;
 
     setTimeout(() => {
       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
@@ -59,47 +85,56 @@ export class Login {
         return;
       }
 
-      if (sesion?.rol === 'admin') {
+      if (sesion?.rol == 'admin') {
         this.router.navigate(['/admin-panel']);
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/mi-perfil']);
       }
     }, 1500);
   }
 
-  toggleRecupPass(): void {
-    this.verRecupPass = !this.verRecupPass;
-  }
-
-  toggleRecupConfirm(): void {
-    this.verRecupConfirm = !this.verRecupConfirm;
-  }
-
   recuperarPassword(): void {
-    if (!this.recupCorreo || !this.recupPassword || !this.recupConfirmPassword) {
-      this.mensajeRecup = 'Por favor, completa todos los campos.';
+    this.mensajeRecup = '';
+    this.recupExito = false;
+
+    if (this.recupForm.invalid) {
+      this.recupForm.markAllAsTouched();
+      return;
+    }
+
+    const { recupCorreo, recupPassword } = this.recupForm.value;
+    const resultado = this.authService.cambiarPassword(recupCorreo, recupPassword);
+
+    if (!resultado.ok) {
+      this.mensajeRecup = resultado.mensaje;
       this.recupExito = false;
       return;
     }
 
-    if (this.recupPassword !== this.recupConfirmPassword) {
-      this.mensajeRecup = 'Las contraseñas no coinciden.';
-      this.recupExito = false;
-      return;
-    }
-
-    const resultado = this.authService.cambiarPassword(this.recupCorreo, this.recupPassword);
-    
+    this.recupExito = true;
     this.mensajeRecup = resultado.mensaje;
-    this.recupExito = resultado.ok;
-
-    if (resultado.ok) {
-      this.recupCorreo = '';
-      this.recupPassword = '';
-      this.recupConfirmPassword = '';
-      this.verRecupPass = false;
-      this.verRecupConfirm = false;
-    }
+    
+    setTimeout(() => {
+      this.recupForm.reset();
+      this.mensajeRecup = '';
+      const modalElement = document.getElementById('modalRecuperar');
+      if (modalElement) {
+        const bootstrap = (window as any).bootstrap;
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        if (modalInstance) modalInstance.hide();
+      }
+    }, 2000);
   }
-
+  
+  passwordsIguales(group: FormGroup): { [key: string]: boolean } | null {
+    const pass = group.get('recupPassword')?.value;
+    const confirmPass = group.get('recupConfirmPassword')?.value;
+    
+    if (pass && confirmPass && pass !== confirmPass) {
+      group.get('recupConfirmPassword')?.setErrors({ noCoinciden: true });
+      return { noCoinciden: true };
+    }
+    return null;
+  }
+ 
 }
