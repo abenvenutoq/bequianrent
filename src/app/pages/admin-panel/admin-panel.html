@@ -63,7 +63,7 @@
                                 <td class="fw-semibold text-secondary">{{ u.rut }}</td>
                                 <td>{{ u.nombre }}</td>
                                 <td>{{ u.correo }}</td>
-                                <td>{{ u.telefono || 'No registrado' }}</td>
+                                <td>{{ u.fechaNacimiento || 'No registrado' }}</td>
                                 <td>
                                     <span class="badge" [ngClass]="u.rol === 'admin' ? 'bg-danger' : 'bg-info text-dark'">
                                         {{ u.rol | uppercase }}

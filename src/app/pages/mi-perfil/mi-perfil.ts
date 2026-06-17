@@ -21,7 +21,7 @@ export class MiPerfil implements OnInit {
 
   nombreEdit = '';
   apellidoEdit = '';
-  telefonoEdit = '';
+  fechaNacimientoEdit = '';
   direccionEdit = '';
   passwordEdit = '';
   confirmPasswordEdit = '';
@@ -67,7 +67,7 @@ export class MiPerfil implements OnInit {
     if (this.usuario) {
       this.nombreEdit = this.usuario.nombre;
       this.apellidoEdit = this.usuario.apellido;
-      this.telefonoEdit = this.usuario.telefono;
+      this.fechaNacimientoEdit = this.usuario.fechaNacimiento;
       this.direccionEdit = this.usuario.direccion;
       this.passwordEdit = this.usuario.password;
       this.confirmPasswordEdit = this.usuario.password;
@@ -99,7 +99,7 @@ export class MiPerfil implements OnInit {
     if (index !== -1) {
       usuarios[index].nombre = this.nombreEdit;
       usuarios[index].apellido = this.apellidoEdit;
-      usuarios[index].telefono = this.telefonoEdit;
+      usuarios[index].fechaNacimiento = this.fechaNacimientoEdit;
       usuarios[index].direccion = this.direccionEdit;
       usuarios[index].password = this.passwordEdit;
 

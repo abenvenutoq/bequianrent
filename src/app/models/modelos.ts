@@ -22,7 +22,7 @@ export interface Usuario {
     apellido: string;
     rut: string;
     correo: string;
-    telefono: string;
+    fechaNacimiento: string;
     direccion: string;
     password: string;
     rol: RolUsuario;

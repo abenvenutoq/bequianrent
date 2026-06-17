@@ -7,7 +7,7 @@ export const USUARIOS: Usuario[] = [
         apellido: "Benvenuto",
         rut: "15940700-4",
         correo: "admin@admin.cl",
-        telefono: "963083858",
+        fechaNacimiento: "13-11-1984",
         direccion: "Av. Maria Elena 370",
         password: "#Asdf1234",
         rol: "admin"
@@ -18,7 +18,7 @@ export const USUARIOS: Usuario[] = [
         apellido: "Quilobran",
         rut: "9843565-4",
         correo: "cliente@cliente.cl",
-        telefono: "987654321",
+        fechaNacimiento: "23-12-1962",
         direccion: "Av. Maria Elena 370",
         password: "#Asdf1234",
         rol: "cliente"

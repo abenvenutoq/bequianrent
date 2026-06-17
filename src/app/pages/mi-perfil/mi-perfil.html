@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Teléfono</label>
-                                    <p class="fs-5 mb-0">{{ usuario.telefono || 'No registrado' }}</p>
+                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento || 'No registrado' }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>
@@ -80,7 +80,7 @@
 
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold small text-muted">Teléfono *</label>
-                                        <input type="text" class="form-control" name="telefono" [(ngModel)]="telefonoEdit" required #tInput="ngModel"
+                                        <input type="text" class="form-control" name="telefono" [(ngModel)]="fechaNacimientoEdit" required #tInput="ngModel"
                                             [ngClass]="{'is-invalid': tInput.invalid && (tInput.dirty || tInput.touched)}">
                                     </div>
                                     <div class="col-md-6">

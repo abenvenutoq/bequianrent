@@ -48,7 +48,7 @@ export class AuthService {
         apellido: string, 
         rut: string, 
         correo: string, 
-        telefono: string, 
+        fechaNacimiento: string, 
         direccion: string, 
         password: string
     ): ResultadoOperacion {
@@ -68,7 +68,7 @@ export class AuthService {
             apellido: apellido.trim(),
             rut: rut.trim(),
             correo: correo.trim(),
-            telefono: telefono.trim(),
+            fechaNacimiento: fechaNacimiento.trim(),
             direccion: direccion.trim(),
             password: password,
             rol: 'cliente'
