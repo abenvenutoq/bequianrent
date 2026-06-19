@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // 👈 Importante para el [(ngModel)] del select del estado
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
 import { ReservaService } from '../../services/reservas.services';
 import { VehiculoService } from '../../services/vehiculos.services';
 import { Usuario, Reserva, Vehiculo } from '../../models/modelos';

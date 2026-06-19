@@ -3,7 +3,7 @@ import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Sesion } from '../../models/modelos';
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
 @Component({
   selector: 'app-navbar',
   standalone: true,

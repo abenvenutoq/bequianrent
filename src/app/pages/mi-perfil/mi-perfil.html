@@ -28,19 +28,19 @@
                             </div>
 
                             <div class="row g-4">
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-nowrap">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>
-                                    <p class="fs-5 mb-0 fw-semibold">{{ usuario.rut }}</p>
+                                    <p class="fs-5 mb-0">{{ usuario.rut }}</p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-nowrap">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>
                                     <p class="fs-5 mb-0">{{ usuario.correo }}</p>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="text-muted small fw-bold text-uppercase mb-1">Teléfono</label>
-                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento || 'No registrado' }}</p>
+                                <div class="col-md-6 text-nowrap">
+                                    <label class="text-muted small fw-bold text-uppercase mb-1">Fecha de Nacimiento</label>
+                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-nowrap">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>
                                     <p class="fs-5 mb-0">{{ usuario.direccion || 'No registrada' }}</p>
                                 </div>
@@ -65,55 +65,63 @@
                                 <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}
                             </div>
 
-                            <form (ngSubmit)="guardarCambios()" #formEditar="ngForm" novalidate>
+                            <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold small text-muted">Nombre *</label>
-                                        <input type="text" class="form-control" name="nombre" [(ngModel)]="nombreEdit" required #nInput="ngModel"
-                                            [ngClass]="{'is-invalid': nInput.invalid && (nInput.dirty || nInput.touched)}">
+                                        <input type="text" class="form-control" formControlName="nombre" 
+                                            [ngClass]="{'is-invalid': f['nombre'].invalid && (f['nombre'].dirty || f['nombre'].touched)}">
+                                        <div class="invalid-feedback">El nombre es obligatorio.</div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold small text-muted">Apellido *</label>
-                                        <input type="text" class="form-control" name="apellido" [(ngModel)]="apellidoEdit" required #aInput="ngModel"
-                                            [ngClass]="{'is-invalid': aInput.invalid && (aInput.dirty || aInput.touched)}">
+                                        <input type="text" class="form-control" formControlName="apellido" 
+                                            [ngClass]="{'is-invalid': f['apellido'].invalid && (f['apellido'].dirty || f['apellido'].touched)}">
+                                        <div class="invalid-feedback">El apellido es obligatorio.</div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold small text-muted">Teléfono *</label>
-                                        <input type="text" class="form-control" name="telefono" [(ngModel)]="fechaNacimientoEdit" required #tInput="ngModel"
-                                            [ngClass]="{'is-invalid': tInput.invalid && (tInput.dirty || tInput.touched)}">
+                                        <label class="form-label fw-bold small text-muted">Fecha de Nacimiento *</label>
+                                        <input type="date" class="form-control" formControlName="fechaNacimiento" 
+                                            [ngClass]="{'is-invalid': f['fechaNacimiento'].invalid && (f['fechaNacimiento'].dirty || f['fechaNacimiento'].touched)}">
+                                        <div class="invalid-feedback" *ngIf="f['fechaNacimiento'].errors?.['required']">La fecha es obligatoria.</div>
+                                        <div class="invalid-feedback" *ngIf="f['fechaNacimiento'].errors?.['menorDeEdad']">Debes ser mayor de 13 años.</div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold small text-muted">Dirección *</label>
-                                        <input type="text" class="form-control" name="direccion" [(ngModel)]="direccionEdit" required #dInput="ngModel"
-                                            [ngClass]="{'is-invalid': dInput.invalid && (dInput.dirty || dInput.touched)}">
+                                        <label class="form-label fw-bold small text-muted">Dirección</label>
+                                        <input type="text" class="form-control" formControlName="direccion" 
+                                            [ngClass]="{'is-invalid': f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)}">
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label fw-bold small text-muted">Nueva Contraseña *</label>
+                                        <label class="form-label fw-bold small text-muted">Contraseña *</label>
                                         <div class="input-group has-validation">
-                                            <input [type]="verPass ? 'text' : 'password'" class="form-control" name="password" minlength="8" [(ngModel)]="passwordEdit" required #pInput="ngModel"
-                                                [ngClass]="{'is-invalid': pInput.invalid && (pInput.dirty || pInput.touched)}">
+                                            <input [type]="verPass ? 'text' : 'password'" class="form-control" formControlName="password" autocomplete="new-password"
+                                                [ngClass]="{'is-invalid': f['password'].invalid && (f['password'].dirty || f['password'].touched)}">
                                             <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">
                                                 <i class="fa-solid" [ngClass]="verPass ? 'fa-eye-slash' : 'fa-eye'"></i>
                                             </span>
-                                            <div class="invalid-feedback">Mínimo 8 caracteres.</div>
+                                            <div class="invalid-feedback" *ngIf="f['password'].errors?.['required']">La contraseña es obligatoria.</div>
+                                            <div class="invalid-feedback" *ngIf="f['password'].errors?.['minlength'] || f['password'].errors?.['maxlength']">Debe tener entre 6 y 18 caracteres.</div>
+                                            <div class="invalid-feedback" *ngIf="f['password'].errors?.['pattern']">Debe tener 1 mayúscula y 1 número.</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>
                                         <div class="input-group has-validation">
-                                            <input [type]="verConfirm ? 'text' : 'password'" class="form-control" name="confirmPassword" [(ngModel)]="confirmPasswordEdit" required #cpInput="ngModel"
-                                                [ngClass]="{'is-invalid': cpInput.invalid && (cpInput.dirty || cpInput.touched)}">
+                                            <input [type]="verConfirm ? 'text' : 'password'" class="form-control" formControlName="confirmPassword" autocomplete="new-password"
+                                                [ngClass]="{'is-invalid': f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)}">
                                             <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">
                                                 <i class="fa-solid" [ngClass]="verConfirm ? 'fa-eye-slash' : 'fa-eye'"></i>
                                             </span>
+                                            <div class="invalid-feedback" *ngIf="f['confirmPassword'].errors?.['required']">Debes confirmar tu contraseña.</div>
+                                            <div class="invalid-feedback" *ngIf="f['confirmPassword'].errors?.['noCoinciden']">Las contraseñas no coinciden.</div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="mt-5 pt-3 d-flex gap-2">
-                                    <button type="submit" class="btn btn-primary px-4" [disabled]="formEditar.invalid">
+                                    <button type="submit" class="btn btn-primary px-4" [disabled]="perfilForm.invalid">
                                         <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios
                                     </button>
                                     <button type="button" (click)="cancelarEdicion()" class="btn btn-outline-secondary px-4">

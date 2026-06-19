@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkActive, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
 import { ReactiveFormsModule, FormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ValidacionService } from '../../services/validacion.services';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class Login implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
+  private ValidacionService = inject(ValidacionService);
 
   loginForm!: FormGroup;
   recupForm!: FormGroup;
@@ -44,7 +46,7 @@ export class Login implements OnInit {
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
       recupConfirmPassword: ['', [Validators.required]]
     }, {
-      validators: this.passwordsIguales
+      validators: this.ValidacionService.passwordIguales
     });
   }
 
@@ -125,16 +127,5 @@ export class Login implements OnInit {
       }
     }, 2000);
   }
-  
-  passwordsIguales(group: FormGroup): { [key: string]: boolean } | null {
-    const pass = group.get('recupPassword')?.value;
-    const confirmPass = group.get('recupConfirmPassword')?.value;
-    
-    if (pass && confirmPass && pass !== confirmPass) {
-      group.get('recupConfirmPassword')?.setErrors({ noCoinciden: true });
-      return { noCoinciden: true };
-    }
-    return null;
-  }
- 
+   
 }

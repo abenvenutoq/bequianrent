@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 
 import { Registro } from './registro';
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
 
 describe('Pruebas Unitarias - Componente Registro', () => {
   let component: Registro;
@@ -37,7 +37,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(component).toBeTruthy();
   });
 
-  // Prueba unitaria para validad que sea mayor de 13 años.
+  // Test para validad que sea mayor de 13 años.
   it('Debe invalidar el formulario si la persona es menor de 13 años', () => {
     const controlFecha = component.registroForm.get('fechaNacimiento');
 
@@ -50,7 +50,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(controlFecha?.errors?.['menorDeEdad']).toBeTruthy();
   });
 
-  // Prueba unitaria para que las contraseñas sean iguales.
+  // Test para que las contraseñas sean iguales.
   it('Debe invalidar el formulario si las contraseñas no coinciden', () => {
     const pass = component.registroForm.get('password');
     const confirmPass = component.registroForm.get('confirmPassword');

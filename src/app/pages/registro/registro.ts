@@ -3,7 +3,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
+import { ValidacionService } from '../../services/validacion.services';
 
 @Component({
   selector: 'app-registro',
@@ -17,6 +18,7 @@ export class Registro implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private ValidacionService = inject(ValidacionService);
 
   registroForm!: FormGroup;
 
@@ -28,21 +30,22 @@ export class Registro implements OnInit {
   ngOnInit(): void {
 
     this.registroForm = this.fb.group({
-      nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
-      rut: ['', [Validators.required, this.validarRutChileno()]],
-      correo: ['',[Validators.required, Validators.email]],
-      fechaNacimiento: ['', [Validators.required, this.validarEdad(13)]],
+      nombre: ['', [Validators.required, Validators.minLength(1), this.ValidacionService.isEmpty]],
+      apellido: ['', [Validators.required, Validators.minLength(1), this.ValidacionService.isEmpty]],
+      rut: ['', [Validators.required, this.ValidacionService.validarRutChileno()]],
+      correo: ['',[Validators.required, this.ValidacionService.isValidEmail]],
+      fechaNacimiento: ['', [Validators.required, this.ValidacionService.validarEdad(13)]],
       direccion: [''],
       password: ['',[
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(18),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)
+        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        this.ValidacionService.isEmpty
       ]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required, this.ValidacionService.isEmpty]]
     }, {
-      validators: this.passwordIguales
+      validators: this.ValidacionService.passwordIguales
     });
 
   }
@@ -91,70 +94,4 @@ export class Registro implements OnInit {
       this.router.navigate(['/login']);
     }, 2500);
   }
-
-  validarEdad(edadMinima: number) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) return null;
-      
-      const fechaNac = new Date(control.value);
-      const hoy = new Date();
-      let edad = hoy.getFullYear() - fechaNac.getFullYear();
-      const m = hoy.getMonth() - fechaNac.getMonth();
-      
-      if (m < 0 || (m === 0 && hoy.getDate() < fechaNac.getDate())) {
-        edad--;
-      }
-      
-      return edad < edadMinima ? { menorDeEdad: true } : null;
-    };
-  }
-
-
-  validarRutChileno() {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const rutCompleto = control.value;
-      
-      // Si el campo está vacío, no lo validamos aquí (de eso se encarga Validators.required)
-      if (!rutCompleto) return null; 
-
-      // Validación de formato básico
-      if (!/^[0-9]+-[0-9kK]{1}$/.test(rutCompleto)) return { rutInvalido: true };
-      
-      const partes = rutCompleto.split("-");
-      const cuerpo = partes[0];
-      const dvIngresado = partes[1].toLowerCase();
-      
-      // Calcular dígito verificador esperado
-      let suma = 0;
-      let multiplicador = 2;
-      
-      for (let i = cuerpo.length - 1; i >= 0; i--) {
-          suma += parseInt(cuerpo.charAt(i)) * multiplicador;
-          multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
-      }
-      
-      let dvEsperado: string | number = 11 - (suma % 11);
-      if (dvEsperado === 11) dvEsperado = "0";
-      else if (dvEsperado === 10) dvEsperado = "k";
-      else dvEsperado = dvEsperado.toString();
-      
-      // Si coinciden, devolvemos null (sin errores). Si no, devolvemos el error.
-      return dvIngresado === dvEsperado ? null : { rutInvalido: true };
-    };
-  }
-
-  passwordIguales(group: AbstractControl): ValidationErrors | null {
-
-    const pass = group.get('password')?.value;
-    const confirmPass = group.get('confirmPassword')?.value;
-
-    if (pass && confirmPass && pass !== confirmPass) {
-      group.get('confirmPassword')?.setErrors({ noCoinciden: true});
-      return { noCoinciden: true}
-    }
-
-    return null;
-
-  }
-
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
 import { ReservaService } from '../../services/reservas.services';
 import { VehiculoService } from '../../services/vehiculos.services';
 import { Reserva, Vehiculo } from '../../models/modelos';

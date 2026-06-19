@@ -3,13 +3,13 @@ import { Usuario } from "../models/modelos";
 export const USUARIOS: Usuario[] = [
     {
         id: 1,
-        nombre: "Angelo",
-        apellido: "Benvenuto",
+        nombre: "Administrador",
+        apellido: "Bequianrent",
         rut: "15940700-4",
-        correo: "admin@admin.cl",
-        fechaNacimiento: "13-11-1984",
-        direccion: "Av. Maria Elena 370",
-        password: "#Asdf1234",
+        correo: "admin@bequianrent.cl",
+        fechaNacimiento: "1984-11-13",
+        direccion: "",
+        password: "Qwe123",
         rol: "admin"
     },
     {
@@ -17,10 +17,10 @@ export const USUARIOS: Usuario[] = [
         nombre: "Maria",
         apellido: "Quilobran",
         rut: "9843565-4",
-        correo: "cliente@cliente.cl",
-        fechaNacimiento: "23-12-1962",
+        correo: "cliente@gmail.com",
+        fechaNacimiento: "1962-12-23",
         direccion: "Av. Maria Elena 370",
-        password: "#Asdf1234",
+        password: "Qwe123",
         rol: "cliente"
     }
 ]

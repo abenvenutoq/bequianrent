@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.services.';
+import { AuthService } from '../../services/auth.services';
 import { VehiculoService } from '../../services/vehiculos.services';
 import { ReservaService } from '../../services/reservas.services';
 import { Vehiculo } from '../../models/modelos';

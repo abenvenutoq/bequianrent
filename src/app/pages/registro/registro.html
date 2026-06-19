@@ -27,14 +27,18 @@
                                 <label for="nombre" class="form-label fw-semibold">Nombre *</label>
                                 <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Juan" 
                                     [ngClass]="{'is-invalid': f['nombre'].invalid && (f['nombre'].dirty || f['nombre'].touched)}">
-                                <div class="invalid-feedback">El nombre es obligatorio.</div>
+
+                                <div class="invalid-feedback" *ngIf="f['nombre'].errors?.['required']">El nombre es obligatorio.</div>
+                                <div class="invalid-feedback" *ngIf="f['nombre'].errors?.['isEmpty']">El nombre no puede estar vacío.</div>
+
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <label for="apellido" class="form-label fw-semibold">Apellidos *</label>
                                 <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Pérez" 
                                     [ngClass]="{'is-invalid': f['apellido'].invalid && (f['apellido'].dirty || f['apellido'].touched)}">
-                                <div class="invalid-feedback">El apellido es obligatorio.</div>
+                                <div class="invalid-feedback" *ngIf="f['apellido'].errors?.['required']">El apellido es obligatorio.</div>
+                                <div class="invalid-feedback" *ngIf="f['apellido'].errors?.['isEmpty']">El apellido no puede estar vacío.</div>
                             </div>
 
                             <div class="col-12 col-md-6">
@@ -51,7 +55,7 @@
                                 <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="juan@correo.cl" 
                                     [ngClass]="{'is-invalid': f['correo'].invalid && (f['correo'].dirty || f['correo'].touched)}">
                                 <div class="invalid-feedback" *ngIf="f['correo'].errors?.['required']">El correo es obligatorio.</div>
-                                <div class="invalid-feedback" *ngIf="f['correo'].errors?.['email']">Introduce un formato válido.</div>
+                                <div class="invalid-feedback" *ngIf="f['correo'].errors?.['emailInvalido']">Introduce un formato válido (Ej: algo@algo.cl)</div>
                             </div>
 
                             <div class="col-12 col-md-6">

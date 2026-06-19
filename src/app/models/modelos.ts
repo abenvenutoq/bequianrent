@@ -8,7 +8,7 @@ export interface Vehiculo {
     tipo: string;
     anio: number;
     precio: number;
-    disponible: Boolean;
+    disponible: boolean;
     transmision: string;
     pasajeros: number;
     rendimiento: string;
@@ -44,7 +44,7 @@ export interface Sesion {
     nombre: string;
     correo: string;
     rol: RolUsuario;
-    loged: Boolean;
+    loged: boolean;
 }
 
 export interface MensajeVista {
