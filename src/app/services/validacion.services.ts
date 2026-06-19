@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 
 export interface ResultadoClave {
   largoMinimo: boolean;
@@ -79,17 +79,14 @@ export class ValidacionService {
     return (control: AbstractControl): ValidationErrors | null => {
       const rutCompleto = control.value;
       
-      // Si el campo está vacío, no lo validamos aquí (de eso se encarga Validators.required)
       if (!rutCompleto) return null; 
 
-      // Validación de formato básico
       if (!/^[0-9]+-[0-9kK]{1}$/.test(rutCompleto)) return { rutInvalido: true };
       
       const partes = rutCompleto.split("-");
       const cuerpo = partes[0];
       const dvIngresado = partes[1].toLowerCase();
       
-      // Calcular dígito verificador esperado
       let suma = 0;
       let multiplicador = 2;
       
@@ -103,7 +100,6 @@ export class ValidacionService {
       else if (dvEsperado === 10) dvEsperado = "k";
       else dvEsperado = dvEsperado.toString();
       
-      // Si coinciden, devolvemos null (sin errores). Si no, devolvemos el error.
       return dvIngresado === dvEsperado ? null : { rutInvalido: true };
     };
   }
@@ -113,6 +109,31 @@ export class ValidacionService {
         return true;
     }
     return direccion.trim().length > 0;
+  }
+
+  validarFechasReserva(control: AbstractControl): ValidationErrors | null {
+    const fechaDesde = control.get('fechaDesde')?.value;
+    const fechaHasta = control.get('fechaHasta')?.value;
+
+    if (!fechaDesde || !fechaHasta) {
+      return null;
+    }
+
+    const inicio = new Date(fechaDesde);
+    const fin = new Date(fechaHasta);
+
+    if (fin < inicio) {
+      control.get('fechaHasta')?.setErrors({ fechaAnterior: true });
+      return { fechaAnterior: true };
+    }
+
+    const erroresHasta = control.get('fechaHasta')?.errors;
+    if (erroresHasta && erroresHasta['fechaAnterior']) {
+      delete erroresHasta['fechaAnterior'];
+      control.get('fechaHasta')?.setErrors(Object.keys(erroresHasta).length ? erroresHasta : null);
+    }
+
+    return null;
   }
 
 }
