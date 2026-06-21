@@ -67,7 +67,7 @@ export class MiPerfil implements OnInit {
       ]],
       confirmPassword: ['', [Validators.required]]
     }, {
-      validators: this.ValidacionService.passwordIguales
+      validators: this.ValidacionService.passwordIguales('password', 'confirmPassword')
     });
   }
 
@@ -130,13 +130,15 @@ export class MiPerfil implements OnInit {
       this.usuario = usuarios[index];
       
       this.mensajeExito = '¡Datos y contraseña actualizados con éxito!';
-      
+
       setTimeout(() => {
         this.editando = false;
         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
             this.router.navigate(['/mi-perfil']);
         });
       }, 1500);
+
+      
     }
   }
 
