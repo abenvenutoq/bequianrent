@@ -54,7 +54,7 @@
                                 <th>RUT</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
-                                <th>Teléfono</th>
+                                <th>Fecha Nacimiento</th>
                                 <th>Rol</th>
                             </tr>
                         </thead>
@@ -63,7 +63,7 @@
                                 <td class="fw-semibold text-secondary text-nowrap">{{ u.rut }}</td>
                                 <td class="text-nowrap">{{ u.nombre }}</td>
                                 <td class="text-nowrap">{{ u.correo }}</td>
-                                <td class="text-nowrap">{{ u.fechaNacimiento || 'No registrado' }}</td>
+                                <td class="text-nowrap">{{ u.fechaNacimiento || 'No registrado' | date: 'dd-MM-yyyy' }}</td>
                                 <td>
                                     <span class="badge" [ngClass]="u.rol === 'admin' ? 'bg-danger' : 'bg-info text-dark'">
                                         {{ u.rol | uppercase }}

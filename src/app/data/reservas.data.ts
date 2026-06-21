@@ -4,7 +4,7 @@ export const RESERVAS: Reserva[] = [
     {
         id: 1,
         idVehiculo: 1,
-        correo: "admin@admin.cl",
+        correo: "admin@bequianrent.cl",
         rut: "15940700-4",
         fechaDesde: new Date("2026-06-15"),
         fechaHasta: new Date("2026-06-22"),
@@ -14,7 +14,7 @@ export const RESERVAS: Reserva[] = [
     {
         id: 2,
         idVehiculo: 2,
-        correo: "admin@admin.cl",
+        correo: "admin@bequianrent.cl",
         rut: "15940700-4",
         fechaDesde: new Date("2026-06-16"),
         fechaHasta: new Date("2026-06-23"),

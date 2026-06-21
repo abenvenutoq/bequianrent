@@ -45,7 +45,7 @@ export class Registro implements OnInit {
       ]],
       confirmPassword: ['', [Validators.required, this.ValidacionService.isEmpty]]
     }, {
-      validators: this.ValidacionService.passwordIguales
+      validators: this.ValidacionService.passwordIguales('password', 'confirmPassword')
     });
 
   }

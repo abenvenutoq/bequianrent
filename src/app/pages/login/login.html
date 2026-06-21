@@ -25,7 +25,7 @@
                             <input type="email" class="form-control" id="login-correo" formControlName="correo" autocomplete="email" placeholder="ejemplo@correo.cl"
                                 [ngClass]="{'is-invalid': f['correo'].invalid && (f['correo'].dirty || f['correo'].touched)}">
                             <div class="invalid-feedback" *ngIf="f['correo'].errors?.['required']">El correo es obligatorio.</div>
-                            <div class="invalid-feedback" *ngIf="f['correo'].errors?.['email']">Ingresa un formato de correo válido.</div>
+                            <div class="invalid-feedback" *ngIf="f['correo'].errors?.['emailInvalido']">Ingresa un formato de correo válido.</div>
                         </div>
                         
                         <div class="mb-4">

@@ -34,19 +34,19 @@ export class Login implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      correo: ['', [Validators.required, Validators.email]],
+      correo: ['', [Validators.required, this.ValidacionService.isValidEmail]],
       password: ['', [Validators.required]]
     });
 
     this.recupForm = this.fb.group({
-      recupCorreo: ['', [Validators.required, Validators.email]],
+      recupCorreo: ['', [Validators.required, this.ValidacionService.isValidEmail]],
       recupPassword: ['', [Validators.required, 
         Validators.minLength(6),
         Validators.maxLength(18),
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
-      recupConfirmPassword: ['', [Validators.required]]
+      recupConfirmPassword: ['', [Validators.required, this.ValidacionService.isEmpty]]
     }, {
-      validators: this.ValidacionService.passwordIguales
+      validators: this.ValidacionService.passwordIguales('recupPassword', 'recupConfirmPassword')
     });
   }
 

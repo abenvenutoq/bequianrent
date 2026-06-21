@@ -52,27 +52,17 @@ export class ValidacionService {
     };
   }
 
-  passwordIguales(group: AbstractControl): ValidationErrors | null {
+  passwordIguales(campo1: string, campo2: string) {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const valor1 = group.get(campo1)?.value;
+      const valor2 = group.get(campo2)?.value;
 
-    const pass = group.get('password')?.value;
-    const confirmPass = group.get('confirmPassword')?.value;
-
-    if (pass && confirmPass && pass !== confirmPass) {
-      group.get('confirmPassword')?.setErrors({ noCoinciden: true});
-      return { noCoinciden: true}
-    }
-    return null;
-  }
-
-
-  isPasswordSecure(password: string | null | undefined): boolean {
-    if (!password) return false;
-    const largoCorrecto = password.length >= 8 && password.length <= 16;
-    const tieneMayuscula = /[A-Z]/.test(password);
-    const tieneMinuscula = /[a-z]/.test(password);
-    const tieneNumero = /\d/.test(password);
-
-    return largoCorrecto && tieneMayuscula && tieneMinuscula && tieneNumero;
+      if (valor1 && valor2 && valor1 !== valor2) {
+        group.get(campo2)?.setErrors({ noCoinciden: true });
+        return { noCoinciden: true };
+      }
+      return null;
+    };
   }
 
   validarRutChileno() {
