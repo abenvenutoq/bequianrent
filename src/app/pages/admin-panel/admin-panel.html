@@ -39,9 +39,9 @@
                     </h2>
                     
                     <div class="d-flex align-items-center gap-3">
-                        <a *ngIf="vistaActual === 'vehiculos'" routerLink="/registrar-auto" class="btn btn-success btn-sm fw-bold px-3">
+                        <!--<a *ngIf="vistaActual === 'vehiculos'" routerLink="/registrar-auto" class="btn btn-success btn-sm fw-bold px-3">
                             <i class="fa-solid fa-plus me-1"></i> Registrar Auto
-                        </a>
+                        </a>-->
                         <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill">{{ getContadorActual() }}</span>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                                 <th>Año</th>
                                 <th>Precio/Día</th>
                                 <th>Disponibilidad</th>
-                                <th class="text-center">Acciones</th>
+                                <!--<th class="text-center">Acciones</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -148,7 +148,7 @@
                                         {{ v.disponible ? 'Disponible' : 'Arrendado' }}
                                     </span>
                                 </td>
-                                <td class="text-center">
+                                <!--<td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
                                         <a routerLink="/editar-auto" class="btn btn-outline-primary btn-sm" title="Editar vehículo">
                                             <i class="fa-solid fa-pen-to-square"></i>
@@ -157,7 +157,7 @@
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
-                                </td>
+                                </td>-->
                             </tr>
                             <tr *ngIf="vehiculos.length === 0" class="text-center">
                                 <td colspan="6" class="text-muted py-4">No hay vehículos registrados en la flota.</td>
