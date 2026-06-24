@@ -142,12 +142,12 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Componente encargado del registro de nuevos usuarios en la app BequianRent.
-Implementa un formulario reactivo con múltiples validaciones de negocio,
+        <p>Componente encargado del registro de nuevos usuarios en la plataforma BequianRent.
+Implementa un formulario reactivo robusto con múltiples validaciones de negocio,
 garantizando la integridad y seguridad de los datos antes de guardarlos.</p>
 <ul>
 <li>Hace uso del <code>ValidacionService</code> para validar campos críticos como el RUT chileno,
-la edad mínima (13 años) y las reglas de seguridad de contraseñas.</li>
+la edad mínima (13 años) y las reglas de seguridad de contraseñas exigidas en la rúbrica.</li>
 </ul>
 
     </p>
@@ -891,7 +891,7 @@ Construye el formulario reactivo y asigna los validadores a cada campo.</p>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>acceder a los controles del formulario desde la vista HTML.</p>
+                                <div class="io-description"><p>Scceder fácilmente a los controles del formulario desde la vista HTML.</p>
 </div>
 
                         </td>
@@ -914,13 +914,13 @@ import { ValidacionService } from &#x27;../../services/validacion.services&#x27;
 
 /**
  * @description
- * Componente encargado del registro de nuevos usuarios en la app BequianRent.
- * Implementa un formulario reactivo con múltiples validaciones de negocio,
+ * Componente encargado del registro de nuevos usuarios en la plataforma BequianRent.
+ * Implementa un formulario reactivo robusto con múltiples validaciones de negocio,
  * garantizando la integridad y seguridad de los datos antes de guardarlos.
  *
  * @usageNotes
  * - Hace uso del &#x60;ValidacionService&#x60; para validar campos críticos como el RUT chileno,
- * la edad mínima (13 años) y las reglas de seguridad de contraseñas.
+ * la edad mínima (13 años) y las reglas de seguridad de contraseñas exigidas en la rúbrica.
  */
 @Component({
   selector: &#x27;app-registro&#x27;,
@@ -970,7 +970,7 @@ export class Registro implements OnInit {
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(18),
-        Validators.pattern(/^(?&#x3D;.*[A-Z])(?&#x3D;.*\d).+$/), 
+        Validators.pattern(/^(?&#x3D;.*[A-Z])(?&#x3D;.*\d).+$/),
         this.ValidacionService.isEmpty
       ]],
       confirmPassword: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isEmpty]]
@@ -982,7 +982,7 @@ export class Registro implements OnInit {
   }
 
   /**
-   * acceder a los controles del formulario desde la vista HTML.
+   * Scceder fácilmente a los controles del formulario desde la vista HTML.
    */
   get f() {
     return this.registroForm.controls;
@@ -1033,9 +1033,8 @@ export class Registro implements OnInit {
       this.mensajeError &#x3D; resultado.mensaje;
       return;
     }
-
-    this.mensajeExito &#x3D; resultado.mensaje;
     
+    this.mensajeExito &#x3D; resultado.mensaje;
     // Retraso para que el usuario pueda leer el mensaje de éxito antes de navegar
     setTimeout(() &#x3D;&gt; {
       this.router.navigate([&#x27;/login&#x27;]);

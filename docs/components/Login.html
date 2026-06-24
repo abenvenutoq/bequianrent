@@ -299,6 +299,12 @@
                                 <a href="#iniciarSesion" >iniciarSesion</a>
                             </li>
                             <li>
+                                <a href="#limpiarFormularioLogin" >limpiarFormularioLogin</a>
+                            </li>
+                            <li>
+                                <a href="#limpiarFormularioRecuperar" >limpiarFormularioRecuperar</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -372,8 +378,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/pages/login/login.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/pages/login/login.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -384,8 +390,87 @@
 <ul>
 <li>Valida el formulario de login y envía las credenciales al servicio de autenticación.
 Si las credenciales son correctas, activa un temporizador de 1.5 segundos para mostrar el mensaje de éxito
-y posteriormente redirige al usuario dinámicamente de acuerdo a su Rol (admin o cliente),</li>
+y posteriormente redirige al usuario dinámicamente de acuerdo a su Rol (Admin o Cliente),
+cumpliendo así con el requisito de privilegios diferenciados.</li>
 </ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="limpiarFormularioLogin"></a>
+                    <span class="name">
+                        <span ><b>limpiarFormularioLogin</b></span>
+                        <a href="#limpiarFormularioLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>limpiarFormularioLogin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/pages/login/login.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resetea el formulario de inicio de sesión a su estado original y limpia las alertas y banderas de estado.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="limpiarFormularioRecuperar"></a>
+                    <span class="name">
+                        <span ><b>limpiarFormularioRecuperar</b></span>
+                        <a href="#limpiarFormularioRecuperar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>limpiarFormularioRecuperar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/pages/login/login.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resetea el formulario de recuperación de contraseña a su estado original y limpia las alertas y banderas de estado.</p>
 </div>
 
                         <div class="io-description">
@@ -416,8 +501,8 @@ y posteriormente redirige al usuario dinámicamente de acuerdo a su Rol (admin o
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/pages/login/login.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/pages/login/login.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -456,8 +541,8 @@ con sus respectivas reglas de validación en tiempo de carga.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="156"
-                                    class="link-to-prism">src/app/pages/login/login.ts:156</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/pages/login/login.ts:171</a></div>
                         </td>
                     </tr>
 
@@ -499,15 +584,15 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/pages/login/login.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/pages/login/login.ts:97</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Alterna la visibilidad de la contraseña del login.</p>
+                        <div class="io-description"><p>Alterna la visibilidad de la contraseña del login entre texto plano y caracteres ocultos.</p>
 </div>
 
                         <div class="io-description">
@@ -538,8 +623,8 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/pages/login/login.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/pages/login/login.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -577,8 +662,8 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/pages/login/login.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/pages/login/login.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -627,7 +712,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/login/login.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/login/login.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -664,7 +749,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/login/login.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/login/login.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -702,7 +787,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/login/login.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/login/login.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -734,7 +819,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/login/login.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/login/login.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -771,7 +856,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/login/login.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/login/login.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -808,7 +893,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/login/login.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/login/login.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -845,7 +930,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/login/login.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/login/login.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -877,7 +962,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/login/login.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/login/login.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -915,7 +1000,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/login/login.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/login/login.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -953,7 +1038,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/login/login.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/login/login.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -991,7 +1076,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/login/login.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/login/login.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -1028,7 +1113,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/login/login.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/login/login.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -1065,7 +1150,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/login/login.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/login/login.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -1102,7 +1187,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/login/login.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/login/login.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -1137,7 +1222,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/pages/login/login.ts:94</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/pages/login/login.ts:89</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1168,7 +1253,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/pages/login/login.ts:95</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/pages/login/login.ts:92</a></div>
                                 </td>
                             </tr>
 
@@ -1181,7 +1266,7 @@ En caso de éxito, actualiza los estados para renderizar la alerta correspondien
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component, inject, OnInit } from &#x27;@angular/core&#x27;;
-import { ActivatedRoute, Router, RouterLinkActive, RouterLink } from &#x27;@angular/router&#x27;;
+import { ActivatedRoute, Router, RouterLink } from &#x27;@angular/router&#x27;;
 import { AuthService } from &#x27;../../services/auth.services&#x27;;
 import { ReactiveFormsModule, FormsModule, FormGroup, Validators, FormBuilder } from &#x27;@angular/forms&#x27;;
 import { ValidacionService } from &#x27;../../services/validacion.services&#x27;;
@@ -1197,7 +1282,6 @@ import { ValidacionService } from &#x27;../../services/validacion.services&#x27;
  * - Requiere que los servicios {@link AuthService} y {@link ValidacionService} estén correctamente inyectados.
  * - Hace uso intensivo de validaciones reactivas personalizadas (ej. estructura de correos válidos).
  */
-
 @Component({
   selector: &#x27;app-login&#x27;,
   standalone: true,
@@ -1239,19 +1323,16 @@ export class Login implements OnInit {
   /** Controla la visibilidad de la confirmación de la nueva contraseña en el formulario de recuperación. */
   verRecupConfirm &#x3D; false;
 
-
   /**
    * Ciclo de vida de Angular. Inicializa las estructuras de los formularios reactivos
    * con sus respectivas reglas de validación en tiempo de carga.
    */
   ngOnInit(): void {
-    // Inicialización del formulario de Login
     this.loginForm &#x3D; this.fb.group({
       correo: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isValidEmail]],
       password: [&#x27;&#x27;, [Validators.required]]
     });
 
-    // Inicialización del formulario de Recuperación de contraseña con las 4 validaciones de seguridad mínimas requeridas
     this.recupForm &#x3D; this.fb.group({
       recupCorreo: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isValidEmail]],
       recupPassword: [&#x27;&#x27;, [
@@ -1263,7 +1344,6 @@ export class Login implements OnInit {
       ]],
       recupConfirmPassword: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isEmpty]]
     }, {
-      // Validador personalizado para asegurar la coincidencia exacta de ambas contraseñas
       validators: this.ValidacionService.passwordIguales(&#x27;recupPassword&#x27;, &#x27;recupConfirmPassword&#x27;)
     });
   }
@@ -1272,22 +1352,44 @@ export class Login implements OnInit {
    * Provee un acceso directo y simplificado a los controles del formulario de recuperación desde la vista HTML.
    * @returns Un objeto con los AbstractControls del formulario de recuperación.
    */
-  get f() { return this.loginForm.controls; }
-  get fr() { return this.recupForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
+  get fr() {
+    return this.recupForm.controls;
+  }
 
-  /** Alterna la visibilidad de la contraseña del login. */
+  /** Alterna la visibilidad de la contraseña del login entre texto plano y caracteres ocultos. */
   togglePass(): void { this.verPass &#x3D; !this.verPass; }
   /** Alterna la visibilidad de la contraseña de recuperación. */
   toggleRecupPass(): void { this.verRecupPass &#x3D; !this.verRecupPass; }
   /** Alterna la visibilidad de la confirmación de contraseña de recuperación. */
   toggleRecupConfirm(): void { this.verRecupConfirm &#x3D; !this.verRecupConfirm; }
 
+  /**
+   * Resetea el formulario de inicio de sesión a su estado original y limpia las alertas y banderas de estado.
+   */
+  limpiarFormularioLogin(): void {
+    this.loginForm.reset();
+    this.mensaje &#x3D; &#x27;&#x27;;
+    this.enviado &#x3D; false;
+  }
+
+  /**
+   * Resetea el formulario de recuperación de contraseña a su estado original y limpia las alertas y banderas de estado.
+   */
+  limpiarFormularioRecuperar(): void {
+    this.recupForm.reset();
+    this.mensajeRecup &#x3D; &#x27;&#x27;;
+    this.recupExito &#x3D; false;
+  }
 
   /**
    * Gestiona el flujo de autenticación del usuario.
    * * Valida el formulario de login y envía las credenciales al servicio de autenticación.
    * Si las credenciales son correctas, activa un temporizador de 1.5 segundos para mostrar el mensaje de éxito
-   * y posteriormente redirige al usuario dinámicamente de acuerdo a su Rol (admin o cliente),
+   * y posteriormente redirige al usuario dinámicamente de acuerdo a su Rol (Admin o Cliente),
+   * cumpliendo así con el requisito de privilegios diferenciados.
    */
   iniciarSesion(): void {
     this.mensaje &#x3D; &#x27;&#x27;;
@@ -1310,7 +1412,6 @@ export class Login implements OnInit {
     this.enviado &#x3D; true;
     this.mensaje &#x3D; resultado.mensaje;
 
-    // Simula retraso para mejorar la experiencia de usuario y visualizar la alerta de éxito
     setTimeout(() &#x3D;&gt; {
       const returnUrl &#x3D; this.route.snapshot.queryParamMap.get(&#x27;returnUrl&#x27;);
       const sesion &#x3D; this.authService.obtenerSesion();
@@ -1320,7 +1421,6 @@ export class Login implements OnInit {
         return;
       }
 
-      // Redirección basada en privilegios/roles
       if (sesion?.rol &#x3D;&#x3D; &#x27;admin&#x27;) {
         this.router.navigate([&#x27;/admin-panel&#x27;]);
       } else {
@@ -1358,15 +1458,9 @@ export class Login implements OnInit {
     setTimeout(() &#x3D;&gt; {
       this.recupForm.reset();
       this.mensajeRecup &#x3D; &#x27;&#x27;;
-      const modalElement &#x3D; document.getElementById(&#x27;modalRecuperar&#x27;);
-      if (modalElement) {
-        const bootstrap &#x3D; (window as any).bootstrap;
-        const modalInstance &#x3D; bootstrap.Modal.getInstance(modalElement);
-        if (modalInstance) modalInstance.hide();
-      }
-    }, 2000);
+      this.recupExito &#x3D; false;
+    }, 3000);
   }
-   
 }</code></pre>
     </div>
 
@@ -1421,10 +1515,12 @@ export class Login implements OnInit {
                             &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;text-decoration-none text-primary fw-semibold&quot; data-bs-toggle&#x3D;&quot;modal&quot; data-bs-target&#x3D;&quot;#modalRecuperar&quot;&gt;¿Olvidaste tu contraseña?&lt;/a&gt;
                         &lt;/div&gt;
                         
-                        &lt;div class&#x3D;&quot;d-grid mt-4&quot;&gt;
+                        &lt;div class&#x3D;&quot;gap-2 d-md-flex justify-content-md-end border-top pt-4&quot;&gt;
+                            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; (click)&#x3D;&quot;limpiarFormularioLogin()&quot;&gt;Limpiar&lt;/button&gt;
                             &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary fw-bold py-2 shadow-sm&quot; [disabled]&#x3D;&quot;loginForm.invalid&quot;&gt;
                                 &lt;i class&#x3D;&quot;fa-solid fa-right-to-bracket me-2&quot;&gt;&lt;/i&gt;Iniciar Sesión
                             &lt;/button&gt;
+                            
                         &lt;/div&gt;
 
                         &lt;div class&#x3D;&quot;text-center pt-3&quot;&gt;
@@ -1491,7 +1587,8 @@ export class Login implements OnInit {
                     &lt;/div&gt;
 
                     &lt;div class&#x3D;&quot;d-grid gap-2 d-md-flex justify-content-md-end border-top pt-3&quot;&gt;
-                        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; data-bs-dismiss&#x3D;&quot;modal&quot;&gt;Cancelar&lt;/button&gt;
+                        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; (click)&#x3D;&quot;limpiarFormularioRecuperar()&quot;&gt;Limpiar&lt;/button&gt;
+                        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-danger&quot; data-bs-dismiss&#x3D;&quot;modal&quot;&gt;Cancelar&lt;/button&gt;
                         &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary fw-bold&quot; [disabled]&#x3D;&quot;recupForm.invalid&quot;&gt;Actualizar Contraseña&lt;/button&gt;
                     &lt;/div&gt;
                 &lt;/form&gt;
@@ -1527,7 +1624,7 @@ export class Login implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-user-lock me-2"></i>¡Bienvenido de nuevo!</h2>    <p class="text-white">Ingresa a tu cuenta de BequianRent</p></div><div class="container my-1 py-5">    <div class="row justify-content-center">        <div class="col-12 col-lg-6 col-md-10">             <div class="card shadow-lg border-0 login-container">                                                    <div class="card-body p-4 p-md-5">                        <div *ngIf="mensaje && !enviado" class="alert alert-danger text-center animate__animated animate__fadeIn" role="alert">                        <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensaje }}                    </div>                    <div *ngIf="mensaje && enviado" class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">                        <i class="fa-solid fa-circle-check me-2"></i> {{ mensaje }}                    </div>                    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate>                                                <div class="mb-4">                            <label for="login-correo" class="form-label fw-semibold">Correo Electrónico</label>                            <input type="email" class="form-control" id="login-correo" formControlName="correo" autocomplete="email" placeholder="ejemplo@correo.cl"                                [ngClass]="{\'is-invalid\': f[\'correo\'].invalid && (f[\'correo\'].dirty || f[\'correo\'].touched)}">                            <div class="invalid-feedback" *ngIf="f[\'correo\'].errors?.[\'required\']">El correo es obligatorio.</div>                            <div class="invalid-feedback" *ngIf="f[\'correo\'].errors?.[\'emailInvalido\']">Ingresa un formato de correo válido.</div>                        </div>                                                <div class="mb-4">                            <label for="login-password" class="form-label fw-semibold">Contraseña</label>                            <div class="input-group has-validation">                                <input [type]="verPass ? \'text\' : \'password\'" class="form-control" id="login-password" formControlName="password" autocomplete="current-password" placeholder="••••••••"                                    [ngClass]="{\'is-invalid\': f[\'password\'].invalid && (f[\'password\'].dirty || f[\'password\'].touched)}">                                <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">                                    <i class="fa-solid" [ngClass]="verPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                </span>                                <div class="invalid-feedback">La contraseña es obligatoria.</div>                            </div>                        </div>                                                <div class="d-flex justify-content-between align-items-center mb-4">                            <div class="form-check">                                <input class="form-check-input" type="checkbox" id="recordarme">                                <label class="form-check-label text-muted" for="recordarme">Recordarme</label>                            </div>                            <a href="#" class="text-decoration-none text-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?</a>                        </div>                                                <div class="d-grid mt-4">                            <button type="submit" class="btn btn-primary fw-bold py-2 shadow-sm" [disabled]="loginForm.invalid">                                <i class="fa-solid fa-right-to-bracket me-2"></i>Iniciar Sesión                            </button>                        </div>                        <div class="text-center pt-3">                            <p class="mb-0 text-muted">¿No tienes una cuenta? <a routerLink="/registro" class="text-decoration-none fw-bold">Regístrate aquí</a></p>                        </div>                    </form>                </div>            </div>        </div>    </div></div><div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="modalRecuperarLabel" aria-hidden="true">    <div class="modal-dialog modal-dialog-centered">        <div class="modal-content border-0 shadow-lg">            <div class="modal-header bg-primary text-white">                <h5 class="modal-title fw-bold" id="modalRecuperarLabel"><i class="fa-solid fa-key me-2"></i>Recuperar Contraseña</h5>                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>            </div>            <div class="modal-body p-4">                                <div *ngIf="mensajeRecup && !recupExito" class="alert alert-danger text-center animate__animated animate__fadeIn" role="alert">                    <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeRecup }}                </div>                <div *ngIf="mensajeRecup && recupExito" class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">                    <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeRecup }}                </div>                <form [formGroup]="recupForm" (ngSubmit)="recuperarPassword()" novalidate>                                        <div class="mb-3">                        <label for="recup-correo" class="form-label fw-semibold">Introduce tu Correo Registrado</label>                        <input type="email" class="form-control" id="recup-correo" formControlName="recupCorreo" autocomplete="email" placeholder="tu@correo.cl"                            [ngClass]="{\'is-invalid\': fr[\'recupCorreo\'].invalid && (fr[\'recupCorreo\'].dirty || fr[\'recupCorreo\'].touched)}">                        <div class="invalid-feedback">Ingresa el correo de tu cuenta.</div>                    </div>                    <div class="mb-3">                        <label for="recup-password" class="form-label fw-semibold">Nueva Contraseña</label>                        <div class="input-group has-validation">                            <input [type]="verRecupPass ? \'text\' : \'password\'" class="form-control" id="recup-password" formControlName="recupPassword" autocomplete="new-password" placeholder="••••••••"                                [ngClass]="{\'is-invalid\': fr[\'recupPassword\'].invalid && (fr[\'recupPassword\'].dirty || fr[\'recupPassword\'].touched)}">                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleRecupPass()">                                <i class="fa-solid" [ngClass]="verRecupPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                            </span>                            <div class="invalid-feedback" *ngIf="fr[\'recupPassword\'].errors?.[\'required\']">La contraseña es obligatoria.</div>                            <div class="invalid-feedback" *ngIf="fr[\'recupPassword\'].errors?.[\'minlength\'] || fr[\'recupPassword\'].errors?.[\'maxlength\']">Debe tener entre 6 y 18 caracteres.</div>                            <div class="invalid-feedback" *ngIf="fr[\'recupPassword\'].errors?.[\'pattern\']">Debe contener al menos 1 mayúscula y 1 número.</div>                        </div>                    </div>                    <div class="mb-4">                        <label for="recup-confirmPassword" class="form-label fw-semibold">Confirmar Nueva Contraseña</label>                        <div class="input-group has-validation">                            <input [type]="verRecupConfirm ? \'text\' : \'password\'" class="form-control" id="recup-confirmPassword" formControlName="recupConfirmPassword" autocomplete="new-password" placeholder="••••••••"                                [ngClass]="{\'is-invalid\': fr[\'recupConfirmPassword\'].invalid && (fr[\'recupConfirmPassword\'].dirty || fr[\'recupConfirmPassword\'].touched)}">                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleRecupConfirm()">                                <i class="fa-solid" [ngClass]="verRecupConfirm ? \'fa-eye-slash\' : \'fa-eye\'"></i>                            </span>                            <div class="invalid-feedback" *ngIf="fr[\'recupConfirmPassword\'].errors?.[\'required\']">Confirma tu contraseña.</div>                            <div class="invalid-feedback" *ngIf="fr[\'recupConfirmPassword\'].errors?.[\'noCoinciden\']">Las contraseñas no coinciden.</div>                        </div>                    </div>                    <div class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-3">                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>                        <button type="submit" class="btn btn-primary fw-bold" [disabled]="recupForm.invalid">Actualizar Contraseña</button>                    </div>                </form>            </div>        </div>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-user-lock me-2"></i>¡Bienvenido de nuevo!</h2>    <p class="text-white">Ingresa a tu cuenta de BequianRent</p></div><div class="container my-1 py-5">    <div class="row justify-content-center">        <div class="col-12 col-lg-6 col-md-10">             <div class="card shadow-lg border-0 login-container">                                                    <div class="card-body p-4 p-md-5">                        <div *ngIf="mensaje && !enviado" class="alert alert-danger text-center animate__animated animate__fadeIn" role="alert">                        <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensaje }}                    </div>                    <div *ngIf="mensaje && enviado" class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">                        <i class="fa-solid fa-circle-check me-2"></i> {{ mensaje }}                    </div>                    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate>                                                <div class="mb-4">                            <label for="login-correo" class="form-label fw-semibold">Correo Electrónico</label>                            <input type="email" class="form-control" id="login-correo" formControlName="correo" autocomplete="email" placeholder="ejemplo@correo.cl"                                [ngClass]="{\'is-invalid\': f[\'correo\'].invalid && (f[\'correo\'].dirty || f[\'correo\'].touched)}">                            <div class="invalid-feedback" *ngIf="f[\'correo\'].errors?.[\'required\']">El correo es obligatorio.</div>                            <div class="invalid-feedback" *ngIf="f[\'correo\'].errors?.[\'emailInvalido\']">Ingresa un formato de correo válido.</div>                        </div>                                                <div class="mb-4">                            <label for="login-password" class="form-label fw-semibold">Contraseña</label>                            <div class="input-group has-validation">                                <input [type]="verPass ? \'text\' : \'password\'" class="form-control" id="login-password" formControlName="password" autocomplete="current-password" placeholder="••••••••"                                    [ngClass]="{\'is-invalid\': f[\'password\'].invalid && (f[\'password\'].dirty || f[\'password\'].touched)}">                                <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">                                    <i class="fa-solid" [ngClass]="verPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                </span>                                <div class="invalid-feedback">La contraseña es obligatoria.</div>                            </div>                        </div>                                                <div class="d-flex justify-content-between align-items-center mb-4">                            <div class="form-check">                                <input class="form-check-input" type="checkbox" id="recordarme">                                <label class="form-check-label text-muted" for="recordarme">Recordarme</label>                            </div>                            <a href="#" class="text-decoration-none text-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?</a>                        </div>                                                <div class="gap-2 d-md-flex justify-content-md-end border-top pt-4">                            <button type="button" class="btn btn-secondary" (click)="limpiarFormularioLogin()">Limpiar</button>                            <button type="submit" class="btn btn-primary fw-bold py-2 shadow-sm" [disabled]="loginForm.invalid">                                <i class="fa-solid fa-right-to-bracket me-2"></i>Iniciar Sesión                            </button>                                                    </div>                        <div class="text-center pt-3">                            <p class="mb-0 text-muted">¿No tienes una cuenta? <a routerLink="/registro" class="text-decoration-none fw-bold">Regístrate aquí</a></p>                        </div>                    </form>                </div>            </div>        </div>    </div></div><div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="modalRecuperarLabel" aria-hidden="true">    <div class="modal-dialog modal-dialog-centered">        <div class="modal-content border-0 shadow-lg">            <div class="modal-header bg-primary text-white">                <h5 class="modal-title fw-bold" id="modalRecuperarLabel"><i class="fa-solid fa-key me-2"></i>Recuperar Contraseña</h5>                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>            </div>            <div class="modal-body p-4">                                <div *ngIf="mensajeRecup && !recupExito" class="alert alert-danger text-center animate__animated animate__fadeIn" role="alert">                    <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeRecup }}                </div>                <div *ngIf="mensajeRecup && recupExito" class="alert alert-success text-center animate__animated animate__fadeIn" role="alert">                    <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeRecup }}                </div>                <form [formGroup]="recupForm" (ngSubmit)="recuperarPassword()" novalidate>                                        <div class="mb-3">                        <label for="recup-correo" class="form-label fw-semibold">Introduce tu Correo Registrado</label>                        <input type="email" class="form-control" id="recup-correo" formControlName="recupCorreo" autocomplete="email" placeholder="tu@correo.cl"                            [ngClass]="{\'is-invalid\': fr[\'recupCorreo\'].invalid && (fr[\'recupCorreo\'].dirty || fr[\'recupCorreo\'].touched)}">                        <div class="invalid-feedback">Ingresa el correo de tu cuenta.</div>                    </div>                    <div class="mb-3">                        <label for="recup-password" class="form-label fw-semibold">Nueva Contraseña</label>                        <div class="input-group has-validation">                            <input [type]="verRecupPass ? \'text\' : \'password\'" class="form-control" id="recup-password" formControlName="recupPassword" autocomplete="new-password" placeholder="••••••••"                                [ngClass]="{\'is-invalid\': fr[\'recupPassword\'].invalid && (fr[\'recupPassword\'].dirty || fr[\'recupPassword\'].touched)}">                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleRecupPass()">                                <i class="fa-solid" [ngClass]="verRecupPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                            </span>                            <div class="invalid-feedback" *ngIf="fr[\'recupPassword\'].errors?.[\'required\']">La contraseña es obligatoria.</div>                            <div class="invalid-feedback" *ngIf="fr[\'recupPassword\'].errors?.[\'minlength\'] || fr[\'recupPassword\'].errors?.[\'maxlength\']">Debe tener entre 6 y 18 caracteres.</div>                            <div class="invalid-feedback" *ngIf="fr[\'recupPassword\'].errors?.[\'pattern\']">Debe contener al menos 1 mayúscula y 1 número.</div>                        </div>                    </div>                    <div class="mb-4">                        <label for="recup-confirmPassword" class="form-label fw-semibold">Confirmar Nueva Contraseña</label>                        <div class="input-group has-validation">                            <input [type]="verRecupConfirm ? \'text\' : \'password\'" class="form-control" id="recup-confirmPassword" formControlName="recupConfirmPassword" autocomplete="new-password" placeholder="••••••••"                                [ngClass]="{\'is-invalid\': fr[\'recupConfirmPassword\'].invalid && (fr[\'recupConfirmPassword\'].dirty || fr[\'recupConfirmPassword\'].touched)}">                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleRecupConfirm()">                                <i class="fa-solid" [ngClass]="verRecupConfirm ? \'fa-eye-slash\' : \'fa-eye\'"></i>                            </span>                            <div class="invalid-feedback" *ngIf="fr[\'recupConfirmPassword\'].errors?.[\'required\']">Confirma tu contraseña.</div>                            <div class="invalid-feedback" *ngIf="fr[\'recupConfirmPassword\'].errors?.[\'noCoinciden\']">Las contraseñas no coinciden.</div>                        </div>                    </div>                    <div class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-3">                        <button type="button" class="btn btn-secondary" (click)="limpiarFormularioRecuperar()">Limpiar</button>                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>                        <button type="submit" class="btn btn-primary fw-bold" [disabled]="recupForm.invalid">Actualizar Contraseña</button>                    </div>                </form>            </div>        </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'Login'};

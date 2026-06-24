@@ -52,15 +52,34 @@ export class ValidacionService {
     };
   }
 
+  /**
+   * Validador personalizado a nivel de grupo (FormGroup) para verificar que dos campos coincidan.
+   *
+   * @param campo1 Nombre del primer control a comparar (ej. 'password').
+   * @param campo2 Nombre del segundo control que recibirá el error (ej. 'confirmPassword').
+   * @returns Una función de validación que retorna un ValidationErrors o null.
+   */
   passwordIguales(campo1: string, campo2: string) {
     return (group: AbstractControl): ValidationErrors | null => {
-      const valor1 = group.get(campo1)?.value;
-      const valor2 = group.get(campo2)?.value;
+      const control1 = group.get(campo1);
+      const control2 = group.get(campo2);
+
+      const valor1 = control1?.value;
+      const valor2 = control2?.value;
 
       if (valor1 && valor2 && valor1 !== valor2) {
-        group.get(campo2)?.setErrors({ noCoinciden: true });
+        control2?.setErrors({ ...control2?.errors, noCoinciden: true });
         return { noCoinciden: true };
+      } 
+      
+      if (control2?.hasError('noCoinciden')) {
+        const erroresActuales = { ...control2.errors };
+        
+        delete erroresActuales['noCoinciden'];
+        
+        control2.setErrors(Object.keys(erroresActuales).length ? erroresActuales : null);
       }
+
       return null;
     };
   }
