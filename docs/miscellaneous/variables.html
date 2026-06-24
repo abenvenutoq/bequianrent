@@ -1,0 +1,728 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bequianrent documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bequianrent documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#angularApp" title="src/server.ts" ><b>angularApp</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#app" title="src/server.ts" ><b>app</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#appConfig" title="src/app/app.config.ts" ><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#bootstrap" title="src/main.server.ts" ><b>bootstrap</b>&nbsp;&nbsp;&nbsp;(src/.../main.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#browserDistFolder" title="src/server.ts" ><b>browserDistFolder</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#config" title="src/app/app.config.server.ts" ><b>config</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reqHandler" title="src/server.ts" ><b>reqHandler</b>&nbsp;&nbsp;&nbsp;(src/.../server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RESERVAS" title="src/app/data/reservas.data.ts" ><b>RESERVAS</b>&nbsp;&nbsp;&nbsp;(src/.../reservas.data.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#routes" title="src/app/app.routes.ts" ><b>routes</b>&nbsp;&nbsp;&nbsp;(src/.../app.routes.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#serverConfig" title="src/app/app.config.server.ts" ><b>serverConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#serverRoutes" title="src/app/app.routes.server.ts" ><b>serverRoutes</b>&nbsp;&nbsp;&nbsp;(src/.../app.routes.server.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#USUARIOS" title="src/app/data/usuarios.data.ts" ><b>USUARIOS</b>&nbsp;&nbsp;&nbsp;(src/.../usuarios.data.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#VEHICULOS" title="src/app/data/vehiculos.data.ts" ><b>VEHICULOS</b>&nbsp;&nbsp;&nbsp;(src/.../vehiculos.data.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="angularApp"></a>
+                    <span class="name">
+                        <span ><b>angularApp</b></span>
+                        <a href="#angularApp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new AngularNodeAppEngine()</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="app"></a>
+                    <span class="name">
+                        <span ><b>app</b></span>
+                        <a href="#app"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>express()</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="browserDistFolder"></a>
+                    <span class="name">
+                        <span ><b>browserDistFolder</b></span>
+                        <a href="#browserDistFolder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>join(import.meta.dirname, &#x27;../browser&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reqHandler"></a>
+                    <span class="name">
+                        <span ><b>reqHandler</b></span>
+                        <a href="#reqHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createNodeRequestHandler(app)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appConfig"></a>
+                    <span class="name">
+                        <span ><b>appConfig</b></span>
+                        <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/App.html" target="_self" >ApplicationConfig</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes), provideClientHydration()
+  ]
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/main.server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bootstrap"></a>
+                    <span class="name">
+                        <span ><b>bootstrap</b></span>
+                        <a href="#bootstrap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(context: BootstrapContext) &#x3D;&gt;
+    bootstrapApplication(App, config, context)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="config"></a>
+                    <span class="name">
+                        <span ><b>config</b></span>
+                        <a href="#config"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>mergeApplicationConfig(appConfig, serverConfig)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverConfig"></a>
+                    <span class="name">
+                        <span ><b>serverConfig</b></span>
+                        <a href="#serverConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/App.html" target="_self" >ApplicationConfig</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    provideServerRendering(withRoutes(serverRoutes))
+  ]
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/data/reservas.data.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RESERVAS"></a>
+                    <span class="name">
+                        <span ><b>RESERVAS</b></span>
+                        <a href="#RESERVAS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Reserva.html" target="_self" >Reserva[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        id: 1,
+        idVehiculo: 1,
+        correo: &quot;admin@bequianrent.cl&quot;,
+        rut: &quot;15940700-4&quot;,
+        fechaDesde: new Date(&quot;2026-06-15&quot;),
+        fechaHasta: new Date(&quot;2026-06-22&quot;),
+        total: 350000,
+        estado: &quot;Confirmada&quot;
+    },
+    {
+        id: 2,
+        idVehiculo: 2,
+        correo: &quot;admin@bequianrent.cl&quot;,
+        rut: &quot;15940700-4&quot;,
+        fechaDesde: new Date(&quot;2026-06-16&quot;),
+        fechaHasta: new Date(&quot;2026-06-23&quot;),
+        total: 360000,
+        estado: &quot;Confirmada&quot;
+    },
+    {
+        id: 3,
+        idVehiculo: 3,
+        correo: &quot;cliente@cliente.cl&quot;,
+        rut: &quot;9843565-4&quot;,
+        fechaDesde: new Date(&quot;2026-06-17&quot;),
+        fechaHasta: new Date(&quot;2026-06-24&quot;),
+        total: 340000,
+        estado: &quot;Confirmada&quot;
+    },
+    {
+        id: 4,
+        idVehiculo: 4,
+        correo: &quot;cliente@cliente.cl&quot;,
+        rut: &quot;9843565-4&quot;,
+        fechaDesde: new Date(&quot;2026-06-18&quot;),
+        fechaHasta: new Date(&quot;2026-06-25&quot;),
+        total: 370000,
+        estado: &quot;Confirmada&quot;
+    }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.routes.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routes"></a>
+                    <span class="name">
+                        <span ><b>routes</b></span>
+                        <a href="#routes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Routes" target="_blank" >Routes</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { path: &#x27;&#x27;, component: Home },
+    { path: &#x27;login&#x27;, component: Login },
+    { path: &#x27;registro&#x27;, component: Registro },
+    { path: &#x27;ver-autos&#x27;, component: VerAutos },
+    { path: &#x27;app-navbar&#x27;, component: Navbar},
+    { path: &#x27;app-footer&#x27;, component: Footer},
+    { path: &#x27;mi-perfil&#x27;, component: MiPerfil},
+    { path: &#x27;reservar-auto/:id&#x27;, component: ReservarAuto }, 
+    { path: &#x27;mis-reservas&#x27;, component: MisReservas },
+    { path: &#x27;admin-panel&#x27;, component: AdminPanel },
+    { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27;, pathMatch: &#x27;full&#x27; }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.routes.server.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverRoutes"></a>
+                    <span class="name">
+                        <span ><b>serverRoutes</b></span>
+                        <a href="#serverRoutes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ServerRoute[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    path: &#x27;**&#x27;,
+    renderMode: RenderMode.Client
+  }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/data/usuarios.data.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="USUARIOS"></a>
+                    <span class="name">
+                        <span ><b>USUARIOS</b></span>
+                        <a href="#USUARIOS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Usuario.html" target="_self" >Usuario[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+        id: 1,
+        nombre: &quot;Administrador&quot;,
+        apellido: &quot;Bequianrent&quot;,
+        rut: &quot;15940700-4&quot;,
+        correo: &quot;admin@bequianrent.cl&quot;,
+        fechaNacimiento: &quot;1984-11-13&quot;,
+        direccion: &quot;&quot;,
+        password: &quot;Qwe123&quot;,
+        rol: &quot;admin&quot;
+    },
+    {
+        id: 2,
+        nombre: &quot;Maria&quot;,
+        apellido: &quot;Quilobran&quot;,
+        rut: &quot;9843565-4&quot;,
+        correo: &quot;cliente@gmail.com&quot;,
+        fechaNacimiento: &quot;1962-12-23&quot;,
+        direccion: &quot;Av. Maria Elena 370&quot;,
+        password: &quot;Qwe123&quot;,
+        rol: &quot;cliente&quot;
+    }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/data/vehiculos.data.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="VEHICULOS"></a>
+                    <span class="name">
+                        <span ><b>VEHICULOS</b></span>
+                        <a href="#VEHICULOS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Vehiculo.html" target="_self" >Vehiculo[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { id: 1, marca: &quot;Toyota&quot;, modelo: &quot;Corolla&quot;, tipo: &quot;Sedán&quot;, anio: 2024, precio: 35000, disponible: false, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;15 km/l&quot;, imagen: &quot;img/autos/toyota_corolla.jpg&quot;, descripcion: &quot;Sedán confiable, cómodo y seguro. Ideal para ciudad y viajes largos con excelente rendimiento.&quot; },
+    { id: 2, marca: &quot;Toyota&quot;, modelo: &quot;Yaris&quot;, tipo: &quot;Sedán&quot;, anio: 2023, precio: 28000, disponible: false, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;17 km/l&quot;, imagen: &quot;img/autos/toyota_yaris.jpg&quot;, descripcion: &quot;Económico y práctico. Un sedán compacto perfecto para el día a día y fácil de estacionar.&quot; },
+    { id: 3, marca: &quot;Toyota&quot;, modelo: &quot;Yaris HB&quot;, tipo: &quot;Hatchback&quot;, anio: 2024, precio: 29000, disponible: false, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;16.5 km/l&quot;, imagen: &quot;img/autos/toyota_yaris_hb.jpg&quot;, descripcion: &quot;Diseño juvenil y versátil. Su formato hatchback ofrece gran agilidad en el tráfico urbano.&quot; },
+    { id: 4, marca: &quot;Toyota&quot;, modelo: &quot;Camry&quot;, tipo: &quot;Sedán&quot;, anio: 2025, precio: 50000, disponible: false, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;14 km/l&quot;, imagen: &quot;img/autos/toyota_camry.jpg&quot;, descripcion: &quot;Lujo y amplitud. Un sedán ejecutivo con marcha suave, tecnología avanzada y máxima comodidad.&quot; },
+    
+    { id: 5, marca: &quot;Volkswagen&quot;, modelo: &quot;Golf&quot;, tipo: &quot;Hatchback&quot;, anio: 2023, precio: 32000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;16 km/l&quot;, imagen: &quot;img/autos/vw_golf.jpg&quot;, descripcion: &quot;Un clásico moderno. Hatchback de manejo deportivo, interior refinado y excelente estabilidad.&quot; },
+    { id: 6, marca: &quot;Volkswagen&quot;, modelo: &quot;Polo&quot;, tipo: &quot;Hatchback&quot;, anio: 2024, precio: 27000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;18 km/l&quot;, imagen: &quot;img/autos/vw_polo.jpg&quot;, descripcion: &quot;Ágil y eficiente. Hatchback urbano con tecnología alemana, ideal para moverte por la ciudad.&quot; },
+    { id: 7, marca: &quot;Volkswagen&quot;, modelo: &quot;Virtus&quot;, tipo: &quot;Sedán&quot;, anio: 2024, precio: 30000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;15.5 km/l&quot;, imagen: &quot;img/autos/vw_virtus.jpg&quot;, descripcion: &quot;Sedán espacioso con gran maletero. Excelente conectividad y seguridad para toda la familia.&quot; },
+    { id: 8, marca: &quot;Volkswagen&quot;, modelo: &quot;Jetta&quot;, tipo: &quot;Sedán&quot;, anio: 2025, precio: 42000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;14.8 km/l&quot;, imagen: &quot;img/autos/vw_jetta.jpg&quot;, descripcion: &quot;Potencia y elegancia. Sedán robusto con manejo dinámico y confort premium en cada viaje.&quot; },
+
+    { id: 9, marca: &quot;Mazda&quot;, modelo: &quot;3 Sedán&quot;, tipo: &quot;Sedán&quot;, anio: 2024, precio: 38000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;14.5 km/l&quot;, imagen: &quot;img/autos/mazda3sedan.jpg&quot;, descripcion: &quot;Diseño elegante y manejo dinámico. Interior premium y tecnología que te conecta con el camino.&quot; },
+    { id: 10, marca: &quot;Mazda&quot;, modelo: &quot;3 Sport&quot;, tipo: &quot;Hatchback&quot;, anio: 2024, precio: 39000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;14.2 km/l&quot;, imagen: &quot;img/autos/mazda3sport.jpg&quot;, descripcion: &quot;Hatchback deportivo y audaz. Líneas fluidas y una experiencia de conducción emocionante.&quot; },
+    { id: 11, marca: &quot;Mazda&quot;, modelo: &quot;2 Sedán&quot;, tipo: &quot;Sedán&quot;, anio: 2023, precio: 26000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;16.8 km/l&quot;, imagen: &quot;img/autos/mazda2sedan.jpg&quot;, descripcion: &quot;Eficiencia con estilo. Un sedán subcompacto ágil, económico y con acabados de alta calidad.&quot; },
+    { id: 12, marca: &quot;Mazda&quot;, modelo: &quot;2 Sport&quot;, tipo: &quot;Hatchback&quot;, anio: 2023, precio: 27000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;16.3 km/l&quot;, imagen: &quot;img/autos/mazda2sport.jpg&quot;, descripcion: &quot;Divertido y compacto. Hatchback ideal para la ciudad con gran respuesta y diseño cautivador.&quot; }
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -6,19 +6,28 @@ import { Router } from '@angular/router';
 import { Registro } from './registro';
 import { AuthService } from '../../services/auth.services';
 
+/**
+ * @description
+ * Suite de Pruebas Unitarias para el componente {@link Registro}.
+ * Evalúa rigurosamente el comportamiento del formulario de creación de usuarios,
+ * verificando los validadores personalizados (RUT, Edad, Correos) y 
+ * las reglas estrictas de contraseñas.
+ */
 describe('Pruebas Unitarias - Componente Registro', () => {
   let component: Registro;
   let fixture: ComponentFixture<Registro>;
 
-  // Creación de mocks
+  /** Mock del AuthService simulando respuestas exitosas por defecto */
   const mockAuthService = { 
     registrar: () => ({ ok: true, mensaje: 'Éxito' }) 
   };
   
+  /** Mock del enrutador para evitar navegaciones reales durante los tests */
   const mockRouter = { 
     navigate: () => {} 
   };
 
+  /** Configuración del entorno de pruebas y compilación del componente */
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Registro, ReactiveFormsModule],
@@ -33,11 +42,12 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     fixture.detectChanges();
   });
 
+  /** @test Verifica la inicialización base del componente */
   it('debe crear el componente correctamente', () => {
     expect(component).toBeTruthy();
   });
 
-  // Test para el registro si el form es válido
+  /** @test Simula un registro completo con datos correctos */
   it('Debe ejecutar el registro correctamente si el formulario es válido', () => {
     component.registroForm.patchValue({
       nombre: 'Angelo',
@@ -56,7 +66,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(component.mensajeError).toBe('');
   });
 
-  // Test para invalidar el registro si el correo ya existe
+  /** @test Simula un registro con un correo existente */
   it('Debe mostrar un mensaje de error si el registro falla (ej. correo ya existe)', () => {
     component.registroForm.patchValue({
       nombre: 'Angelo',
@@ -80,7 +90,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(component.mensajeExito).toBe(''); 
   });
 
-  // Test para validad que sea mayor de 13 años.
+  /** @test Invalida form para menores de 13 años */
   it('Debe invalidar el formulario si la persona es menor de 13 años', () => {
     const controlFecha = component.registroForm.get('fechaNacimiento');
 
@@ -93,8 +103,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(controlFecha?.errors?.['menorDeEdad']).toBeTruthy();
   });
   
-  // Prueba para correo
-
+  /** @test Invalida form por correo con formato incorrecto */
   it('Debe invalidar correo sin formato correcto', () =>{
     const correo = component.registroForm.get('correo');
 
@@ -103,6 +112,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(correo?.errors?.['emailInvalido']).toBeTruthy();
   });
 
+  /** @test Valida form por correo con formato correcto */
   it('Debe validar correo con formato correcto', () => {
     const correo = component.registroForm.get('correo');
 
@@ -111,8 +121,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(correo?.errors?.['emailInvalido']).toBeFalsy();
   });
 
-  // Pruebas individuales para contraseña
-
+  /** @test Invalida form si las contraseñas no son identicas */
   it('Debe invalidar el formulario si las contraseñas no coinciden', () => {
     const pass = component.registroForm.get('password');
     const confirmPass = component.registroForm.get('confirmPassword');
@@ -126,6 +135,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(component.registroForm.valid).toBeFalsy();
   });
 
+  /** @test Invalida form contraseña sin numero */
   it('Debe invalidar una contraseña sin numero', () => {
     const password = component.registroForm.get('password');
 
@@ -134,6 +144,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['pattern']).toBeTruthy();
   });
 
+  /** @test Valida form por contraseña con formato correcto */
   it('Debe validar una contraseña con numero', () => {
     const password = component.registroForm.get('password');
 
@@ -142,6 +153,8 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['pattern']).toBeFalsy();
   });
 
+  
+  /** @test Invalida form por contraseña sin mayuscula */
   it('Debe invalidar una contraseña sin mayuscula', () => {
     const password = component.registroForm.get('password');
 
@@ -150,6 +163,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['pattern']).toBeTruthy();
   });
 
+  /** @test Valida form por contraseña con mayuscula */
   it('Debe validar una contraseña con mayuscula', () => {
     const password = component.registroForm.get('password');
 
@@ -158,6 +172,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['pattern']).toBeFalsy();
   });
 
+  /** @test Valida form por contraseña con 6 caracteres */
   it('Debe validar una contraseña con 6 caracteres', () => {
     const password = component.registroForm.get('password');
 
@@ -166,6 +181,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['minlength']).toBeFalsy();
   });
 
+  /** @test Valida form por contraseña con 18 caracteres */
   it('Debe validar una contraseña con 18 caracteres', () => {
     const password = component.registroForm.get('password');
 
@@ -174,6 +190,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['maxlength']).toBeFalsy();
   });
 
+  /** @test Valida form por contraseña con menos de 6 caracteres */
   it('Debe invalidar una contraseña con menos de 6 caracteres', () => {
     const password = component.registroForm.get('password');
 
@@ -182,6 +199,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['minlength']).toBeTruthy();
   });
 
+  /** @test Valida form por contraseña con mas de 18 caracteres */
   it('Debe invalidar una contraseña con mas de 18 caracteres', () => {
     const password = component.registroForm.get('password');
 
@@ -190,8 +208,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(password?.errors?.['maxlength']).toBeTruthy();
   });
 
-  // Pruebas para rut
-
+  /** @test Invalida form por rut incorrecto */
   it('Debe invalidar un rut inválido según modulo 11', () => {
     const rut = component.registroForm.get('rut');
 
@@ -200,6 +217,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(rut?.errors?.['rutInvalido']).toBeTruthy();
   })
 
+  /** @test Valida form por rut correcto */
   it('Debe validar un rut válido según modulo 11', () => {
     const rut = component.registroForm.get('rut');
 
@@ -208,8 +226,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(rut?.errors?.['rutInvalido']).toBeFalsy();
   })
 
-  // Pruebas para nombre
-
+  /** @test Invalida form nombre con solo espacio en blanco */
   it('Debe invalidar un nombre que tenga solo espacio en blanco', () => {
     const nombre = component.registroForm.get('nombre');
 
@@ -218,6 +235,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(nombre?.errors?.['isEmpty']).toBeTruthy();
   });
 
+  /** @test Valida nombre si no esta compuesto solo con espacio en blanco */
   it('Debe validar un nombre si no esta conformado solo por espacio en blanco', () => {
     const nombre = component.registroForm.get('nombre');
     
@@ -226,7 +244,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(nombre?.errors?.['isEmpty']).toBeFalsy();
   });
 
-  // Prueba para apellido
+  /** @test Invalida form apellido con solo espacio en blanco */
   it('Debe invalidar el apellido que tenga solo espacio en blanco', () => {
     const apellido = component.registroForm.get('apellido');
 
@@ -235,6 +253,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
     expect(apellido?.errors?.['isEmpty']).toBeTruthy();
   });
 
+  /** @test Valida apellido si no esta compuesto solo con espacio en blanco */
   it('Debe validar el apellido no esta conformado solo por espacio en blanco', () => {
     const apellido = component.registroForm.get('apellido');
     
@@ -244,7 +263,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
   });
 
 
-  // Prueba para limpiar formulario
+  /** @test Para limpiar el formulario */
   it('Debe limpiar el formulario', () => {
     component.registroForm.controls['nombre'].setValue('Angelo');
     component.registroForm.controls['apellido'].setValue('Benvenuto');
@@ -256,13 +275,13 @@ describe('Pruebas Unitarias - Componente Registro', () => {
 
     component.limpiarFormulario();
 
-    expect(component.registroForm.controls['nombre'].setValue(''));
-    expect(component.registroForm.controls['apellido'].setValue(''));
-    expect(component.registroForm.controls['rut'].setValue(''));
-    expect(component.registroForm.controls['fechaNacimiento'].setValue(''));
-    expect(component.registroForm.controls['direccion'].setValue(''));
-    expect(component.registroForm.controls['password'].setValue(''));
-    expect(component.registroForm.controls['confirmPassword'].setValue(''));
+    expect(component.registroForm.get('nombre')?.value).toBeNull;
+    expect(component.registroForm.get('apellido')?.value).toBeNull;
+    expect(component.registroForm.get('rut')?.value).toBeNull;
+    expect(component.registroForm.get('fechaNacimiento')?.value).toBeNull;
+    expect(component.registroForm.get('direccion')?.value).toBeNull;
+    expect(component.registroForm.get('password')?.value).toBeNull;
+    expect(component.registroForm.get('confirmPassword')?.value).toBeNull;
   });
 
 });

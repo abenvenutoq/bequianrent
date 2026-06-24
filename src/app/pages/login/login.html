@@ -48,10 +48,12 @@
                             <a href="#" class="text-decoration-none text-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?</a>
                         </div>
                         
-                        <div class="d-grid mt-4">
+                        <div class="gap-2 d-md-flex justify-content-md-end border-top pt-4">
+                            <button type="button" class="btn btn-secondary" (click)="limpiarFormularioLogin()">Limpiar</button>
                             <button type="submit" class="btn btn-primary fw-bold py-2 shadow-sm" [disabled]="loginForm.invalid">
                                 <i class="fa-solid fa-right-to-bracket me-2"></i>Iniciar Sesión
                             </button>
+                            
                         </div>
 
                         <div class="text-center pt-3">
@@ -118,7 +120,8 @@
                     </div>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-3">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" (click)="limpiarFormularioRecuperar()">Limpiar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary fw-bold" [disabled]="recupForm.invalid">Actualizar Contraseña</button>
                     </div>
                 </form>
