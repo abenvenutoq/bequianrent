@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../services/auth.services';
 import { Usuario } from '../../models/modelos';
 import { ValidacionService } from '../../services/validacion.services';
