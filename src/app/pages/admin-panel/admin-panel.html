@@ -85,6 +85,7 @@
                                 <th>Desde / Hasta</th>
                                 <th>Total</th>
                                 <th style="width: 180px;">Estado (Admin)</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,6 +114,10 @@
                                         <option value="Completada">🆗 Completada</option>
                                         <option value="Cancelada">⛔ Cancelada</option>
                                     </select>
+                                </td>
+                                <td class="text-center"> <a [routerLink]="['/editar-reserva', r.id]" class="btn btn-outline-primary btn-sm" title="Editar Reserva">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
                                 </td>
                             </tr>
                             <tr *ngIf="reservas.length === 0" class="text-center">

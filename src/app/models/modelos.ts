@@ -33,8 +33,8 @@ export interface Reserva {
     idVehiculo: number;
     correo: string;
     rut: string;
-    fechaDesde: Date;
-    fechaHasta: Date;
+    fechaDesde: string;
+    fechaHasta: string;
     total: number;
     estado: string;
 }

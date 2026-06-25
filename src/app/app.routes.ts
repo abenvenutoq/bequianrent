@@ -9,6 +9,8 @@ import { AdminPanel } from './pages/admin-panel/admin-panel';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
 import { MiPerfil } from './pages/mi-perfil/mi-perfil';
+import { EditarReserva } from './pages/editar-reserva/editar-reserva';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -20,6 +22,7 @@ export const routes: Routes = [
     { path: 'mi-perfil', component: MiPerfil},
     { path: 'reservar-auto/:id', component: ReservarAuto }, 
     { path: 'mis-reservas', component: MisReservas },
-    { path: 'admin-panel', component: AdminPanel },
+    { path: 'admin-panel', component: AdminPanel, canActivate: [adminGuard] },
+    { path: 'editar-reserva/:id', component: EditarReserva, canActivate: [adminGuard]},
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

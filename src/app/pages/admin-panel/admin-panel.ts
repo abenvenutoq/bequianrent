@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // 👈 Importante para el [(ngModel)] del select del estado
 import { AuthService } from '../../services/auth.services';
 import { ReservaService } from '../../services/reservas.services';
@@ -10,7 +10,7 @@ import { Usuario, Reserva, Vehiculo } from '../../models/modelos';
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './admin-panel.html',
   styleUrl: './admin-panel.css',
 })
@@ -19,6 +19,7 @@ export class AdminPanel implements OnInit {
   private reservaService = inject(ReservaService);
   private vehiculoService = inject(VehiculoService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   // Control de la vista activa (reemplaza al cambiarVista de JS)
   vistaActual: 'usuarios' | 'reservas' | 'vehiculos' = 'usuarios';
@@ -36,6 +37,12 @@ export class AdminPanel implements OnInit {
     if (!this.authService.esAdmin()) {
       this.router.navigate(['/login']);
       return;
+    }
+
+    const vistaParam = this.route.snapshot.queryParamMap.get('vista');
+
+    if (vistaParam === 'usuarios' || vistaParam === 'reservas' || vistaParam === 'vehiculos'){
+      this.vistaActual = vistaParam;
     }
 
     // Cargamos todos los datos iniciales

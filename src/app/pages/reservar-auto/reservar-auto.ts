@@ -111,8 +111,8 @@ export class ReservarAuto implements OnInit {
         idVehiculo: this.vehiculo.id,
         correo: usuarioActual.correo,
         rut: usuarioActual.rut,
-        fechaDesde: new Date(fechaDesde),
-        fechaHasta: new Date(fechaHasta),
+        fechaDesde: fechaDesde,
+        fechaHasta: fechaHasta,
         total: this.totalPagar,
         estado: 'Confirmada'
       };
