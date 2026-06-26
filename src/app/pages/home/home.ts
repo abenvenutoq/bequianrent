@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { VehiculoService } from '../../services/vehiculos.services';
 
+/**
+ * @description
+ * Componente home o pagina inicial
+ * muestra de manera aleatoria 3 vehiculos de localstorage
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
