@@ -138,6 +138,21 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que representa la barra de navegación principal (Navbar) de la aplicación.</p>
+<ul>
+<li>Funcionalidades principales:</li>
+</ul>
+<ul>
+<li>Se suscribe de forma reactiva al estado de la sesión (<code>Sesion$</code>) provisto por el <code>AuthService</code>.</li>
+<li>Actualiza dinámicamente las opciones del menú (ej. mostrar &quot;Iniciar Sesión&quot; vs &quot;Mi Perfil&quot; / &quot;Cerrar Sesión&quot;) según si el usuario está logueado o no.</li>
+<li>Gestiona el cierre de sesión seguro y redirige a la página principal.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -300,14 +315,20 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/components/navbar/navbar.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/components/navbar/navbar.ts:64</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Finaliza la sesión actual del usuario.</p>
+<ol>
+<li>Llama al método de limpieza en el <code>AuthService</code> (borrando LocalStorage/SessionStorage y actualizando el Observable).</li>
+<li>Redirige al usuario a la vista pública principal (raíz <code>/</code>).</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -337,14 +358,20 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/components/navbar/navbar.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/components/navbar/navbar.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de vida de destrucción del componente.</p>
+<ul>
+<li>Importante: Corta la suscripción al observable (<code>unsubscribe()</code>) para prevenir fugas de memoria (memory leaks)
+o comportamientos inesperados si el componente Navbar llegara a ser destruido y recreado.</li>
+</ul>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -374,14 +401,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/components/navbar/navbar.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/components/navbar/navbar.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de vida de inicialización.
+Se suscribe al <code>BehaviorSubject</code> del servicio de autenticación. Cada vez que ocurre un inicio
+o cierre de sesión en cualquier parte de la app, este bloque recibe los nuevos datos y le indica
+explícitamente a Angular que detecte los cambios (<code>detectChanges</code>) para actualizar el HTML del menú.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -422,10 +454,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/navbar/navbar.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/navbar/navbar.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio centralizado de autenticación para consultar y modificar el estado de la sesión.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -454,10 +492,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/navbar/navbar.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/navbar/navbar.ts:31</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de detección de cambios de Angular.
+Se inyecta para forzar el repintado de la vista cuando el observable emite un cambio de sesión.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -486,10 +531,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/navbar/navbar.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/navbar/navbar.ts:27</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento para navegar tras el cierre de sesión.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -517,10 +568,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/navbar/navbar.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/navbar/navbar.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena la información del usuario logueado actualmente.
+Si es <code>null</code>, significa que no hay ninguna sesión activa (modo visitante).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -544,10 +602,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/navbar/navbar.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/navbar/navbar.ts:41</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Referencia a la suscripción activa del observable de sesión.
+Se guarda en memoria para poder destruirla cuando el componente se desmonte.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -563,6 +628,15 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
 import { Sesion } from &#x27;../../models/modelos&#x27;;
 import { AuthService } from &#x27;../../services/auth.services&#x27;;
+
+/**
+ * @description
+ * Componente que representa la barra de navegación principal (Navbar) de la aplicación.
+ * * Funcionalidades principales:
+ * - Se suscribe de forma reactiva al estado de la sesión (&#x60;Sesion$&#x60;) provisto por el &#x60;AuthService&#x60;.
+ * - Actualiza dinámicamente las opciones del menú (ej. mostrar &quot;Iniciar Sesión&quot; vs &quot;Mi Perfil&quot; / &quot;Cerrar Sesión&quot;) según si el usuario está logueado o no.
+ * - Gestiona el cierre de sesión seguro y redirige a la página principal.
+ */
 @Component({
   selector: &#x27;app-navbar&#x27;,
   standalone: true,
@@ -571,14 +645,31 @@ import { AuthService } from &#x27;../../services/auth.services&#x27;;
   styleUrl: &#x27;./navbar.css&#x27;
 })
 export class Navbar implements OnInit, OnDestroy {
+  /** Servicio centralizado de autenticación para consultar y modificar el estado de la sesión. */
   private authService &#x3D; inject(AuthService);
+  /** Servicio de enrutamiento para navegar tras el cierre de sesión. */
   private router &#x3D; inject(Router);
+  /** * Servicio de detección de cambios de Angular. 
+   * Se inyecta para forzar el repintado de la vista cuando el observable emite un cambio de sesión.
+   */
   private cdr &#x3D; inject(ChangeDetectorRef);
 
+  /** * Almacena la información del usuario logueado actualmente. 
+   * Si es &#x60;null&#x60;, significa que no hay ninguna sesión activa (modo visitante).
+   */
   sesion: Sesion | null &#x3D; null;
-  
+
+  /** * Referencia a la suscripción activa del observable de sesión.
+   * Se guarda en memoria para poder destruirla cuando el componente se desmonte.
+   */
   private sesionSub!: Subscription;
 
+  /**
+   * Ciclo de vida de inicialización.
+   * Se suscribe al &#x60;BehaviorSubject&#x60; del servicio de autenticación. Cada vez que ocurre un inicio 
+   * o cierre de sesión en cualquier parte de la app, este bloque recibe los nuevos datos y le indica 
+   * explícitamente a Angular que detecte los cambios (&#x60;detectChanges&#x60;) para actualizar el HTML del menú.
+   */
   ngOnInit(): void {
 
     this.sesionSub &#x3D; this.authService.Sesion$.subscribe({
@@ -589,11 +680,21 @@ export class Navbar implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Finaliza la sesión actual del usuario.
+   * 1. Llama al método de limpieza en el &#x60;AuthService&#x60; (borrando LocalStorage/SessionStorage y actualizando el Observable).
+   * 2. Redirige al usuario a la vista pública principal (raíz &#x60;/&#x60;).
+   */
   cerrarSesion(): void {
     this.authService.cerrarSesion();
     this.router.navigate([&#x27;/&#x27;]);
   }
 
+  /**
+   * Ciclo de vida de destrucción del componente.
+   * * Importante: Corta la suscripción al observable (&#x60;unsubscribe()&#x60;) para prevenir fugas de memoria (memory leaks)
+   * o comportamientos inesperados si el componente Navbar llegara a ser destruido y recreado.
+   */
   ngOnDestroy(): void {
     if (this.sesionSub) {
       this.sesionSub.unsubscribe();

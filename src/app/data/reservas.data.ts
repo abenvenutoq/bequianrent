@@ -24,7 +24,7 @@ export const RESERVAS: Reserva[] = [
     {
         id: 3,
         idVehiculo: 3,
-        correo: "cliente@cliente.cl",
+        correo: "cliente@gmail.cl",
         rut: "9843565-4",
         fechaDesde: "2026-06-17",
         fechaHasta: "2026-06-24",
@@ -34,7 +34,7 @@ export const RESERVAS: Reserva[] = [
     {
         id: 4,
         idVehiculo: 4,
-        correo: "cliente@cliente.cl",
+        correo: "cliente@gmail.cl",
         rut: "9843565-4",
         fechaDesde: "2026-06-18",
         fechaHasta: "2026-06-25",

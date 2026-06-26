@@ -138,6 +138,22 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente encargado de renderizar el catálogo público de la flota de vehículos.</p>
+<ul>
+<li>Funcionalidades principales:</li>
+</ul>
+<ul>
+<li>Se conecta al <code>VehiculoService</code> para recuperar el inventario persistido.</li>
+<li>Implementa un motor de búsqueda/filtrado múltiple en tiempo real usando el módulo <code>FormsModule</code> (<code>[(ngModel)]</code>).</li>
+<li>Protege los datos originales utilizando una propiedad computada (Getter) para mostrar los resultados
+filtrados sin mutar ni alterar la base de datos principal de la vista.</li>
+</ul>
+
+    </p>
 
 
 
@@ -299,14 +315,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Resetea el motor de búsqueda a su estado por defecto.
+Al vaciar los strings de los filtros, la reactividad de Angular gatilla automáticamente
+el getter <code>listaFiltrada</code>, volviendo a renderizar el inventario completo.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -346,10 +366,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Modelo de datos bidireccional para el filtro por Año de fabricación.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -377,10 +403,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Modelo de datos bidireccional para el estado del auto (&#39;true&#39; = Disponible, &#39;false&#39; = Ocupado).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -408,10 +440,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Modelo de datos bidireccional para el filtro de Marca (ej. &#39;Kia&#39;, &#39;Toyota&#39;).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -439,10 +477,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colección base que almacena todos los vehículos de forma intacta.
+Se inicializa inmediatamente al instanciar el componente.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -471,10 +516,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio inyectado para acceder a los datos de la flota en el almacenamiento.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -500,9 +551,25 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/ver-autos/ver-autos.ts:47</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Propiedad computada (Getter) que procesa y retorna los vehículos en pantalla según los filtros activos.</p>
+<ul>
+<li>Lógica de evaluación:</li>
+</ul>
+<ul>
+<li>Si un filtro está vacío (string <code>&#39;&#39;</code>), la condición se asume como válida (<code>true</code>), ignorando esa restricción.</li>
+<li>Cada vehículo debe cumplir con las 3 condiciones de forma simultánea (<code>cumpleMarca &amp;&amp; cumpleAnio &amp;&amp; cumpleDisp</code>).</li>
+</ul>
+</div>
+
+                                <div>
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -517,6 +584,15 @@ import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { RouterLink } from &#x27;@angular/router&#x27;;
 import { VehiculoService } from &#x27;../../services/vehiculos.services&#x27;;
 
+/**
+ * @description
+ * Componente encargado de renderizar el catálogo público de la flota de vehículos.
+ * * Funcionalidades principales:
+ * - Se conecta al &#x60;VehiculoService&#x60; para recuperar el inventario persistido.
+ * - Implementa un motor de búsqueda/filtrado múltiple en tiempo real usando el módulo &#x60;FormsModule&#x60; (&#x60;[(ngModel)]&#x60;).
+ * - Protege los datos originales utilizando una propiedad computada (Getter) para mostrar los resultados 
+ * filtrados sin mutar ni alterar la base de datos principal de la vista.
+ */
 @Component({
   selector: &#x27;app-ver-autos&#x27;,
   standalone: true,
@@ -525,15 +601,29 @@ import { VehiculoService } from &#x27;../../services/vehiculos.services&#x27;;
   styleUrl: &#x27;./ver-autos.css&#x27;,
 })
 export class VerAutos {
-
+  /** Servicio inyectado para acceder a los datos de la flota en el almacenamiento. */
   private vehiculos &#x3D; inject(VehiculoService);
 
+  /** * Colección base que almacena todos los vehículos de forma intacta. 
+   * Se inicializa inmediatamente al instanciar el componente.
+   */
   vehiculo &#x3D; this.vehiculos.getVehiculos();
 
+  /** Modelo de datos bidireccional para el filtro de Marca (ej. &#x27;Kia&#x27;, &#x27;Toyota&#x27;). */
   filtroMarca: string &#x3D; &#x27;&#x27;;
+  /** Modelo de datos bidireccional para el filtro por Año de fabricación. */
   filtroAnio: string &#x3D; &#x27;&#x27;;
+  /** Modelo de datos bidireccional para el estado del auto (&#x27;true&#x27; &#x3D; Disponible, &#x27;false&#x27; &#x3D; Ocupado). */
   filtroDisponible: string &#x3D; &#x27;&#x27;;
 
+
+  /**
+   * Propiedad computada (Getter) que procesa y retorna los vehículos en pantalla según los filtros activos.
+   * * Lógica de evaluación:
+   * - Si un filtro está vacío (string &#x60;&#x27;&#x27;&#x60;), la condición se asume como válida (&#x60;true&#x60;), ignorando esa restricción.
+   * - Cada vehículo debe cumplir con las 3 condiciones de forma simultánea (&#x60;cumpleMarca &amp;&amp; cumpleAnio &amp;&amp; cumpleDisp&#x60;).
+   * @returns Un sub-arreglo filtrado dinámicamente con los vehículos que coinciden con la búsqueda.
+   */
   get listaFiltrada() {
     return this.vehiculo.filter(auto &#x3D;&gt; {
       const cumpleMarca &#x3D; this.filtroMarca &#x3D;&#x3D;&#x3D; &#x27;&#x27; || auto.marca &#x3D;&#x3D;&#x3D; this.filtroMarca;
@@ -547,6 +637,11 @@ export class VerAutos {
     });
   }
 
+  /**
+   * Resetea el motor de búsqueda a su estado por defecto.
+   * Al vaciar los strings de los filtros, la reactividad de Angular gatilla automáticamente 
+   * el getter &#x60;listaFiltrada&#x60;, volviendo a renderizar el inventario completo.
+   */
   limpiarFiltros() {
     this.filtroMarca &#x3D; &#x27;&#x27;;
     this.filtroAnio &#x3D; &#x27;&#x27;;

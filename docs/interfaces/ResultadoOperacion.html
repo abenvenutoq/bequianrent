@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Patrón estándar de retorno para operaciones de negocio o servicios que realizan lógica compleja.
+Evita retornar múltiples tipos de datos, unificando la respuesta.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -212,6 +220,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Mensaje descriptivo sobre el resultado (útil para inyectarlo directamente en alertas de la UI).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -245,6 +259,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p><code>true</code> si el proceso finalizó con éxito, <code>false</code> si hubo un error o validación fallida.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -253,66 +273,133 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type RolUsuario &#x3D; &#x27;cliente&#x27; | &#x27;admin&#x27;;
+
+/**
+ * @description
+ * Define las variantes de color/estado para las alertas visuales en la interfaz,
+ * comúnmente alineadas con las clases de Bootstrap (success, danger, warning, info).
+ */
 export type TipoMensaje &#x3D; &#x27;sucess&#x27; | &#x27;danger&#x27; | &#x27;warning&#x27; | &#x27;info&#x27;;
 
+/**
+ * @description
+ * Representa la entidad física de un automóvil dentro del catálogo de la empresa.
+ */
 export interface Vehiculo {
+    /** Identificador único del vehículo. */
     id: number;
+    /** Marca del fabricante (ej. Toyota, Ford). */
     marca: string;
+    /** Modelo específico del vehículo. */
     modelo: string;
+    /** Categoría del vehículo (ej. SUV, Sedán, Hatchback). */
     tipo: string;
+    /** Año de fabricación. */
     anio: number;
+    /** Costo de arriendo por día en moneda local. */
     precio: number;
+    /** Indica si el vehículo está libre para ser arrendado (&#x60;true&#x60;) o si ya está ocupado (&#x60;false&#x60;). */
     disponible: boolean;
+    /** Tipo de caja de cambios (ej. Manual, Automática). */
     transmision: string;
+    /** Capacidad máxima de personas que el vehículo puede transportar de forma segura. */
     pasajeros: number;
+    /** Eficiencia de combustible estimada (ej. 15 km/l). */
     rendimiento: string;
+    /** Ruta local o URL de la fotografía del vehículo para mostrar en el catálogo. */
     imagen: string;
+    /** Breve reseña comercial o características destacadas del automóvil. */
     descripcion: string;
 }
 
+/**
+ * @description
+ * Representa a un cliente o administrador registrado en el sistema.
+ */
 export interface Usuario {
-    id: number,
+    /** Identificador numérico único autoincremental del usuario. */
+    id: number;
+    /** Nombre de pila. */
     nombre: string;
+    /** Apellido paterno/materno. */
     apellido: string;
+    /** Rol Único Tributario (formato chileno) que actúa como identificador legal. */
     rut: string;
+    /** Correo electrónico, utilizado también como credencial de acceso (login). */
     correo: string;
+    /** Fecha de nacimiento en formato YYYY-MM-DD. */
     fechaNacimiento: string;
+    /** Dirección física de residencia (campo opcional en el registro). */
     direccion: string;
+    /** Contraseña encriptada o en texto plano para la validación de credenciales. */
     password: string;
+    /** Define los permisos que tiene el usuario dentro de la plataforma. */
     rol: RolUsuario;
 }
 
+/**
+ * @description
+ * Representa una transacción de arriendo o reserva de un vehículo realizada por un usuario.
+ */
 export interface Reserva {
+    /** Identificador numérico único de la transacción. */
     id: number;
+    /** ID del vehículo que está siendo arrendado. */
     idVehiculo: number;
+    /** Correo del usuario que realizó la reserva. Actúa como llave foránea lógica. */
     correo: string;
+    /** RUT del usuario arrendatario. */
     rut: string;
+    /** Fecha de inicio del periodo de arriendo (YYYY-MM-DD). */
     fechaDesde: string;
+    /** Fecha de término y devolución del vehículo (YYYY-MM-DD). */
     fechaHasta: string;
+    /** Monto monetario total calculado a pagar por todos los días de reserva. */
     total: number;
+    /** Situación actual de la reserva (ej. &#x27;Confirmada&#x27;, &#x27;Pendiente&#x27;, &#x27;Cancelada&#x27;). */
     estado: string;
 }
 
+/**
+ * @description
+ * Estructura de datos almacenada temporalmente para manejar el estado de autenticación
+ * del usuario en el navegador (LocalStorage o SessionStorage).
+ */
 export interface Sesion {
+    /** ID del usuario autenticado. */
     id: number;
+    /** Nombre del usuario para mostrar mensajes de bienvenida en la UI. */
     nombre: string;
+    /** Correo electrónico que identifica la sesión. */
     correo: string;
+    /** Rol actual del usuario para habilitar/deshabilitar menús protegidos. */
     rol: RolUsuario;
+    /** Bandera que confirma si la sesión está activa y validada de forma exitosa. */
     loged: boolean;
 }
 
+/**
+ * @description
+ * Estructura utilizada para emitir notificaciones dinámicas en pantalla.
+ */
 export interface MensajeVista {
+    /** Determina el color o icono de la notificación (ej. &#x27;danger&#x27; para errores). */
     tipo: TipoMensaje;
+    /** El cuerpo del mensaje o instrucción a mostrar al usuario. */
     texto: string;
 }
 
+/**
+ * @description
+ * Patrón estándar de retorno para operaciones de negocio o servicios que realizan lógica compleja.
+ * Evita retornar múltiples tipos de datos, unificando la respuesta.
+ */
 export interface ResultadoOperacion {
-    ok: boolean,
-    mensaje: string
-}
-
-
-</code></pre>
+    /** &#x60;true&#x60; si el proceso finalizó con éxito, &#x60;false&#x60; si hubo un error o validación fallida. */
+    ok: boolean;
+    /** Mensaje descriptivo sobre el resultado (útil para inyectarlo directamente en alertas de la UI). */
+    mensaje: string;
+}</code></pre>
     </div>
 </div>
 

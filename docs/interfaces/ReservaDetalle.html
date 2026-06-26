@@ -144,6 +144,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interfaz extendida que enriquece el modelo base de <code>Reserva</code>.
+Permite incrustar el objeto completo del <code>Vehiculo</code> dentro de la reserva
+para facilitar su visualización en el HTML (marca, modelo, imagen, etc.) sin hacer múltiples consultas.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -233,10 +242,24 @@ import { ReservaService } from &#x27;../../services/reservas.services&#x27;;
 import { VehiculoService } from &#x27;../../services/vehiculos.services&#x27;;
 import { Reserva, Vehiculo } from &#x27;../../models/modelos&#x27;;
 
+/**
+ * @description
+ * Interfaz extendida que enriquece el modelo base de &#x60;Reserva&#x60;.
+ * Permite incrustar el objeto completo del &#x60;Vehiculo&#x60; dentro de la reserva 
+ * para facilitar su visualización en el HTML (marca, modelo, imagen, etc.) sin hacer múltiples consultas.
+ */
 interface ReservaDetalle extends Reserva {
   vehiculo?: Vehiculo;
 }
 
+/**
+ * @description
+ * Componente responsable de renderizar el historial personal de reservas del usuario activo.
+ * * Funcionalidades principales:
+ * - Protege la ruta verificando la sesión activa del usuario.
+ * - Cruza información relacional (Reservas + Vehículos) en el lado del cliente.
+ * - Implementa manejo de errores (&#x60;try-catch&#x60;) para evitar que el componente se rompa si un vehículo fue eliminado.
+ */
 @Component({
   selector: &#x27;app-mis-reservas&#x27;,
   standalone: true,
@@ -245,14 +268,28 @@ interface ReservaDetalle extends Reserva {
   styleUrl: &#x27;./mis-reservas.css&#x27;,
 })
 export class MisReservas implements OnInit {
+  /** Servicio para validar la sesión activa y obtener el correo del usuario. */
   private authService &#x3D; inject(AuthService);
+  /** Servicio para obtener el registro histórico global de reservas. */
   private reservaService &#x3D; inject(ReservaService);
+  /** Servicio para recuperar los datos específicos de los autos arrendados. */
   private vehiculoService &#x3D; inject(VehiculoService);
+  /** Servicio de enrutamiento para expulsar a usuarios no autenticados. */
   private router &#x3D; inject(Router);
 
+  /** * Colección de reservas filtradas y enriquecidas con los datos de los vehículos. 
+   * Se utiliza directamente en el HTML para iterar las tarjetas o filas.
+   */
   misReservas: ReservaDetalle[] &#x3D; [];
+  /** Bandera booleana que controla la visualización de un spinner o estado de carga en la UI. */
   cargando &#x3D; true;
 
+  /**
+   * Ciclo de vida inicial del componente.
+   * 1. Bloquea la ejecución en entornos de servidor (SSR).
+   * 2. Comprueba de forma síncrona la existencia de una sesión válida.
+   * 3. Invoca la carga de reservas utilizando el correo del usuario y gestiona el estado visual de &quot;cargando&quot;.
+   */
   ngOnInit(): void {
     if (!this.authService.isBrowser()) return;
 
@@ -271,23 +308,35 @@ export class MisReservas implements OnInit {
     }
   }
 
+  /**
+   * Obtiene, filtra y procesa las reservas que le pertenecen exclusivamente al usuario logueado.
+   * * Lógica aplicada:
+   * - Normaliza el correo (minúsculas y sin espacios) para garantizar una comparación exacta.
+   * - Filtra el arreglo global de reservas basándose en el correo.
+   * - Mapea los resultados cruzando el &#x60;idVehiculo&#x60; con la base de datos de autos para inyectar la información gráfica del auto.
+   * * @param {string} correoUsuario El correo electrónico extraído de la sesión activa actual.
+   */
   cargarReservas(correoUsuario: string): void {
     if (!correoUsuario) return;
 
+    // Normalización de seguridad para evitar fallos por mayúsculas accidentales o espacios al final
     const correoLimpio &#x3D; correoUsuario.trim().toLowerCase();
 
     const todasLasReservas &#x3D; this.reservaService.obtenerReservas() || [];
     
+    // Extraemos solo las reservas del usuario actual
     const reservasUsuario &#x3D; todasLasReservas.filter(r &#x3D;&gt; {
       return r &amp;&amp; r.correo &amp;&amp; r.correo.trim().toLowerCase() &#x3D;&#x3D;&#x3D; correoLimpio;
     });
 
+    // Enriquecemos la data combinando cada reserva con los detalles de su vehículo
     this.misReservas &#x3D; reservasUsuario.map(reserva &#x3D;&gt; {
       let vehiculoEncontrado: Vehiculo | undefined;
       
       try {
         vehiculoEncontrado &#x3D; this.vehiculoService.getVehiculosPorId(reserva.idVehiculo);
       } catch (e) {
+        // Si el admin eliminó el vehículo de la flota, mostramos una advertencia en consola pero no rompemos la app
         console.warn(&#x60;No se pudo cargar el vehículo con ID ${reserva.idVehiculo}&#x60;, e);
       }
 
@@ -297,6 +346,7 @@ export class MisReservas implements OnInit {
       };
     });
 
+    // Ordenas las reservas por fecha.
     this.misReservas.sort((a, b) &#x3D;&gt; {
       const fechaA &#x3D; a.fechaDesde ? new Date(a.fechaDesde).getTime() : 0;
       const fechaB &#x3D; b.fechaDesde ? new Date(b.fechaDesde).getTime() : 0;
