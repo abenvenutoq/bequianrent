@@ -138,6 +138,31 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente principal del Panel de Administración (Dashboard).
+Centraliza la gestión de las tres entidades clave del sistema: Usuarios, Reservas y Vehículos.</p>
+<ul>
+<li><em>Características principales:</em></li>
+</ul>
+<ul>
+<li>Interfaz basada en pestañas dinámicas (Submenús).</li>
+<li>Permite modificar en tiempo real el estado de las reservas (con <code>[(ngModel)]</code>).</li>
+<li>Gestiona la sincronización cruzada: al cambiar el estado de una reserva a &quot;Completada&quot; o &quot;Cancelada&quot;,
+libera automáticamente el vehículo asociado.</li>
+<li>Permite dar de baja (eliminar) vehículos de la flota.</li>
+</ul>
+<ul>
+<li>@usageNotes</li>
+</ul>
+<ul>
+<li>Este componente requiere que el usuario posea el rol <code>admin</code>.</li>
+<li>Está protegido tanto por un Guard en el sistema de rutas como por validaciones extra en su inicialización.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -179,6 +204,7 @@
                 <td class="col-md-9">
                                 <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                                 <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
                 </td>
             </tr>
 
@@ -227,6 +253,10 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#reservaService" >reservaService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -320,14 +350,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:117</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Modifica el estado de ciclo de vida de una reserva (Ej: Confirmada, Cancelada, Completada).
+<em>Reglas de Negocio:</em></p>
+<ul>
+<li>Si el estado pasa a <strong>Completada</strong> o <strong>Cancelada</strong>, el vehículo arrendado recupera su disponibilidad (<code>true</code>).</li>
+<li>Si el estado pasa a <strong>Confirmada</strong>, el vehículo queda bloqueado para nuevos arriendos (<code>false</code>).</li>
+</ul>
+<ul>
+<li>@param {Reserva} reserva El objeto completo de la reserva a modificar.</li>
+</ul>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -338,6 +378,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -352,6 +393,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El objeto completo de la reserva a modificar.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>nuevoEstado</td>
@@ -364,6 +409,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El nuevo string de estado extraído desde el control select del HTML.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -399,14 +448,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:93</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Alterna la vista principal de la interfaz sin necesidad de recargar la página.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -417,6 +468,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -431,6 +483,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El nombre exacto de la sección que el admin desea visualizar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -466,14 +522,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:83</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Extrae la información consolidada desde todos los servicios (LocalStorage)
+para poblar las tablas del Panel de Administración.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -503,14 +562,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un vehículo definitivamente del registro de la flota local.
+Emite un cuadro de diálogo nativo de confirmación antes de proceder a filtrar y guardar.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -521,6 +583,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -535,6 +598,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador único del vehículo.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -570,19 +637,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retorna numéricamente la cantidad de elementos de la vista actualmente seleccionada.
+Se utiliza generalmente para alimentar las insignias (badges) en el título de la página.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>El total de registros de la lista activa.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -607,14 +681,22 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de vida inicial del Panel.</p>
+<ol>
+<li>Detiene su ejecución si está renderizándose en el Servidor (SSR).</li>
+<li>Comprueba de forma síncrona que la sesión activa corresponda a un administrador.</li>
+<li>Lee la URL en búsqueda del parámetro <code>?vista=</code> para autoseleccionar una pestaña.</li>
+<li>Carga las bases de datos locales a las variables del componente.</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -644,14 +726,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:163</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Helper que cruza la información entre la base de datos de reservas y la de vehículos,
+permitiendo imprimir el nombre (Marca + Modelo) del auto dentro de la tabla de reservas.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -662,6 +747,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -676,6 +762,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador foráneo del auto en la reserva.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -685,7 +775,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>El nombre concatenado del vehículo, o un texto de contingencia si no se encuentra.</p>
+
                             </div>
                 </td>
             </tr>
@@ -722,10 +813,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para validar roles de acceso y recuperar usuarios.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -753,10 +850,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colección local de todas las reservas de arrendamiento vigentes e históricas.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -785,10 +888,54 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para manipular el registro histórico de reservas.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para interceptar parámetros de la URL (Query Params).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -817,10 +964,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento para redireccionar usuarios no autorizados.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -848,10 +1001,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colección local de todos los usuarios registrados en el sistema.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -879,10 +1038,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colección local con el inventario completo de la flota.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -911,10 +1076,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para gestionar el inventario de la flota automotriz.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -942,10 +1113,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/admin-panel/admin-panel.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Determina la sección activa que se está renderizando actualmente en el DOM.
+Valores posibles: <code>&#39;usuarios&#39;</code>, <code>&#39;reservas&#39;</code>, <code>&#39;vehiculos&#39;</code>.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -957,60 +1135,105 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
+import { Router, RouterLink, ActivatedRoute } from &#x27;@angular/router&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;; // 👈 Importante para el [(ngModel)] del select del estado
 import { AuthService } from &#x27;../../services/auth.services&#x27;;
 import { ReservaService } from &#x27;../../services/reservas.services&#x27;;
 import { VehiculoService } from &#x27;../../services/vehiculos.services&#x27;;
 import { Usuario, Reserva, Vehiculo } from &#x27;../../models/modelos&#x27;;
 
+/**
+ * @description
+ * Componente principal del Panel de Administración (Dashboard).
+ * Centraliza la gestión de las tres entidades clave del sistema: Usuarios, Reservas y Vehículos.
+ * * *Características principales:*
+ * - Interfaz basada en pestañas dinámicas (Submenús).
+ * - Permite modificar en tiempo real el estado de las reservas (con &#x60;[(ngModel)]&#x60;).
+ * - Gestiona la sincronización cruzada: al cambiar el estado de una reserva a &quot;Completada&quot; o &quot;Cancelada&quot;, 
+ * libera automáticamente el vehículo asociado.
+ * - Permite dar de baja (eliminar) vehículos de la flota.
+ * * @usageNotes
+ * - Este componente requiere que el usuario posea el rol &#x60;admin&#x60;.
+ * - Está protegido tanto por un Guard en el sistema de rutas como por validaciones extra en su inicialización.
+ */
 @Component({
   selector: &#x27;app-admin-panel&#x27;,
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: &#x27;./admin-panel.html&#x27;,
   styleUrl: &#x27;./admin-panel.css&#x27;,
 })
 export class AdminPanel implements OnInit {
-  private authService &#x3D; inject(AuthService);
-  private reservaService &#x3D; inject(ReservaService);
-  private vehiculoService &#x3D; inject(VehiculoService);
-  private router &#x3D; inject(Router);
 
-  // Control de la vista activa (reemplaza al cambiarVista de JS)
+  /** Servicio para validar roles de acceso y recuperar usuarios. */
+  private authService &#x3D; inject(AuthService);
+  /** Servicio para manipular el registro histórico de reservas. */
+  private reservaService &#x3D; inject(ReservaService);
+  /** Servicio para gestionar el inventario de la flota automotriz. */
+  private vehiculoService &#x3D; inject(VehiculoService);
+  /** Servicio de enrutamiento para redireccionar usuarios no autorizados. */
+  private router &#x3D; inject(Router);
+  /** Servicio para interceptar parámetros de la URL (Query Params). */
+  private route &#x3D; inject(ActivatedRoute);
+
+  /** * Determina la sección activa que se está renderizando actualmente en el DOM.
+   * Valores posibles: &#x60;&#x27;usuarios&#x27;&#x60;, &#x60;&#x27;reservas&#x27;&#x60;, &#x60;&#x27;vehiculos&#x27;&#x60;. */  
   vistaActual: &#x27;usuarios&#x27; | &#x27;reservas&#x27; | &#x27;vehiculos&#x27; &#x3D; &#x27;usuarios&#x27;;
 
-  // Arreglos de datos
+  /** Colección local de todos los usuarios registrados en el sistema. */
   usuarios: Usuario[] &#x3D; [];
+  /** Colección local de todas las reservas de arrendamiento vigentes e históricas. */
   reservas: Reserva[] &#x3D; [];
+  /** Colección local con el inventario completo de la flota. */
   vehiculos: Vehiculo[] &#x3D; [];
 
+  /**
+   * Ciclo de vida inicial del Panel.
+   * 1. Detiene su ejecución si está renderizándose en el Servidor (SSR).
+   * 2. Comprueba de forma síncrona que la sesión activa corresponda a un administrador.
+   * 3. Lee la URL en búsqueda del parámetro &#x60;?vista&#x3D;&#x60; para autoseleccionar una pestaña.
+   * 4. Carga las bases de datos locales a las variables del componente.
+   */
   ngOnInit(): void {
-    // Protección SSR para evitar problemas con F5
     if (!this.authService.isBrowser()) return;
 
-    // Validación de seguridad: Si no es admin, lo expulsamos al inicio
     if (!this.authService.esAdmin()) {
       this.router.navigate([&#x27;/login&#x27;]);
       return;
     }
 
-    // Cargamos todos los datos iniciales
+    const vistaParam &#x3D; this.route.snapshot.queryParamMap.get(&#x27;vista&#x27;);
+
+    if (vistaParam &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27; || vistaParam &#x3D;&#x3D;&#x3D; &#x27;reservas&#x27; || vistaParam &#x3D;&#x3D;&#x3D; &#x27;vehiculos&#x27;){
+      this.vistaActual &#x3D; vistaParam;
+    }
+
     this.cargarDatos();
   }
 
+  /**
+   * Extrae la información consolidada desde todos los servicios (LocalStorage) 
+   * para poblar las tablas del Panel de Administración.
+   */
   cargarDatos(): void {
     this.usuarios &#x3D; this.authService.obtenerUsusario() || [];
     this.reservas &#x3D; this.reservaService.obtenerReservas() || [];
     this.vehiculos &#x3D; this.vehiculoService.getVehiculos() || [];
   }
 
-  // Cambia la sección activa del submenú
+  /**
+   * Alterna la vista principal de la interfaz sin necesidad de recargar la página.
+   * @param {&#x27;usuarios&#x27; | &#x27;reservas&#x27; | &#x27;vehiculos&#x27;} vista El nombre exacto de la sección que el admin desea visualizar.
+   */
   cambiarVista(vista: &#x27;usuarios&#x27; | &#x27;reservas&#x27; | &#x27;vehiculos&#x27;): void {
     this.vistaActual &#x3D; vista;
   }
 
-  // Retorna el contador dinámico para la insignia del título
+  /**
+   * Retorna numéricamente la cantidad de elementos de la vista actualmente seleccionada.
+   * Se utiliza generalmente para alimentar las insignias (badges) en el título de la página.
+   * @returns {number} El total de registros de la lista activa.
+   */
   getContadorActual(): number {
     if (this.vistaActual &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27;) return this.usuarios.length;
     if (this.vistaActual &#x3D;&#x3D;&#x3D; &#x27;reservas&#x27;) return this.reservas.length;
@@ -1018,24 +1241,23 @@ export class AdminPanel implements OnInit {
     return 0;
   }
 
-  // Cambiar estado de una reserva (Administrado por el Admin)
+  /**
+   * Modifica el estado de ciclo de vida de una reserva (Ej: Confirmada, Cancelada, Completada).
+   * *Reglas de Negocio:*
+   * - Si el estado pasa a **Completada** o **Cancelada**, el vehículo arrendado recupera su disponibilidad (&#x60;true&#x60;).
+   * - Si el estado pasa a **Confirmada**, el vehículo queda bloqueado para nuevos arriendos (&#x60;false&#x60;).
+   * * @param {Reserva} reserva El objeto completo de la reserva a modificar.
+   * @param {string} nuevoEstado El nuevo string de estado extraído desde el control select del HTML.
+   */
   cambiarEstadoReserva(reserva: Reserva, nuevoEstado: string): void {
     reserva.estado &#x3D; nuevoEstado;
     
-    // Si el estado pasa a &quot;Completada&quot;, el auto vuelve a estar disponible
-    if (nuevoEstado &#x3D;&#x3D;&#x3D; &#x27;Completada&#x27;) {
+    // Si el estado pasa a &quot;Completada&quot; o &quot;Cancelada&quot;, el auto vuelve a estar disponible
+    if (nuevoEstado &#x3D;&#x3D;&#x3D; &#x27;Completada&#x27; || nuevoEstado &#x3D;&#x3D;&#x3D; &#x27;Cancelada&#x27;) {
       const auto &#x3D; this.vehiculos.find(v &#x3D;&gt; Number(v.id) &#x3D;&#x3D;&#x3D; Number(reserva.idVehiculo));
       if (auto) {
         auto.disponible &#x3D; true;
-        this.vehiculoService.saveVehiculos(this.vehiculos); // Guarda la flota actualizada
-      }
-    }
-
-    if (nuevoEstado &#x3D;&#x3D;&#x3D; &#x27;Cancelada&#x27;) {
-      const auto &#x3D; this.vehiculos.find(v &#x3D;&gt; Number(v.id) &#x3D;&#x3D;&#x3D; Number(reserva.idVehiculo));
-      if (auto) {
-        auto.disponible &#x3D; true;
-        this.vehiculoService.saveVehiculos(this.vehiculos); // Guarda la flota actualizada
+        this.vehiculoService.saveVehiculos(this.vehiculos);
       }
     }
     
@@ -1048,12 +1270,15 @@ export class AdminPanel implements OnInit {
       }
     }
 
-    // Guardamos la lista de reservas modificada en el localStorage
     this.reservaService.guardarReservas(this.reservas);
     alert(&#x60;Estado de la reserva #${reserva.id} modificado a: ${nuevoEstado}&#x60;);
   }
 
-  // Eliminar un vehículo de la flota
+  /**
+   * Elimina un vehículo definitivamente del registro de la flota local.
+   * Emite un cuadro de diálogo nativo de confirmación antes de proceder a filtrar y guardar.
+   * @param {number | string} id Identificador único del vehículo.
+   */
   eliminarVehiculo(id: number | string): void {
     if (confirm(&#x27;¿Estás seguro de que deseas eliminar este vehículo de la flota?&#x27;)) {
       // Filtramos el arreglo para quitar el auto seleccionado
@@ -1064,7 +1289,12 @@ export class AdminPanel implements OnInit {
     }
   }
 
-  // Helper para mostrar la marca/modelo del auto en la tabla de reservas
+  /**
+   * Helper que cruza la información entre la base de datos de reservas y la de vehículos,
+   * permitiendo imprimir el nombre (Marca + Modelo) del auto dentro de la tabla de reservas.
+   * @param {number | string} idVehiculo Identificador foráneo del auto en la reserva.
+   * @returns {string} El nombre concatenado del vehículo, o un texto de contingencia si no se encuentra.
+   */
   obtenerNombreAuto(idVehiculo: number | string): string {
     const auto &#x3D; this.vehiculos.find(v &#x3D;&gt; Number(v.id) &#x3D;&#x3D;&#x3D; Number(idVehiculo));
     return auto ? &#x60;${auto.marca} ${auto.modelo}&#x60; : &#x60;Vehículo #${idVehiculo}&#x60;;
@@ -1160,6 +1390,7 @@ export class AdminPanel implements OnInit {
                                 &lt;th&gt;Desde / Hasta&lt;/th&gt;
                                 &lt;th&gt;Total&lt;/th&gt;
                                 &lt;th style&#x3D;&quot;width: 180px;&quot;&gt;Estado (Admin)&lt;/th&gt;
+                                &lt;th class&#x3D;&quot;text-center&quot;&gt;Acciones&lt;/th&gt;
                             &lt;/tr&gt;
                         &lt;/thead&gt;
                         &lt;tbody&gt;
@@ -1188,6 +1419,14 @@ export class AdminPanel implements OnInit {
                                         &lt;option value&#x3D;&quot;Completada&quot;&gt;🆗 Completada&lt;/option&gt;
                                         &lt;option value&#x3D;&quot;Cancelada&quot;&gt;⛔ Cancelada&lt;/option&gt;
                                     &lt;/select&gt;
+                                &lt;/td&gt;
+                                &lt;td class&#x3D;&quot;text-center&quot;&gt; 
+                                    &lt;a [routerLink]&#x3D;&quot;r.estado &#x3D;&#x3D;&#x3D; &#x27;Confirmada&#x27; ? [&#x27;/editar-reserva&#x27;, r.id] : null&quot; 
+                                    class&#x3D;&quot;btn btn-outline-primary btn-sm&quot; 
+                                    [class.disabled]&#x3D;&quot;r.estado !&#x3D;&#x3D; &#x27;Confirmada&#x27;&quot;
+                                    title&#x3D;&quot;Editar Reserva&quot;&gt;
+                                        &lt;i class&#x3D;&quot;fa-solid fa-pen-to-square&quot;&gt;&lt;/i&gt;
+                                    &lt;/a&gt;
                                 &lt;/td&gt;
                             &lt;/tr&gt;
                             &lt;tr *ngIf&#x3D;&quot;reservas.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;text-center&quot;&gt;
@@ -1275,8 +1514,8 @@ export class AdminPanel implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-users-gear me-2"></i>Panel Administración</h2>    <p class="text-white">Panel de gestión y control de BequianRent</p></div><div class="container my-5 flex-grow-1">    <div class="row">                <div class="col-md-3 mb-4">            <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">                <div class="d-flex flex-column gap-2">                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'usuarios\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'usuarios\')">                        <i class="fa-solid fa-users me-2"></i>Usuarios Registrados                    </button>                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'reservas\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'reservas\')">                        <i class="fa-solid fa-calendar-days me-2"></i>Reservas Realizadas                    </button>                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'vehiculos\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'vehiculos\')">                        <i class="fa-solid fa-car me-2"></i>Vehículos en Flota                    </button>                </div>            </div>        </div>        <div class="col-md-9">            <div class="card shadow-sm border-0 p-4 bg-white" style="border-radius: 10px;">                                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                    <h2 class="h4 fw-bold mb-0 text-dark">                        <span *ngIf="vistaActual === \'usuarios\'">Usuarios Registrados</span>                        <span *ngIf="vistaActual === \'reservas\'">Reservas Realizadas</span>                        <span *ngIf="vistaActual === \'vehiculos\'">Vehículos en Flota</span>                    </h2>                                        <div class="d-flex align-items-center gap-3">                        <!--<a *ngIf="vistaActual === \'vehiculos\'" routerLink="/registrar-auto" class="btn btn-success btn-sm fw-bold px-3">                            <i class="fa-solid fa-plus me-1"></i> Registrar Auto                        </a>-->                        <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill">{{ getContadorActual() }}</span>                    </div>                </div>                <div class="table-responsive">                                        <table *ngIf="vistaActual === \'usuarios\'" class="table table-hover align-middle">                        <thead class="table-light text-nowrap">                            <tr>                                <th>RUT</th>                                <th>Nombre</th>                                <th>Correo</th>                                <th>Fecha Nacimiento</th>                                <th>Rol</th>                            </tr>                        </thead>                        <tbody>                            <tr *ngFor="let u of usuarios">                                <td class="fw-semibold text-secondary text-nowrap">{{ u.rut }}</td>                                <td class="text-nowrap">{{ u.nombre }}</td>                                <td class="text-nowrap">{{ u.correo }}</td>                                <td class="text-nowrap">{{ u.fechaNacimiento || \'No registrado\' | date: \'dd-MM-yyyy\' }}</td>                                <td>                                    <span class="badge" [ngClass]="u.rol === \'admin\' ? \'bg-danger\' : \'bg-info text-dark\'">                                        {{ u.rol | uppercase }}                                    </span>                                </td>                            </tr>                            <tr *ngIf="usuarios.length === 0">                                <td colspan="5" class="text-muted py-4">No hay usuarios registrados en el sistema.</td>                            </tr>                        </tbody>                    </table>                    <table *ngIf="vistaActual === \'reservas\'" class="table table-hover align-middle">                        <thead class="table-light text-nowrap">                            <tr>                                <th>ID</th>                                <th>Cliente (Correo)</th>                                <th>Vehículo</th>                                <th>Desde / Hasta</th>                                <th>Total</th>                                <th style="width: 180px;">Estado (Admin)</th>                            </tr>                        </thead>                        <tbody>                            <tr *ngFor="let r of reservas">                                <td class="fw-bold">#{{ r.id }}</td>                                <td class="small">{{ r.correo }}</td>                                <td class="fw-semibold text-primary">{{ obtenerNombreAuto(r.idVehiculo) }}</td>                                <td class="small text-secondary fw-semibold">                                    <i class="fa-regular fa-calendar text-muted me-1"></i>                                    {{ r.fechaDesde | date:\'dd/MM/yyyy\' }}                                     <br>                                    <i class="fa-regular fa-calendar-check text-muted me-1"></i>                                    {{ r.fechaHasta | date:\'dd/MM/yyyy\' }}                                </td>                                <td class="fw-bold text-success">${{ r.total | number:\'1.0-0\' }}</td>                                <td>                                    <select class="form-select form-select-sm fw-semibold"                                             [ngModel]="r.estado"                                            (ngModelChange)="cambiarEstadoReserva(r, $event)"                                            [ngClass]="{                                                \'text-success border-success\': r.estado === \'Confirmada\',                                                \'text-secondary border-secondary\': r.estado === \'Completada\',                                                \'text-danger border-danger\': r.estado === \'Cancelada\'                                            }">                                        <option value="Confirmada">✅ Confirmada</option>                                        <option value="Completada">🆗 Completada</option>                                        <option value="Cancelada">⛔ Cancelada</option>                                    </select>                                </td>                            </tr>                            <tr *ngIf="reservas.length === 0" class="text-center">                                <td colspan="6" class="text-muted py-4">No se registran reservas en el sistema.</td>                            </tr>                        </tbody>                    </table>                    <table *ngIf="vistaActual === \'vehiculos\'" class="table table-hover align-middle">                        <thead class="table-light text-nowrap">                            <tr>                                <th>Foto</th>                                <th>Vehículo</th>                                <th>Año</th>                                <th>Precio/Día</th>                                <th>Disponibilidad</th>                                <!--<th class="text-center">Acciones</th>-->                            </tr>                        </thead>                        <tbody>                            <tr *ngFor="let v of vehiculos">                                <td>                                    <img [src]="v.imagen" class="rounded object-fit-cover shadow-sm" alt="Auto" style="width: 70px; height: 45px;">                                </td>                                <td>                                    <span class="fw-bold text-dark">{{ v.marca }}</span> <br>                                    <small class="text-muted">{{ v.modelo }}</small>                                </td>                                <td>{{ v.anio }}</td>                                <td class="fw-semibold text-success">${{ v.precio | number:\'1.0-0\' }}</td>                                <td>                                    <span class="badge rounded-pill" [ngClass]="v.disponible ? \'bg-success\' : \'bg-warning text-dark\'">                                        {{ v.disponible ? \'Disponible\' : \'Arrendado\' }}                                    </span>                                </td>                                <!--<td class="text-center">                                    <div class="d-flex justify-content-center gap-2">                                        <a routerLink="/editar-auto" class="btn btn-outline-primary btn-sm" title="Editar vehículo">                                            <i class="fa-solid fa-pen-to-square"></i>                                        </a>                                        <button (click)="eliminarVehiculo(v.id)" class="btn btn-outline-danger btn-sm" title="Eliminar vehículo">                                            <i class="fa-solid fa-trash"></i>                                        </button>                                    </div>                                </td>-->                            </tr>                            <tr *ngIf="vehiculos.length === 0" class="text-center">                                <td colspan="6" class="text-muted py-4">No hay vehículos registrados en la flota.</td>                            </tr>                        </tbody>                    </table>                </div>            </div>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-users-gear me-2"></i>Panel Administración</h2>    <p class="text-white">Panel de gestión y control de BequianRent</p></div><div class="container my-5 flex-grow-1">    <div class="row">                <div class="col-md-3 mb-4">            <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">                <div class="d-flex flex-column gap-2">                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'usuarios\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'usuarios\')">                        <i class="fa-solid fa-users me-2"></i>Usuarios Registrados                    </button>                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'reservas\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'reservas\')">                        <i class="fa-solid fa-calendar-days me-2"></i>Reservas Realizadas                    </button>                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'vehiculos\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'vehiculos\')">                        <i class="fa-solid fa-car me-2"></i>Vehículos en Flota                    </button>                </div>            </div>        </div>        <div class="col-md-9">            <div class="card shadow-sm border-0 p-4 bg-white" style="border-radius: 10px;">                                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                    <h2 class="h4 fw-bold mb-0 text-dark">                        <span *ngIf="vistaActual === \'usuarios\'">Usuarios Registrados</span>                        <span *ngIf="vistaActual === \'reservas\'">Reservas Realizadas</span>                        <span *ngIf="vistaActual === \'vehiculos\'">Vehículos en Flota</span>                    </h2>                                        <div class="d-flex align-items-center gap-3">                        <!--<a *ngIf="vistaActual === \'vehiculos\'" routerLink="/registrar-auto" class="btn btn-success btn-sm fw-bold px-3">                            <i class="fa-solid fa-plus me-1"></i> Registrar Auto                        </a>-->                        <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill">{{ getContadorActual() }}</span>                    </div>                </div>                <div class="table-responsive">                                        <table *ngIf="vistaActual === \'usuarios\'" class="table table-hover align-middle">                        <thead class="table-light text-nowrap">                            <tr>                                <th>RUT</th>                                <th>Nombre</th>                                <th>Correo</th>                                <th>Fecha Nacimiento</th>                                <th>Rol</th>                            </tr>                        </thead>                        <tbody>                            <tr *ngFor="let u of usuarios">                                <td class="fw-semibold text-secondary text-nowrap">{{ u.rut }}</td>                                <td class="text-nowrap">{{ u.nombre }}</td>                                <td class="text-nowrap">{{ u.correo }}</td>                                <td class="text-nowrap">{{ u.fechaNacimiento || \'No registrado\' | date: \'dd-MM-yyyy\' }}</td>                                <td>                                    <span class="badge" [ngClass]="u.rol === \'admin\' ? \'bg-danger\' : \'bg-info text-dark\'">                                        {{ u.rol | uppercase }}                                    </span>                                </td>                            </tr>                            <tr *ngIf="usuarios.length === 0">                                <td colspan="5" class="text-muted py-4">No hay usuarios registrados en el sistema.</td>                            </tr>                        </tbody>                    </table>                    <table *ngIf="vistaActual === \'reservas\'" class="table table-hover align-middle">                        <thead class="table-light text-nowrap">                            <tr>                                <th>ID</th>                                <th>Cliente (Correo)</th>                                <th>Vehículo</th>                                <th>Desde / Hasta</th>                                <th>Total</th>                                <th style="width: 180px;">Estado (Admin)</th>                                <th class="text-center">Acciones</th>                            </tr>                        </thead>                        <tbody>                            <tr *ngFor="let r of reservas">                                <td class="fw-bold">#{{ r.id }}</td>                                <td class="small">{{ r.correo }}</td>                                <td class="fw-semibold text-primary">{{ obtenerNombreAuto(r.idVehiculo) }}</td>                                <td class="small text-secondary fw-semibold">                                    <i class="fa-regular fa-calendar text-muted me-1"></i>                                    {{ r.fechaDesde | date:\'dd/MM/yyyy\' }}                                     <br>                                    <i class="fa-regular fa-calendar-check text-muted me-1"></i>                                    {{ r.fechaHasta | date:\'dd/MM/yyyy\' }}                                </td>                                <td class="fw-bold text-success">${{ r.total | number:\'1.0-0\' }}</td>                                <td>                                    <select class="form-select form-select-sm fw-semibold"                                             [ngModel]="r.estado"                                            (ngModelChange)="cambiarEstadoReserva(r, $event)"                                            [ngClass]="{                                                \'text-success border-success\': r.estado === \'Confirmada\',                                                \'text-secondary border-secondary\': r.estado === \'Completada\',                                                \'text-danger border-danger\': r.estado === \'Cancelada\'                                            }">                                        <option value="Confirmada">✅ Confirmada</option>                                        <option value="Completada">🆗 Completada</option>                                        <option value="Cancelada">⛔ Cancelada</option>                                    </select>                                </td>                                <td class="text-center">                                     <a [routerLink]="r.estado === \'Confirmada\' ? [\'/editar-reserva\', r.id] : null"                                     class="btn btn-outline-primary btn-sm"                                     [class.disabled]="r.estado !== \'Confirmada\'"                                    title="Editar Reserva">                                        <i class="fa-solid fa-pen-to-square"></i>                                    </a>                                </td>                            </tr>                            <tr *ngIf="reservas.length === 0" class="text-center">                                <td colspan="6" class="text-muted py-4">No se registran reservas en el sistema.</td>                            </tr>                        </tbody>                    </table>                    <table *ngIf="vistaActual === \'vehiculos\'" class="table table-hover align-middle">                        <thead class="table-light text-nowrap">                            <tr>                                <th>Foto</th>                                <th>Vehículo</th>                                <th>Año</th>                                <th>Precio/Día</th>                                <th>Disponibilidad</th>                                <!--<th class="text-center">Acciones</th>-->                            </tr>                        </thead>                        <tbody>                            <tr *ngFor="let v of vehiculos">                                <td>                                    <img [src]="v.imagen" class="rounded object-fit-cover shadow-sm" alt="Auto" style="width: 70px; height: 45px;">                                </td>                                <td>                                    <span class="fw-bold text-dark">{{ v.marca }}</span> <br>                                    <small class="text-muted">{{ v.modelo }}</small>                                </td>                                <td>{{ v.anio }}</td>                                <td class="fw-semibold text-success">${{ v.precio | number:\'1.0-0\' }}</td>                                <td>                                    <span class="badge rounded-pill" [ngClass]="v.disponible ? \'bg-success\' : \'bg-warning text-dark\'">                                        {{ v.disponible ? \'Disponible\' : \'Arrendado\' }}                                    </span>                                </td>                                <!--<td class="text-center">                                    <div class="d-flex justify-content-center gap-2">                                        <a routerLink="/editar-auto" class="btn btn-outline-primary btn-sm" title="Editar vehículo">                                            <i class="fa-solid fa-pen-to-square"></i>                                        </a>                                        <button (click)="eliminarVehiculo(v.id)" class="btn btn-outline-danger btn-sm" title="Eliminar vehículo">                                            <i class="fa-solid fa-trash"></i>                                        </button>                                    </div>                                </td>-->                            </tr>                            <tr *ngIf="vehiculos.length === 0" class="text-center">                                <td colspan="6" class="text-muted py-4">No hay vehículos registrados en la flota.</td>                            </tr>                        </tbody>                    </table>                </div>            </div>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AdminPanel'};
 </script>

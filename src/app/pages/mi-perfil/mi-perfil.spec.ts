@@ -5,11 +5,18 @@ import { Router } from '@angular/router';
 import { MiPerfil } from './mi-perfil';
 import { AuthService } from '../../services/auth.services';
 
+/**
+ * @description
+ * Suite de Pruebas Unitarias exhaustivas para el componente {@link MiPerfil}.
+ * Evalúa el ciclo completo del perfil de usuario: carga de datos de la sesión activa,
+ * comportamiento de la transición al modo de edición, validación reactiva de los campos,
+ * y persistencia segura de la actualización (simulando los temporizadores de UX mediante Vitest).
+ */
 describe('Pruebas Unitarias - Componente Mi Perfil', () => {
   let component: MiPerfil;
   let fixture: ComponentFixture<MiPerfil>;
 
-  // Creamos un usuario falso para que el componente trabaje con él
+  /** Mock simulando un registro extraído del LocalStorage. */
   const mockUsuario = {
     id: 1,
     rut: '15940700-4',
@@ -18,10 +25,10 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     apellido: 'Benvenuto',
     fechaNacimiento: '1984-11-13',
     direccion: 'Av. Maria Elena 370',
-    password: 'Password123'
+    password: 'Password123*'
   };
 
-  // Mock del AuthService
+  /** Mock del `AuthService` para interceptar validaciones de sesión y guardados. */
   const mockAuthService = {
     isBrowser: () => true,
     obtenerSesion: () => ({ loged: true, correo: 'angelo@correo.com' }) as any,
@@ -30,7 +37,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     cerrarSesion: () => {}
   };
 
-  // Mock del Router
+  /** Mock del servicio de enrutamiento para evitar redirecciones reales y atrapar sus llamados. */
   const mockRouter = {
     navigate: vi.fn(),
     navigateByUrl: () => Promise.resolve(true) 
@@ -54,13 +61,13 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     vi.restoreAllMocks();
   });
 
-
+  /** @test Verifica la inicialización del componente y la correcta inyección de la sesión mockeada. */
   it('Debe crear el componente y cargar el usuario en el ngOnInit', () => {
     expect(component).toBeTruthy();
     expect(component.usuario?.correo).toBe('angelo@correo.com'); 
   });
 
-  // Pruebas de Redirección
+  /** @test Redirige a login si no existe sesión activa */
   it('Debe redirigir al login si NO hay una sesión activa', () => {
     vi.spyOn(mockAuthService, 'obtenerSesion').mockReturnValue(null);
     const routerSpy = vi.spyOn(mockRouter, 'navigate');
@@ -70,7 +77,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     expect(routerSpy).toHaveBeenCalledWith(['/login']);
   });
 
-  // Pruebas de Interfaz (Editar datos)
+  /** @test Comprueba la activación del formulario y que se inyecte la data mediante `patchValue`. */
   it('Debe activar el modo edición y rellenar el formulario con los datos del usuario', () => {
     component.activarEdicion();
 
@@ -79,7 +86,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     expect(component.perfilForm.get('direccion')?.value).toBe('Av. Maria Elena 370');
   });
 
-  // Prueba para cancelar edición (Botón Cancelar)
+  /** @test Prueba para cancelar edición (Botón Cancelar) */
   it('Debe cancelar el modo edición', () => {
     component.activarEdicion();
     component.cancelarEdicion();
@@ -87,7 +94,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     expect(component.editando).toBeFalsy();
   });
 
-  // Prueba para invalidar form si se borra el nombre
+  /** @test para invalidad el form en caso que el nombre se borre */
   it('Debe invalidar el formulario si se borra el nombre (es requerido)', () => {
     component.activarEdicion();
     const controlNombre = component.perfilForm.get('nombre');
@@ -98,7 +105,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     expect(component.perfilForm.invalid).toBeTruthy();
   });
 
-  // Prueba debe guardar si formulario es válido 
+  /** @test debe guardar los cambios si el form es válido */
   it('Debe guardar los cambios y actualizar el usuario si el formulario es válido', () => {
     component.activarEdicion();
     
@@ -114,6 +121,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
 
     const guardarSpy = vi.spyOn(mockAuthService, 'guardarUsuario');
 
+    // Congela el tiempo para testear el setTimeout de UX (1.5 segundos)
     vi.useFakeTimers();
 
     component.guardarCambios();
@@ -122,12 +130,15 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
     expect(component.mensajeExito).toBe('¡Datos y contraseña actualizados con éxito!'); 
     expect(component.usuario?.nombre).toBe('Angelo Editado');
 
+    // Avanza el reloj virtual 1500 ms
     vi.advanceTimersByTime(1500);
+    // Verifica que luego de ese tiempo el modo edición se haya cerrado automáticamente
     expect(component.editando).toBeFalsy(); 
 
     vi.useRealTimers();
   });
 
+  /** @test no debe guardar los datos si el form es inválido */
   it('NO debe guardar los cambios si el formulario es inválido', () => {
     component.activarEdicion();
     

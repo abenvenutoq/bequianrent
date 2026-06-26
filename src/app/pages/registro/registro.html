@@ -70,6 +70,7 @@
                                 <label for="direccion" class="form-label fw-semibold">Dirección de Despacho (Opcional)</label>
                                 <input type="text" class="form-control" id="direccion" formControlName="direccion" placeholder="Av. Principal 123" 
                                     [ngClass]="{'is-invalid': f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)}">
+                                <div class="invalid-feedback" *ngIf="f['direccion'].errors?.['direccionInvalida']">No puede ser un espacio en blanco</div>
                             </div>
 
                             <div class="col-12 col-md-6">
@@ -83,7 +84,7 @@
                                     
                                     <div class="invalid-feedback" *ngIf="f['password'].errors?.['required']">La contraseña es obligatoria.</div>
                                     <div class="invalid-feedback" *ngIf="f['password'].errors?.['minlength'] || f['password'].errors?.['maxlength']">Debe tener entre 6 y 18 caracteres.</div>
-                                    <div class="invalid-feedback" *ngIf="f['password'].errors?.['pattern']">Debe contener al menos 1 mayúscula y 1 número.</div>
+                                    <div class="invalid-feedback" *ngIf="f['password'].errors?.['pattern']">Debe contener al menos 1 mayúscula, 1 número y 1 carácter especial.</div>
                                 </div>
                             </div>
 

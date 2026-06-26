@@ -56,8 +56,8 @@ describe('Pruebas Unitarias - Componente Registro', () => {
       correo: 'angelo@correo.com',
       fechaNacimiento: '1984-11-13',
       direccion: 'Av. Maria Elena 370',
-      password: 'Password123',
-      confirmPassword: 'Password123'
+      password: 'Password123*',
+      confirmPassword: 'Password123*'
     });
 
     component.registrar();
@@ -75,8 +75,8 @@ describe('Pruebas Unitarias - Componente Registro', () => {
       correo: 'correo_duplicado@correo.com',
       fechaNacimiento: '1984-11-13',
       direccion: 'Av. Maria Elena 370',
-      password: 'Password123',
-      confirmPassword: 'Password123'
+      password: 'Password123*',
+      confirmPassword: 'Password123*'
     });
 
     vi.spyOn(mockAuthService, 'registrar').mockReturnValue({ 
@@ -139,7 +139,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
   it('Debe invalidar una contraseña sin numero', () => {
     const password = component.registroForm.get('password');
 
-    password?.setValue('Qweqwe');
+    password?.setValue('*Qweqwe');
 
     expect(password?.errors?.['pattern']).toBeTruthy();
   });
@@ -148,7 +148,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
   it('Debe validar una contraseña con numero', () => {
     const password = component.registroForm.get('password');
 
-    password?.setValue('Qwe123');
+    password?.setValue('*Qwe123');
 
     expect(password?.errors?.['pattern']).toBeFalsy();
   });
@@ -158,7 +158,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
   it('Debe invalidar una contraseña sin mayuscula', () => {
     const password = component.registroForm.get('password');
 
-    password?.setValue('qwe123');
+    password?.setValue('*qwe123');
 
     expect(password?.errors?.['pattern']).toBeTruthy();
   });
@@ -167,7 +167,7 @@ describe('Pruebas Unitarias - Componente Registro', () => {
   it('Debe validar una contraseña con mayuscula', () => {
     const password = component.registroForm.get('password');
 
-    password?.setValue('Qwe123');
+    password?.setValue('*Qwe123');
 
     expect(password?.errors?.['pattern']).toBeFalsy();
   });

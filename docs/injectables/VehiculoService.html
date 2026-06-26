@@ -137,6 +137,22 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio encargado de la gestión y persistencia del inventario de vehículos de BequianRent.</p>
+<ul>
+<li>Este servicio realiza las siguientes tareas esenciales:</li>
+</ul>
+<ul>
+<li>Centraliza el almacenamiento local de la flota mediante el uso de LocalStorage.</li>
+<li>Provee métodos genéricos (<code>leerJSON</code>, <code>guardarJSON</code>) para una manipulación segura de datos.</li>
+<li>Normaliza estructuras de datos (rutas de imágenes y coerción de tipos de precio/año/disponibilidad).</li>
+<li>Implementa validaciones de entorno (SSR) para garantizar que la aplicación no falle en el servidor.</li>
+</ul>
+
+            </p>
 
 
 
@@ -205,10 +221,6 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#sessionDisponible" >sessionDisponible</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
                                 <a href="#storageDisponible" >storageDisponible</a>
                             </li>
                         </ul>
@@ -234,10 +246,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/vehiculos.services.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/services/vehiculos.services.ts:25</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del servicio.
+Invoca automáticamente la inicialización de los datos del inventario en el almacenamiento local.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -267,14 +286,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:132</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza y persiste de manera individual el estado de disponibilidad de un solo vehículo.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -285,6 +306,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -299,6 +321,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Identificador único del vehículo a modificar.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>disponible</td>
@@ -311,6 +337,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Nuevo estado (<code>true</code> si está libre, <code>false</code> si se ha reservado).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -348,8 +378,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:180</a></div>
                         </td>
                     </tr>
 
@@ -364,6 +394,9 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Utilidad auxiliar genérica para realizar copias profundas (Deep Copy) de objetos y arreglos.
+Rompe la referencia en memoria del objeto original utilizando el motor V8 de Javascript (JSON parse/stringify).</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -374,6 +407,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -388,6 +422,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Objeto o estructura que se desea clonar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -397,7 +435,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Una copia idéntica pero con una dirección de memoria desvinculada.</p>
+
                             </div>
                 </td>
             </tr>
@@ -423,19 +462,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:85</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Recupera el inventario completo de vehículos desde el almacenamiento persistente.
+Al leerlos, pasa cada ruta de imagen por un proceso de normalización para asegurar que se rendericen correctamente.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Vehiculo.html" target="_self" >Vehiculo[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Arreglo completo de objetos de tipo {@link Vehiculo}.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -460,14 +506,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:96</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene una lista filtrada del inventario de acuerdo a su estado de disponibilidad.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -478,6 +526,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -492,6 +541,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Estado deseado (<code>true</code> para vehículos libres, <code>false</code> para vehículos arrendados).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -501,7 +554,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Arreglo de vehículos que coinciden con el estado solicitado.</p>
+
                             </div>
                 </td>
             </tr>
@@ -527,14 +581,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:122</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Busca y retorna un vehículo específico en base a su identificador único.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -545,6 +601,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -559,6 +616,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El identificador del vehículo a buscar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -568,7 +629,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>El objeto {@link Vehiculo} si existe, o <code>undefined</code> si no se encuentra o el ID es nulo.</p>
+
                             </div>
                 </td>
             </tr>
@@ -594,8 +656,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -610,6 +672,8 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Método genérico para guardar estructuras de datos en el LocalStorage, validando la disponibilidad del navegador.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -620,6 +684,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -634,6 +699,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Llave bajo la cual se persistirá la información.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>valor</td>
@@ -646,6 +715,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Estructura u objeto de tipo genérico <code>T</code> a convertir en string y almacenar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -681,14 +754,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:39</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sienta las bases de datos iniciales de la flota en el navegador.
+Si la clave del inventario no existe en el LocalStorage, inyecta automáticamente los vehículos semilla.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -718,8 +794,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -734,6 +810,9 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Método genérico para la lectura segura de datos almacenados en LocalStorage.
+Incluye manejo de excepciones y devoluciones de respaldo en caso de errores de serialización o contextos SSR.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -744,6 +823,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -758,6 +838,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Llave del LocalStorage a consultar.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>respaldo</td>
@@ -770,6 +854,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Valor predeterminado que se devolverá en caso de no encontrar datos o ante un fallo.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -779,7 +867,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>El objeto parseado de tipo <code>T</code> o su versión de respaldo clonada.</p>
+
                             </div>
                 </td>
             </tr>
@@ -805,14 +894,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:152</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Evalúa y corrige de forma preventiva las rutas de las imágenes de los vehículos.
+Garantiza que, sin importar cómo se haya guardado o tipeado la URL, la vista de usuario renderice correctamente la imagen.
+Si el string viene vacío, asigna una imagen de &quot;placeholder&quot; por defecto.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -823,6 +916,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -837,6 +931,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Cadena de texto correspondiente a la URL o path de la imagen.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -846,7 +944,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Ruta absoluta limpia y normalizada para el atributo <code>src</code>.</p>
+
                             </div>
                 </td>
             </tr>
@@ -872,14 +971,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:106</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Procesa, normaliza y guarda la colección completa de vehículos en el LocalStorage.
+Aplica coerción de tipos (transforma precios y años a <code>Number</code>, y disponibilidad a <code>boolean</code>)
+garantizando que los datos ingresados desde formularios sean consistentes antes de guardarse.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -890,6 +993,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -904,6 +1008,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Arreglo con la flota de vehículos a persistir.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -915,45 +1023,6 @@
                             <div class="io-description">
                                 
                             </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="sessionDisponible"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>sessionDisponible</b></span>
-                        <a href="#sessionDisponible"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>sessionDisponible()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:101</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
                 </td>
             </tr>
         </tbody>
@@ -980,19 +1049,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/app/services/vehiculos.services.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/services/vehiculos.services.ts:169</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Valida de manera segura si las APIs globales del navegador (window y localStorage)
+están disponibles, evitando crasheos durante el Server-Side Rendering (SSR).</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p><code>true</code> si el código se ejecuta en el navegador, <code>false</code> en el servidor.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1030,10 +1106,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/services/vehiculos.services.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/vehiculos.services.ts:18</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario de constantes con las llaves utilizadas para persistir datos en LocalStorage.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1062,10 +1144,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/vehiculos.services.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/services/vehiculos.services.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colección base de vehículos obtenida desde los datos semilla estáticos (<code>VEHICULOS</code>).
+Se clona profundamente para evitar mutaciones directas en la constante original.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1080,18 +1169,39 @@
 import { Vehiculo } from &#x27;../models/modelos&#x27;;
 import { VEHICULOS } from &#x27;../data/vehiculos.data&#x27;;
 
+/**
+ * @description
+ * Servicio encargado de la gestión y persistencia del inventario de vehículos de BequianRent.
+ * * Este servicio realiza las siguientes tareas esenciales:
+ * - Centraliza el almacenamiento local de la flota mediante el uso de LocalStorage.
+ * - Provee métodos genéricos (&#x60;leerJSON&#x60;, &#x60;guardarJSON&#x60;) para una manipulación segura de datos.
+ * - Normaliza estructuras de datos (rutas de imágenes y coerción de tipos de precio/año/disponibilidad).
+ * - Implementa validaciones de entorno (SSR) para garantizar que la aplicación no falle en el servidor.
+ */
 @Injectable ({ providedIn: &#x27;root&#x27;})
 export class VehiculoService{
+    /** Diccionario de constantes con las llaves utilizadas para persistir datos en LocalStorage. */
     readonly KEYS &#x3D; {
         vehiculos: &#x27;bequianrent_vehiculos&#x27;
     };
 
+    /** Colección base de vehículos obtenida desde los datos semilla estáticos (&#x60;VEHICULOS&#x60;).
+     * Se clona profundamente para evitar mutaciones directas en la constante original.
+     */
     readonly vehiculosBase: Vehiculo[] &#x3D; this.clonar(VEHICULOS) as unknown as Vehiculo[];
 
+    /**
+     * Constructor del servicio.
+     * Invoca automáticamente la inicialización de los datos del inventario en el almacenamiento local.
+     */
     constructor() {
         this.iniciarlizarDatos();
     }
 
+    /**
+     * Sienta las bases de datos iniciales de la flota en el navegador.
+     * Si la clave del inventario no existe en el LocalStorage, inyecta automáticamente los vehículos semilla.
+     */
     iniciarlizarDatos(): void {
         if (!this.storageDisponible()) return;
 
@@ -1100,6 +1210,13 @@ export class VehiculoService{
         }
     }
     
+    /**
+     * Método genérico para la lectura segura de datos almacenados en LocalStorage.
+     * Incluye manejo de excepciones y devoluciones de respaldo en caso de errores de serialización o contextos SSR.
+     * @param {string} clave Llave del LocalStorage a consultar.
+     * @param {T} respaldo Valor predeterminado que se devolverá en caso de no encontrar datos o ante un fallo.
+     * @returns {T} El objeto parseado de tipo &#x60;T&#x60; o su versión de respaldo clonada.
+     */
     leerJSON&lt;T&gt;(clave: string, respaldo: T): T {
         if (!this.storageDisponible()) return this.clonar(respaldo);
 
@@ -1116,21 +1233,42 @@ export class VehiculoService{
         }
     }
 
+    /**
+     * Método genérico para guardar estructuras de datos en el LocalStorage, validando la disponibilidad del navegador.
+     * @param {string} clave Llave bajo la cual se persistirá la información.
+     * @param {T} valor Estructura u objeto de tipo genérico &#x60;T&#x60; a convertir en string y almacenar.
+     */
     guardarJSON&lt;T&gt;(clave: string, valor: T): void {
         if (!this.storageDisponible()) return;
         localStorage.setItem(clave, JSON.stringify(valor));
     }
 
+    /**
+     * Recupera el inventario completo de vehículos desde el almacenamiento persistente.
+     * Al leerlos, pasa cada ruta de imagen por un proceso de normalización para asegurar que se rendericen correctamente.
+     * @returns {Vehiculo[]} Arreglo completo de objetos de tipo {@link Vehiculo}.
+     */
     getVehiculos(): Vehiculo[] {
         return this.leerJSON&lt;Vehiculo[]&gt;(this.KEYS.vehiculos, this.vehiculosBase).map(vehiculo &#x3D;&gt; ({
             ...vehiculo, imagen: this.normalizarRutaImagen(vehiculo.imagen)
         }));
     }
 
+    /**
+     * Obtiene una lista filtrada del inventario de acuerdo a su estado de disponibilidad.
+     * @param {boolean} disponible Estado deseado (&#x60;true&#x60; para vehículos libres, &#x60;false&#x60; para vehículos arrendados).
+     * @returns {Vehiculo[]} Arreglo de vehículos que coinciden con el estado solicitado.
+     */
     getVehiculosDisp(disponible: boolean){
         return this.getVehiculos().filter(vehiculo &#x3D;&gt; Boolean(vehiculo.disponible) &#x3D;&#x3D;&#x3D; Boolean(disponible));
     }
 
+    /**
+     * Procesa, normaliza y guarda la colección completa de vehículos en el LocalStorage.
+     * Aplica coerción de tipos (transforma precios y años a &#x60;Number&#x60;, y disponibilidad a &#x60;boolean&#x60;)
+     * garantizando que los datos ingresados desde formularios sean consistentes antes de guardarse.
+     * @param {Vehiculo[]} vehiculos Arreglo con la flota de vehículos a persistir.
+     */
     saveVehiculos(vehiculos: Vehiculo[]): void { 
         const normalizados &#x3D; vehiculos.map(vehiculo &#x3D;&gt; ({
             ...vehiculo,
@@ -1142,11 +1280,21 @@ export class VehiculoService{
         this.guardarJSON(this.KEYS.vehiculos, normalizados);
     }
 
+    /**
+     * Busca y retorna un vehículo específico en base a su identificador único.
+     * @param {number | string | null} id El identificador del vehículo a buscar.
+     * @returns {Vehiculo | undefined} El objeto {@link Vehiculo} si existe, o &#x60;undefined&#x60; si no se encuentra o el ID es nulo.
+     */
     getVehiculosPorId(id: number | string | null): Vehiculo | undefined {
         if (id &#x3D;&#x3D;&#x3D; null || id &#x3D;&#x3D;&#x3D; undefined || id &#x3D;&#x3D;&#x3D; &#x27;&#x27;) return undefined;
         return this.getVehiculos().find(vehiculo &#x3D;&gt; Number(vehiculo.id) &#x3D;&#x3D;&#x3D; Number(id));
     }
 
+    /**
+     * Actualiza y persiste de manera individual el estado de disponibilidad de un solo vehículo.
+     * @param {number} idVehiculo Identificador único del vehículo a modificar.
+     * @param {boolean} disponible Nuevo estado (&#x60;true&#x60; si está libre, &#x60;false&#x60; si se ha reservado).
+     */
     actualizarDisponibilidad(idVehiculo: number, disponible: boolean): void {
         if (!this.storageDisponible()) return;
 
@@ -1160,6 +1308,13 @@ export class VehiculoService{
         }
     }
 
+    /**
+     * Evalúa y corrige de forma preventiva las rutas de las imágenes de los vehículos.
+     * Garantiza que, sin importar cómo se haya guardado o tipeado la URL, la vista de usuario renderice correctamente la imagen.
+     * Si el string viene vacío, asigna una imagen de &quot;placeholder&quot; por defecto.
+     * @param {string} ruta Cadena de texto correspondiente a la URL o path de la imagen.
+     * @returns {string} Ruta absoluta limpia y normalizada para el atributo &#x60;src&#x60;.
+     */
     normalizarRutaImagen(ruta: string): string {
         const limpia &#x3D; (ruta || &#x27;&#x27;).trim();
 
@@ -1171,14 +1326,23 @@ export class VehiculoService{
         return limpia;
     }
 
+    /**
+     * Valida de manera segura si las APIs globales del navegador (window y localStorage) 
+     * están disponibles, evitando crasheos durante el Server-Side Rendering (SSR).
+     * @private
+     * @returns {boolean} &#x60;true&#x60; si el código se ejecuta en el navegador, &#x60;false&#x60; en el servidor.
+     */
     private storageDisponible(): boolean {
         return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
     }
 
-    private sessionDisponible(): boolean {
-        return typeof sessionStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
-    }
-
+    /**
+     * Utilidad auxiliar genérica para realizar copias profundas (Deep Copy) de objetos y arreglos.
+     * Rompe la referencia en memoria del objeto original utilizando el motor V8 de Javascript (JSON parse/stringify).
+     * @private
+     * @param {T} valor Objeto o estructura que se desea clonar.
+     * @returns {T} Una copia idéntica pero con una dirección de memoria desvinculada.
+     */
     private clonar&lt;T&gt;(valor: T): T {
         return JSON.parse(JSON.stringify(valor)) as T;
     }

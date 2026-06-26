@@ -138,6 +138,22 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente encargado de gestionar el flujo de arriendo de un vehículo.</p>
+<ul>
+<li>Funcionalidades principales:</li>
+</ul>
+<ul>
+<li>Carga dinámicamente los datos del vehículo seleccionado mediante el parámetro de la URL.</li>
+<li>Implementa un formulario reactivo para capturar las fechas de inicio y término del arriendo.</li>
+<li>Calcula en tiempo real la cantidad de días de reserva y el costo total a pagar.</li>
+<li>Procesa la transacción, registra la reserva, descuenta el vehículo del inventario y redirige al usuario.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -285,7 +301,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -400,14 +416,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:105</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ejecuta el cálculo matemático para determinar la duración y costo de la reserva.</p>
+<ul>
+<li>Lógica:</li>
+</ul>
+<ol>
+<li>Convierte las fechas a milisegundos y calcula su diferencia.</li>
+<li>Transforma la diferencia a días (1000ms * 60s * 60m * 24h).</li>
+<li>Aplica un mínimo de 1 día de cobro si el cliente arrienda y devuelve el mismo día.</li>
+<li>Multiplica los días por el precio diario del vehículo.</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -437,14 +464,23 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:138</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Finaliza y persiste la transacción de arriendo.</p>
+<ol>
+<li>Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.</li>
+<li>Crea el objeto con el payload de la nueva reserva.</li>
+<li>Guarda la reserva mediante el <code>ReservaService</code>.</li>
+<li>Actualiza la disponibilidad del auto (<code>disponible: false</code>) usando el <code>VehiculoService</code>.</li>
+<li>Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -474,14 +510,23 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de vida inicial del componente.</p>
+<ol>
+<li>Bloquea ejecución en SSR.</li>
+<li>Protege la ruta verificando que exista una sesión activa.</li>
+<li>Establece la fecha mínima de reserva al día actual.</li>
+<li>Inicializa el formulario reactivo con validaciones cruzadas.</li>
+<li>Recupera el ID del vehículo desde la URL y carga sus datos.</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -521,10 +566,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:33</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cantidad calculada de días totales que durará el arriendo.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -553,10 +604,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio inyectado para la construcción ágil del formulario.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -579,10 +636,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena la fecha actual formateada para bloquear la selección de días pasados en el input de tipo Date.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -605,10 +668,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo que controla las fechas de la reserva.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -636,10 +705,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Monto total a pagar calculado en base al precio diario del vehículo y los días de reserva.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -668,10 +743,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de validaciones personalizadas de reglas de negocio.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -694,10 +775,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Objeto que almacena los detalles del vehículo actualmente en proceso de reserva.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -717,6 +804,15 @@ import { ReservaService } from &#x27;../../services/reservas.services&#x27;;
 import { Vehiculo } from &#x27;../../models/modelos&#x27;;
 import { ValidacionService } from &#x27;../../services/validacion.services&#x27;;
 
+/**
+ * @description
+ * Componente encargado de gestionar el flujo de arriendo de un vehículo.
+ * * Funcionalidades principales:
+ * - Carga dinámicamente los datos del vehículo seleccionado mediante el parámetro de la URL.
+ * - Implementa un formulario reactivo para capturar las fechas de inicio y término del arriendo.
+ * - Calcula en tiempo real la cantidad de días de reserva y el costo total a pagar.
+ * - Procesa la transacción, registra la reserva, descuenta el vehículo del inventario y redirige al usuario.
+ */
 @Component({
   selector: &#x27;app-reservar-auto&#x27;,
   standalone: true,
@@ -726,14 +822,21 @@ import { ValidacionService } from &#x27;../../services/validacion.services&#x27;
 })
 export class ReservarAuto implements OnInit {
   
+  /** Objeto que almacena los detalles del vehículo actualmente en proceso de reserva. */
   vehiculo: Vehiculo | undefined;
   
+  /** Cantidad calculada de días totales que durará el arriendo. */
   diasReserva: number &#x3D; 0;
+  /** Monto total a pagar calculado en base al precio diario del vehículo y los días de reserva. */
   totalPagar: number &#x3D; 0;
+  /** Almacena la fecha actual formateada para bloquear la selección de días pasados en el input de tipo Date. */
   fechaMinima!: string;
 
+  /** Formulario reactivo que controla las fechas de la reserva. */
   reservaForm!: FormGroup;
+  /** Servicio inyectado para la construcción ágil del formulario. */
   private fb &#x3D; inject(FormBuilder);
+  /** Servicio de validaciones personalizadas de reglas de negocio. */
   private ValidacionService &#x3D; inject(ValidacionService);
 
   constructor(
@@ -744,10 +847,19 @@ export class ReservarAuto implements OnInit {
     private router: Router
   ) {}
 
+  /**
+   * Ciclo de vida inicial del componente.
+   * 1. Bloquea ejecución en SSR.
+   * 2. Protege la ruta verificando que exista una sesión activa.
+   * 3. Establece la fecha mínima de reserva al día actual.
+   * 4. Inicializa el formulario reactivo con validaciones cruzadas.
+   * 5. Recupera el ID del vehículo desde la URL y carga sus datos.
+   */
   ngOnInit(): void {
     const hoy &#x3D; new Date();
     this.fechaMinima &#x3D; hoy.toISOString().split(&#x27;T&#x27;)[0];
 
+    // Inicializamos el form con un validador a nivel de grupo
     this.reservaForm &#x3D; this.fb.group({
       fechaDesde: [&#x27;&#x27;, [Validators.required]],
       fechaHasta: [&#x27;&#x27;, [Validators.required]]
@@ -755,10 +867,12 @@ export class ReservarAuto implements OnInit {
       validators: [this.ValidacionService.validarFechasReserva.bind(this.ValidacionService)]
     });
 
+    // Detectamos cambios en las fechas para recalcular el precio automáticamente
     this.reservaForm.valueChanges.subscribe(() &#x3D;&gt; {
       this.calcularTotal();
     });
 
+    // Si el vehículo no existe o ya está arrendado, devolvemos al usuario al catálogo
     if (!this.authService.estaLogueado()) {
       this.router.navigate([&#x27;/login&#x27;], { queryParams: { returnUrl: this.router.url } });
       return;
@@ -776,6 +890,14 @@ export class ReservarAuto implements OnInit {
     }
   }
 
+  /**
+   * Ejecuta el cálculo matemático para determinar la duración y costo de la reserva.
+   * * Lógica:
+   * 1. Convierte las fechas a milisegundos y calcula su diferencia.
+   * 2. Transforma la diferencia a días (1000ms * 60s * 60m * 24h).
+   * 3. Aplica un mínimo de 1 día de cobro si el cliente arrienda y devuelve el mismo día.
+   * 4. Multiplica los días por el precio diario del vehículo.
+   */
   calcularTotal(): void {
     const fechaDesde &#x3D; this.reservaForm.get(&#x27;fechaDesde&#x27;)?.value;
     const fechaHasta &#x3D; this.reservaForm.get(&#x27;fechaHasta&#x27;)?.value;
@@ -790,8 +912,10 @@ export class ReservarAuto implements OnInit {
     const fin &#x3D; new Date(fechaHasta);
     const diferenciaML &#x3D; fin.getTime() - inicio.getTime();
 
+    // Math.ceil para redondear siempre hacia arriba en caso de fracciones de día
     this.diasReserva &#x3D; Math.ceil(diferenciaML / (1000 * 60 * 60 * 24));
 
+    // Si se arrienda y devuelve el mismo día, se cobra al menos 1 día
     if (this.diasReserva &lt;&#x3D; 0) {
       this.diasReserva &#x3D; 1;
     }
@@ -799,20 +923,30 @@ export class ReservarAuto implements OnInit {
     this.totalPagar &#x3D; this.diasReserva * this.vehiculo.precio;
   }
 
+  /**
+   * Finaliza y persiste la transacción de arriendo.
+   * 1. Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.
+   * 2. Crea el objeto con el payload de la nueva reserva.
+   * 3. Guarda la reserva mediante el &#x60;ReservaService&#x60;.
+   * 4. Actualiza la disponibilidad del auto (&#x60;disponible: false&#x60;) usando el &#x60;VehiculoService&#x60;.
+   * 5. Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).
+   */
   confirmarReserva(): void {
     if (this.reservaForm.valid &amp;&amp; this.diasReserva &gt; 0 &amp;&amp; this.vehiculo) {
       
+      //1. Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.
       const sesion &#x3D; this.authService.obtenerSesion();
       if (!sesion) return;
 
       const usuarios &#x3D; this.authService.obtenerUsusario();
       const usuarioActual &#x3D; usuarios.find(u &#x3D;&gt; u.correo &#x3D;&#x3D;&#x3D; sesion.correo);
-
+      
       if (!usuarioActual) {
         alert(&quot;Error: No se encontró el usuario en la base de datos.&quot;);
         return;
       }
 
+      //2. Crea el objeto con el payload de la nueva reserva.
       const fechaDesde &#x3D; this.reservaForm.get(&#x27;fechaDesde&#x27;)?.value;
       const fechaHasta &#x3D; this.reservaForm.get(&#x27;fechaHasta&#x27;)?.value;
 
@@ -820,15 +954,19 @@ export class ReservarAuto implements OnInit {
         idVehiculo: this.vehiculo.id,
         correo: usuarioActual.correo,
         rut: usuarioActual.rut,
-        fechaDesde: new Date(fechaDesde),
-        fechaHasta: new Date(fechaHasta),
+        fechaDesde: fechaDesde,
+        fechaHasta: fechaHasta,
         total: this.totalPagar,
         estado: &#x27;Confirmada&#x27;
       };
 
+      // 3. Guarda la reserva mediante el &#x60;ReservaService&#x60;.
       this.reservaService.crearReserva(nuevaReserva);
+
+      // 4. Actualiza la disponibilidad del auto (&#x60;disponible: false&#x60;) usando el &#x60;VehiculoService&#x60;.
       this.vehiculoService.actualizarDisponibilidad(this.vehiculo.id, false);
 
+      // 5. Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).
       alert(&quot;¡Reserva confirmada con éxito!&quot;);
       this.router.navigate([&#x27;/mis-reservas&#x27;]);
     }
@@ -950,7 +1088,7 @@ export class ReservarAuto implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-sliders me-2"></i>Configura tu Reserva</h2>    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p></div><div class="container mb-5 flex-grow-1">    <div class="row g-4" id="reserva-contenedor-principal">                <div class="col-md-6">            <div class="card shadow-sm border-0 h-100" *ngIf="vehiculo; else loading">                <img [src]="vehiculo.imagen" class="card-img-top p-3" alt="Vehículo" style="border-radius: 15px; object-fit: contain; max-height: 300px;">                <div class="card-body px-4 pb-4">                    <span class="badge bg-primary mb-2">{{ vehiculo.tipo }}</span>                    <h3 class="card-title fw-bold text-dark">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>                    <h4 class="text-success fw-bold mb-3">{{ vehiculo.precio | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }} <small class="text-muted fs-6 fw-normal">/día</small></h4>                    <p class="text-secondary">{{ vehiculo.descripcion }}</p>                                        <ul class="list-group list-group-flush mt-3">                        <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-calendar text-primary me-2"></i><strong>Año:</strong> {{ vehiculo.anio }}</li>                        <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-users text-primary me-2"></i><strong>Pasajeros:</strong> {{ vehiculo.pasajeros }}</li>                        <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-gear text-primary me-2"></i><strong>Transmisión:</strong> {{ vehiculo.transmision }}</li>                    </ul>                </div>            </div>            <ng-template #loading>                <div class="card shadow-sm border-0 h-100">                    <div class="text-center p-5">                        <div class="spinner-border text-primary" role="status">                            <span class="visually-hidden">Cargando vehículo...</span>                        </div>                    </div>                </div>            </ng-template>        </div>        <div class="col-md-6">            <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 10px;">                <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>                                <form [formGroup]="reservaForm" (ngSubmit)="confirmarReserva()">                    <div class="mb-3">                        <label for="fechaDesde" class="form-label fw-semibold">Fecha de Recogida (Inicio)</label>                        <input type="date" id="fechaDesde" class="form-control form-control-lg" formControlName="fechaDesde" [min]="fechaMinima"                            [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaDesde\')?.invalid && (reservaForm.get(\'fechaDesde\')?.dirty || reservaForm.get(\'fechaDesde\')?.touched)}">                        <div class="invalid-feedback">La fecha de recogida es obligatoria.</div>                    </div>                    <div class="mb-4">                        <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>                        <input type="date" id="fechaHasta" class="form-control form-control-lg" formControlName="fechaHasta" [min]="fechaMinima"                            [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaHasta\')?.invalid && (reservaForm.get(\'fechaHasta\')?.dirty || reservaForm.get(\'fechaHasta\')?.touched)}">                                                <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'required\']">                            La fecha de devolución es obligatoria.                        </div>                        <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'fechaAnterior\']">                            La fecha de devolución no puede ser anterior a la fecha de recogida.                        </div>                    </div>                    <div class="bg-light rounded p-3 mb-4 border text-dark">                        <div class="d-flex justify-content-between mb-2">                            <span>Cantidad de Días:</span>                            <span class="fw-bold">{{ diasReserva }} días</span>                        </div>                        <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">                            <span class="fs-5 fw-semibold">Total a Pagar:</span>                            <span class="fs-4 fw-bold text-success">{{ totalPagar | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }}</span>                        </div>                    </div>                    <div class="d-grid gap-2">                        <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" [disabled]="reservaForm.invalid || diasReserva <= 0">                            <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar                        </button>                        <a routerLink="/ver-autos" class="btn btn-outline-secondary btn-sm mt-2">Volver a la galería</a>                    </div>                </form>            </div>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+    var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ReservarAuto'};
 </script>

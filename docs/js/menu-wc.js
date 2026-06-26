@@ -63,6 +63,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/App.html" data-type="entity-link" >App</a>
                             </li>
                             <li class="link">
+                                <a href="components/EditarReserva.html" data-type="entity-link" >EditarReserva</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/Footer.html" data-type="entity-link" >Footer</a>
                             </li>
                             <li class="link">
@@ -129,9 +132,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/ReservaDetalle.html" data-type="entity-link" >ReservaDetalle</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/ResultadoClave.html" data-type="entity-link" >ResultadoClave</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ResultadoOperacion.html" data-type="entity-link" >ResultadoOperacion</a>

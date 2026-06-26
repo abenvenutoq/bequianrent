@@ -58,13 +58,13 @@ export class Registro implements OnInit {
       rut: ['', [Validators.required, this.ValidacionService.validarRutChileno()]],
       correo: ['',[Validators.required, this.ValidacionService.isValidEmail]],
       fechaNacimiento: ['', [Validators.required, this.ValidacionService.validarEdad(13)]],
-      direccion: [''],
+      direccion: ['', [this.ValidacionService.validDireccion]],
       // Validaciones de seguridad exigidas para la contraseña
       password: ['',[
         Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(18),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        Validators.minLength(6), // Minimo 6 carácteres
+        Validators.maxLength(18), // Maximo 18 carácteres
+        Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/), // Requerido 1 Mayuscula, 1 numero y 1 carácter especial. 
         this.ValidacionService.isEmpty
       ]],
       confirmPassword: ['', [Validators.required, this.ValidacionService.isEmpty]]
@@ -82,9 +82,9 @@ export class Registro implements OnInit {
     return this.registroForm.controls;
   }
 
-  /** Alterna el tipo de input (password/text) de la contraseña principal */
+  /** Muestra y oculta la password en el input */
   togglePass(): void { this.verPass = !this.verPass;}
-  /** Alterna el tipo de input (password/text) de la confirmación de contraseña */
+  /** Muestra y oculta la confirmación de password en el input */
   toggleConfirm(): void { this.verConfirm = !this.verConfirm}
 
   /**

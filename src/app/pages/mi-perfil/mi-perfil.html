@@ -91,6 +91,7 @@
                                         <label class="form-label fw-bold small text-muted">Dirección</label>
                                         <input type="text" class="form-control" formControlName="direccion" 
                                             [ngClass]="{'is-invalid': f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)}">
+                                        <div class="invalid-feedback" *ngIf="f['direccion'].errors?.['direccionInvalida']">No puede ser un espacio en blanco</div>
                                     </div>
 
                                     <div class="col-md-6">

@@ -73,7 +73,7 @@ export class Login implements OnInit {
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(18),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/), // Exige al menos una mayúscula y un número
+        Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/), // Exige al menos una mayúscula y un número
         this.ValidacionService.isEmpty
       ]],
       recupConfirmPassword: ['', [Validators.required, this.ValidacionService.isEmpty]]

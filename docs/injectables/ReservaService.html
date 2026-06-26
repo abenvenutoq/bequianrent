@@ -137,6 +137,22 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio encargado de la persistencia y gestión del ciclo de vida de las reservas de arriendo de vehículos.</p>
+<ul>
+<li>Este servicio realiza las siguientes tareas esenciales:</li>
+</ul>
+<ul>
+<li>Centraliza el almacenamiento local de las reservas mediante LocalStorage.</li>
+<li>Agregamosdatos iniciales en el sistema si el almacenamiento está vacío.</li>
+<li>Controla de forma autoincremental los identificadores de nuevos registros.</li>
+<li>Implementa seguridad de entorno (SSR) para garantizar estabilidad tanto en el servidor como en el cliente.</li>
+</ul>
+
+            </p>
 
 
 
@@ -173,7 +189,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
                                 <a href="#clonar" >clonar</a>
                             </li>
                             <li>
@@ -193,7 +208,6 @@
                                 <a href="#obtenerReservas" >obtenerReservas</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
                                 <a href="#storageDisponible" >storageDisponible</a>
                             </li>
                         </ul>
@@ -219,10 +233,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/reservas.services.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/services/reservas.services.ts:25</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del servicio.
+Invoca automaticamente la inicialización de los datos de reserva en el almacenamiento local.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -238,7 +259,6 @@
                 <td class="col-md-4">
                     <a name="clonar"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
                         <span ><b>clonar</b></span>
                         <a href="#clonar"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -246,30 +266,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>clonar(valor: T)</code>
+<code>clonar(objeto: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="57"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:57</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:112</a></div>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Type parameters :</b>
-                            <ul class="type-parameters">
-                                    <li>T</li>
-                            </ul>
-                        </td>
-                    </tr>
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Utilidad auxiliar para realizar copias de objetos o arreglos mediante serialización JSON.
+Rompe la referencia por dirección de memoria original de los objetos de Javascript.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -280,13 +294,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>valor</td>
+                                                <td>objeto</td>
                                             <td>
-                                                        <code>T</code>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                             </td>
 
                                             <td>
@@ -294,16 +309,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Estructura de datos u objeto genérico que se desea clonar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>T</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Una copia idéntica y totalmente desvinculada del objeto original.</p>
+
                             </div>
                 </td>
             </tr>
@@ -329,14 +349,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:75</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registra una nueva reserva dentro de la base de datos persistente.
+Omite el ID de entrada, lo calcula automáticamente mediante la lógica autoincremental y lo añade al almacenamiento.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -347,6 +370,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -361,6 +385,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El payload completo de la reserva sin el campo identificador único.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -398,14 +426,26 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Genera de forma autoincremental un nuevo identificador numérico único para las reservas.</p>
+<ul>
+<li>Comportamiento:</li>
+</ul>
+<ul>
+<li>Si la lista está vacía, devuelve el ID base <code>1</code>.</li>
+<li>Si ya existen elementos, extrae el ID máximo actual utilizando desestructuración (<code>...</code>) y le suma <code>1</code>.</li>
+</ul>
+<ul>
+<li>@private</li>
+</ul>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -416,6 +456,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -430,6 +471,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Colección actual de reservas sobre la cual buscar el ID máximo.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -439,7 +484,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>El identificador autoincremental numérico listo para asignarse.</p>
+
                             </div>
                 </td>
             </tr>
@@ -465,14 +511,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Serializa y sobrescribe de forma persistente la colección de reservas en el almacenamiento local.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -483,6 +531,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -497,6 +546,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El arreglo completo de reservas actualizadas que se procederá a almacenar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -532,14 +585,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:17</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:40</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sienta las bases de datos iniciales en el browser.
+Si la clave de reservas no existe en el LocalStorage o corresponde a un arreglo vacío (<code>[]</code>),
+inyecta automaticamente las reservas base preconfiguradas del sistema.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -569,19 +626,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:55</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Recupera el listado completo de las reservas del sistema almacenadas en el LocalStorage.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Reserva.html" target="_self" >Reserva[]</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Un arreglo con todos los objetos {@link Reserva} registrados, o un arreglo vacío en entornos SSR.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -592,7 +655,6 @@
                 <td class="col-md-4">
                     <a name="storageDisponible"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
                         <span ><b>storageDisponible</b></span>
                         <a href="#storageDisponible"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -600,27 +662,33 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>storageDisponible()</code>
+<code>storageDisponible()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/services/reservas.services.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/services/reservas.services.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Valida de manera segura si las APIs globales del browser (<code>window</code> y <code>localStorage</code>) están disponibles en el hilo actual.
+Bloquea la ejecución en el servidor durante el Server-Side Rendering (SSR) evitando excepciones críticas.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p><code>true</code> si el código corre del lado del cliente/browser, de lo contrario <code>false</code>.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -658,10 +726,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/services/reservas.services.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/reservas.services.ts:18</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Diccionario de constantes que contiene las llaves de acceso para el LocalStorage del browser.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -690,10 +764,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/reservas.services.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/services/reservas.services.ts:25</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colección base clonada a partir del archivo estático de datos semilla (<code>RESERVAS</code>).
+Evita problemas de mutación directa en memoria.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -707,40 +788,76 @@
 import { Reserva } from &#x27;../models/modelos&#x27;;
 import { RESERVAS } from &#x27;../data/reservas.data&#x27;;
 
+/**
+ * @description
+ * Servicio encargado de la persistencia y gestión del ciclo de vida de las reservas de arriendo de vehículos.
+ * * Este servicio realiza las siguientes tareas esenciales:
+ * - Centraliza el almacenamiento local de las reservas mediante LocalStorage.
+ * - Agregamosdatos iniciales en el sistema si el almacenamiento está vacío.
+ * - Controla de forma autoincremental los identificadores de nuevos registros.
+ * - Implementa seguridad de entorno (SSR) para garantizar estabilidad tanto en el servidor como en el cliente.
+ */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class ReservaService {
+    
+    /** Diccionario de constantes que contiene las llaves de acceso para el LocalStorage del browser. */
     readonly KEYS &#x3D; {
         reservas: &#x27;bequianrent_reservas&#x27;
     };
 
+    /** Colección base clonada a partir del archivo estático de datos semilla (&#x60;RESERVAS&#x60;). 
+     * Evita problemas de mutación directa en memoria.
+     */
     readonly reservasBase: Reserva[] &#x3D; this.clonar(RESERVAS) as unknown as Reserva[];
 
+    /**
+     * Constructor del servicio.
+     * Invoca automaticamente la inicialización de los datos de reserva en el almacenamiento local.
+     */
     constructor() {
         this.inicializarDatos();
     }
     
+    /**
+     * Sienta las bases de datos iniciales en el browser.
+     * Si la clave de reservas no existe en el LocalStorage o corresponde a un arreglo vacío (&#x60;[]&#x60;),
+     * inyecta automaticamente las reservas base preconfiguradas del sistema.
+     */
     inicializarDatos(): void {
         if (!this.storageDisponible()) return;
 
         const datosActuales &#x3D; localStorage.getItem(this.KEYS.reservas);
 
-        // Si la clave no existe en el navegador, O si existe pero es un arreglo vacío &quot;[]&quot;
+        // Si la clave no existe en el browser, O si existe pero es un arreglo vacío &quot;[]&quot;
         if (!datosActuales || datosActuales &#x3D;&#x3D;&#x3D; &#x27;[]&#x27;) {
             this.guardarReservas(this.reservasBase);
         }
     }
 
+    /**
+     * Recupera el listado completo de las reservas del sistema almacenadas en el LocalStorage.
+     * @returns {Reserva[]} Un arreglo con todos los objetos {@link Reserva} registrados, o un arreglo vacío en entornos SSR.
+     */
     obtenerReservas(): Reserva[] {
         if (!this.storageDisponible()) return [];
         const datos &#x3D; localStorage.getItem(this.KEYS.reservas);
         return datos ? JSON.parse(datos) as Reserva[] : [];
     }
 
+    /**
+     * Serializa y sobrescribe de forma persistente la colección de reservas en el almacenamiento local.
+     * @param {Reserva[]} reservas El arreglo completo de reservas actualizadas que se procederá a almacenar.
+     */
     guardarReservas(reservas: Reserva[]): void {
         if (!this.storageDisponible()) return;
         localStorage.setItem(this.KEYS.reservas, JSON.stringify(reservas));
     }
 
+    /**
+     * Registra una nueva reserva dentro de la base de datos persistente.
+     * Omite el ID de entrada, lo calcula automáticamente mediante la lógica autoincremental y lo añade al almacenamiento.
+     * @param {Omit&lt;Reserva, &#x27;id&#x27;&gt;} nuevaReserva El payload completo de la reserva sin el campo identificador único.
+     */
     crearReserva(nuevaReserva: Omit&lt;Reserva, &#x27;id&#x27;&gt;): void {
         const reservas &#x3D; this.obtenerReservas();
         const id &#x3D; this.generarId(reservas);
@@ -749,18 +866,37 @@ export class ReservaService {
         this.guardarReservas(reservas);
     }
 
+    /**
+     * Genera de forma autoincremental un nuevo identificador numérico único para las reservas.
+     * * Comportamiento:
+     * - Si la lista está vacía, devuelve el ID base &#x60;1&#x60;.
+     * - Si ya existen elementos, extrae el ID máximo actual utilizando desestructuración (&#x60;...&#x60;) y le suma &#x60;1&#x60;.
+     * * @private
+     * @param {Reserva[]} lista Colección actual de reservas sobre la cual buscar el ID máximo.
+     * @returns {number} El identificador autoincremental numérico listo para asignarse.
+     */
     private generarId(lista: Reserva[]): number {
         if (lista.length &#x3D;&#x3D;&#x3D; 0) return 1;
         return Math.max(...lista.map(r &#x3D;&gt; Number(r.id))) + 1;
     }
 
-    // Unificamos la validación del entorno en una sola función
-    private storageDisponible(): boolean {
+    /**
+     * Valida de manera segura si las APIs globales del browser (&#x60;window&#x60; y &#x60;localStorage&#x60;) están disponibles en el hilo actual.
+     * Bloquea la ejecución en el servidor durante el Server-Side Rendering (SSR) evitando excepciones críticas.
+     * @returns {boolean} &#x60;true&#x60; si el código corre del lado del cliente/browser, de lo contrario &#x60;false&#x60;.
+     */
+    storageDisponible(): boolean {
         return typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; typeof localStorage !&#x3D;&#x3D; &#x27;undefined&#x27;;
     }
 
-    private clonar&lt;T&gt;(valor: T): T {
-        return JSON.parse(JSON.stringify(valor)) as T;
+    /**
+     * Utilidad auxiliar para realizar copias de objetos o arreglos mediante serialización JSON.
+     * Rompe la referencia por dirección de memoria original de los objetos de Javascript.
+     * @param {any} objeto Estructura de datos u objeto genérico que se desea clonar.
+     * @returns {any} Una copia idéntica y totalmente desvinculada del objeto original.
+     */
+    clonar(objeto: any): any {
+        return JSON.parse(JSON.stringify(objeto));
     }
 }</code></pre>
     </div>

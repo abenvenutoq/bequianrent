@@ -137,6 +137,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio centralizado de validación reactiva para la aplicación BequianRent.
+Provee un conjunto de validaciones personalizados y métodos auxiliares
+Mejora la integridad de los datos en formularios de registro,</p>
+
+            </p>
 
 
 
@@ -212,14 +221,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:18</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Valida si un campo de texto está vacío o compuesto únicamente por espacios en blanco.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -230,6 +241,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -244,6 +256,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Control reactivo de Angular a evaluar.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -253,7 +269,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Un objeto con la llave <code>{ isEmpty: true }</code> si el campo es inválido, o <code>null</code> si es correcto.</p>
+
                             </div>
                 </td>
             </tr>
@@ -279,14 +296,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:36</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Verifica la estructura formal de una dirección de correo electrónico a través de una expresión regular estándar.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -297,6 +316,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -311,6 +331,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Control reactivo que contiene el string del correo.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -320,7 +344,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Error <code>{ emailInvalido: true }</code> si no pasa el patrón Regex, de lo contrario <code>null</code>.</p>
+
                             </div>
                 </td>
             </tr>
@@ -346,14 +371,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:76</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Valida la igualdad estricta entre dos campos de contraseña (Password y Confirmación).
+Actúa a nivel de <code>FormGroup</code>. Si las claves difieren, inyecta directamente el error <code>noCoincide</code>
+en el control de confirmación para facilitar su renderizado en la interfaz.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -399,7 +428,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Función validadora a nivel de grupo.</p>
+
                             </div>
                 </td>
             </tr>
@@ -425,14 +455,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:51</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validación para comprobar que el usuario posea una edad mínima obligatoria.
+Contrasta de forma matemática los años transcurridos entre la fecha de nacimiento ingresada y la fecha actual.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -443,6 +476,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -457,6 +491,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El límite inferior de años exigido por la plataforma (ej: 18 años).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -466,7 +504,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Una función validadora personalizada para Angular Forms.</p>
+
                             </div>
                 </td>
             </tr>
@@ -492,14 +531,30 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:174</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validación cruzada para el rango de fechas en la reserva de vehículos.</p>
+<ul>
+<li>El método realiza dos acciones críticas:</li>
+</ul>
+<ol>
+<li><strong>Validación cronológica:</strong> Garantiza de forma estricta que la fecha de finalización (<code>fechaHasta</code>)
+no sea anterior a la fecha de inicio (<code>fechaDesde</code>). Si es menor, estampa el error <code>{ fechaAnterior: true }</code>.</li>
+<li><strong>Limpieza de estado (Manejo de errores persistentes):</strong> Si el usuario corrige las fechas y el rango
+vuelve a ser válido, el método extrae activamente el mapa de errores de <code>fechaHasta</code>, elimina el error
+específico <code>fechaAnterior</code> mediante el operador <code>delete</code> y actualiza el control. Esto evita que el input
+quede bloqueado como inválido y preserva otros posibles errores nativos (como <code>required</code>).</li>
+</ol>
+<ul>
+<li>@param {AbstractControl} control El contenedor o formulario reactivo de nivel superior (<code>FormGroup</code>).</li>
+</ul>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -510,6 +565,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -524,6 +580,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El contenedor o formulario reactivo de nivel superior (<code>FormGroup</code>).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -533,7 +593,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Error <code>{ fechaAnterior: true }</code> si el rango es ilógico, o <code>null</code> si es correcto y limpio.</p>
+
                             </div>
                 </td>
             </tr>
@@ -559,19 +620,34 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:111</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Valida la estructura y autenticidad matemática de un RUT (Rol Único Tributario) chileno.</p>
+<ul>
+<li>El proceso abarca:</li>
+</ul>
+<ol>
+<li>Verifica que el rut ingresado tenga el formato correcto.</li>
+<li>Separa el rut en numero correlativo y digito verificador .</li>
+<li>Aplicación del Algoritmo del Módulo 11 (recorrido invertido con factor multiplicador del 2 al 7).</li>
+<li>Comparación del residuo obtenido contra el DV ingresado (incluyendo casos especiales &#39;0&#39; y &#39;K&#39;).</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>(control: AbstractControl) &#x3D;&gt; any</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Validador síncrono para inyectar en controles reactivos.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -589,21 +665,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>validDireccion(direccion: string | null | undefined)</code>
+<code>validDireccion(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/app/services/validacion.services.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/services/validacion.services.ts:146</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Validador reactivo para verificar que la dirección no contenga únicamente espacios.
+Al ser opcional, si está vacía retorna null (válido).</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -614,13 +693,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>direccion</td>
+                                                <td>control</td>
                                             <td>
-                                                        <code>string | null | undefined</code>
+                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
                                             </td>
 
                                             <td>
@@ -628,16 +708,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>El control del formulario.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>ValidationErrors | null</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Error si solo hay espacios, null si es válido.</p>
+
                             </div>
                 </td>
             </tr>
@@ -652,18 +737,20 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { AbstractControl, ValidationErrors, FormGroup } from &#x27;@angular/forms&#x27;;
 
-export interface ResultadoClave {
-  largoMinimo: boolean;
-  largoMaximo: boolean;
-  mayuscula: boolean;
-  numero: boolean;
-  especial: boolean;
-  valida: boolean;
-}
-
+/**
+ * @description
+ * Servicio centralizado de validación reactiva para la aplicación BequianRent.
+ * Provee un conjunto de validaciones personalizados y métodos auxiliares
+ * Mejora la integridad de los datos en formularios de registro,
+ */
 @Injectable({ providedIn: &#x27;root&#x27;})
 export class ValidacionService {
 
+  /**
+   * Valida si un campo de texto está vacío o compuesto únicamente por espacios en blanco.
+   * @param {AbstractControl} control Control reactivo de Angular a evaluar.
+   * @returns {ValidationErrors | null} Un objeto con la llave &#x60;{ isEmpty: true }&#x60; si el campo es inválido, o &#x60;null&#x60; si es correcto.
+   */
   isEmpty(control: AbstractControl){
     const valor &#x3D; control.value;
 
@@ -677,6 +764,11 @@ export class ValidacionService {
       return null;
   }
 
+  /**
+   * Verifica la estructura formal de una dirección de correo electrónico a través de una expresión regular estándar.
+   * @param {AbstractControl} control Control reactivo que contiene el string del correo.
+   * @returns {ValidationErrors | null} Error &#x60;{ emailInvalido: true }&#x60; si no pasa el patrón Regex, de lo contrario &#x60;null&#x60;.
+   */
   isValidEmail(control: AbstractControl){
     const valor &#x3D; control.value;
     if(!valor || typeof valor !&#x3D;&#x3D; &#x27;string&#x27;) return null;
@@ -686,6 +778,12 @@ export class ValidacionService {
     return esValido ? null: {emailInvalido: true};
   }
 
+  /**
+   * Validación para comprobar que el usuario posea una edad mínima obligatoria.
+   * Contrasta de forma matemática los años transcurridos entre la fecha de nacimiento ingresada y la fecha actual.
+   * @param {number} edadMinima El límite inferior de años exigido por la plataforma (ej: 18 años).
+   * @returns {(control: AbstractControl) &#x3D;&gt; ValidationErrors | null} Una función validadora personalizada para Angular Forms.
+   */
   validarEdad(edadMinima: number) {
     return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
       if (!control.value) return null;
@@ -703,19 +801,49 @@ export class ValidacionService {
     };
   }
 
+  /**
+   * Valida la igualdad estricta entre dos campos de contraseña (Password y Confirmación).
+   * Actúa a nivel de &#x60;FormGroup&#x60;. Si las claves difieren, inyecta directamente el error &#x60;noCoincide&#x60;
+   * en el control de confirmación para facilitar su renderizado en la interfaz.
+   * @param {string} password Nombre del control de la contraseña principal (ej: &#x27;password&#x27; o &#x27;recupPassword&#x27;).
+   * @param {string} confirmPassword Nombre del control de confirmación (ej: &#x27;confirmPassword&#x27; o &#x27;confirmRecupPassword&#x27;).
+   * @returns {(group: AbstractControl) &#x3D;&gt; ValidationErrors | null} Función validadora a nivel de grupo.
+   */
   passwordIguales(campo1: string, campo2: string) {
     return (group: AbstractControl): ValidationErrors | null &#x3D;&gt; {
-      const valor1 &#x3D; group.get(campo1)?.value;
-      const valor2 &#x3D; group.get(campo2)?.value;
+      const control1 &#x3D; group.get(campo1);
+      const control2 &#x3D; group.get(campo2);
+
+      const valor1 &#x3D; control1?.value;
+      const valor2 &#x3D; control2?.value;
 
       if (valor1 &amp;&amp; valor2 &amp;&amp; valor1 !&#x3D;&#x3D; valor2) {
-        group.get(campo2)?.setErrors({ noCoinciden: true });
+        control2?.setErrors({ ...control2?.errors, noCoinciden: true });
         return { noCoinciden: true };
+      } 
+      
+      // Limpia el error específico si las contraseñas vuelven a coincidir
+      if (control2?.hasError(&#x27;noCoinciden&#x27;)) {
+        const erroresActuales &#x3D; { ...control2.errors };
+        
+        delete erroresActuales[&#x27;noCoinciden&#x27;];
+        
+        control2.setErrors(Object.keys(erroresActuales).length ? erroresActuales : null);
       }
+
       return null;
     };
   }
 
+  /**
+   * Valida la estructura y autenticidad matemática de un RUT (Rol Único Tributario) chileno.
+   * * El proceso abarca:
+   * 1. Verifica que el rut ingresado tenga el formato correcto.
+   * 2. Separa el rut en numero correlativo y digito verificador .
+   * 3. Aplicación del Algoritmo del Módulo 11 (recorrido invertido con factor multiplicador del 2 al 7).
+   * 4. Comparación del residuo obtenido contra el DV ingresado (incluyendo casos especiales &#x27;0&#x27; y &#x27;K&#x27;).
+   * @returns {(control: AbstractControl) &#x3D;&gt; ValidationErrors | null} Validador síncrono para inyectar en controles reactivos.
+   */
   validarRutChileno() {
     return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
       const rutCompleto &#x3D; control.value;
@@ -745,13 +873,40 @@ export class ValidacionService {
     };
   }
 
-  validDireccion(direccion: string | null | undefined): boolean {
-    if (!direccion) {
-        return true;
+  /**
+   * Validador reactivo para verificar que la dirección no contenga únicamente espacios.
+   * Al ser opcional, si está vacía retorna null (válido).
+   * @param {AbstractControl} control El control del formulario.
+   * @returns {ValidationErrors | null} Error si solo hay espacios, null si es válido.
+   */
+  validDireccion(control: AbstractControl): ValidationErrors | null {
+    const valor &#x3D; control.value;
+
+    // Si no hay valor o no es texto, lo damos por válido (ya que es opcional)
+    if (!valor || typeof valor !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return null;
     }
-    return direccion.trim().length &gt; 0;
+
+    // Si tiene texto, pero al quitarle los espacios queda vacío, es inválido
+    if (valor.trim().length &#x3D;&#x3D;&#x3D; 0) {
+        return { direccionInvalida: true };
+    }
+
+    return null; // Es una dirección válida
   }
 
+  /**
+   * Validación cruzada para el rango de fechas en la reserva de vehículos.
+   * * El método realiza dos acciones críticas:
+   * 1. **Validación cronológica:** Garantiza de forma estricta que la fecha de finalización (&#x60;fechaHasta&#x60;) 
+   * no sea anterior a la fecha de inicio (&#x60;fechaDesde&#x60;). Si es menor, estampa el error &#x60;{ fechaAnterior: true }&#x60;.
+   * 2. **Limpieza de estado (Manejo de errores persistentes):** Si el usuario corrige las fechas y el rango 
+   * vuelve a ser válido, el método extrae activamente el mapa de errores de &#x60;fechaHasta&#x60;, elimina el error 
+   * específico &#x60;fechaAnterior&#x60; mediante el operador &#x60;delete&#x60; y actualiza el control. Esto evita que el input 
+   * quede bloqueado como inválido y preserva otros posibles errores nativos (como &#x60;required&#x60;).
+   * * @param {AbstractControl} control El contenedor o formulario reactivo de nivel superior (&#x60;FormGroup&#x60;).
+   * @returns {ValidationErrors | null} Error &#x60;{ fechaAnterior: true }&#x60; si el rango es ilógico, o &#x60;null&#x60; si es correcto y limpio.
+   */
   validarFechasReserva(control: AbstractControl): ValidationErrors | null {
     const fechaDesde &#x3D; control.get(&#x27;fechaDesde&#x27;)?.value;
     const fechaHasta &#x3D; control.get(&#x27;fechaHasta&#x27;)?.value;
@@ -763,11 +918,13 @@ export class ValidacionService {
     const inicio &#x3D; new Date(fechaDesde);
     const fin &#x3D; new Date(fechaHasta);
 
+    // 1. Si la fecha de fin es menor al inicio, aplicamos el error
     if (fin &lt; inicio) {
       control.get(&#x27;fechaHasta&#x27;)?.setErrors({ fechaAnterior: true });
       return { fechaAnterior: true };
     }
 
+    // 2. Lógica de limpieza: Si el rango es correcto, removemos el error manualmente
     const erroresHasta &#x3D; control.get(&#x27;fechaHasta&#x27;)?.errors;
     if (erroresHasta &amp;&amp; erroresHasta[&#x27;fechaAnterior&#x27;]) {
       delete erroresHasta[&#x27;fechaAnterior&#x27;];

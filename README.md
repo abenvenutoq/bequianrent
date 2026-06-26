@@ -1,6 +1,15 @@
-# COMANDOS NECESARIO PARA CORRER EN LA OFICINA, INGRESAR EN CONSOLA 
-$env:PATH = "C:\Users\angelo.benvenuto\node-v24.16.0;" + $env:PATH
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+# DATOS PARA CONEXION DE PRUEBAS 
+
+ROL ADMIN
+
+correo: admin@bequianrent.cl
+password: *Qwe123
+
+ROL USUARIO
+
+correo: cliente@gmail.com
+password: *Qwe123
+
 
 # Bequianrent
 

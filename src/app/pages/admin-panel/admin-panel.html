@@ -115,7 +115,11 @@
                                         <option value="Cancelada">⛔ Cancelada</option>
                                     </select>
                                 </td>
-                                <td class="text-center"> <a [routerLink]="['/editar-reserva', r.id]" class="btn btn-outline-primary btn-sm" title="Editar Reserva">
+                                <td class="text-center"> 
+                                    <a [routerLink]="r.estado === 'Confirmada' ? ['/editar-reserva', r.id] : null" 
+                                    class="btn btn-outline-primary btn-sm" 
+                                    [class.disabled]="r.estado !== 'Confirmada'"
+                                    title="Editar Reserva">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                 </td>

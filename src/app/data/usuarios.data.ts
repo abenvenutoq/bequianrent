@@ -9,7 +9,7 @@ export const USUARIOS: Usuario[] = [
         correo: "admin@bequianrent.cl",
         fechaNacimiento: "1984-11-13",
         direccion: "",
-        password: "Qwe123",
+        password: "*Qwe123",
         rol: "admin"
     },
     {
@@ -20,7 +20,7 @@ export const USUARIOS: Usuario[] = [
         correo: "cliente@gmail.com",
         fechaNacimiento: "1962-12-23",
         direccion: "Av. Maria Elena 370",
-        password: "Qwe123",
+        password: "*Qwe123",
         rol: "cliente"
     }
 ]

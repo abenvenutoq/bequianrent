@@ -138,6 +138,16 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que gestiona la vista del perfil de usuario (<code>MiPerfil</code>).
+Permite visualizar la información de la cuenta activa y habilita un modo de edición
+para actualizar los datos personales, validando en tiempo real las reglas de negocio
+(RUT, edad mínima y contraseñas) mediante un formulario reactivo.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -340,14 +350,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:125</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Habilita el modo de edición de perfil.
+Utiliza el método <code>patchValue</code> para inyectar y pre-rellenar los inputs del formulario
+basándose en la información actual guardada en el estado local del componente.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -377,14 +391,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:143</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Aborta el flujo de edición y retorna la vista al estado de solo lectura.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -414,14 +430,22 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:154</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Procesa la solicitud para guardar las modificaciones del usuario.</p>
+<ol>
+<li>Detiene la ejecución si el formulario posee estados inválidos (marcando todos los inputs como <code>touched</code>).</li>
+<li>Extrae los valores actualizados y busca el registro del usuario en la &quot;Base de Datos&quot; local.</li>
+<li>Sobrescribe la información, la persiste vía <code>AuthService</code> y actualiza la vista.</li>
+<li>Activa un temporizador visual (1.5 segundos) antes de cerrar automáticamente el modo edición.</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -451,14 +475,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Ciclo de vida inicial del componente.</p>
+<ul>
+<li>Ejecuta las siguientes acciones críticas:</li>
+</ul>
+<ol>
+<li>Bloquea la ejecución en SSR usando <code>isBrowser()</code>.</li>
+<li>Protege la vista validando que exista una sesión activa; de lo contrario, expulsa al login.</li>
+<li>Recupera los datos reales del usuario mediante una búsqueda en el almacenamiento local.</li>
+<li>Inicializa el formulario reactivo inyectándole los validadores estrictos.</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -488,14 +523,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:116</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Intercambia dinámicamente el estado de visibilidad de la confirmación de contraseña.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -525,14 +562,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:111</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Intercambia dinámicamente el estado de visibilidad de la contraseña principal en el DOM.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -573,10 +612,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:26</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que provee las funciones de autenticación y gestión de usuarios.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -604,10 +649,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>flag que controla si la vista está en modo lectura o en modo edición de formulario.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -636,10 +687,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creador de formularios reactivos.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -667,10 +724,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de retroalimentación en caso de ocurrir un error en el guardado.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -698,10 +761,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de retroalimentación visual de éxito al guardar.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -724,10 +793,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo principal para la actualización de datos del perfil.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -756,10 +831,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:28</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento de Angular para proteger la ruta si no hay sesión.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -787,10 +868,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Objeto que almacena los datos en duro del usuario actualmente logueado.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -819,10 +906,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:32</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio centralizado que provee las validaciones de negocio personalizadas.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -850,10 +943,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad (tipo text/password) del input de confirmación de contraseña.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -881,10 +980,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad (tipo text/password) del input de la contraseña principal.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -910,9 +1015,19 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:74</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:106</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Getter auxiliar diseñado para limpiar el código HTML.
+Facilita el acceso directo a los controles individuales del formulario (ej. <code>f[&#39;nombre&#39;].errors</code>).</p>
+</div>
+
+                                <div>
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -924,11 +1039,18 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from &#x27;@angular/forms&#x27;;
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators} from &#x27;@angular/forms&#x27;;
 import { AuthService } from &#x27;../../services/auth.services&#x27;;
 import { Usuario } from &#x27;../../models/modelos&#x27;;
 import { ValidacionService } from &#x27;../../services/validacion.services&#x27;;
 
+/**
+ * @description
+ * Componente que gestiona la vista del perfil de usuario (&#x60;MiPerfil&#x60;).
+ * Permite visualizar la información de la cuenta activa y habilita un modo de edición
+ * para actualizar los datos personales, validando en tiempo real las reglas de negocio
+ * (RUT, edad mínima y contraseñas) mediante un formulario reactivo.
+ */
 @Component({
   selector: &#x27;app-mi-perfil&#x27;,
   standalone: true,
@@ -937,22 +1059,42 @@ import { ValidacionService } from &#x27;../../services/validacion.services&#x27;
   styleUrl: &#x27;./mi-perfil.css&#x27;,
 })
 export class MiPerfil implements OnInit {
+
+  /** Servicio que provee las funciones de autenticación y gestión de usuarios. */
   private authService &#x3D; inject(AuthService);
+  /** Servicio de enrutamiento de Angular para proteger la ruta si no hay sesión. */
   private router &#x3D; inject(Router);
+  /** Creador de formularios reactivos. */
   private fb &#x3D; inject(FormBuilder);
+  /** Servicio centralizado que provee las validaciones de negocio personalizadas. */
   private ValidacionService &#x3D; inject(ValidacionService);
 
+  /** Objeto que almacena los datos en duro del usuario actualmente logueado. */
   usuario: Usuario | null &#x3D; null;
+  /** flag que controla si la vista está en modo lectura o en modo edición de formulario. */
   editando &#x3D; false;
 
+  /** Formulario reactivo principal para la actualización de datos del perfil. */
   perfilForm!: FormGroup;
 
+  /** Mensaje de retroalimentación en caso de ocurrir un error en el guardado. */
   mensajeError &#x3D; &#x27;&#x27;;
+  /** Mensaje de retroalimentación visual de éxito al guardar. */
   mensajeExito &#x3D; &#x27;&#x27;;
 
+  /** Controla la visibilidad (tipo text/password) del input de la contraseña principal. */
   verPass &#x3D; false;
+  /** Controla la visibilidad (tipo text/password) del input de confirmación de contraseña. */
   verConfirm &#x3D; false;
 
+  /**
+   * Ciclo de vida inicial del componente.
+   * * Ejecuta las siguientes acciones críticas:
+   * 1. Bloquea la ejecución en SSR usando &#x60;isBrowser()&#x60;.
+   * 2. Protege la vista validando que exista una sesión activa; de lo contrario, expulsa al login.
+   * 3. Recupera los datos reales del usuario mediante una búsqueda en el almacenamiento local.
+   * 4. Inicializa el formulario reactivo inyectándole los validadores estrictos.
+   */
   ngOnInit(): void {
     if (!this.authService.isBrowser()){
       return;
@@ -980,7 +1122,7 @@ export class MiPerfil implements OnInit {
       nombre: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isEmpty]],
       apellido: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isEmpty]],
       fechaNacimiento: [&#x27;&#x27;, [Validators.required, this.ValidacionService.validarEdad(13)]],
-      direccion: [&#x27;&#x27;],
+      direccion: [&#x27;&#x27;, [this.ValidacionService.validDireccion]],
       password: [&#x27;&#x27;, [
         Validators.required, 
         Validators.minLength(6), 
@@ -994,18 +1136,30 @@ export class MiPerfil implements OnInit {
     });
   }
 
+  /**
+   * Getter auxiliar diseñado para limpiar el código HTML.
+   * Facilita el acceso directo a los controles individuales del formulario (ej. &#x60;f[&#x27;nombre&#x27;].errors&#x60;).
+   * @returns Los controles subyacentes del &#x60;perfilForm&#x60;.
+   */
   get f() {
     return this.perfilForm.controls;
   }
 
+  /** Intercambia dinámicamente el estado de visibilidad de la contraseña principal en el DOM. */
   togglePass(): void {
     this.verPass &#x3D; !this.verPass;
   }
 
+  /** Intercambia dinámicamente el estado de visibilidad de la confirmación de contraseña. */
   toggleConfirm(): void {
     this.verConfirm &#x3D; !this.verConfirm;
   }
 
+  /**
+   * Habilita el modo de edición de perfil.
+   * Utiliza el método &#x60;patchValue&#x60; para inyectar y pre-rellenar los inputs del formulario
+   * basándose en la información actual guardada en el estado local del componente.
+   */
   activarEdicion(): void {
     if (this.usuario) {
       this.perfilForm.patchValue({
@@ -1023,10 +1177,18 @@ export class MiPerfil implements OnInit {
     }
   }
 
+  /** Aborta el flujo de edición y retorna la vista al estado de solo lectura. */
   cancelarEdicion(): void {
     this.editando &#x3D; false;
   }
 
+  /**
+   * Procesa la solicitud para guardar las modificaciones del usuario.
+   * 1. Detiene la ejecución si el formulario posee estados inválidos (marcando todos los inputs como &#x60;touched&#x60;).
+   * 2. Extrae los valores actualizados y busca el registro del usuario en la &quot;Base de Datos&quot; local.
+   * 3. Sobrescribe la información, la persiste vía &#x60;AuthService&#x60; y actualiza la vista.
+   * 4. Activa un temporizador visual (1.5 segundos) antes de cerrar automáticamente el modo edición.
+   */
   guardarCambios(): void {
     if (!this.usuario) return;
 
@@ -1054,6 +1216,7 @@ export class MiPerfil implements OnInit {
       
       this.mensajeExito &#x3D; &#x27;¡Datos y contraseña actualizados con éxito!&#x27;;
 
+      // Auto-cierra el modo edición tras un segundo y medio para mejorar la UX
       setTimeout(() &#x3D;&gt; {
         this.editando &#x3D; false;
         this.router.navigateByUrl(&#x27;/&#x27;, {skipLocationChange: true}).then(() &#x3D;&gt; {
@@ -1162,6 +1325,7 @@ export class MiPerfil implements OnInit {
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Dirección&lt;/label&gt;
                                         &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;direccion&quot; 
                                             [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: f[&#x27;direccion&#x27;].invalid &amp;&amp; (f[&#x27;direccion&#x27;].dirty || f[&#x27;direccion&#x27;].touched)}&quot;&gt;
+                                        &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;f[&#x27;direccion&#x27;].errors?.[&#x27;direccionInvalida&#x27;]&quot;&gt;No puede ser un espacio en blanco&lt;/div&gt;
                                     &lt;/div&gt;
 
                                     &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
@@ -1237,8 +1401,8 @@ export class MiPerfil implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>Mi Perfil</h2>    <p class="text-white">Gestiona tu información personal</p></div><main class="container my-5 flex-grow-1" *ngIf="usuario">    <div class="row justify-content-center">        <div class="col-12 col-lg-10">            <div class="card shadow rounded-4 overflow-hidden border-0">                <div class="row g-0">                                        <div class="col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-5">                        <div class="avatar-circle mb-3 mx-auto">                            <i class="fa-solid fa-user" id="avatarIcon"></i>                        </div>                        <h4 class="fw-bold mb-1 text-center">{{ usuario.nombre }} {{ usuario.apellido }}</h4>                        <span class="badge px-3 py-2 rounded-pill mt-2"                               [ngClass]="usuario.rol === \'admin\' ? \'bg-danger\' : \'bg-primary\'">                            {{ usuario.rol | uppercase }}                        </span>                    </div>                    <div class="col-md-8 p-5">                                                <div *ngIf="!editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Información Personal</h4>                            </div>                            <div class="row g-4">                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>                                    <p class="fs-5 mb-0">{{ usuario.rut }}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>                                    <p class="fs-5 mb-0">{{ usuario.correo }}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Fecha de Nacimiento</label>                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento | date: \'dd-MM-yyyy\'}}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>                                    <p class="fs-5 mb-0">{{ usuario.direccion || \'No registrada\' }}</p>                                </div>                            </div>                            <div class="mt-5 pt-3">                                <button (click)="activarEdicion()" class="btn btn-outline-primary px-4">                                    <i class="fa-solid fa-pen me-2"></i> Editar Datos                                </button>                            </div>                        </div>                        <div *ngIf="editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Editar Información</h4>                            </div>                            <div *ngIf="mensajeError" class="alert alert-danger text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeError }}                            </div>                            <div *ngIf="mensajeExito" class="alert alert-success text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}                            </div>                            <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>                                <div class="row g-3">                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Nombre *</label>                                        <input type="text" class="form-control" formControlName="nombre"                                             [ngClass]="{\'is-invalid\': f[\'nombre\'].invalid && (f[\'nombre\'].dirty || f[\'nombre\'].touched)}">                                        <div class="invalid-feedback">El nombre es obligatorio.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Apellido *</label>                                        <input type="text" class="form-control" formControlName="apellido"                                             [ngClass]="{\'is-invalid\': f[\'apellido\'].invalid && (f[\'apellido\'].dirty || f[\'apellido\'].touched)}">                                        <div class="invalid-feedback">El apellido es obligatorio.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Fecha de Nacimiento *</label>                                        <input type="date" class="form-control" formControlName="fechaNacimiento"                                             [ngClass]="{\'is-invalid\': f[\'fechaNacimiento\'].invalid && (f[\'fechaNacimiento\'].dirty || f[\'fechaNacimiento\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'required\']">La fecha es obligatoria.</div>                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'menorDeEdad\']">Debes ser mayor de 13 años.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Dirección</label>                                        <input type="text" class="form-control" formControlName="direccion"                                             [ngClass]="{\'is-invalid\': f[\'direccion\'].invalid && (f[\'direccion\'].dirty || f[\'direccion\'].touched)}">                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verPass ? \'text\' : \'password\'" class="form-control" formControlName="password" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'password\'].invalid && (f[\'password\'].dirty || f[\'password\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">                                                <i class="fa-solid" [ngClass]="verPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'required\']">La contraseña es obligatoria.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'minlength\'] || f[\'password\'].errors?.[\'maxlength\']">Debe tener entre 6 y 18 caracteres.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'pattern\']">Debe tener 1 mayúscula y 1 número.</div>                                        </div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verConfirm ? \'text\' : \'password\'" class="form-control" formControlName="confirmPassword" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'confirmPassword\'].invalid && (f[\'confirmPassword\'].dirty || f[\'confirmPassword\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">                                                <i class="fa-solid" [ngClass]="verConfirm ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'required\']">Debes confirmar tu contraseña.</div>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'noCoinciden\']">Las contraseñas no coinciden.</div>                                        </div>                                    </div>                                </div>                                <div class="mt-5 pt-3 d-flex gap-2">                                    <button type="submit" class="btn btn-primary px-4" [disabled]="perfilForm.invalid">                                        <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios                                    </button>                                    <button type="button" (click)="cancelarEdicion()" class="btn btn-outline-secondary px-4">                                        Cancelar                                    </button>                                </div>                            </form>                        </div>                    </div>                </div>            </div>        </div>    </div></main></div>'
-    var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>Mi Perfil</h2>    <p class="text-white">Gestiona tu información personal</p></div><main class="container my-5 flex-grow-1" *ngIf="usuario">    <div class="row justify-content-center">        <div class="col-12 col-lg-10">            <div class="card shadow rounded-4 overflow-hidden border-0">                <div class="row g-0">                                        <div class="col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-5">                        <div class="avatar-circle mb-3 mx-auto">                            <i class="fa-solid fa-user" id="avatarIcon"></i>                        </div>                        <h4 class="fw-bold mb-1 text-center">{{ usuario.nombre }} {{ usuario.apellido }}</h4>                        <span class="badge px-3 py-2 rounded-pill mt-2"                               [ngClass]="usuario.rol === \'admin\' ? \'bg-danger\' : \'bg-primary\'">                            {{ usuario.rol | uppercase }}                        </span>                    </div>                    <div class="col-md-8 p-5">                                                <div *ngIf="!editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Información Personal</h4>                            </div>                            <div class="row g-4">                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>                                    <p class="fs-5 mb-0">{{ usuario.rut }}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>                                    <p class="fs-5 mb-0">{{ usuario.correo }}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Fecha de Nacimiento</label>                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento | date: \'dd-MM-yyyy\'}}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>                                    <p class="fs-5 mb-0">{{ usuario.direccion || \'No registrada\' }}</p>                                </div>                            </div>                            <div class="mt-5 pt-3">                                <button (click)="activarEdicion()" class="btn btn-outline-primary px-4">                                    <i class="fa-solid fa-pen me-2"></i> Editar Datos                                </button>                            </div>                        </div>                        <div *ngIf="editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Editar Información</h4>                            </div>                            <div *ngIf="mensajeError" class="alert alert-danger text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeError }}                            </div>                            <div *ngIf="mensajeExito" class="alert alert-success text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}                            </div>                            <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>                                <div class="row g-3">                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Nombre *</label>                                        <input type="text" class="form-control" formControlName="nombre"                                             [ngClass]="{\'is-invalid\': f[\'nombre\'].invalid && (f[\'nombre\'].dirty || f[\'nombre\'].touched)}">                                        <div class="invalid-feedback">El nombre es obligatorio.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Apellido *</label>                                        <input type="text" class="form-control" formControlName="apellido"                                             [ngClass]="{\'is-invalid\': f[\'apellido\'].invalid && (f[\'apellido\'].dirty || f[\'apellido\'].touched)}">                                        <div class="invalid-feedback">El apellido es obligatorio.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Fecha de Nacimiento *</label>                                        <input type="date" class="form-control" formControlName="fechaNacimiento"                                             [ngClass]="{\'is-invalid\': f[\'fechaNacimiento\'].invalid && (f[\'fechaNacimiento\'].dirty || f[\'fechaNacimiento\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'required\']">La fecha es obligatoria.</div>                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'menorDeEdad\']">Debes ser mayor de 13 años.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Dirección</label>                                        <input type="text" class="form-control" formControlName="direccion"                                             [ngClass]="{\'is-invalid\': f[\'direccion\'].invalid && (f[\'direccion\'].dirty || f[\'direccion\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'direccion\'].errors?.[\'direccionInvalida\']">No puede ser un espacio en blanco</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verPass ? \'text\' : \'password\'" class="form-control" formControlName="password" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'password\'].invalid && (f[\'password\'].dirty || f[\'password\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">                                                <i class="fa-solid" [ngClass]="verPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'required\']">La contraseña es obligatoria.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'minlength\'] || f[\'password\'].errors?.[\'maxlength\']">Debe tener entre 6 y 18 caracteres.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'pattern\']">Debe tener 1 mayúscula y 1 número.</div>                                        </div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verConfirm ? \'text\' : \'password\'" class="form-control" formControlName="confirmPassword" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'confirmPassword\'].invalid && (f[\'confirmPassword\'].dirty || f[\'confirmPassword\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">                                                <i class="fa-solid" [ngClass]="verConfirm ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'required\']">Debes confirmar tu contraseña.</div>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'noCoinciden\']">Las contraseñas no coinciden.</div>                                        </div>                                    </div>                                </div>                                <div class="mt-5 pt-3 d-flex gap-2">                                    <button type="submit" class="btn btn-primary px-4" [disabled]="perfilForm.invalid">                                        <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios                                    </button>                                    <button type="button" (click)="cancelarEdicion()" class="btn btn-outline-secondary px-4">                                        Cancelar                                    </button>                                </div>                            </form>                        </div>                    </div>                </div>            </div>        </div>    </div></main></div>'
+    var COMPONENTS = [{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MiPerfil'};
 </script>
