@@ -203,12 +203,12 @@
   const authService &#x3D; inject(AuthService);
   const router &#x3D; inject(Router);
 
-  // Reutilizamos tu función estrella ⭐
+
   if (authService.esAdmin()) {
-    return true; // Lo dejamos pasar sin problemas
+    return true; 
   }
 
-  // Si no es admin, bloqueamos la entrada y lo mandamos al login
+  /** Si no es admin redirige al login */
   router.navigate([&#x27;/login&#x27;]);
   return false;
 }</code>
