@@ -1,6 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { VehiculoService } from './vehiculos.services';
 
+/**
+ * @description
+ * Suite de Pruebas Unitarias para el servicio {@link VehiculoService}.
+ */
 describe('Pruebas Unitarias - VehiculoService', () => {
   let service: VehiculoService;
 

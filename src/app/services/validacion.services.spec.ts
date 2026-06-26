@@ -2,6 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ValidacionService } from './validacion.services';
 
+/**
+ * @description
+ * Suite de Pruebas Unitarias para el servicio {@link ValidacionService}.
+ */
 describe('Pruebas Unitarias - ValidacionService', () => {
   let service: ValidacionService;
 

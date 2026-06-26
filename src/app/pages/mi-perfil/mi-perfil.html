@@ -104,7 +104,7 @@
                                             </span>
                                             <div class="invalid-feedback" *ngIf="f['password'].errors?.['required']">La contraseña es obligatoria.</div>
                                             <div class="invalid-feedback" *ngIf="f['password'].errors?.['minlength'] || f['password'].errors?.['maxlength']">Debe tener entre 6 y 18 caracteres.</div>
-                                            <div class="invalid-feedback" *ngIf="f['password'].errors?.['pattern']">Debe tener 1 mayúscula y 1 número.</div>
+                                            <div class="invalid-feedback" *ngIf="f['password'].errors?.['pattern']">Debe tener 1 mayúscula, 1 número y 1 carácter especial.</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
