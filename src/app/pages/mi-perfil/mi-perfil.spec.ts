@@ -115,8 +115,8 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
       apellido: 'Benvenuto',
       fechaNacimiento: '1984-11-13',
       direccion: 'Nueva Dirección 123',
-      password: 'Password123',
-      confirmPassword: 'Password123'
+      password: '*Password123',
+      confirmPassword: '*Password123'
     });
 
     const guardarSpy = vi.spyOn(mockAuthService, 'guardarUsuario');

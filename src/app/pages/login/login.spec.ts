@@ -58,7 +58,7 @@ describe('Pruebas Unitarias - Componente Login', () => {
     it('Debe invalidar una contraseña si NO contiene una letra mayúscula', () => {
         const password = component.recupForm.get('recupPassword');
 
-        password?.setValue('qwe123');
+        password?.setValue('*qwe123');
 
         expect(password?.errors?.['pattern']).toBeTruthy();
     });
@@ -66,7 +66,7 @@ describe('Pruebas Unitarias - Componente Login', () => {
     it('Debe validar una contraseña con mayuscula', () => {
         const password = component.recupForm.get('recupPassword');
 
-        password?.setValue('Qwe123');
+        password?.setValue('*Qwe123');
 
         expect(password?.errors?.['pattern']).toBeFalsy();
     });
@@ -77,7 +77,7 @@ describe('Pruebas Unitarias - Componente Login', () => {
     it('Debe validar una contraseña con 6 caracteres', () => {
         const password = component.recupForm.get('recupPassword');
 
-        password?.setValue('Qwe123');
+        password?.setValue('*Qwe123');
 
         expect(password?.errors?.['minlength']).toBeFalsy();
     });
