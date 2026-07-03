@@ -26,7 +26,7 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
   const mockAuthService = {
     isBrowser: vi.fn().mockReturnValue(true),
     obtenerSesion: vi.fn().mockReturnValue({ correo: 'test@correo.com' }),
-    obtenerUsusario: vi.fn().mockReturnValue([mockUsuario]),
+    obtenerUsuario: vi.fn().mockReturnValue([mockUsuario]),
     estaLogueado: vi.fn().mockReturnValue(true)
   };
 

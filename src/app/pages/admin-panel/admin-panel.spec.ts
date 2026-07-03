@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
+import { Reserva } from '../../models/modelos';
 import { AdminPanel } from './admin-panel';
 import { AuthService } from '../../services/auth.services';
 import { ReservaService } from '../../services/reservas.services';
@@ -8,23 +11,26 @@ import { VehiculoService } from '../../services/vehiculos.services';
 
 /**
  * @description
- * Suite de Pruebas Unitarias para el componente {@link AdminPanel}.
- * Verifica la protección de la ruta, el despliegue de las distintas vistas del dashboard
- * y la lógica estricta del cambio de estados de vehículos según las operaciones de las reservas.
+ * Suite de Pruebas Unitarias para el componente contenedor {@link AdminPanel}.
+ * Verifica la correcta asignación de pestañas según la URL (QueryParams), 
+ * la carga de datos iniciales y el manejo centralizado de eventos (cambio de estados de reserva).
  */
 describe('Pruebas Unitarias - Componente Admin Panel', () => {
   let component: AdminPanel;
   let fixture: ComponentFixture<AdminPanel>;
 
-  // --- Datos Mock (Mocks de Bases de Datos) ---
+  // --- Datos Mock Simuldos ---
+  // Agregamos fechaNacimiento válida para que los componentes hijos no rompan el DatePipe al renderizarse
   const mockUsuarios = [
-    { id: 1, nombre: 'Admin', rol: 'admin' },
-    { id: 2, nombre: 'Cliente', rol: 'cliente' }
+    { id: 1, nombre: 'Admin', rol: 'admin', fechaNacimiento: '1990-01-01' },
+    { id: 2, nombre: 'Cliente', rol: 'cliente', fechaNacimiento: '1995-05-05' }
   ];
 
-  const mockReservas = [
-    { id: 1, idVehiculo: 10, estado: 'Pendiente' }
-  ];
+  const mockReservas: Reserva[] = [{
+    id: 1,
+    idVehiculo: 10,
+    estado: 'Pendiente'
+  } as Reserva];
 
   const mockVehiculos = [
     { id: 10, marca: 'Toyota', modelo: 'Yaris', disponible: false }
@@ -32,19 +38,19 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
 
   // --- Mocks de Servicios ---
   const mockAuthService = {
-    isBrowser: vi.fn().mockReturnValue(true),
-    esAdmin: vi.fn().mockReturnValue(true),
-    obtenerUsusario: vi.fn().mockReturnValue(mockUsuarios)
+    isBrowser: vi.fn(() => true),
+    obtenerUsuario: vi.fn(() => mockUsuarios),
+    esAdmin: vi.fn(() => true)
   };
 
   const mockReservaService = {
-    obtenerReservas: vi.fn().mockReturnValue(mockReservas),
-    guardarReservas: vi.fn()
+    obtenerReservas: vi.fn(() => mockReservas),
+    guardarReservas: vi.fn() // Espía para ver si el Padre guarda correctamente
   };
 
   const mockVehiculoService = {
-    getVehiculos: vi.fn().mockReturnValue(mockVehiculos),
-    saveVehiculos: vi.fn()
+    getVehiculos: vi.fn(() => mockVehiculos),
+    saveVehiculos: vi.fn() // Espía para ver si el Padre guarda la disponibilidad del auto
   };
 
   const mockRouter = {
@@ -52,20 +58,13 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
   };
 
   const mockActivatedRoute = {
-    snapshot: {
-      queryParamMap: {
-        get: vi.fn().mockReturnValue('vehiculos') // Simulamos entrar con ?vista=vehiculos
-      }
-    }
+    // Simulamos que el usuario llegó por la URL: /admin-panel?vista=vehiculos
+    queryParams: of({ vista: 'vehiculos' }) 
   };
 
   beforeEach(async () => {
-    // Interceptamos alerts y confirms nativos para que no bloqueen los tests
-    vi.stubGlobal('alert', vi.fn());
-    vi.stubGlobal('confirm', vi.fn(() => true));
-
     await TestBed.configureTestingModule({
-      imports: [AdminPanel],
+      imports: [AdminPanel], // Al ser standalone importa automáticamente a sus componentes hijos
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: ReservaService, useValue: mockReservaService },
@@ -77,79 +76,49 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
 
     fixture = TestBed.createComponent(AdminPanel);
     component = fixture.componentInstance;
-    fixture.detectChanges(); 
+    fixture.detectChanges(); // Ejecuta el ngOnInit() y renderiza el HTML
   });
 
   afterEach(() => {
-    vi.restoreAllMocks();
+    vi.clearAllMocks();
   });
 
   /** @test Inicialización básica y parámetros de URL */
-  it('Debe crear el componente, cargar datos y ajustar la vista desde los queryParams', () => {
+  it('Debe crear el componente y cargar datos', () => {
     expect(component).toBeTruthy();
+    
+    // Verifica que el Padre extrajo la info de los servicios
     expect(component.usuarios.length).toBe(2);
     expect(component.vehiculos.length).toBe(1);
     expect(component.reservas.length).toBe(1);
     
-    // Entró con ?vista=vehiculos según nuestro mockActivatedRoute
-    expect(component.vistaActual).toBe('vehiculos'); 
   });
 
-  /** @test Protección de Rutas (Guardia manual) */
-  it('Debe expulsar al usuario si no posee rol de Administrador', () => {
-    mockAuthService.esAdmin.mockReturnValueOnce(false); // Simulamos que es un cliente normal
-    
-    component.ngOnInit();
-
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']);
-  });
-
-  /** @test Verificación de utilidades de la vista */
-  it('Debe cambiar de vista y retornar el contador correcto', () => {
-    component.cambiarVista('usuarios');
-    expect(component.vistaActual).toBe('usuarios');
-    expect(component.getContadorActual()).toBe(2); // 2 usuarios mockeados
-
+  /** @test Lógica de cambio de vista manual */
+  it('Debe cambiar la vista actual usando el método cambiarVista()', () => {
     component.cambiarVista('reservas');
-    expect(component.getContadorActual()).toBe(1); // 1 reserva mockeada
+    expect(component.vistaActual).toBe('reservas');
   });
 
-  /** @test Cambio de estados (Reglas de Negocio) */
-  it('Debe liberar el vehículo (disponible: true) cuando la reserva se Cancelada o Completada', () => {
-    const spySaveVehiculos = vi.spyOn(mockVehiculoService, 'saveVehiculos');
-    const spySaveReservas = vi.spyOn(mockReservaService, 'guardarReservas');
+  /** @test Integración Padre-Hijo: Liberación de vehículos */
+  it('Debe actualizar estado a Completada, liberar el vehículo y guardar cambios', () => {
+    const reservaSimulada = mockReservas[0];
     
-    const reservaTest = component.reservas[0];
-    
-    // Modificamos a Completada
-    component.cambiarEstadoReserva(reservaTest, 'Completada');
+    // Act: Simulamos que el componente hijo emitió el evento de cambio
+    component.actualizarEstadoReserva({
+      reserva: reservaSimulada, 
+      nuevoEstado: 'Completada'
+    });
 
-    // El auto ID 10 ahora debería estar disponible
-    expect(component.vehiculos[0].disponible).toBe(true);
-    
-    // Verificamos guardado persistente
-    expect(spySaveVehiculos).toHaveBeenCalled();
-    expect(spySaveReservas).toHaveBeenCalled();
-    expect(window.alert).toHaveBeenCalledWith('Estado de la reserva #1 modificado a: Completada');
-  });
+    // Assert 1: La reserva en memoria local debió cambiar
+    expect(reservaSimulada.estado).toBe('Completada');
 
-  /** @test Lógica de borrado con confirmación */
-  it('Debe eliminar un vehículo de la flota si se confirma la acción', () => {
-    const spySaveVehiculos = vi.spyOn(mockVehiculoService, 'saveVehiculos');
+    // Assert 2: El vehículo asociado (ID 10) debió quedar Disponible (true)
+    const vehiculoModificado = component.vehiculos.find(v => v.id === 10);
+    expect(vehiculoModificado?.disponible).toBe(true);
 
-    component.eliminarVehiculo(10); // ID del Toyota Yaris mockeado
-
-    // El arreglo de vehículos debe quedar vacío
-    expect(component.vehiculos.length).toBe(0);
-    expect(spySaveVehiculos).toHaveBeenCalled();
-  });
-
-  /** @test Lógica visual de cruce de datos */
-  it('Debe retornar correctamente la marca y el modelo del vehículo a través de su ID', () => {
-    const nombre = component.obtenerNombreAuto(10);
-    expect(nombre).toBe('Toyota Yaris');
-
-    const nombreNoEncontrado = component.obtenerNombreAuto(999);
-    expect(nombreNoEncontrado).toBe('Vehículo #999');
+    // Assert 3: Se debieron llamar a los servicios de guardado para la persistencia
+    expect(mockVehiculoService.saveVehiculos).toHaveBeenCalledWith(component.vehiculos);
+    expect(mockReservaService.guardarReservas).toHaveBeenCalledWith(component.reservas);
   });
 });

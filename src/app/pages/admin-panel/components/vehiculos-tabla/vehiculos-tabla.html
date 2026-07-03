@@ -1,0 +1,36 @@
+<div class="table-responsive">
+    <table class="table table-hover text-center align-middle">
+        <thead class="table-light text-nowrap">
+            <tr>
+                <th>Id</th>
+                <th>Imagen</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Año</th>
+                <th>Disponibilidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let v of listaVehiculos">
+                <td>{{ v.id }}</td>
+                <td>
+                    <img [src]="v.imagen" class="rounded object-fit-cover shadow-sm" alt="Auto" style="width: 70px; height: 45px;">
+                </td>
+                <td>
+                    <span class="fw-bold text-dark">{{ v.marca }}</span> <br>
+                    <small class="text-muted">{{ v.modelo }}</small>
+                </td>
+                <td>{{ v.anio }}</td>
+                <td class="fw-semibold text-success">${{ v.precio | number:'1.0-0' }}</td>
+                <td>
+                    <span class="badge rounded-pill" [ngClass]="v.disponible ? 'bg-success' : 'bg-warning text-dark'">
+                        {{ v.disponible ? 'Disponible' : 'Arrendado' }}
+                    </span>
+                </td>
+            </tr>
+            <tr *ngIf="listaVehiculos.length === 0" class="text-center">
+                <td colspan="6" class="text-muted py-4">No hay vehículos registrados en la flota.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

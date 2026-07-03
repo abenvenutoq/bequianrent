@@ -1,0 +1,29 @@
+<div class="table-responsive">
+    <table class="table table-hover text-center align-middle">
+        <thead class="table-light text-nowrap">
+            <tr>
+                <th>RUT</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Fecha Nacimiento</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of listaUsuarios">
+                <td class="fw-semibold text-secondary text-nowrap">{{ u.rut }}</td>
+                <td class="text-nowrap">{{ u.nombre }}</td>
+                <td class="text-nowrap">{{ u.correo }}</td>
+                <td class="text-nowrap">{{ (u.fechaNacimiento | date: 'dd-MM-yyyy') || 'No registrado' }}</td>
+                <td>
+                    <span class="badge" [ngClass]="u.rol === 'admin' ? 'bg-danger' : 'bg-info text-dark'">
+                        {{ u.rol | uppercase }}
+                    </span>
+                </td>
+            </tr>
+            <tr *ngIf="listaUsuarios.length === 0">
+                <td colspan="5" class="text-muted py-4">No hay usuarios registrados en el sistema.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,60 @@
+<div class="table-responsive" [formGroup]="adminForm">
+    <table class="table table-hover text-center align-middle">
+        <thead class="table-light text-nowrap">
+            <tr>
+                <th>ID</th>
+                <th>Cliente (Correo)</th>
+                <th>Vehículo</th>
+                <th>Desde / Hasta</th>
+                <th>Total</th>
+                <th style="width: 180px;">Estado (Admin)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        
+        <tbody formArrayName="reservasControls">
+            
+            <tr *ngFor="let control of reservasFormArray.controls; let i = index" [formGroupName]="i">
+                
+                <td class="fw-bold">#{{ listaReservas[i].id }}</td>
+                <td class="small">{{ listaReservas[i].correo }}</td>
+                <td class="fw-semibold text-primary">{{ obtenerNombreAuto(listaReservas[i].idVehiculo) }}</td>
+                <td class="small text-secondary fw-semibold">
+                    <i class="fa-regular fa-calendar text-muted me-1"></i>
+                    {{ listaReservas[i].fechaDesde | date:'dd/MM/yyyy' }} 
+                    <br>
+                    <i class="fa-regular fa-calendar-check text-muted me-1"></i>
+                    {{ listaReservas[i].fechaHasta | date:'dd/MM/yyyy' }}
+                </td>
+                <td class="fw-bold text-success">${{ listaReservas[i].total | number:'1.0-0' }}</td>
+                
+                <td>
+                    <select class="form-select form-select-sm fw-semibold" 
+                            formControlName="estado"
+                            [ngClass]="{
+                                'text-success border-success': listaReservas[i].estado === 'Confirmada',
+                                'text-secondary border-secondary': listaReservas[i].estado === 'Completada',
+                                'text-danger border-danger': listaReservas[i].estado === 'Cancelada'
+                            }">
+                        <option value="Confirmada">✅ Confirmada</option>
+                        <option value="Completada">🆗 Completada</option>
+                        <option value="Cancelada">⛔ Cancelada</option>
+                    </select>
+                </td>
+                
+                <td class="text-center"> 
+                    <a [routerLink]="listaReservas[i].estado === 'Confirmada' ? ['/editar-reserva', listaReservas[i].id] : null" 
+                    class="btn btn-outline-primary btn-sm" 
+                    [class.disabled]="listaReservas[i].estado !== 'Confirmada'"
+                    title="Editar Reserva">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </td>
+            </tr>
+            
+            <tr *ngIf="listaReservas.length === 0" class="text-center">
+                <td colspan="7" class="text-muted py-4">No se registran reservas en el sistema.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

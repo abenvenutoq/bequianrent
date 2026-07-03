@@ -30,7 +30,7 @@ describe('Pruebas Unitarias - AuthService', () => {
     
     // 3. Interceptamos los métodos internos
     vi.spyOn(service, 'isBrowser').mockReturnValue(true);
-    vi.spyOn(service, 'obtenerUsusario').mockReturnValue(mockUsuarios);
+    vi.spyOn(service, 'obtenerUsuario').mockReturnValue(mockUsuarios);
     vi.spyOn(service, 'guardarUsuario').mockImplementation(() => {});
   });
 

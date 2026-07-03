@@ -32,7 +32,7 @@ describe('Pruebas Unitarias - Componente Mi Perfil', () => {
   const mockAuthService = {
     isBrowser: () => true,
     obtenerSesion: () => ({ loged: true, correo: 'angelo@correo.com' }) as any,
-    obtenerUsusario: () => [mockUsuario],
+    obtenerUsuario: () => [mockUsuario],
     guardarUsuario: () => {},
     cerrarSesion: () => {}
   };

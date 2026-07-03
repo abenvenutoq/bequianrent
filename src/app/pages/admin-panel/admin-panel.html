@@ -3,9 +3,8 @@
     <p class="text-white">Panel de gestión y control de BequianRent</p>
 </div>
 
-<div class="container my-5 flex-grow-1">
+<div class="container my-5">
     <div class="row">
-        
         <div class="col-md-3 mb-4">
             <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">
                 <div class="d-flex flex-column gap-2">
@@ -29,155 +28,24 @@
         </div>
 
         <div class="col-md-9">
-            <div class="card shadow-sm border-0 p-4 bg-white" style="border-radius: 10px;">
-                
-                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-                    <h2 class="h4 fw-bold mb-0 text-dark">
-                        <span *ngIf="vistaActual === 'usuarios'">Usuarios Registrados</span>
-                        <span *ngIf="vistaActual === 'reservas'">Reservas Realizadas</span>
-                        <span *ngIf="vistaActual === 'vehiculos'">Vehículos en Flota</span>
-                    </h2>
-                    
-                    <div class="d-flex align-items-center gap-3">
-                        <!--<a *ngIf="vistaActual === 'vehiculos'" routerLink="/registrar-auto" class="btn btn-success btn-sm fw-bold px-3">
-                            <i class="fa-solid fa-plus me-1"></i> Registrar Auto
-                        </a>-->
-                        <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill">{{ getContadorActual() }}</span>
-                    </div>
-                </div>
+            
+            <app-usuarios-tabla 
+                *ngIf="vistaActual === 'usuarios'" 
+                [listaUsuarios]="usuarios">
+            </app-usuarios-tabla>
 
-                <div class="table-responsive">
-                    
-                    <table *ngIf="vistaActual === 'usuarios'" class="table table-hover align-middle">
-                        <thead class="table-light text-nowrap">
-                            <tr>
-                                <th>RUT</th>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Fecha Nacimiento</th>
-                                <th>Rol</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let u of usuarios">
-                                <td class="fw-semibold text-secondary text-nowrap">{{ u.rut }}</td>
-                                <td class="text-nowrap">{{ u.nombre }}</td>
-                                <td class="text-nowrap">{{ u.correo }}</td>
-                                <td class="text-nowrap">{{ u.fechaNacimiento || 'No registrado' | date: 'dd-MM-yyyy' }}</td>
-                                <td>
-                                    <span class="badge" [ngClass]="u.rol === 'admin' ? 'bg-danger' : 'bg-info text-dark'">
-                                        {{ u.rol | uppercase }}
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr *ngIf="usuarios.length === 0">
-                                <td colspan="5" class="text-muted py-4">No hay usuarios registrados en el sistema.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <app-reservas-tabla 
+                *ngIf="vistaActual === 'reservas'" 
+                [listaReservas]="reservas"
+                [listaVehiculos]="vehiculos"
+                (onEstadoCambiado)="actualizarEstadoReserva($event)">
+            </app-reservas-tabla>
 
-                    <table *ngIf="vistaActual === 'reservas'" class="table table-hover align-middle">
-                        <thead class="table-light text-nowrap">
-                            <tr>
-                                <th>ID</th>
-                                <th>Cliente (Correo)</th>
-                                <th>Vehículo</th>
-                                <th>Desde / Hasta</th>
-                                <th>Total</th>
-                                <th style="width: 180px;">Estado (Admin)</th>
-                                <th class="text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let r of reservas">
-                                <td class="fw-bold">#{{ r.id }}</td>
-                                <td class="small">{{ r.correo }}</td>
-                                <td class="fw-semibold text-primary">{{ obtenerNombreAuto(r.idVehiculo) }}</td>
-                                <td class="small text-secondary fw-semibold">
-                                    <i class="fa-regular fa-calendar text-muted me-1"></i>
-                                    {{ r.fechaDesde | date:'dd/MM/yyyy' }} 
-                                    <br>
-                                    <i class="fa-regular fa-calendar-check text-muted me-1"></i>
-                                    {{ r.fechaHasta | date:'dd/MM/yyyy' }}
-                                </td>
-                                <td class="fw-bold text-success">${{ r.total | number:'1.0-0' }}</td>
-                                <td>
-                                    <select class="form-select form-select-sm fw-semibold" 
-                                            [ngModel]="r.estado"
-                                            (ngModelChange)="cambiarEstadoReserva(r, $event)"
-                                            [ngClass]="{
-                                                'text-success border-success': r.estado === 'Confirmada',
-                                                'text-secondary border-secondary': r.estado === 'Completada',
-                                                'text-danger border-danger': r.estado === 'Cancelada'
-                                            }">
-                                        <option value="Confirmada">✅ Confirmada</option>
-                                        <option value="Completada">🆗 Completada</option>
-                                        <option value="Cancelada">⛔ Cancelada</option>
-                                    </select>
-                                </td>
-                                <td class="text-center"> 
-                                    <a [routerLink]="r.estado === 'Confirmada' ? ['/editar-reserva', r.id] : null" 
-                                    class="btn btn-outline-primary btn-sm" 
-                                    [class.disabled]="r.estado !== 'Confirmada'"
-                                    title="Editar Reserva">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr *ngIf="reservas.length === 0" class="text-center">
-                                <td colspan="6" class="text-muted py-4">No se registran reservas en el sistema.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <app-vehiculos-tabla 
+                *ngIf="vistaActual === 'vehiculos'" 
+                [listaVehiculos]="vehiculos">
+            </app-vehiculos-tabla>
 
-                    <table *ngIf="vistaActual === 'vehiculos'" class="table table-hover align-middle">
-                        <thead class="table-light text-nowrap">
-                            <tr>
-                                <th>Foto</th>
-                                <th>Vehículo</th>
-                                <th>Año</th>
-                                <th>Precio/Día</th>
-                                <th>Disponibilidad</th>
-                                <!--<th class="text-center">Acciones</th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let v of vehiculos">
-                                <td>
-                                    <img [src]="v.imagen" class="rounded object-fit-cover shadow-sm" alt="Auto" style="width: 70px; height: 45px;">
-                                </td>
-                                <td>
-                                    <span class="fw-bold text-dark">{{ v.marca }}</span> <br>
-                                    <small class="text-muted">{{ v.modelo }}</small>
-                                </td>
-                                <td>{{ v.anio }}</td>
-                                <td class="fw-semibold text-success">${{ v.precio | number:'1.0-0' }}</td>
-                                <td>
-                                    <span class="badge rounded-pill" [ngClass]="v.disponible ? 'bg-success' : 'bg-warning text-dark'">
-                                        {{ v.disponible ? 'Disponible' : 'Arrendado' }}
-                                    </span>
-                                </td>
-                                <!--<td class="text-center">
-                                    <div class="d-flex justify-content-center gap-2">
-                                        <a routerLink="/editar-auto" class="btn btn-outline-primary btn-sm" title="Editar vehículo">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                        <button (click)="eliminarVehiculo(v.id)" class="btn btn-outline-danger btn-sm" title="Eliminar vehículo">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>-->
-                            </tr>
-                            <tr *ngIf="vehiculos.length === 0" class="text-center">
-                                <td colspan="6" class="text-muted py-4">No hay vehículos registrados en la flota.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
         </div>
-
     </div>
 </div>
