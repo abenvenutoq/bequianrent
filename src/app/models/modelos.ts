@@ -132,3 +132,17 @@ export interface ResultadoOperacion {
     /** Mensaje descriptivo sobre el resultado (útil para inyectarlo directamente en alertas de la UI). */
     mensaje: string;
 }
+
+export interface SerieIndicador {
+  fecha: string;
+  valor: number;
+}
+
+export interface IndicadorEconomico {
+  version: string;
+  autor: string;
+  codigo: string;
+  nombre: string;
+  unidad_medida: string;
+  serie: SerieIndicador[];
+}

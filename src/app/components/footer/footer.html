@@ -1,5 +1,43 @@
-<footer class="bg-dark text-white text-center py-4 mt-auto">
+<footer class="bg-dark text-white py-4 mt-auto border-top border-secondary">
     <div class="container">
-        <p class="mb-0">&copy; 2026 BequianRent - Proyecto WEB - DuocUc Online</p>
+        <div class="row g-4 align-items-center justify-content-center">
+            
+            <div class="col-12 col-md-5 col-lg-6">
+                <h5 class="fw-bold text-primary mb-2">
+                    <i class="fa-solid fa-car me-2"></i>BequianRent
+                </h5>
+                <p class="text-white-50 fw-bold medium mb-0">
+                    Sistema de gestión de alquiler de vehículos.
+                </p>
+                <small class="d-block text-white-50 mt-3">
+                    &copy; {{ anio }} BequianRent - DuocUc Online
+                </small>
+            </div>
+
+            <div class="col-12 col-md-5 col-lg-4 text-center">
+                <div class="p-3 rounded-3 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 d-inline-block w-100" style="max-width: 320px;">
+                    <p class="mb-2 fw-semibold text-success small text-uppercase tracking-wider">
+                        <i class="fa-solid fa-chart-line me-1"></i> Indicador Económico
+                    </p>
+
+                    <div *ngIf="valorDolar !== null; else dolarNoDisponible">
+                        <small class="d-block text-white-50 mb-1">Dólar Observado (Chile)</small>
+                        <span class="fs-5 fw-bold text-warning">
+                            {{ valorDolar?.toLocaleString('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0, maximumFractionDigits: 0 }) }}
+                        </span>
+                        <small class="d-block text-white-50 mt-1" *ngIf="fechaDolar">
+                            Actualizado: {{ fechaDolar }}
+                        </small>
+                    </div>
+
+                    <ng-template #dolarNoDisponible>
+                        <small class="d-block text-white-50 py-2">
+                            <i class="fa-solid fa-spinner fa-spin me-1"></i> {{ mensajeDolar || 'Conectando con API...' }}
+                        </small>
+                    </ng-template>
+                </div>
+            </div>
+
+        </div>
     </div>
 </footer>
