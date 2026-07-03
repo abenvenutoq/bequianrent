@@ -81,7 +81,7 @@ export class AdminPanel implements OnInit {
    * para poblar las tablas del Panel de Administración.
    */
   cargarDatos(): void {
-    this.usuarios = this.authService.obtenerUsusario() || [];
+    this.usuarios = this.authService.obtenerUsuario() || [];
     this.reservas = this.reservaService.obtenerReservas() || [];
     this.vehiculos = this.vehiculoService.getVehiculos() || [];
   }

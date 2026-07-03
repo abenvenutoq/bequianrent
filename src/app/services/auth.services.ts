@@ -56,7 +56,7 @@ export class AuthService {
      * REcupera el listado completo de los usuarios registrado en la app
      * @returns {Usuario[]} Un arreglo con todos los objetos {@link Usuario} encontrados.
      */
-    obtenerUsusario(): Usuario[] {
+    obtenerUsuario(): Usuario[] {
         if (!this.isBrowser()) return [];
 
         const datos = localStorage.getItem(this.claveUsuarios);
@@ -94,7 +94,7 @@ export class AuthService {
         direccion: string, 
         password: string
     ): ResultadoOperacion {
-        const usuarios = this.obtenerUsusario();
+        const usuarios = this.obtenerUsuario();
 
         const existeEmail = usuarios.find(item => item.correo.toLowerCase() === correo.trim().toLowerCase());
         if (existeEmail) {
@@ -134,7 +134,7 @@ export class AuthService {
      * @returns {ResultadoOperacion} Objeto de interfaz con el estado (`ok: boolean`) y el mensaje descriptivo del resultado.
      */
     iniciarSesion(correo: string, password: string): ResultadoOperacion {
-        const usuario = this.obtenerUsusario().find(
+        const usuario = this.obtenerUsuario().find(
             (item) => item.correo.toLowerCase() === correo.trim().toLowerCase() && item.password === password
         );
 
@@ -174,7 +174,7 @@ export class AuthService {
     cambiarPassword(correo: string, nuevaClave: string): ResultadoOperacion {
         if (!this.isBrowser()) return { ok: false, mensaje: "Error del sistema" };
 
-        const usuarios = this.obtenerUsusario();
+        const usuarios = this.obtenerUsuario();
         const index = usuarios.findIndex(u => u.correo.toLowerCase() === correo.trim().toLowerCase());
 
         if (index === -1) {

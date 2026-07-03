@@ -68,7 +68,7 @@ export class MiPerfil implements OnInit {
       return;
     }
 
-    const todosLosUsuarios = this.authService.obtenerUsusario();
+    const todosLosUsuarios = this.authService.obtenerUsuario();
     const usuarioEncontrado = todosLosUsuarios.find(u => u.correo === sesionActual.correo);
 
     if (usuarioEncontrado) {
@@ -163,7 +163,7 @@ export class MiPerfil implements OnInit {
     }
 
     const formValues = this.perfilForm.value;
-    const usuarios = this.authService.obtenerUsusario();
+    const usuarios = this.authService.obtenerUsuario();
     const index = usuarios.findIndex(u => u.id === this.usuario!.id);
 
     if (index !== -1) {

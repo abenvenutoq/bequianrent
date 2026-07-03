@@ -142,7 +142,7 @@ export class ReservarAuto implements OnInit {
       const sesion = this.authService.obtenerSesion();
       if (!sesion) return;
 
-      const usuarios = this.authService.obtenerUsusario();
+      const usuarios = this.authService.obtenerUsuario();
       const usuarioActual = usuarios.find(u => u.correo === sesion.correo);
       
       if (!usuarioActual) {

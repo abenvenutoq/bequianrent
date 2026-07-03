@@ -29,14 +29,14 @@ export class VehiculoService{
      * Invoca automáticamente la inicialización de los datos del inventario en el almacenamiento local.
      */
     constructor() {
-        this.iniciarlizarDatos();
+        this.inicializarDatos();
     }
 
     /**
      * Sienta las bases de datos iniciales de la flota en el navegador.
      * Si la clave del inventario no existe en el LocalStorage, inyecta automáticamente los vehículos semilla.
      */
-    iniciarlizarDatos(): void {
+    inicializarDatos(): void {
         if (!this.storageDisponible()) return;
 
         if (!localStorage.getItem(this.KEYS.vehiculos)) {
