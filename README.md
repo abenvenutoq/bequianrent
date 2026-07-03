@@ -1,72 +1,75 @@
-# DATOS PARA CONEXION DE PRUEBAS 
+# BequianRent - Sistema de Arriendo de Vehículos
 
-ROL ADMIN
+¡Bienvenido a **BequianRent**! Una aplicación web SPA desarrollada en Angular en base a las clases de FullStack 2 de DuocUC Online
 
-correo: admin@bequianrent.cl
-password: *Qwe123
+---
 
-ROL USUARIO
+## Cuentas de Prueba (Credenciales)
+Para facilitar la revisión y corrección de las funcionalidades de la rúbrica, puedes utilizar los siguientes usuarios preconfigurados en el sistema:
 
-correo: cliente@gmail.com
-password: *Qwe123
+### Rol Administrador (Admin Panel)
+* **Correo:** `admin@bequianrent.cl`
+* **Contraseña:** `*Qwe123`
 
+### Rol Cliente (Catálogo y Reservas)
+* **Correo:** `cliente@gmail.com`
+* **Contraseña:** `*Qwe123`
 
-# Bequianrent
+---
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.
+## Guía de Inicio Rápido
 
-## Development server
+### 1. Instalar Dependencias
+Antes de levantar el proyecto por primera vez, descarga e instala los paquetes y librerías necesarias ejecutando en la terminal:
+```bash
+npm install
+```
 
-To start a local development server, run:
-
+### 2. Ejecutar el Servidor de Desarrollo
 ```bash
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+o bien utilizar (Abrira directamente una ventana con el web browser por defecto)
 ```bash
-ng generate component component-name
+ng serve -o 
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
+### 3. Ejecutar Pruebas Unitarias (Testing)
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+### 4. Generar y Levantar Documentación (Compodoc)
 ```bash
-ng e2e
+npx compodoc -p tsconfig.app.json -s
+```
+**Nota:** Una vez que la terminal indique que el servidor de Compodoc está listo, puedes navegar y revisar toda la arquitectura del proyecto ingresando a: http://127.0.0.1:8080/.
+
+--- 
+
+# 🛠️ Tecnologías y Herramientas Utilizadas
+
+* **Framework:** Angular v22.0.0 (Componentes Standalone)
+* **Estilos:** Bootstrap v5.3 (Diseño responsivo y adaptativo)
+* **Estrategia de Persistencia:** LocalStorage y SessionStorage (Simulación de Base de Datos y Sesiones Activas)
+* **Gestor de Pruebas:** Vitest (Pruebas unitarias de lógica y comportamiento)
+* ***Documentación:** Compodoc
+
+--- 
+
+# Comandos para verificar versiones instaladas
+
+Sirven para revisar si tienes Node, npm y Angular instalados.
+```bash
+node -v 
+npm -v
+ng version
+```
+Si ng no funciona, prueba:
+```bash
+npx ng versión
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Datos trabajados en LocalStorage
+La data que utiliza la APP se encuentra en: [Archivos De Datos](src/app/data)
