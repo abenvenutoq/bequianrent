@@ -1,0 +1,145 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global shadow-sm">
+    <h2 class="fw-bold mb-1"><i class="fa-solid fa-chart-line me-2"></i>Dashboard de Estadísticas</h2>
+    <p class="text-white-50 mb-0">Resumen histórico de arriendos e ingresos mensuales</p>
+</div>
+
+<!-- KPI CARDS -->
+<div class="container px-4 mb-4">
+    <div class="row g-4">
+
+        <!-- Total Ventas -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <small class="text-muted fw-semibold">TOTAL ARRIENDOS</small>
+                            <h2 class="fw-bold mt-2 mb-0">{{ totalArriendos }}</h2>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center"
+                             style="width:70px;height:70px;">
+                            <i class="fa-solid fa-file-invoice text-primary fs-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="progress" style="height:8px;">
+                        <div class="progress-bar bg-primary"
+                             style="width:100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <small class="text-muted fw-semibold">INGRESOS GENERADOS</small>
+                            <h2 class="fw-bold text-success mt-2 mb-0">{{ totalIngresos | currency:'CLP':'$ ':'1.0-0' }}</h2>
+                        </div>
+                        <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center"
+                             style="width:70px;height:70px;">
+                            <i class="fa-solid fa-sack-dollar text-success fs-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="progress" style="height:8px;">
+                        <div class="progress-bar bg-success"
+                             style="width:100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <small class="text-muted fw-semibold">INGRESO PROMEDIO</small>
+                            <h2 class="fw-bold text-dark mt-2 mb-0">{{ totalArriendos > 0
+                                ? (totalIngresos / totalArriendos | currency:'CLP':'$ ':'1.0-0')
+                                : '$ 0'}}
+                            </h2>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center"
+                             style="width:70px;height:70px;">
+                            <i class="fa-solid fa-chart-column text-warning fs-3"></i>
+                        </div>
+                    </div>
+                    <div class="progress" style="height:8px;">
+                        <div class="progress-bar bg-warning"
+                             style="width:100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TABLA -->
+<div class="container px-4">
+    <div class="card border-0 shadow-lg">
+        <div class="card-body p-0">
+            <div *ngIf="cargando" class="text-center py-5">
+                <div class="spinner-border text-primary"></div>
+                <div class="mt-3 text-muted">
+                    Cargando información...
+                </div>
+            </div>
+
+            <div *ngIf="mensajeError"
+                 class="alert alert-danger m-4 rounded-4">
+                <i class="fa-solid fa-circle-exclamation me-2"></i>
+                {{ mensajeError }}
+            </div>
+
+            <div class="table-responsive" *ngIf="!cargando && !mensajeError">
+                <table class="table table-borderless table-hover align-middle mb-0 text-center">
+                    <thead class="bg-light border-bottom border-secondary border-opacity-25">
+                        <tr>
+                            <th class="py-3 text-secondary small text-uppercase fw-bold tracking-wider">Año</th>
+                            <th class="py-3 text-secondary small text-uppercase fw-bold tracking-wider">Mes</th>
+                            <th class="py-3 text-secondary small text-uppercase fw-bold tracking-wider">Operaciones</th>
+                            <th class="py-3 text-secondary small text-uppercase fw-bold tracking-wider">Ingresos</th>
+                            <th class="py-3 text-secondary small text-uppercase fw-bold tracking-wider">Auto Estrella</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of arriendosMensuales" class="border-bottom border-light">
+                            
+                            <td class="py-3 text-center">
+                                <div class="fw-bold text-danger opacity-50">{{ item.anio }}</div>
+                            </td>
+                            
+                            <td class="py-3 text-center">
+                                <div class="fw-semibold text-dark text-capitalize opacity-50">{{ item.mes }}</div>
+                            </td>
+
+                            <td class="py-3 text-center">
+                                <div class="fw-semibold text-primary text-capitalize fs-6">{{ item.totalArriendos }}</div>
+                            </td>
+
+                            <td class="py-3 text-center">
+                                <div class="fw-bold text-success text-capitalize fs-6">{{ item.ingresosGenerados | currency:'CLP':'$ ':'1.0-0' }}</div>
+                            </td>
+
+                            <td class="py-3 text-center">
+                                <span class="d-inline-flex align-items-center px-3 py-2 rounded-3 bg-secondary bg-opacity-10 text-dark fw-medium">
+                                    <i class="fa-solid fa-star text-warning me-2"></i>{{ item.vehiculoMasRentado }}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

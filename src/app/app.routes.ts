@@ -11,6 +11,7 @@ import { Footer } from './components/footer/footer';
 import { MiPerfil } from './pages/mi-perfil/mi-perfil';
 import { EditarReserva } from './pages/editar-reserva/editar-reserva';
 import { adminGuard } from './guards/admin.guard';
+import { AdminEstadisticaVenta } from './pages/estadisticas-ventas/estadisticas-arriendos';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -24,5 +25,6 @@ export const routes: Routes = [
     { path: 'mis-reservas', component: MisReservas },
     { path: 'admin-panel', component: AdminPanel, canActivate: [adminGuard] },
     { path: 'editar-reserva/:id', component: EditarReserva, canActivate: [adminGuard]},
+    { path: 'estadisticas-arriendos', component: AdminEstadisticaVenta, canActivate: [adminGuard]},
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

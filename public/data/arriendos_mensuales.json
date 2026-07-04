@@ -1,0 +1,14 @@
+[
+  { "mes": "Julio", "anio": 2025, "totalArriendos": 130, "ingresosGenerados": 4100000, "vehiculoMasRentado": "Peugeot 208" },
+  { "mes": "Agosto", "anio": 2025, "totalArriendos": 115, "ingresosGenerados": 3700000, "vehiculoMasRentado": "Kia Morning" },
+  { "mes": "Septiembre", "anio": 2025, "totalArriendos": 190, "ingresosGenerados": 6200000, "vehiculoMasRentado": "Toyota Yaris" },
+  { "mes": "Octubre", "anio": 2025, "totalArriendos": 105, "ingresosGenerados": 3400000, "vehiculoMasRentado": "Chevrolet Sail" },
+  { "mes": "Noviembre", "anio": 2025, "totalArriendos": 125, "ingresosGenerados": 4000000, "vehiculoMasRentado": "Nissan Versa" },
+  { "mes": "Diciembre", "anio": 2025, "totalArriendos": 160, "ingresosGenerados": 5100000, "vehiculoMasRentado": "Hyundai Accent" },
+  { "mes": "Enero", "anio": 2026, "totalArriendos": 145, "ingresosGenerados": 4500000, "vehiculoMasRentado": "Toyota Yaris" },
+  { "mes": "Febrero", "anio": 2026, "totalArriendos": 180, "ingresosGenerados": 5800000, "vehiculoMasRentado": "Hyundai Accent" },
+  { "mes": "Marzo", "anio": 2026, "totalArriendos": 120, "ingresosGenerados": 3900000, "vehiculoMasRentado": "Kia Morning" },
+  { "mes": "Abril", "anio": 2026, "totalArriendos": 95, "ingresosGenerados": 3100000, "vehiculoMasRentado": "Toyota Yaris" },
+  { "mes": "Mayo", "anio": 2026, "totalArriendos": 110, "ingresosGenerados": 3500000, "vehiculoMasRentado": "Chevrolet Sail" },
+  { "mes": "Junio", "anio": 2026, "totalArriendos": 100, "ingresosGenerados": 3200000, "vehiculoMasRentado": "Peugeot 208" }
+]

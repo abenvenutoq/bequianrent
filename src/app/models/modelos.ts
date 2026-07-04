@@ -150,3 +150,11 @@ export interface IndicadorEconomico {
   unidad_medida: string;
   serie: SerieIndicador[];
 }
+
+export interface ArriendosMensuales {
+    mes: string;
+    anio: number;
+    totalArriendos: number;
+    ingresosGenerados: number;
+    vehiculoMasRentado: string;
+}

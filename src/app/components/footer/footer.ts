@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
 import { IndicadoresEconomicos } from '../../services/indicador-economico.service';
 
 /**
@@ -16,7 +15,6 @@ import { IndicadoresEconomicos } from '../../services/indicador-economico.servic
 })
 
 export class Footer implements OnInit {
-  // Inyecciones modernas usando inject() o mantén tu constructor si lo prefieres
   private readonly IndicadoresEconomicos = inject(IndicadoresEconomicos);
   private readonly cdr = inject(ChangeDetectorRef);
 
