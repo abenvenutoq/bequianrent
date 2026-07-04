@@ -133,6 +133,10 @@ export interface ResultadoOperacion {
     mensaje: string;
 }
 
+/**
+ * @description
+ * 
+ */
 export interface SerieIndicador {
   fecha: string;
   valor: number;

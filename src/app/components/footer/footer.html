@@ -10,31 +10,57 @@
                     Sistema de gestión de alquiler de vehículos.
                 </p>
                 <small class="d-block text-white-50 mt-3">
-                    &copy; {{ anio }} BequianRent - DuocUc Online
+                    &copy; {{ anio }} BequianRent - <span class="text-warning fw-bold">Duoc</span><span class="fw-bold">UC</span>
                 </small>
             </div>
 
-            <div class="col-12 col-md-5 col-lg-4 text-center">
-                <div class="p-3 rounded-3 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 d-inline-block w-100" style="max-width: 320px;">
-                    <p class="mb-2 fw-semibold text-success small text-uppercase tracking-wider">
-                        <i class="fa-solid fa-chart-line me-1"></i> Indicador Económico
+            <div class="col-12 col-md-7 col-lg-6 text-center text-md-end">
+                <div class="p-3 rounded-3 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 d-inline-block w-100" style="max-width: 400px;">
+                    
+                    <p class="mb-3 fw-semibold text-success small text-uppercase tracking-wider text-center">
+                        <i class="fa-solid fa-chart-line me-1"></i> Indicadores Económicos
                     </p>
 
-                    <div *ngIf="valorDolar !== null; else dolarNoDisponible">
-                        <small class="d-block text-white-50 mb-1">Dólar Observado (Chile)</small>
-                        <span class="fs-5 fw-bold text-warning">
-                            {{ valorDolar?.toLocaleString('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0, maximumFractionDigits: 0 }) }}
-                        </span>
-                        <small class="d-block text-white-50 mt-1" *ngIf="fechaDolar">
-                            Actualizado: {{ fechaDolar }}
+                    <div class="d-flex justify-content-around text-center mb-2">
+                        
+                        <div>
+                            <small class="d-block text-white-50 mb-1">Dólar</small>
+                            <div *ngIf="valorDolar !== null; else dolarNoDisponible">
+                                <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:'CLP':'symbol':'1.0-0' }}</span>
+                            </div>
+                            <ng-template #dolarNoDisponible>
+                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
+                            </ng-template>
+                        </div>
+
+                        <div>
+                            <small class="d-block text-white-50 mb-1">UF</small>
+                            <div *ngIf="valorUf !== null; else UfNoDisponible">
+                                <span class="fs-6 fw-bold text-warning">{{ valorUf | currency:'CLP':'symbol':'1.0-0' }}</span>
+                            </div>
+                            <ng-template #UfNoDisponible>
+                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
+                            </ng-template>
+                        </div>
+
+                        <div>
+                            <small class="d-block text-white-50 mb-1">UTM</small>
+                            <div *ngIf="valorUtm !== null; else UtmNoDisponible">
+                                <span class="fs-6 fw-bold text-warning">{{ valorUtm | currency:'CLP':'symbol':'1.0-0' }}</span>
+                            </div>
+                            <ng-template #UtmNoDisponible>
+                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
+                            </ng-template>
+                        </div>
+
+                    </div>
+
+                    <div class="border-top border-secondary border-opacity-25 pt-2 mt-3 text-center" *ngIf="fechaDolar || fechaUf || fechaUtm">
+                        <small class="text-white-50">
+                            <i class="fa-regular fa-clock me-1"></i> Actualizado: {{ fechaDolar || fechaUf || fechaUtm }}
                         </small>
                     </div>
 
-                    <ng-template #dolarNoDisponible>
-                        <small class="d-block text-white-50 py-2">
-                            <i class="fa-solid fa-spinner fa-spin me-1"></i> {{ mensajeDolar || 'Conectando con API...' }}
-                        </small>
-                    </ng-template>
                 </div>
             </div>
 

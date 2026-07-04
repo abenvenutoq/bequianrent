@@ -1,3 +1,10 @@
+# Ejecutar para pruebas en el trabajo 
+```bash
+$env:PATH = "C:\Users\angelo.benvenuto\node-v24.16.0;" + $env:PATH
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+---
+
 # BequianRent - Sistema de Arriendo de Vehículos
 
 ¡Bienvenido a **BequianRent**! Una aplicación web SPA desarrollada en Angular en base a las clases de FullStack 2 de DuocUC Online
@@ -73,3 +80,13 @@ npx ng versión
 
 # Datos trabajados en LocalStorage
 La data que utiliza la APP se encuentra en: [Archivos De Datos](src/app/data)
+
+---
+
+# Datos de indicadores economicos desde API mindicador.cl 
+Se agregaron funciones para traer información actulizada de indicadores desde la API las que se muestran en el footer de la aplicación
+ - Valor Dolar actual
+ - Valor UF actual
+ - Valor UTM actual
+
+---
