@@ -26,7 +26,7 @@
                         <div>
                             <small class="d-block text-white-50 mb-1">Dólar</small>
                             <div *ngIf="valorDolar !== null; else dolarNoDisponible">
-                                <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:'CLP':'symbol':'1.0-0' }}</span>
+                                <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
                             <ng-template #dolarNoDisponible>
                                 <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
@@ -36,7 +36,7 @@
                         <div>
                             <small class="d-block text-white-50 mb-1">UF</small>
                             <div *ngIf="valorUf !== null; else UfNoDisponible">
-                                <span class="fs-6 fw-bold text-warning">{{ valorUf | currency:'CLP':'symbol':'1.0-0' }}</span>
+                                <span class="fs-6 fw-bold text-warning">{{ valorUf | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
                             <ng-template #UfNoDisponible>
                                 <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
@@ -46,7 +46,7 @@
                         <div>
                             <small class="d-block text-white-50 mb-1">UTM</small>
                             <div *ngIf="valorUtm !== null; else UtmNoDisponible">
-                                <span class="fs-6 fw-bold text-warning">{{ valorUtm | currency:'CLP':'symbol':'1.0-0' }}</span>
+                                <span class="fs-6 fw-bold text-warning">{{ valorUtm | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
                             <ng-template #UtmNoDisponible>
                                 <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
