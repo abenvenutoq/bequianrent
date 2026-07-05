@@ -156,7 +156,7 @@ export class Login implements OnInit {
       }
 
       if (sesion?.rol == 'admin') {
-        this.router.navigate(['/admin-panel']);
+        this.router.navigate(['/estadisticas-arriendos']);
       } else {
         this.router.navigate(['/mi-perfil']);
       }

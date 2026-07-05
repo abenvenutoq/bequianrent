@@ -16,6 +16,11 @@ export const adminGuard = () => {
     return true; 
   }
 
+  if (authService.esCliente()) {
+    router.navigate(['/']);
+    return false;
+  }
+
   /** Si no es admin redirige al login */
   router.navigate(['/login']);
   return false;

@@ -1,6 +1,6 @@
-<div class="bg-primary text-white py-4 mb-4 text-center header-global shadow-sm">
-    <h2 class="fw-bold mb-1"><i class="fa-solid fa-chart-line me-2"></i>Dashboard de Estadísticas</h2>
-    <p class="text-white-50 mb-0">Resumen histórico de arriendos e ingresos mensuales</p>
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-arrow-up-right-dots me-2"></i> Dashboard de Estadísticas</h2>
+    <p class="text-white">Resumen histórico de arriendos e ingresos mensuales</p>
 </div>
 
 <!-- KPI CARDS -->
@@ -60,9 +60,8 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
                             <small class="text-muted fw-semibold">INGRESO PROMEDIO</small>
-                            <h2 class="fw-bold text-dark mt-2 mb-0">{{ totalArriendos > 0
-                                ? (totalIngresos / totalArriendos | currency:'CLP':'$ ':'1.0-0')
-                                : '$ 0'}}
+                            <h2 class="fw-bold text-dark mt-2 mb-0">
+                                {{ ingresoPromedio | currency:'CLP':'$ ':'1.0-0'}}
                             </h2>
                         </div>
                         <div class="bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center"

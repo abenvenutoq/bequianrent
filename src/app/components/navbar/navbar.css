@@ -3,3 +3,9 @@
     height: 80px;
     width: auto;
 }
+
+/* Base logout button styling */
+.logout-btn {
+  cursor: pointer;
+}
+

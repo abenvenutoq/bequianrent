@@ -56,4 +56,8 @@ export class AdminEstadisticaVenta implements OnInit {
     )
   }
 
+  get ingresoPromedio(): number {
+    return this.totalIngresos / this.totalArriendos;
+  }
+
 }

@@ -232,6 +232,10 @@ export class AuthService {
         return this.obtenerSesion()?.rol === 'admin';
     }
 
+    esCliente(): boolean {
+        return this.obtenerSesion()?.rol === 'cliente';
+    }
+
     /**
      * Genera de forma autoincremental un nuevo identificador numérico único para un usuario.
      * * Evalúa la colección actual:
