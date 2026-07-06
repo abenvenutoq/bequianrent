@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { IndicadoresEconomicos } from '../../services/indicador-economico.service';
 
 /**
@@ -9,7 +10,7 @@ import { IndicadoresEconomicos } from '../../services/indicador-economico.servic
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.css'  
 })

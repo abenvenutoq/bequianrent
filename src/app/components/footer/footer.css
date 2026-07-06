@@ -1,5 +1,12 @@
-footer {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+/* Efectos de transición para las redes sociales en el footer */
+.hover-primary:hover { color: #0d6efd !important; transition: color 0.2s ease-in-out; }
+.hover-danger:hover { color: #dc3545 !important; transition: color 0.2s ease-in-out; }
+.hover-info:hover { color: #0dcaf0 !important; transition: color 0.2s ease-in-out; }
+.hover-success:hover { color: #198754 !important; transition: color 0.2s ease-in-out; }
+
+/* Cambiar color cuando la ruta web en el footer está activa */
+footer a:hover {
+    color: #0d6efd !important;
+    text-decoration: underline !important;
+    cursor: pointer;
 }

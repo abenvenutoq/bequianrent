@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminEstadisticaVenta } from './estadisticas-arriendos';
-import { EstadisticaService } from '../../services/estadisticas';
+import { EstadisticaService } from '../../services/estadisticas.services';
 
 describe('EstadisticasVentas', () => {
   let component: EstadisticaService;

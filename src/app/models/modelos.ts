@@ -158,3 +158,22 @@ export interface ArriendosMensuales {
     ingresosGenerados: number;
     vehiculoMasRentado: string;
 }
+
+export interface Sucursales {
+    id: number,
+    nombre: string,
+    direccion: string,
+    ciudad: string,
+    telefono: string,
+    jefesucursal: string,
+    horario: string
+}
+
+export interface Testimonios {
+    id: number,
+    evaluacion: number, 
+    nombre: string, 
+    autoRentado: string,
+    fechaEvaluacion: string,
+    comentario: string
+}

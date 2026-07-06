@@ -1,34 +1,55 @@
-<footer class="bg-dark text-white py-4 mt-auto border-top border-secondary">
+<footer class="bg-dark text-white py-5 mt-auto border-top border-secondary">
     <div class="container">
-        <div class="row g-4 align-items-center justify-content-center">
+        <div class="row g-4">
             
-            <div class="col-12 col-md-5 col-lg-6">
-                <h5 class="fw-bold text-primary mb-2">
+            <div class="col-12 col-md-6 col-lg-4">
+                <h5 class="fw-bold text-primary mb-3">
                     <i class="fa-solid fa-car me-2"></i>BequianRent
                 </h5>
-                <p class="text-white-50 fw-bold medium mb-0">
-                    Sistema de gestión de alquiler de vehículos.
+                <p class="text-white-50 medium mb-3">
+                    Tu viaje empieza aquí. Conectamos tus destinos con la mejor variedad de autos. Reserva en minutos.
                 </p>
-                <small class="d-block text-white-50 mt-3">
+                <div class="text-white-50 small mb-3">
+                    <p class="mb-1"><i class="fa-solid fa-location-dot text-warning me-2"></i><strong>Casa Matriz:</strong> Av. Vitacura 2900, Las Condes, Santiago</p>
+                    <p class="mb-0"><i class="fa-solid fa-phone text-success me-2"></i><strong>Contacto:</strong> +56 2 2840 5500</p>
+                </div>
+                <div class="d-flex gap-3 fs-5 mt-3">
+                    <a href="#" class="text-white-50 text-decoration-none" title="Facebook"><i class="fa-brands fa-facebook hover-primary"></i></a>
+                    <a href="#" class="text-white-50 text-decoration-none" title="Instagram"><i class="fa-brands fa-instagram hover-danger"></i></a>
+                    <a href="#" class="text-white-50 text-decoration-none" title="LinkedIn"><i class="fa-brands fa-linkedin hover-info"></i></a>
+                    <a href="#" class="text-white-50 text-decoration-none" title="WhatsApp"><i class="fa-brands fa-whatsapp hover-success"></i></a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <h5 class="fw-bold text-light mb-3">Enlaces de Interés</h5>
+                <ul class="list-unstyled text-white-50 small">
+                    <li class="mb-2">
+                        <a routerLink="/sucursales" class="text-white-50 text-decoration-none"><i class="fa-solid fa-chevron-right me-1 small"></i> Nuestras Sucursales</a>
+                    </li>
+                    <li class="mb-2">
+                        <a routerLink="/testimonios" class="text-white-50 text-decoration-none"><i class="fa-solid fa-chevron-right me-1 small"></i> Opiniones de Clientes</a>
+                    </li>
+                </ul>
+                <small class="d-block text-white-50 mt-4">
                     &copy; {{ anio }} BequianRent - <span class="text-warning fw-bold">Duoc</span><span class="fw-bold">UC</span>
                 </small>
             </div>
 
-            <div class="col-12 col-md-7 col-lg-6 text-center text-md-end">
+            <div class="col-12 col-lg-4 text-center text-md-start">
                 <div class="p-3 rounded-3 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 d-inline-block w-100" style="max-width: 400px;">
                     
                     <p class="mb-3 fw-semibold text-success small text-uppercase tracking-wider text-center">
                         <i class="fa-solid fa-chart-line me-1"></i> Indicadores Económicos
                     </p>
 
-                    <div class="d-flex justify-content-around text-center mb-2">
-                        
+                    <div class="d-flex justify-content-around text-center">
                         <div>
-                            <small class="d-block text-white-50 mb-1">Dólar</small>
-                            <div *ngIf="valorDolar !== null; else dolarNoDisponible">
+                            <small class="d-block text-white-50 mb-1">DÓLAR</small>
+                            <div *ngIf="valorDolar !== null; else DolarNoDisponible">
                                 <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
-                            <ng-template #dolarNoDisponible>
+                            <ng-template #DolarNoDisponible>
                                 <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
                             </ng-template>
                         </div>
@@ -52,7 +73,6 @@
                                 <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
                             </ng-template>
                         </div>
-
                     </div>
 
                     <div class="border-top border-secondary border-opacity-25 pt-2 mt-3 text-center" *ngIf="fechaDolar || fechaUf || fechaUtm">

@@ -12,6 +12,8 @@ import { MiPerfil } from './pages/mi-perfil/mi-perfil';
 import { EditarReserva } from './pages/editar-reserva/editar-reserva';
 import { adminGuard } from './guards/admin.guard';
 import { AdminEstadisticaVenta } from './pages/estadisticas-ventas/estadisticas-arriendos';
+import { Sucursal } from './pages/sucursales/sucursales';
+import { Testimonio } from './pages/testimonios/testimonios';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -26,5 +28,7 @@ export const routes: Routes = [
     { path: 'admin-panel', component: AdminPanel, canActivate: [adminGuard] },
     { path: 'editar-reserva/:id', component: EditarReserva, canActivate: [adminGuard]},
     { path: 'estadisticas-arriendos', component: AdminEstadisticaVenta, canActivate: [adminGuard]},
+    { path: 'sucursales', component: Sucursal},
+    { path: 'testimonios', component: Testimonio},
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

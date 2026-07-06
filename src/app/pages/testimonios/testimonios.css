@@ -1,0 +1,137 @@
+/* Cabecera corporativa */
+.header-global {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+/* Envoltorio del carrusel */
+.carousel-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 0;
+}
+
+/* Escena tridimensional */
+.carousel-escena {
+    position: relative;
+    height: 380px; /* Alto ideal para contener las tarjetas sin romperse */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px; /* Habilita el efecto de profundidad 3D */
+}
+
+/* Base de los ítems del carrusel */
+.carousel-item-custom {
+    position: absolute;
+    width: 100%;
+    max-width: 500px; /* Ancho máximo de cada tarjeta de opinión */
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+                opacity 0.6s ease, 
+                visibility 0.6s ease, 
+                z-index 0.6s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0;
+}
+
+/* ====== ESTADOS DEL CARRUSEL ====== */
+
+/* 1. Tarjeta Activa (En el centro, totalmente opaca y ligeramente más grande) */
+.carousel-item-custom.activo {
+    opacity: 1;
+    visibility: visible;
+    z-index: 3;
+    transform: translate3d(0, 0, 0) scale(1.06);
+}
+
+/* 2. Tarjeta Anterior (Se posiciona a la izquierda, reducida y con opacidad) */
+.carousel-item-custom.anterior {
+    opacity: 0.35;
+    visibility: visible;
+    z-index: 2;
+    transform: translate3d(-90%, 0, -150px) scale(0.88);
+    pointer-events: none; /* Bloquea interacciones para evitar desajustes */
+}
+
+/* 3. Tarjeta Siguiente (Se posiciona a la derecha, reducida y con opacidad) */
+.carousel-item-custom.siguiente {
+    opacity: 0.35;
+    visibility: visible;
+    z-index: 2;
+    transform: translate3d(90%, 0, -150px) scale(0.88);
+    pointer-events: none;
+}
+
+/* 4. Tarjetas en cola ocultas */
+.carousel-item-custom.oculto {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 0, -300px) scale(0.7);
+}
+
+/* ====== BOTONES FLOTANTES ====== */
+.btn-carousel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #0d6efd;
+    color: rgb(255, 255, 255);
+    border: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    z-index: 10;
+    transition: all 0.25s ease;
+}
+
+.btn-carousel:hover {
+    background-color: #0a58ca;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 16px rgba(10, 88, 202, 0.4);
+}
+
+.btn-prev { left: -15px; }
+.btn-next { right: -15px; }
+
+/* ====== INDICADORES INFERIORES ====== */
+.indicador-punto {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #969696;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.indicador-punto.activo {
+    background-color: #0d6efd;
+    width: 26px;
+    border-radius: 6px;
+}
+
+/* ====== ADAPTACIÓN MÓVIL (RESPONSIVE) ====== */
+@media (max-width: 768px) {
+    /* En pantallas móviles ocultamos las laterales para que no se corten */
+    .carousel-item-custom.anterior,
+    .carousel-item-custom.siguiente {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .carousel-item-custom.activo {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    .carousel-wrapper {
+        padding: 20px 10px;
+    }
+    .btn-prev { left: 5px; }
+    .btn-next { right: 5px; }
+    .carousel-escena {
+        height: 360px;
+    }
+}

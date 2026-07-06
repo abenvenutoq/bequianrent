@@ -1,0 +1,83 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-shop me-2"></i> Nuestras Sucursales</h2>
+    <p class="text-white">Encuentra la surcursal mas cercana!</p>
+</div>
+
+<div class="container mb-5">
+    
+    <div *ngIf="cargando" class="text-center py-5">
+        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="text-muted fs-5 fw-medium">Buscando sucursales disponibles...</p>
+    </div>
+
+    <div *ngIf="mensajeError" class="alert alert-danger d-flex align-items-center p-4 my-4 shadow-sm rounded-3 border-0 border-start border-danger border-5" role="alert">
+        <i class="fa-solid fa-triangle-exclamation fs-3 me-3 text-danger"></i>
+        <div>
+            <h5 class="alert-heading fw-bold mb-1">Hubo un problema</h5>
+            <p class="mb-0 text-secondary">{{ mensajeError }}</p>
+        </div>
+    </div>
+
+    <div *ngIf="!cargando && !mensajeError">
+        
+        <div *ngIf="sucursales.length === 0" class="text-center py-5 text-muted">
+            <i class="fa-solid fa-folder-open display-2 mb-3 text-black-50"></i>
+            <p class="fs-5">No registramos sucursales activas en este momento.</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" *ngIf="sucursales.length > 0">
+            <div class="col" *ngFor="let item of sucursales">
+                
+                <div class="card h-100 shadow-sm border-0 border-top border-primary border-4 rounded-3 card-sucursal">
+                    <div class="card-body p-4 d-flex flex-column">
+                        
+                        <div class="mb-3">
+                            <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-2 small rounded-pill fw-semibold">
+                                <i class="fa-solid fa-city me-1"></i> {{ item.ciudad || 'Chile' }}
+                            </span>
+                        </div>
+
+                        <h4 class="card-title fw-bold text-dark mb-3">{{ item.nombre }}</h4>
+                        
+                        <hr class="text-black-50 my-2 opacity-25">
+
+                        <ul class="list-unstyled flex-grow-1 my-3 small text-secondary">
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="fa-solid fa-location-dot text-danger mt-1 me-3 fs-5 flex-shrink-0" style="width: 20px;"></i>
+                                <div>
+                                    <strong class="text-dark">Dirección:</strong><br>
+                                    <span class="text-muted">{{ item.direccion }}</span>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-start mb-3">
+                                <i class="fa-solid fa-phone text-success mt-1 me-3 fs-5 flex-shrink-0" style="width: 20px;"></i>
+                                <div>
+                                    <strong class="text-dark">Teléfono:</strong><br>
+                                    <span class="text-muted">{{ item.telefono }}</span>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-start mb-0">
+                                <i class="fa-solid fa-clock text-warning mt-1 me-3 fs-5 flex-shrink-0" style="width: 20px;"></i>
+                                <div>
+                                    <strong class="text-dark">Horario de Atención:</strong><br>
+                                    <span class="text-muted">{{ item.horario }}</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="mt-auto pt-3">
+                            <a href="https://maps.google.com" target="_blank" class="btn btn-outline-primary btn-sm w-100 py-2 fw-bold rounded-2 btn-mapa">
+                                <i class="fa-solid fa-map-pinned me-2"></i>Ver en Google Maps
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

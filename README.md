@@ -1,13 +1,6 @@
-# Ejecutar para pruebas en el trabajo 
-```bash
-$env:PATH = "C:\Users\angelo.benvenuto\node-v24.16.0;" + $env:PATH
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-```
----
-
 # BequianRent - Sistema de Arriendo de Vehículos
 
-¡Bienvenido a **BequianRent**! Una aplicación web SPA desarrollada en Angular en base a las clases de FullStack 2 de DuocUC Online
+¡Bienvenido a **BequianRent**! Una aplicación desarrollada en Angular en base a las clases de FullStack 2 de DuocUC Online
 
 ---
 
@@ -89,4 +82,39 @@ Se agregaron funciones para traer información actulizada de indicadores desde l
  - Valor UF actual
  - Valor UTM actual
 
+    Servicio: [Servicio](../bequianrent/src/app/services/indicador-economico.service.ts)
+    Componente (Footer): [Componente](../bequianrent/src/app/components/footer/footer.ts)
+
+---
+
+# Datos de estadisticas de arriendos desde JSON Local
+Se agrego archivo arriendos_mensuales.json para trabajar con componente de estadisticas de arriendos desde la APP
+ - 
+    Servicio: [Servicio](../bequianrent/src/app/services/estadisticas.services.ts)
+    Archivo JSON: [JSON](../bequianrent/public/data/arriendos_mensuales.json)
+    Componente: [Componente](../bequianrent/src/app/pages/estadisticas-ventas/estadisticas-arriendos.ts)
+
+---
+
+# Datos de Sucursales y Oponiones (Testimonios) desde GITHUB PAGES, API Externa.
+Se creo repositorio con archivos JSON coprrespondientes con data para sucursales y testimonios obtenidos desde URL GithubPages
+ - 
+    Dirección URL JSON Sucursales: [URL](https://abenvenutoq.github.io/bequianrent-api/sucursales.json)
+    Dirección URL JSON Testimonios: [URL](https://abenvenutoq.github.io/bequianrent-api/testimonios.json)
+    Servicio Sucursales: [Servicio](../bequianrent/src/app/services/sucursales.services.ts)
+    Servicio Testimonio: [Servicio](../bequianrent/src/app/services/testimonios.services.ts)
+    Componente Sucursales: [Componente](../bequianrent/src/app/pages/sucursales/sucursales.ts)
+    Componente Testimonios: [Componente](../bequianrent/src/app/pages/testimonios/testimonios.ts)
+
+---
+
+
+# FIN README.MD
+
+
+# Ejecutar estos comandos para pruebas en el computador de la oficina
+```bash
+$env:PATH = "C:\Users\angelo.benvenuto\node-v24.16.0;" + $env:PATH
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
 ---

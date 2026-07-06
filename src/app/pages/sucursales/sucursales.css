@@ -1,0 +1,24 @@
+/* Efecto de elevación interactiva para las tarjetas */
+.card-sucursal {
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease-in-out;
+}
+
+.card-sucursal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Transición suave para el botón */
+.btn-mapa {
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-mapa:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Estilo para espaciar el título global */
+.header-global {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}

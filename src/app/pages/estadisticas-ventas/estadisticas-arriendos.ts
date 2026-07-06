@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EstadisticaService } from '../../services/estadisticas';
+import { EstadisticaService } from '../../services/estadisticas.services';
 import { ArriendosMensuales } from '../../models/modelos';
 
 @Component({
@@ -34,7 +34,7 @@ export class AdminEstadisticaVenta implements OnInit {
         this.cdr.detectChanges();
       },
       error: () => {
-        this.mensajeError = 'No se pudieron cargar las ventas mensuales.';
+        this.mensajeError = 'No se pudieron cargar los detalles de arriendos mensuales.';
         this.cargando = false;
         this.cdr.detectChanges();
       }
