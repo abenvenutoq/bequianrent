@@ -25,7 +25,8 @@ describe('Pruebas unitarias para adminGuard', () => {
     };
 
     authServiceSpy = {
-      esAdmin: vi.fn() 
+      esAdmin: vi.fn(),
+      esCliente: vi.fn()
     };
 
 
@@ -66,7 +67,7 @@ describe('Pruebas unitarias para adminGuard', () => {
     authServiceSpy.esAdmin.mockReturnValue(false);
 
     const resultado = TestBed.runInInjectionContext(() => adminGuard());
-
+    
     expect(resultado).toBe(false); 
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
   });

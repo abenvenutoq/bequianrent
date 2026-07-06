@@ -398,6 +398,72 @@ export interface ResultadoOperacion {
     ok: boolean;
     /** Mensaje descriptivo sobre el resultado (útil para inyectarlo directamente en alertas de la UI). */
     mensaje: string;
+}
+
+/**
+ * @description
+ * Representa la estructura de datos de un testimonio o reseña que un cliente deja sobre su experiencia con el servicio.
+ * Se utiliza para mostrar opiniones en la sección de testimonios del sitio web.
+ */
+export interface SerieIndicador {
+  fecha: string;
+  valor: number;
+}
+
+/**
+ * @description
+ * Representa la estructura de datos de un indicador económico, como el Dólar, UF o UTM.
+ * Se utiliza para mostrar información financiera actualizada en la sección de indicadores del sitio web.
+ */
+export interface IndicadorEconomico {
+  version: string;
+  autor: string;
+  codigo: string;
+  nombre: string;
+  unidad_medida: string;
+  serie: SerieIndicador[];
+}
+
+/**
+ * @description
+ * Representa la estructura de datos de ArriendosMensuales, que contiene información sobre las ventas mensuales de arriendos.
+ * Se utiliza para mostrar estadísticas de ventas en la sección de estadísticas del sitio web.
+ */
+export interface ArriendosMensuales {
+    mes: string;
+    anio: number;
+    totalArriendos: number;
+    ingresosGenerados: number;
+    vehiculoMasRentado: string;
+}
+
+/**
+ * @description
+ * Representa la estructura de datos de una Sucural, que contiene información sobre las sucursales de la empresa.
+ * Se utiliza para mostrar información de contacto y ubicación de las sucursales en la sección correspondiente del sitio web.
+ */
+export interface Sucursales {
+    id: number,
+    nombre: string,
+    direccion: string,
+    ciudad: string,
+    telefono: string,
+    jefesucursal: string,
+    horario: string
+}
+
+/**
+ * @description
+ * Representa la estructura de datos de un testimonio o reseña que un cliente deja sobre su experiencia con el servicio.
+ * Se utiliza para mostrar opiniones en la sección de testimonios del sitio web.
+ */
+export interface Testimonios {
+    id: number,
+    evaluacion: number, 
+    nombre: string, 
+    autoRentado: string,
+    fechaEvaluacion: string,
+    comentario: string
 }</code></pre>
     </div>
 </div>

@@ -18,43 +18,53 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
   let component: ReservarAuto;
   let fixture: ComponentFixture<ReservarAuto>;
 
-  // --- Datos Mock ---
+  /** Datos mock para el usuario y vehículo */
   const mockUsuario = { rut: '1-9', correo: 'test@correo.com' };
   const mockVehiculo = { id: 10, precio: 30000, disponible: true }; // Precio 30.000 por día
 
-  // --- Mocks de Servicios ---
+  /** Mock del servicio de autenticación */
   const mockAuthService = {
     isBrowser: vi.fn().mockReturnValue(true),
     obtenerSesion: vi.fn().mockReturnValue({ correo: 'test@correo.com' }),
     obtenerUsuario: vi.fn().mockReturnValue([mockUsuario]),
     estaLogueado: vi.fn().mockReturnValue(true)
   };
-
+  
+  /** Mock del servicio de vehículos */
   const mockVehiculoService = {
     getVehiculosPorId: vi.fn().mockReturnValue(mockVehiculo),
     actualizarDisponibilidad: vi.fn()
   };
 
+  /** Mock del servicio de reservas */
   const mockReservaService = {
     crearReserva: vi.fn()
   };
 
+  /** Mock del servicio de enrutamiento */
   const mockRouter = {
     navigate: vi.fn()
   };
 
+  /** Mock del servicio de rutas activas */
   const mockActivatedRoute = {
     snapshot: {
       paramMap: {
-        get: vi.fn().mockReturnValue('10') // Simulamos entrar al auto ID 10
+        get: vi.fn().mockReturnValue('10')
       }
     }
   };
 
+  /** Mock del servicio de validación */
   const mockValidacionService = {
     validarFechasReserva: vi.fn().mockReturnValue(null)
   };
 
+  /**
+   * @description
+   * Configuración inicial de TestBed y creación del componente antes de cada prueba.
+   * Se inyectan los servicios mock para simular el comportamiento real sin depender de la implementación.
+   */
   beforeEach(async () => {
     vi.spyOn(window, 'alert').mockImplementation(() => {}); // Silencia las alertas nativas
 
@@ -75,6 +85,9 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
     fixture.detectChanges(); // Dispara el ngOnInit
   });
 
+  /** @description
+   * Limpia los mocks después de cada prueba.
+   */
   afterEach(() => {
     vi.restoreAllMocks();
   });

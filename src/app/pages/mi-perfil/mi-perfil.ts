@@ -50,7 +50,9 @@ export class MiPerfil implements OnInit {
   verConfirm = false;
 
   /**
+   * @description
    * Ciclo de vida inicial del componente.
+   * Ejecuta las siguientes acciones críticas:
    * * Ejecuta las siguientes acciones críticas:
    * 1. Bloquea la ejecución en SSR usando `isBrowser()`.
    * 2. Protege la vista validando que exista una sesión activa; de lo contrario, expulsa al login.
@@ -79,7 +81,7 @@ export class MiPerfil implements OnInit {
       return;
     }
     
-
+    /** Inicializa el formulario reactivo con los validadores correspondientes */
     this.perfilForm = this.fb.group({
       nombre: ['', [Validators.required, this.ValidacionService.isEmpty]],
       apellido: ['', [Validators.required, this.ValidacionService.isEmpty]],

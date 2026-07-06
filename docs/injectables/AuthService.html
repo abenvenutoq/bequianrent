@@ -208,6 +208,9 @@
                                 <a href="#esAdmin" >esAdmin</a>
                             </li>
                             <li>
+                                <a href="#esCliente" >esCliente</a>
+                            </li>
+                            <li>
                                 <a href="#estaLogueado" >estaLogueado</a>
                             </li>
                             <li>
@@ -230,7 +233,7 @@
                                 <a href="#obtenerSesion" >obtenerSesion</a>
                             </li>
                             <li>
-                                <a href="#obtenerUsusario" >obtenerUsusario</a>
+                                <a href="#obtenerUsuario" >obtenerUsuario</a>
                             </li>
                             <li>
                                 <a href="#registrar" >registrar</a>
@@ -456,6 +459,43 @@ Comúnmente utilizado en los Guards de protección de rutas de administración (
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="esCliente"></a>
+                    <span class="name">
+                        <span ><b>esCliente</b></span>
+                        <a href="#esCliente"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>esCliente()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="235"
+                                    class="link-to-prism">src/app/services/auth.services.ts:235</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="estaLogueado"></a>
                     <span class="name">
                         <span ><b>estaLogueado</b></span>
@@ -517,8 +557,8 @@ Comúnmente utilizado en los Guards de protección de rutas de administración (
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="244"
-                                    class="link-to-prism">src/app/services/auth.services.ts:244</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">src/app/services/auth.services.ts:248</a></div>
                         </td>
                     </tr>
 
@@ -879,16 +919,16 @@ evita errores de referencias nulas durente SSR</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="obtenerUsusario"></a>
+                    <a name="obtenerUsuario"></a>
                     <span class="name">
-                        <span ><b>obtenerUsusario</b></span>
-                        <a href="#obtenerUsusario"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>obtenerUsuario</b></span>
+                        <a href="#obtenerUsuario"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>obtenerUsusario()</code>
+<code>obtenerUsuario()</code>
                 </td>
             </tr>
 
@@ -1315,7 +1355,7 @@ export class AuthService {
      * REcupera el listado completo de los usuarios registrado en la app
      * @returns {Usuario[]} Un arreglo con todos los objetos {@link Usuario} encontrados.
      */
-    obtenerUsusario(): Usuario[] {
+    obtenerUsuario(): Usuario[] {
         if (!this.isBrowser()) return [];
 
         const datos &#x3D; localStorage.getItem(this.claveUsuarios);
@@ -1353,7 +1393,7 @@ export class AuthService {
         direccion: string, 
         password: string
     ): ResultadoOperacion {
-        const usuarios &#x3D; this.obtenerUsusario();
+        const usuarios &#x3D; this.obtenerUsuario();
 
         const existeEmail &#x3D; usuarios.find(item &#x3D;&gt; item.correo.toLowerCase() &#x3D;&#x3D;&#x3D; correo.trim().toLowerCase());
         if (existeEmail) {
@@ -1393,7 +1433,7 @@ export class AuthService {
      * @returns {ResultadoOperacion} Objeto de interfaz con el estado (&#x60;ok: boolean&#x60;) y el mensaje descriptivo del resultado.
      */
     iniciarSesion(correo: string, password: string): ResultadoOperacion {
-        const usuario &#x3D; this.obtenerUsusario().find(
+        const usuario &#x3D; this.obtenerUsuario().find(
             (item) &#x3D;&gt; item.correo.toLowerCase() &#x3D;&#x3D;&#x3D; correo.trim().toLowerCase() &amp;&amp; item.password &#x3D;&#x3D;&#x3D; password
         );
 
@@ -1433,7 +1473,7 @@ export class AuthService {
     cambiarPassword(correo: string, nuevaClave: string): ResultadoOperacion {
         if (!this.isBrowser()) return { ok: false, mensaje: &quot;Error del sistema&quot; };
 
-        const usuarios &#x3D; this.obtenerUsusario();
+        const usuarios &#x3D; this.obtenerUsuario();
         const index &#x3D; usuarios.findIndex(u &#x3D;&gt; u.correo.toLowerCase() &#x3D;&#x3D;&#x3D; correo.trim().toLowerCase());
 
         if (index &#x3D;&#x3D;&#x3D; -1) {
@@ -1489,6 +1529,10 @@ export class AuthService {
      */
     esAdmin(): boolean {
         return this.obtenerSesion()?.rol &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;;
+    }
+
+    esCliente(): boolean {
+        return this.obtenerSesion()?.rol &#x3D;&#x3D;&#x3D; &#x27;cliente&#x27;;
     }
 
     /**

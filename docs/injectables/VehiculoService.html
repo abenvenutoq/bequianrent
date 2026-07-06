@@ -208,7 +208,7 @@
                                 <a href="#guardarJSON" >guardarJSON</a>
                             </li>
                             <li>
-                                <a href="#iniciarlizarDatos" >iniciarlizarDatos</a>
+                                <a href="#inicializarDatos" >inicializarDatos</a>
                             </li>
                             <li>
                                 <a href="#leerJSON" >leerJSON</a>
@@ -738,16 +738,16 @@ Al leerlos, pasa cada ruta de imagen por un proceso de normalización para asegu
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="iniciarlizarDatos"></a>
+                    <a name="inicializarDatos"></a>
                     <span class="name">
-                        <span ><b>iniciarlizarDatos</b></span>
-                        <a href="#iniciarlizarDatos"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>inicializarDatos</b></span>
+                        <a href="#inicializarDatos"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>iniciarlizarDatos()</code>
+<code>inicializarDatos()</code>
                 </td>
             </tr>
 
@@ -1195,14 +1195,14 @@ export class VehiculoService{
      * Invoca automáticamente la inicialización de los datos del inventario en el almacenamiento local.
      */
     constructor() {
-        this.iniciarlizarDatos();
+        this.inicializarDatos();
     }
 
     /**
      * Sienta las bases de datos iniciales de la flota en el navegador.
      * Si la clave del inventario no existe en el LocalStorage, inyecta automáticamente los vehículos semilla.
      */
-    iniciarlizarDatos(): void {
+    inicializarDatos(): void {
         if (!this.storageDisponible()) return;
 
         if (!localStorage.getItem(this.KEYS.vehiculos)) {

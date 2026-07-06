@@ -135,13 +135,19 @@ export interface ResultadoOperacion {
 
 /**
  * @description
- * 
+ * Representa la estructura de datos de un testimonio o reseña que un cliente deja sobre su experiencia con el servicio.
+ * Se utiliza para mostrar opiniones en la sección de testimonios del sitio web.
  */
 export interface SerieIndicador {
   fecha: string;
   valor: number;
 }
 
+/**
+ * @description
+ * Representa la estructura de datos de un indicador económico, como el Dólar, UF o UTM.
+ * Se utiliza para mostrar información financiera actualizada en la sección de indicadores del sitio web.
+ */
 export interface IndicadorEconomico {
   version: string;
   autor: string;
@@ -151,6 +157,11 @@ export interface IndicadorEconomico {
   serie: SerieIndicador[];
 }
 
+/**
+ * @description
+ * Representa la estructura de datos de ArriendosMensuales, que contiene información sobre las ventas mensuales de arriendos.
+ * Se utiliza para mostrar estadísticas de ventas en la sección de estadísticas del sitio web.
+ */
 export interface ArriendosMensuales {
     mes: string;
     anio: number;
@@ -159,6 +170,11 @@ export interface ArriendosMensuales {
     vehiculoMasRentado: string;
 }
 
+/**
+ * @description
+ * Representa la estructura de datos de una Sucural, que contiene información sobre las sucursales de la empresa.
+ * Se utiliza para mostrar información de contacto y ubicación de las sucursales en la sección correspondiente del sitio web.
+ */
 export interface Sucursales {
     id: number,
     nombre: string,
@@ -169,6 +185,11 @@ export interface Sucursales {
     horario: string
 }
 
+/**
+ * @description
+ * Representa la estructura de datos de un testimonio o reseña que un cliente deja sobre su experiencia con el servicio.
+ * Se utiliza para mostrar opiniones en la sección de testimonios del sitio web.
+ */
 export interface Testimonios {
     id: number,
     evaluacion: number, 

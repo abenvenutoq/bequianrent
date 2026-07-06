@@ -71,46 +71,36 @@ npx ng versión
 
 ---
 
-# Datos trabajados en LocalStorage
-La data que utiliza la APP se encuentra en: [Archivos De Datos](src/app/data)
+## 🛠️ Características y Arquitectura del Proyecto
+
+### 🛡️ Guards en Angular
+Protección de rutas sensibles (Panel de Administración).
+* **Archivo:** `admin.guard.ts`
+* **Funcionamiento:** Evalúa a través de `AuthService` si la sesión activa corresponde al rol `admin`. Si no es administrador, bloquea el acceso.
+
+### 📈 Consumo API Externa (`mindicador.cl`)
+Integración para obtener y mostrar el valor diario del Dólar, la UF y la UTM.
+* **Modelo:** `indicadores.model.ts`
+* **Servicio:** `indicadores.service.ts`
+* **Componente UI:** `footer.ts`
+
+### 📊 Uso de Estadísticas
+Se implementó una tabla para visualizar las estadísticas mensuales de arriendos desde la aplicación.
+* **Servicio:** `estadisticas.services.ts`
+* **Archivo JSON Local:** `arriendos_mensuales.json`
+* **Componente:** `estadisticas-arriendos.ts`
+
+### 🏢 Datos de Sucursales y Opiniones (GitHub Pages)
+Se creó un repositorio externo con archivos JSON correspondientes a la data de sucursales y testimonios, obtenidos consumiendo una API estática alojada en GitHub Pages.
+* **API Sucursales:** [sucursales.json](https://abenvenutoq.github.io/bequianrent-api/sucursales.json)
+* **API Testimonios:** [testimonios.json](https://abenvenutoq.github.io/bequianrent-api/testimonios.json)
+* **Servicios:** `sucursales.services.ts` | `testimonios.services.ts`
+* **Componentes:** `sucursales.ts` | `testimonios.ts`
 
 ---
-
-# Datos de indicadores economicos desde API mindicador.cl 
-Se agregaron funciones para traer información actulizada de indicadores desde la API las que se muestran en el footer de la aplicación
- - Valor Dolar actual
- - Valor UF actual
- - Valor UTM actual
-
-    Servicio: [Servicio](../bequianrent/src/app/services/indicador-economico.service.ts)
-    Componente (Footer): [Componente](../bequianrent/src/app/components/footer/footer.ts)
-
----
-
-# Datos de estadisticas de arriendos desde JSON Local
-Se agrego archivo arriendos_mensuales.json para trabajar con componente de estadisticas de arriendos desde la APP
- - 
-    Servicio: [Servicio](../bequianrent/src/app/services/estadisticas.services.ts)
-    Archivo JSON: [JSON](../bequianrent/public/data/arriendos_mensuales.json)
-    Componente: [Componente](../bequianrent/src/app/pages/estadisticas-ventas/estadisticas-arriendos.ts)
-
----
-
-# Datos de Sucursales y Oponiones (Testimonios) desde GITHUB PAGES, API Externa.
-Se creo repositorio con archivos JSON coprrespondientes con data para sucursales y testimonios obtenidos desde URL GithubPages
- - 
-    Dirección URL JSON Sucursales: [URL](https://abenvenutoq.github.io/bequianrent-api/sucursales.json)
-    Dirección URL JSON Testimonios: [URL](https://abenvenutoq.github.io/bequianrent-api/testimonios.json)
-    Servicio Sucursales: [Servicio](../bequianrent/src/app/services/sucursales.services.ts)
-    Servicio Testimonio: [Servicio](../bequianrent/src/app/services/testimonios.services.ts)
-    Componente Sucursales: [Componente](../bequianrent/src/app/pages/sucursales/sucursales.ts)
-    Componente Testimonios: [Componente](../bequianrent/src/app/pages/testimonios/testimonios.ts)
-
----
-
+*BequianRent - Proyecto Académico DuocUC*
 
 # FIN README.MD
-
 
 # Ejecutar estos comandos para pruebas en el computador de la oficina
 ```bash

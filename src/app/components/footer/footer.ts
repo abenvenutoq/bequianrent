@@ -5,7 +5,11 @@ import { IndicadoresEconomicos } from '../../services/indicador-economico.servic
 
 /**
  * @description
- * 
+ * Componente Footer
+ * Este componente representa el pie de página de la aplicación.
+ * Muestra información económica relevante, como el valor del Dólar, UF y UTM.
+ * Utiliza el servicio {@link IndicadoresEconomicos} para obtener los datos desde una API externa.
+ * Implementa la interfaz OnInit para cargar los datos al inicializar el componente.
  */
 @Component({
   selector: 'app-footer',
@@ -14,6 +18,7 @@ import { IndicadoresEconomicos } from '../../services/indicador-economico.servic
   templateUrl: './footer.html',
   styleUrl: './footer.css'  
 })
+
 
 export class Footer implements OnInit {
   private readonly IndicadoresEconomicos = inject(IndicadoresEconomicos);
@@ -38,6 +43,12 @@ export class Footer implements OnInit {
     this.cargarUtm();
   }
 
+  /**
+   * @description
+   * Carga el valor del Dólar desde la API externa utilizando el servicio {@link IndicadoresEconomicos}.
+   * Actualiza las propiedades `valorDolar` y `fechaDolar` con los datos obtenidos.
+   * Maneja errores en caso de que la API no esté disponible, mostrando un mensaje de error.
+   */
   cargarDolar(): void {
     this.IndicadoresEconomicos.obtenerDolar().subscribe({
       next: (res) => {
@@ -55,6 +66,12 @@ export class Footer implements OnInit {
     });
   }
 
+  /**
+   * @description
+   * Carga el valor de la UF desde la API externa utilizando el servicio {@link IndicadoresEconomicos}.
+   * Actualiza las propiedades `valorUf` y `fechaUf` con los datos obtenidos.
+   * Maneja errores en caso de que la API no esté disponible, mostrando un mensaje de error.
+   */
   cargarUf(): void {
     this.IndicadoresEconomicos.obtenerUf().subscribe({
       next: (res) => {
@@ -66,12 +83,18 @@ export class Footer implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Error cargando API Dólar:', err);
+        console.error('Error cargando API UF:', err);
         this.mensajeUf = 'UF no disponible';
       }
     });
   }
 
+  /**
+   * @description
+   * Carga el valor de la UTM desde la API externa utilizando el servicio {@link IndicadoresEconomicos}.
+   * Actualiza las propiedades `valorUtm` y `fechaUtm` con los datos obtenidos.
+   * Maneja errores en caso de que la API no esté disponible, mostrando un mensaje de error.
+   */
   cargarUtm(): void {
     this.IndicadoresEconomicos.obtenerUtm().subscribe({
       next: (res) => {
@@ -83,8 +106,8 @@ export class Footer implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error('Error cargando API Dólar:', err);
-        this.mensajeUtm = 'UF no disponible';
+        console.error('Error cargando API UTM:', err);
+        this.mensajeUtm = 'UTM no disponible';
       }
     });
   }

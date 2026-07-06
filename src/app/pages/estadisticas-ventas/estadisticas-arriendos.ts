@@ -4,6 +4,13 @@ import { CommonModule } from '@angular/common';
 import { EstadisticaService } from '../../services/estadisticas.services';
 import { ArriendosMensuales } from '../../models/modelos';
 
+/**
+ * @description
+ * Componente AdminEstadisticaVenta
+ * Este componente se encarga de mostrar las estadísticas de ventas mensuales de arriendos.
+ * Utiliza el servicio EstadisticaService para obtener los datos y mostrarlos en la interfaz de usuario.
+ * Implementa la interfaz OnInit para cargar los datos al inicializar el componente.
+ */
 @Component({
   selector: 'app-estadisticas-ventas',
   standalone: true,
@@ -12,6 +19,13 @@ import { ArriendosMensuales } from '../../models/modelos';
   styleUrl: './estadisticas-arriendos.css',
 })
 
+/** 
+ * @description
+ * Clase AdminEstadisticaVenta
+ * Este componente proporciona métodos y propiedades para mostrar estadísticas de ventas mensuales de arriendos.
+ * Utiliza el servicio EstadisticaService para obtener los datos y mostrarlos en la interfaz de usuario.
+ * Implementa la interfaz OnInit para cargar los datos al inicializar el componente.
+ */
 export class AdminEstadisticaVenta implements OnInit {
 
   arriendosMensuales: ArriendosMensuales[] = [];
@@ -25,6 +39,7 @@ export class AdminEstadisticaVenta implements OnInit {
     this.cargarVentasMensuales();
   }
 
+  /** @description Carga las ventas mensuales del servicio */
   cargarVentasMensuales(): void {
 
     this.estadisticaService.obtenerVentasMensuales().subscribe({
@@ -42,6 +57,7 @@ export class AdminEstadisticaVenta implements OnInit {
 
   }
 
+  /** @description Obtiene el total de arriendos mensuales */
   get totalArriendos(): number {
     return this.arriendosMensuales.reduce(
       (total, item) => total + item.totalArriendos,
@@ -49,6 +65,7 @@ export class AdminEstadisticaVenta implements OnInit {
     )
   }
 
+  /** @description Obtiene el total de ingresos generados */
   get totalIngresos(): number {
     return this.arriendosMensuales.reduce(
       (total, item) => total + item.ingresosGenerados,
@@ -56,6 +73,7 @@ export class AdminEstadisticaVenta implements OnInit {
     )
   }
 
+  /** @description Obtiene el ingreso promedio por arriendo */
   get ingresoPromedio(): number {
     return this.totalIngresos / this.totalArriendos;
   }

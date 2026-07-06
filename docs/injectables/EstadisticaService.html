@@ -93,7 +93,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content component">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -103,100 +103,52 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Components</li>
-  <li class="breadcrumb-item"
-  >
-  App</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >EstadisticaService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a href="#info" class="nav-link active"
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
         <li class="nav-item">
-            <a href="#source" class="nav-link"
+            <a href="#source" 
+                class="nav-link"
+                
                 role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
-        </li>
-        <li class="nav-item">
-            <a href="#templateData" class="nav-link"
-                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li class="nav-item">
-            <a href="#tree" class="nav-link"
-                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
-    <h3>File</h3>
-</p>
-<p class="comment">
-    <code>src/app/app.ts</code>
-</p>
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/estadisticas.services.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio para obtener estadísticas de ventas mensuales.
+Este servicio utiliza HttpClient para realizar solicitudes HTTP y obtener datos de ventas mensuales desde un archivo JSON.</p>
+
+            </p>
 
 
 
-
-
-
-<section data-compodoc="block-metadata">
-    <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
-        <tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-            <tr>
-                <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-root</code></td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-3">imports</td>
-                <td class="col-md-9">
-                                <code><a href="https://angular.io/api/router/RouterOutlet" target="_blank" >RouterOutlet</a></code>
-                                <code><a href="../components/Navbar.html" target="_self" >Navbar</a></code>
-                                <code><a href="../components/Footer.html" target="_self" >Footer</a></code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./app.html</code></td>
-            </tr>
-
-
-
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./app.css</code></td>
-            </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section data-compodoc="block-index">
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -209,9 +161,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#title" >title</a>
+                                <a href="#ulrVentasMensuales" >ulrVentasMensuales</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#obtenerVentasMensuales" >obtenerVentasMensuales</a>
                             </li>
                         </ul>
                     </td>
@@ -221,23 +188,22 @@
 
 
 
-
         </tbody>
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
+            <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(reservaService: <a href="../injectables/ReservaService.html" target="_self">ReservaService</a>)</code>
+<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/app.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/estadisticas.services.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -255,10 +221,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>reservaService</td>
+                                                        <td>http</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ReservaService.html" target="_self" >ReservaService</a></code>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -275,12 +241,50 @@
         </table>
 </section>
 
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="obtenerVentasMensuales"></a>
+                    <span class="name">
+                        <span ><b>obtenerVentasMensuales</b></span>
+                        <a href="#obtenerVentasMensuales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>obtenerVentasMensuales()</code>
+                </td>
+            </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/app/services/estadisticas.services.ts:27</a></div>
+                        </td>
+                    </tr>
 
 
+            <tr>
+                <td class="col-md-4">
 
-    <section data-compodoc="block-properties">
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ArriendosMensuales.html" target="_self" >Observable&lt;ArriendosMensuales[]&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
@@ -289,29 +293,29 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="title"></a>
+                    <a name="ulrVentasMensuales"></a>
                     <span class="name">
-                            <span class="modifier">Protected</span>
+                            <span class="modifier">Private</span>
                             <span class="modifier">Readonly</span>
-                        <span ><b>title</b></span>
-                        <a href="#title"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ulrVentasMensuales</b></span>
+                        <a href="#ulrVentasMensuales"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;bequianrent&#x27;)</code>
+                        <i>Default value : </i><code>&#x27;/data/arriendos_mensuales.json&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/app.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/estadisticas.services.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -320,75 +324,45 @@
     </table>
 </section>
 
-</div>
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, signal } from &#x27;@angular/core&#x27;;
-import { RouterOutlet } from &#x27;@angular/router&#x27;;
-import { Navbar } from &quot;./components/navbar/navbar&quot;;
-import { Footer } from &quot;./components/footer/footer&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 
-import { ReservaService } from &#x27;./services/reservas.services&#x27;;
+import { ArriendosMensuales } from &#x27;../models/modelos&#x27;;
 
-@Component({
-  selector: &#x27;app-root&#x27;,
-  imports: [RouterOutlet, Navbar, Footer],
-  templateUrl: &#x27;./app.html&#x27;,
-  styleUrl: &#x27;./app.css&#x27;
+/**
+ * @description
+ * Servicio para obtener estadísticas de ventas mensuales.
+ * Este servicio utiliza HttpClient para realizar solicitudes HTTP y obtener datos de ventas mensuales desde un archivo JSON.
+ */
+@Injectable({
+    providedIn: &#x27;root&#x27;
 })
-export class App {
-  protected readonly title &#x3D; signal(&#x27;bequianrent&#x27;);
 
-  constructor(private reservaService: ReservaService) {}
+/**
+ * @description
+ * Clase EstadisticaService
+ * Este servicio proporciona métodos para obtener estadísticas de ventas mensuales desde un archivo JSON.
+ * Utiliza HttpClient para realizar solicitudes HTTP y devuelve un Observable con los datos de ventas mensuales.
+ */
+export class EstadisticaService {
+    private readonly ulrVentasMensuales &#x3D; &#x27;/data/arriendos_mensuales.json&#x27;
+
+    constructor(private readonly http: HttpClient) {}
+
+    obtenerVentasMensuales(): Observable&lt;ArriendosMensuales[]&gt; {
+        return this.http.get&lt;ArriendosMensuales[]&gt;(this.ulrVentasMensuales);
+    }
+    
 }
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;app-navbar&gt;&lt;/app-navbar&gt;
-&lt;main class&#x3D;&quot;flex-grow-1&quot;&gt;
-    &lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;/main&gt;
-&lt;app-footer&gt;&lt;/app-footer&gt;</code></pre>
-    </div>
-
-
-    <div class="tab-pane fade " id="tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
-            </div>
-        </div>
-    </div>
-
-    
 </div>
-
-<script src="../js/libs/vis-network.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><app-navbar></app-navbar><main class="flex-grow-1">    <router-outlet></router-outlet></main><app-footer></app-footer></div>'
-    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'Sucursal', 'selector': 'app-sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VehiculosTablaComponent', 'selector': 'app-vehiculos-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'App'};
-</script>
-<script src="../js/tree.js"></script>
-
-
-
-
 
 
 
@@ -427,8 +401,8 @@ export class App {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'App.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'EstadisticaService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

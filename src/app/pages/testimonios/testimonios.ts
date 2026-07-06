@@ -4,6 +4,11 @@ import { CommonModule } from '@angular/common';
 import { TestimoniosService } from '../../services/testimonios.services';
 import { Testimonios } from '../../models/modelos';
 
+/**
+ * @description
+ * Componente Testimonio
+ * Este componente se encarga de mostrar los testimonios de los clientes.
+ */
 @Component({
   selector: 'app-testimonios',
   standalone: true,
@@ -11,13 +16,17 @@ import { Testimonios } from '../../models/modelos';
   templateUrl: './testimonios.html',
   styleUrl: './testimonios.css',
 })
+
+/** 
+ * @description
+ * Clase del componente Testimonio
+ */
 export class Testimonio implements OnInit {
 
   testimonios: Testimonios[] = [];
   cargando = true;
   mensajeError = '';
   
-  // ---> NUEVA VARIABLE: Guarda el índice del testimonio central
   indexActivo = 0; 
 
   private readonly cdr = inject(ChangeDetectorRef);
@@ -28,6 +37,7 @@ export class Testimonio implements OnInit {
     this.cargarTestimonios();
   }
 
+  /** @description Carga los testimonios desde el servicio */
   cargarTestimonios(): void {
     this.testimoniosService.obtenerTestimonios().subscribe({
       next: (datos) => {
@@ -43,19 +53,21 @@ export class Testimonio implements OnInit {
     });
   }
 
-  // ---> NUEVOS MÉTODOS: Navegación cíclica del carrusel
+  /** @description Navega al testimonio anterior */
   anterior(): void {
     if (this.testimonios.length === 0) return;
     this.indexActivo = (this.indexActivo - 1 + this.testimonios.length) % this.testimonios.length;
     this.cdr.detectChanges();
   }
 
+  /** @description Navega al testimonio siguiente */
   siguiente(): void {
     if (this.testimonios.length === 0) return;
     this.indexActivo = (this.indexActivo + 1) % this.testimonios.length;
     this.cdr.detectChanges();
   }
 
+  /** @description Navega al testimonio en el índice especificado */
   irAlIndice(index: number): void {
     this.indexActivo = index;
     this.cdr.detectChanges();

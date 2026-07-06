@@ -43,18 +43,20 @@ describe('TipoCambioService', () => {
     httpMock.verify();
   });
 
+  
   /**
-   * @description
-   * Verifica que el servicio se instancie correctamente dentro del ecosistema de Angular.
+   * @test 0. Verifica que el servicio se haya creado correctamente
+   * Esta prueba asegura que la instancia del servicio TipoCambioService se haya inicializado sin errores.
+   * Se espera que la instancia no sea nula ni indefinida.
    */
   it('debería crearse el servicio correctamente', () => {
     expect(service).toBeTruthy();
   });
 
-  /**
-   * @description
-   * Verifica que el método `obtenerDolar()` realice una petición GET a la URL correcta
-   * y que mapee correctamente la respuesta JSON simulada.
+  
+  /** 
+   * @test 1. Verifica que el método `obtenerDolar()` realice una petición GET a la URL correspondiente
+   * del Dólar y maneje correctamente los datos devueltos.
    */
   it('debería ejecutar una petición GET y retornar el valor del Dólar', () => {
 
@@ -81,8 +83,7 @@ describe('TipoCambioService', () => {
   });
 
   /**
-   * @description
-   * Verifica que el método `obtenerUf()` realice una petición GET a la URL correspondiente
+   * @test 2. Verifica que el método `obtenerUf()` realice una petición GET a la URL correspondiente
    * de la UF y maneje correctamente los datos devueltos.
    */
   it('debería ejecutar una petición GET y retornar el valor de la UF', () => {
@@ -106,9 +107,8 @@ describe('TipoCambioService', () => {
   });
 
   /**
-   * @description
-   * Verifica que el método `obtenerUtm()` realice una petición GET a la URL de la UTM
-   * de manera exitosa y asigne correctamente la respuesta.
+   * @test 3. Verifica que el método `obtenerUtm()` realice una petición GET a la URL correspondiente
+   * de la UTM y maneje correctamente los datos devueltos.
    */
   it('debería ejecutar una petición GET y retornar el valor de la UTM', () => {
     const mockResponse = {

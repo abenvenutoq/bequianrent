@@ -204,11 +204,18 @@
   const router &#x3D; inject(Router);
 
 
+  /** @description Verifica si el usuario es administrador */
   if (authService.esAdmin()) {
     return true; 
   }
 
-  /** Si no es admin redirige al login */
+  /** @description Si es cliente, redirige a la página principal */
+  if (authService.esCliente()) {
+    router.navigate([&#x27;/&#x27;]);
+    return false;
+  }
+
+  /** @description Si no es admin redirige al login */
   router.navigate([&#x27;/login&#x27;]);
   return false;
 }</code>
@@ -356,7 +363,10 @@
                         <i>Default value : </i><code>{
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideClientHydration()
+    provideRouter(routes), 
+    provideClientHydration(),
+
+    { provide: LOCALE_ID, useValue: &#x27;es-CL&#x27;}
   ]
 }</code>
                     </td>
@@ -500,7 +510,7 @@
     {
         id: 3,
         idVehiculo: 3,
-        correo: &quot;cliente@cliente.cl&quot;,
+        correo: &quot;cliente@gmail.com&quot;,
         rut: &quot;9843565-4&quot;,
         fechaDesde: &quot;2026-06-17&quot;,
         fechaHasta: &quot;2026-06-24&quot;,
@@ -510,7 +520,7 @@
     {
         id: 4,
         idVehiculo: 4,
-        correo: &quot;cliente@cliente.cl&quot;,
+        correo: &quot;cliente@gmail.com&quot;,
         rut: &quot;9843565-4&quot;,
         fechaDesde: &quot;2026-06-18&quot;,
         fechaHasta: &quot;2026-06-25&quot;,
@@ -558,6 +568,9 @@
     { path: &#x27;mis-reservas&#x27;, component: MisReservas },
     { path: &#x27;admin-panel&#x27;, component: AdminPanel, canActivate: [adminGuard] },
     { path: &#x27;editar-reserva/:id&#x27;, component: EditarReserva, canActivate: [adminGuard]},
+    { path: &#x27;estadisticas-arriendos&#x27;, component: AdminEstadisticaVenta, canActivate: [adminGuard]},
+    { path: &#x27;sucursales&#x27;, component: Sucursal},
+    { path: &#x27;testimonios&#x27;, component: Testimonio},
     { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27;, pathMatch: &#x27;full&#x27; }
 ]</code>
                     </td>

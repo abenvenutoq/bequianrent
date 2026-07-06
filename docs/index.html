@@ -97,31 +97,81 @@
                    <div class="content-data">
 
 
-<h1>DATOS PARA CONEXION DE PRUEBAS</h1>
-<p>ROL ADMIN</p>
-<p>correo: <a href="mailto:admin@bequianrent.cl">admin@bequianrent.cl</a>
-password: *Qwe123</p>
-<p>ROL USUARIO</p>
-<p>correo: <a href="mailto:cliente@gmail.com">cliente@gmail.com</a>
-password: *Qwe123</p>
-<h1>Bequianrent</h1>
-<p>This project was generated using <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 22.0.0.</p>
-<h2>Development server</h2>
-<p>To start a local development server, run:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng serve</code></pre></div><p>Once the server is running, open your browser and navigate to <code>http://localhost:4200/</code>. The application will automatically reload whenever you modify any of the source files.</p>
-<h2>Code scaffolding</h2>
-<p>Angular CLI includes powerful code scaffolding tools. To generate a new component, run:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng generate component component-name</code></pre></div><p>For a complete list of available schematics (such as <code>components</code>, <code>directives</code>, or <code>pipes</code>), run:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng generate --help</code></pre></div><h2>Building</h2>
-<p>To build the project run:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng build</code></pre></div><p>This will compile your project and store the build artifacts in the <code>dist/</code> directory. By default, the production build optimizes your application for performance and speed.</p>
-<h2>Running unit tests</h2>
-<p>To execute unit tests with the <a href="https://vitest.dev/">Vitest</a> test runner, use the following command:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng test</code></pre></div><h2>Running end-to-end tests</h2>
-<p>For end-to-end (e2e) testing, run:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng e2e</code></pre></div><p>Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.</p>
-<h2>Additional Resources</h2>
-<p>For more information on using the Angular CLI, including detailed command references, visit the <a href="https://angular.dev/tools/cli">Angular CLI Overview and Command Reference</a> page.</p>
+<h1>BequianRent - Sistema de Arriendo de Vehículos</h1>
+<p>¡Bienvenido a <strong>BequianRent</strong>! Una aplicación desarrollada en Angular en base a las clases de FullStack 2 de DuocUC Online</p>
+<hr>
+<h2>Cuentas de Prueba (Credenciales)</h2>
+<p>Para facilitar la revisión y corrección de las funcionalidades de la rúbrica, puedes utilizar los siguientes usuarios preconfigurados en el sistema:</p>
+<h3>Rol Administrador (Admin Panel)</h3>
+<ul>
+<li><strong>Correo:</strong> <code>admin@bequianrent.cl</code></li>
+<li><strong>Contraseña:</strong> <code>*Qwe123</code></li>
+</ul>
+<h3>Rol Cliente (Catálogo y Reservas)</h3>
+<ul>
+<li><strong>Correo:</strong> <code>cliente@gmail.com</code></li>
+<li><strong>Contraseña:</strong> <code>*Qwe123</code></li>
+</ul>
+<hr>
+<h2>Guía de Inicio Rápido</h2>
+<h3>1. Instalar Dependencias</h3>
+<p>Antes de levantar el proyecto por primera vez, descarga e instala los paquetes y librerías necesarias ejecutando en la terminal:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install</code></pre></div><h3>2. Ejecutar el Servidor de Desarrollo</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng serve</code></pre></div><p>o bien utilizar (Abrira directamente una ventana con el web browser por defecto)</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng serve -o </code></pre></div><h3>3. Ejecutar Pruebas Unitarias (Testing)</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng test</code></pre></div><h3>4. Generar y Levantar Documentación (Compodoc)</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npx compodoc -p tsconfig.app.json -s</code></pre></div><p><strong>Nota:</strong> Una vez que la terminal indique que el servidor de Compodoc está listo, puedes navegar y revisar toda la arquitectura del proyecto ingresando a: <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>.</p>
+<hr>
+<h1>🛠️ Tecnologías y Herramientas Utilizadas</h1>
+<ul>
+<li><strong>Framework:</strong> Angular v22.0.0 (Componentes Standalone)</li>
+<li><strong>Estilos:</strong> Bootstrap v5.3 (Diseño responsivo y adaptativo)</li>
+<li><strong>Estrategia de Persistencia:</strong> LocalStorage y SessionStorage (Simulación de Base de Datos y Sesiones Activas)</li>
+<li><strong>Gestor de Pruebas:</strong> Vitest (Pruebas unitarias de lógica y comportamiento)</li>
+<li>*<strong>Documentación:</strong> Compodoc</li>
+</ul>
+<hr>
+<h1>Comandos para verificar versiones instaladas</h1>
+<p>Sirven para revisar si tienes Node, npm y Angular instalados.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">node -v 
+npm -v
+ng version</code></pre></div><p>Si ng no funciona, prueba:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npx ng versión</code></pre></div><hr>
+<h2>🛠️ Características y Arquitectura del Proyecto</h2>
+<h3>🛡️ Guards en Angular</h3>
+<p>Protección de rutas sensibles (Panel de Administración).</p>
+<ul>
+<li><strong>Archivo:</strong> <code>admin.guard.ts</code></li>
+<li><strong>Funcionamiento:</strong> Evalúa a través de <code>AuthService</code> si la sesión activa corresponde al rol <code>admin</code>. Si no es administrador, bloquea el acceso.</li>
+</ul>
+<h3>📈 Consumo API Externa (<code>mindicador.cl</code>)</h3>
+<p>Integración para obtener y mostrar el valor diario del Dólar, la UF y la UTM.</p>
+<ul>
+<li><strong>Modelo:</strong> <code>indicadores.model.ts</code></li>
+<li><strong>Servicio:</strong> <code>indicadores.service.ts</code></li>
+<li><strong>Componente UI:</strong> <code>footer.ts</code></li>
+</ul>
+<h3>📊 Uso de Estadísticas</h3>
+<p>Se implementó una tabla para visualizar las estadísticas mensuales de arriendos desde la aplicación.</p>
+<ul>
+<li><strong>Servicio:</strong> <code>estadisticas.services.ts</code></li>
+<li><strong>Archivo JSON Local:</strong> <code>arriendos_mensuales.json</code></li>
+<li><strong>Componente:</strong> <code>estadisticas-arriendos.ts</code></li>
+</ul>
+<h3>🏢 Datos de Sucursales y Opiniones (GitHub Pages)</h3>
+<p>Se creó un repositorio externo con archivos JSON correspondientes a la data de sucursales y testimonios, obtenidos consumiendo una API estática alojada en GitHub Pages.</p>
+<ul>
+<li><strong>API Sucursales:</strong> <a href="https://abenvenutoq.github.io/bequianrent-api/sucursales.json">sucursales.json</a></li>
+<li><strong>API Testimonios:</strong> <a href="https://abenvenutoq.github.io/bequianrent-api/testimonios.json">testimonios.json</a></li>
+<li><strong>Servicios:</strong> <code>sucursales.services.ts</code> | <code>testimonios.services.ts</code></li>
+<li><strong>Componentes:</strong> <code>sucursales.ts</code> | <code>testimonios.ts</code></li>
+</ul>
+<hr>
+<p><em>BequianRent - Proyecto Académico DuocUC</em></p>
+<h1>FIN README.MD</h1>
+<h1>Ejecutar estos comandos para pruebas en el computador de la oficina</h1>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$env:PATH = &quot;C:\Users\angelo.benvenuto\node-v24.16.0;&quot; + $env:PATH
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code></pre></div><hr>
 
 
 

@@ -4,7 +4,13 @@ import { CommonModule } from '@angular/common';
 import { SucursalesService } from '../../services/sucursales.services';
 import { Sucursales } from '../../models/modelos';
 
-
+/**
+ * @description
+ * Componente Sucursal
+ * Este componente se encarga de mostrar la información de las sucursales.
+ * Utiliza el servicio SucursalesService para obtener los datos y mostrarlos en la interfaz de usuario.
+ * Implementa la interfaz OnInit para cargar los datos al inicializar el componente.
+ */
 @Component({
   selector: 'app-sucursales',
   standalone: true,
@@ -12,6 +18,8 @@ import { Sucursales } from '../../models/modelos';
   templateUrl: './sucursales.html',
   styleUrl: './sucursales.css',
 })
+
+/** @description Componente para gestionar la visualización de sucursales */
 export class Sucursal implements OnInit {
 
   sucursales: Sucursales[] = [];
@@ -28,7 +36,7 @@ export class Sucursal implements OnInit {
     this.cargarSucursales();
   }
 
-
+  /** @description Carga las sucursales desde el servicio */
   cargarSucursales(): void {
     this.sucursalesService.obtenerSucursales().subscribe({
       next: (datos) => {

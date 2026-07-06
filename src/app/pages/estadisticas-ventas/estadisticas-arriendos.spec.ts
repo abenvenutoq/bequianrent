@@ -1,22 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminEstadisticaVenta } from './estadisticas-arriendos';
-import { EstadisticaService } from '../../services/estadisticas.services';
 
+/**
+ * @description
+ * Pruebas unitarias para el componente AdminEstadisticaVenta.
+ * Estas pruebas verifican la creación del componente y su funcionalidad básica.
+ */
 describe('EstadisticasVentas', () => {
-  let component: EstadisticaService;
-  let fixture: ComponentFixture<EstadisticaService>;
+  let component: AdminEstadisticaVenta;
+  let fixture: ComponentFixture<AdminEstadisticaVenta>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EstadisticaService],
+      imports: [AdminEstadisticaVenta],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EstadisticaService);
+    fixture = TestBed.createComponent(AdminEstadisticaVenta);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
 
+  /**
+   * @description
+   * Prueba que verifica que el componente se cree correctamente.
+   */
   it('should create', () => {
     expect(component).toBeTruthy();
   });

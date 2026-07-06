@@ -116,7 +116,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  Sesion</li>
+  Testimonios</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -148,8 +148,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Estructura de datos almacenada temporalmente para manejar el estado de autenticación
-del usuario en el navegador (LocalStorage o SessionStorage).</p>
+                <p>Representa la estructura de datos de un testimonio o reseña que un cliente deja sobre su experiencia con el servicio.
+Se utiliza para mostrar opiniones en la sección de testimonios del sitio web.</p>
 
             </p>
 
@@ -167,9 +167,27 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#correo" 
+                                        <a href="#autoRentado" 
 >
-                                            correo
+                                            autoRentado
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#comentario" 
+>
+                                            comentario
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#evaluacion" 
+>
+                                            evaluacion
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#fechaEvaluacion" 
+>
+                                            fechaEvaluacion
                                         </a>
                                 </li>
                                 <li>
@@ -179,21 +197,9 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#loged" 
->
-                                            loged
-                                        </a>
-                                </li>
-                                <li>
                                         <a href="#nombre" 
 >
                                             nombre
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#rol" 
->
-                                            rol
                                         </a>
                                 </li>
                             </ul>
@@ -211,9 +217,9 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="correo"></a>
-                                        <span class="name "><b>correo</b>
-                                            <a href="#correo">
+                                        <a name="autoRentado"></a>
+                                        <span class="name "><b>autoRentado</b>
+                                            <a href="#autoRentado">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -221,7 +227,7 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>correo:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>autoRentado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -238,12 +244,105 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Correo electrónico que identifica la sesión.</p>
-</div>
-                                </td>
-                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="comentario"></a>
+                                        <span class="name "><b>comentario</b>
+                                            <a href="#comentario">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>comentario:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="evaluacion"></a>
+                                        <span class="name "><b>evaluacion</b>
+                                            <a href="#evaluacion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>evaluacion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="fechaEvaluacion"></a>
+                                        <span class="name "><b>fechaEvaluacion</b>
+                                            <a href="#fechaEvaluacion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>fechaEvaluacion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -277,51 +376,6 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>ID del usuario autenticado.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="loged"></a>
-                                        <span class="name "><b>loged</b>
-                                            <a href="#loged">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>loged:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Bandera que confirma si la sesión está activa y validada de forma exitosa.</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -355,51 +409,6 @@ del usuario en el navegador (LocalStorage o SessionStorage).</p>
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Nombre del usuario para mostrar mensajes de bienvenida en la UI.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="rol"></a>
-                                        <span class="name "><b>rol</b>
-                                            <a href="#rol">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>rol:         <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Rol actual del usuario para habilitar/deshabilitar menús protegidos.</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -637,7 +646,7 @@ export interface Testimonios {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Sesion.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Testimonios.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
