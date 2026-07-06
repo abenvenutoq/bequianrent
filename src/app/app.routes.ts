@@ -11,7 +11,7 @@ import { Footer } from './components/footer/footer';
 import { MiPerfil } from './pages/mi-perfil/mi-perfil';
 import { EditarReserva } from './pages/editar-reserva/editar-reserva';
 import { adminGuard } from './guards/admin.guard';
-import { AdminEstadisticaVenta } from './pages/estadisticas-ventas/estadisticas-arriendos';
+import { AdminEstadisticaVenta } from './pages/estadisticas-arriendos/estadisticas-arriendos';
 import { Sucursal } from './pages/sucursales/sucursales';
 import { Testimonio } from './pages/testimonios/testimonios';
 

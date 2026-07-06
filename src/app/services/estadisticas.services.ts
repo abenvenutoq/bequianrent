@@ -24,7 +24,7 @@ export class EstadisticaService {
 
     constructor(private readonly http: HttpClient) {}
 
-    obtenerVentasMensuales(): Observable<ArriendosMensuales[]> {
+    obtenerArriendosMensuales(): Observable<ArriendosMensuales[]> {
         return this.http.get<ArriendosMensuales[]>(this.ulrVentasMensuales);
     }
     

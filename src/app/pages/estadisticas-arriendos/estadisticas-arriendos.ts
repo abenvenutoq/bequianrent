@@ -36,13 +36,13 @@ export class AdminEstadisticaVenta implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-    this.cargarVentasMensuales();
+    this.cargarArriendosMensuales();
   }
 
-  /** @description Carga las ventas mensuales del servicio */
-  cargarVentasMensuales(): void {
+  /** @description Carga los arriendos mensuales del servicio */
+  cargarArriendosMensuales(): void {
 
-    this.estadisticaService.obtenerVentasMensuales().subscribe({
+    this.estadisticaService.obtenerArriendosMensuales().subscribe({
       next: (datos) => {
         this.arriendosMensuales = datos.reverse();
         this.cargando = false;
