@@ -178,7 +178,7 @@ Este servicio utiliza HttpClient para realizar solicitudes HTTP y obtener datos 
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#obtenerVentasMensuales" >obtenerVentasMensuales</a>
+                                <a href="#obtenerArriendosMensuales" >obtenerArriendosMensuales</a>
                             </li>
                         </ul>
                     </td>
@@ -250,16 +250,16 @@ Este servicio utiliza HttpClient para realizar solicitudes HTTP y obtener datos 
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="obtenerVentasMensuales"></a>
+                    <a name="obtenerArriendosMensuales"></a>
                     <span class="name">
-                        <span ><b>obtenerVentasMensuales</b></span>
-                        <a href="#obtenerVentasMensuales"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>obtenerArriendosMensuales</b></span>
+                        <a href="#obtenerArriendosMensuales"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>obtenerVentasMensuales()</code>
+<code>obtenerArriendosMensuales()</code>
                 </td>
             </tr>
 
@@ -354,7 +354,7 @@ export class EstadisticaService {
 
     constructor(private readonly http: HttpClient) {}
 
-    obtenerVentasMensuales(): Observable&lt;ArriendosMensuales[]&gt; {
+    obtenerArriendosMensuales(): Observable&lt;ArriendosMensuales[]&gt; {
         return this.http.get&lt;ArriendosMensuales[]&gt;(this.ulrVentasMensuales);
     }
     
