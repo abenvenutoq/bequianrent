@@ -62,6 +62,7 @@ export class Footer implements OnInit {
       error: (err) => {
         console.error('Error cargando API Dólar:', err);
         this.mensajeDolar = 'Dólar no disponible';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -85,6 +86,7 @@ export class Footer implements OnInit {
       error: (err) => {
         console.error('Error cargando API UF:', err);
         this.mensajeUf = 'UF no disponible';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -108,6 +110,7 @@ export class Footer implements OnInit {
       error: (err) => {
         console.error('Error cargando API UTM:', err);
         this.mensajeUtm = 'UTM no disponible';
+        this.cdr.detectChanges();
       }
     });
   }

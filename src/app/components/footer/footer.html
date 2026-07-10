@@ -44,35 +44,46 @@
                     </p>
 
                     <div class="d-flex justify-content-around text-center">
+    
                         <div>
                             <small class="d-block text-white-50 mb-1">DÓLAR</small>
-                            <div *ngIf="valorDolar !== null; else DolarNoDisponible">
+                            <div *ngIf="valorDolar !== null; else DolarFallback">
                                 <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
-                            <ng-template #DolarNoDisponible>
-                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
+                            <ng-template #DolarFallback>
+                                <span *ngIf="mensajeDolar" class="text-danger small fw-bold" [title]="mensajeDolar">
+                                    <i class="fa-solid fa-circle-xmark"></i> N/A
+                                </span>
+                                <i *ngIf="!mensajeDolar" class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
                             </ng-template>
                         </div>
 
                         <div>
                             <small class="d-block text-white-50 mb-1">UF</small>
-                            <div *ngIf="valorUf !== null; else UfNoDisponible">
+                            <div *ngIf="valorUf !== null; else UfFallback">
                                 <span class="fs-6 fw-bold text-warning">{{ valorUf | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
-                            <ng-template #UfNoDisponible>
-                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
+                            <ng-template #UfFallback>
+                                <span *ngIf="mensajeUf" class="text-danger small fw-bold" [title]="mensajeUf">
+                                    <i class="fa-solid fa-circle-xmark"></i> N/A
+                                </span>
+                                <i *ngIf="!mensajeUf" class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
                             </ng-template>
                         </div>
 
                         <div>
                             <small class="d-block text-white-50 mb-1">UTM</small>
-                            <div *ngIf="valorUtm !== null; else UtmNoDisponible">
+                            <div *ngIf="valorUtm !== null; else UtmFallback">
                                 <span class="fs-6 fw-bold text-warning">{{ valorUtm | currency:'CLP':'$ ':'1.0-0' }}</span>
                             </div>
-                            <ng-template #UtmNoDisponible>
-                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
+                            <ng-template #UtmFallback>
+                                <span *ngIf="mensajeUtm" class="text-danger small fw-bold" [title]="mensajeUtm">
+                                    <i class="fa-solid fa-circle-xmark"></i> N/A
+                                </span>
+                                <i *ngIf="!mensajeUtm" class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>
                             </ng-template>
                         </div>
+
                     </div>
 
                     <div class="border-top border-secondary border-opacity-25 pt-2 mt-3 text-center" *ngIf="fechaDolar || fechaUf || fechaUtm">

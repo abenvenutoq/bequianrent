@@ -20,12 +20,12 @@ import { ArriendosMensuales } from '../models/modelos';
  * Utiliza HttpClient para realizar solicitudes HTTP y devuelve un Observable con los datos de ventas mensuales.
  */
 export class EstadisticaService {
-    private readonly ulrVentasMensuales = '/data/arriendos_mensuales.json'
+    private readonly urlVentasMensuales = '/data/arriendos_mensuales.json'
 
     constructor(private readonly http: HttpClient) {}
 
     obtenerArriendosMensuales(): Observable<ArriendosMensuales[]> {
-        return this.http.get<ArriendosMensuales[]>(this.ulrVentasMensuales);
+        return this.http.get<ArriendosMensuales[]>(this.urlVentasMensuales);
     }
     
 }
