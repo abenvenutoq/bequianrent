@@ -6,7 +6,8 @@ import { Sucursales } from '../../models/modelos';
 /**
  * @description
  * Componente que representa la página de sucursales.
- * Muestra una lista de sucursales obtenidas desde el servicio correspondiente.
+ * Gestiona la visualización de la lista de sucursales y el estado de carga.
+ * Utiliza el servicio `SucursalesService` para obtener los datos y manejar errores.
  */
 @Component({
   selector: 'Sucursales',
@@ -19,11 +20,23 @@ export class SucursalesComponent implements OnInit {
   
   /**
    * @description
-   * Lista de sucursales obtenidas desde el servicio.
-   * Se inicializa como un arreglo vacío y se llena al cargar los datos.
+   * Arreglo de sucursales recibidas desde el servicio.
+   * Se actualiza cuando la carga de datos finaliza correctamente.
    */
   sucursales: Sucursales[] = [];
+
+  /**
+   * @description
+   * Indicador de estado de carga.
+   * Se utiliza para mostrar spinner o mensajes de progreso en la vista.
+   */
   cargando: boolean = true;
+
+  /**
+   * @description
+   * Mensaje de error que se muestra cuando falla la carga de sucursales.
+   * Está en `null` cuando no existe error.
+   */
   mensajeError: string | null = null;
 
   constructor(private sucursalesService: SucursalesService) {}
@@ -39,9 +52,11 @@ export class SucursalesComponent implements OnInit {
 
   /**
    * @description
-   * Carga las sucursales desde el servicio y las almacena en la variable local.
-   * Maneja errores en caso de que la carga falle.
-   * Actualiza el estado de carga y el mensaje de error según corresponda.
+   * Solicita la lista de sucursales al servicio y actualiza el estado interno.
+   * - Muestra el indicador de carga mientras la petición está en curso.
+   * - Almacena los datos recibidos en `sucursales`.
+   * - Captura y guarda el error en `mensajeError` si la petición falla.
+   * @returns {void}
    */
   cargarSucursales(): void {
     this.cargando = true;
@@ -52,9 +67,8 @@ export class SucursalesComponent implements OnInit {
         this.sucursales = data;
         this.cargando = false;
       },
-      error: (err) => {
-        console.error('Error al cargar las sucursales:', err);
-        this.mensajeError = 'No pudimos cargar la lista de sucursales en este momento. Por favor, intenta de nuevo más tarde.';
+      error: (err: Error) => {
+        this.mensajeError = err.message;
         this.cargando = false;
       }
     });

@@ -1,13 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { Sucursales } from '../models/modelos';
 
 /**
  * @description
  * Servicio que maneja las operaciones relacionadas con las sucursales.
- * Permite obtener, agregar, editar y eliminar sucursales.
- * Utiliza LocalStorage para simular un backend y persistir los datos.
+ * - Recupera datos desde LocalStorage o desde la API remota si no hay datos locales.
+ * - Permite agregar, editar y eliminar sucursales.
+ * - Persiste los cambios en LocalStorage para mantener el estado del navegador.
  */
 @Injectable({
   providedIn: 'root'
@@ -26,10 +28,10 @@ export class SucursalesService {
 
     /**
      * @description
-     * Obtiene la lista de sucursales.
-     * Primero intenta obtener los datos desde LocalStorage.
-     * Si no existen, realiza una solicitud HTTP a la API y guarda los datos en LocalStorage.
-     * @returns Observable<Sucursales[]> Lista de sucursales
+     * Obtiene el listado de sucursales disponible en la aplicación.
+     * - Si hay datos almacenados en LocalStorage, los devuelve inmediatamente.
+     * - Si no hay datos locales, consulta la API remota y los guarda en LocalStorage.
+     * @returns Observable<Sucursales[]> Flujo con el arreglo de sucursales cargado.
      */
     obtenerSucursales(): Observable<Sucursales[]> {
         const dataLocal = localStorage.getItem(this.STORAGE_KEY);
@@ -38,18 +40,23 @@ export class SucursalesService {
             return of(JSON.parse(dataLocal));
         } else {
             return this.http.get<Sucursales[]>(this.url).pipe(
-            tap(data => this.guardarLocalStorage(data))
-            );
+                tap(data => this.guardarLocalStorage(data)),
+                catchError((error: HttpErrorResponse) => {
+                    
+                    console.error('Error HTTP Capturado en SucursalesServices:', error.message)
+
+                    return throwError(() => new Error('No pudimos cargar la lista de sucursales en este momento. Por favor, intenta de nuevo más tarde.'));
+                })
+             );
         }
     }
 
     /**
      * @description
-     * Agrega una nueva sucursal a la lista.
-     * Genera un ID automático basado en el ID más alto existente.
-     * Guarda la lista actualizada en LocalStorage.
+     * Agrega una nueva sucursal a la lista y la persiste en LocalStorage.
+     * Calcula automáticamente el ID asignando el siguiente valor disponible.
      * @param nuevaSucursal La sucursal que se desea agregar.
-     * @returns Observable<Sucursales[]> Lista actualizada de sucursales
+     * @returns Observable<Sucursales[]> Flujo con la lista actualizada de sucursales.
      */
     agregarSucursal(nuevaSucursal: Sucursales): Observable<Sucursales[]> {
         const sucursales = this.leerLocalStorage();
@@ -65,11 +72,10 @@ export class SucursalesService {
 
     /**
      * @description
-     * Edita una sucursal existente en la lista.
-     * Busca la sucursal por ID y actualiza sus datos.
-     * Guarda la lista actualizada en LocalStorage.
+     * Edita una sucursal existente en la lista local.
+     * Busca la sucursal por su ID y actualiza sus datos, luego vuelve a persistir el arreglo.
      * @param sucursalModificada La sucursal con los datos actualizados.
-     * @returns Observable<Sucursales[]> Lista actualizada de sucursales
+     * @returns Observable<Sucursales[]> Flujo con la lista actualizada de sucursales.
      */
     editarSucursal(sucursalModificada: Sucursales): Observable<Sucursales[]> {
         const sucursales = this.leerLocalStorage();
@@ -85,11 +91,9 @@ export class SucursalesService {
 
     /**
      * @description
-     * Elimina una sucursal de la lista.
-     * Filtra la lista para excluir la sucursal con el ID especificado.
-     * Guarda la lista actualizada en LocalStorage.
+     * Elimina una sucursal de la lista local por su ID y persiste el cambio.
      * @param id El ID de la sucursal que se desea eliminar.
-     * @returns Observable<Sucursales[]> Lista actualizada de sucursales
+     * @returns Observable<Sucursales[]> Flujo con la lista de sucursales después de la eliminación.
      */
     eliminarSucursal(id: number): Observable<Sucursales[]> {
         let sucursales = this.leerLocalStorage();
