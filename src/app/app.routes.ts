@@ -12,8 +12,9 @@ import { MiPerfil } from './pages/mi-perfil/mi-perfil';
 import { EditarReserva } from './pages/editar-reserva/editar-reserva';
 import { adminGuard } from './guards/admin.guard';
 import { AdminEstadisticaVenta } from './pages/estadisticas-arriendos/estadisticas-arriendos';
-import { Sucursal } from './pages/sucursales/sucursales';
+import { SucursalesComponent } from './pages/sucursales/sucursales';
 import { Testimonio } from './pages/testimonios/testimonios';
+import { MantenedorSucursales } from './pages/mantenedor-sucursales/mantenedor-sucursales';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -28,7 +29,8 @@ export const routes: Routes = [
     { path: 'admin-panel', component: AdminPanel, canActivate: [adminGuard] },
     { path: 'editar-reserva/:id', component: EditarReserva, canActivate: [adminGuard]},
     { path: 'estadisticas-arriendos', component: AdminEstadisticaVenta, canActivate: [adminGuard]},
-    { path: 'sucursales', component: Sucursal},
+    { path: 'sucursales', component: SucursalesComponent},
     { path: 'testimonios', component: Testimonio},
+    { path: 'mantenedor-sucursales', component: MantenedorSucursales, canActivate: [adminGuard] },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

@@ -1,0 +1,93 @@
+<!-- ENCABEZADO ORIGINAL -->
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-shop-lock me-3"></i>Mantenedor Sucursales</h2>
+    <p class="text-white">Panel mantenedor de sucursales Bequianrent</p>
+</div>
+
+<div class="container mb-5">
+    
+    <div class="card shadow-sm mb-5 border-0">
+        <div class="card-header bg-white border-bottom py-3">
+            <h5 class="mb-0 fw-bold text-primary">
+                {{ modoEdicion ? 'Editar Sucursal' : 'Agregar Nueva Sucursal' }}
+            </h5>
+        </div>
+        <div class="card-body bg-light">
+            <form [formGroup]="sucursalesForm" (ngSubmit)="guardarSucursal()">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small">Nombre de Sucursal</label>
+                        <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Sucursal Centro">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small">Ciudad</label>
+                        <input type="text" class="form-control" formControlName="ciudad" placeholder="Ej: Santiago">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small">Dirección</label>
+                        <input type="text" class="form-control" formControlName="direccion" placeholder="Ej: Av. Providencia 123">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small">Teléfono</label>
+                        <input type="text" class="form-control" formControlName="telefono" placeholder="Ej: +569 1234 5678">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small">Jefe de Sucursal</label>
+                        <input type="text" class="form-control" formControlName="jefeSucursal" placeholder="Ej: Juan Pérez">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small">Horario</label>
+                        <input type="text" class="form-control" formControlName="horario" placeholder="Ej: Lun-Vie 09:00 a 18:00">
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex gap-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary px-4" (click)="cancelarEdicion()">
+                        {{ modoEdicion ? 'Cancelar' : 'Limpiar' }}
+                    </button>
+                    <button type="submit" class="btn btn-primary px-4" [disabled]="sucursalesForm.invalid">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        {{ modoEdicion ? 'Modificar' : 'Guardar' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0 table-responsive">
+            <table class="table table-hover table-striped align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Ciudad</th>
+                        <th>Jefe Sucursal</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sucursal of sucursales">
+                        <td class="fw-bold">{{ sucursal.id }}</td>
+                        <td>{{ sucursal.nombre }}</td>
+                        <td>{{ sucursal.ciudad }}</td>
+                        <td>{{ sucursal.jefeSucursal }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-primary me-2" (click)="editarSucursal(sucursal)" title="Editar">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" (click)="eliminarSucursal(sucursal.id)" title="Eliminar">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="sucursales.length === 0">
+                        <td colspan="5" class="text-center py-4 text-muted">
+                            No hay sucursales registradas.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

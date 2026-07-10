@@ -181,7 +181,7 @@ export interface Sucursales {
     direccion: string,
     ciudad: string,
     telefono: string,
-    jefesucursal: string,
+    jefeSucursal: string,
     horario: string
 }
 
