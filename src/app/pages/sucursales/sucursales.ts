@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SucursalesService } from '../../services/sucursales.services';
 import { Sucursales } from '../../models/modelos';
@@ -39,7 +39,10 @@ export class SucursalesComponent implements OnInit {
    */
   mensajeError: string | null = null;
 
-  constructor(private sucursalesService: SucursalesService) {}
+  constructor(
+    private sucursalesService: SucursalesService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   /**
    * @description
@@ -66,10 +69,12 @@ export class SucursalesComponent implements OnInit {
       next: (data) => {
         this.sucursales = data;
         this.cargando = false;
+        this.cdr.detectChanges();
       },
       error: (err: Error) => {
         this.mensajeError = err.message;
         this.cargando = false;
+        this.cdr.detectChanges();
       }
     });
   }

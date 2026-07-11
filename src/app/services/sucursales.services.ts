@@ -102,6 +102,17 @@ export class SucursalesService {
         
         return of(sucursales);
     }
+
+    /**
+     * @description
+     * Funcion para restaurar datos de sucursales desde API GithubPages,
+     * elimina los cambios realizados por el usuario en localstorage
+     */
+    restaurarDatosDesdeAPI(): Observable<Sucursales[]> {
+        localStorage.removeItem(this.STORAGE_KEY);
+        
+        return this.obtenerSucursales();
+    }
     
     /**
      * @description

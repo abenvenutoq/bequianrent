@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Sucursal } from './sucursales';
+import { SucursalesComponent } from './sucursales';
 
 /**
  * @description
@@ -8,15 +8,15 @@ import { Sucursal } from './sucursales';
  * Estas pruebas verifican la creación del componente y su funcionalidad básica.
  */
 describe('Sucursal', () => {
-  let component: Sucursal;
-  let fixture: ComponentFixture<Sucursal>;
+  let component: SucursalesComponent;
+  let fixture: ComponentFixture<SucursalesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Sucursal],
+      imports: [SucursalesComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Sucursal);
+    fixture = TestBed.createComponent(SucursalesComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

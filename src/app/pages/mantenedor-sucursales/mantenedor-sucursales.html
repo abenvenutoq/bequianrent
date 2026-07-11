@@ -5,6 +5,12 @@
 </div>
 
 <div class="container mb-5">
+
+    <div class="container mb-3 d-flex justify-content-end">
+        <button type="button" class="btn btn-warning text-dark fw-bold shadow-sm" (click)="restaurarDatosGP()">
+            <i class="fa-solid fa-rotate-left me-2"></i>Restaurar Datos desde Github Pages
+        </button>
+    </div>
     
     <div class="card shadow-sm mb-5 border-0">
         <div class="card-header bg-white border-bottom py-3">
@@ -17,27 +23,40 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label fw-semibold small">Nombre de Sucursal</label>
-                        <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Sucursal Centro">
+                        <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Sucursal Centro"
+                               [ngClass]="{'is-invalid': esCampoInvalido('nombre')}">
+                        <div class="invalid-feedback" *ngIf="sucursalesForm.get('nombre')?.hasError('required')">El nombre es obligatorio.</div>
+                        <div class="invalid-feedback" *ngIf="sucursalesForm.get('nombre')?.hasError('minlength')">Debe tener al menos 3 caracteres.</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold small">Ciudad</label>
-                        <input type="text" class="form-control" formControlName="ciudad" placeholder="Ej: Santiago">
+                        <input type="text" class="form-control" formControlName="ciudad" placeholder="Ej: Santiago"
+                               [ngClass]="{'is-invalid': esCampoInvalido('ciudad')}">
+                        <div class="invalid-feedback">La ciudad es obligatoria.</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold small">Dirección</label>
-                        <input type="text" class="form-control" formControlName="direccion" placeholder="Ej: Av. Providencia 123">
+                        <input type="text" class="form-control" formControlName="direccion" placeholder="Ej: Av. Providencia 123"
+                               [ngClass]="{'is-invalid': esCampoInvalido('direccion')}">
+                        <div class="invalid-feedback">La dirección es obligatoria.</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold small">Teléfono</label>
-                        <input type="text" class="form-control" formControlName="telefono" placeholder="Ej: +569 1234 5678">
+                        <input type="text" class="form-control" formControlName="telefono" placeholder="Ej: +569 1234 5678"
+                               [ngClass]="{'is-invalid': esCampoInvalido('telefono')}">
+                        <div class="invalid-feedback">El teléfono es obligatorio.</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold small">Jefe de Sucursal</label>
-                        <input type="text" class="form-control" formControlName="jefeSucursal" placeholder="Ej: Juan Pérez">
+                        <input type="text" class="form-control" formControlName="jefeSucursal" placeholder="Ej: Juan Pérez"
+                               [ngClass]="{'is-invalid': esCampoInvalido('jefeSucursal')}">
+                        <div class="invalid-feedback">El jefe de sucursal es obligatorio.</div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold small">Horario</label>
-                        <input type="text" class="form-control" formControlName="horario" placeholder="Ej: Lun-Vie 09:00 a 18:00">
+                        <input type="text" class="form-control" formControlName="horario" placeholder="Ej: Lun-Vie 09:00 a 18:00"
+                               [ngClass]="{'is-invalid': esCampoInvalido('horario')}">
+                        <div class="invalid-feedback">El horario es obligatorio.</div>
                     </div>
                 </div>
 
@@ -45,15 +64,24 @@
                     <button type="button" class="btn btn-secondary px-4" (click)="cancelarEdicion()">
                         {{ modoEdicion ? 'Cancelar' : 'Limpiar' }}
                     </button>
-                    <button type="submit" class="btn btn-primary px-4" [disabled]="sucursalesForm.invalid">
+                    <!-- Eliminé el [disabled] de este botón para que el usuario pueda presionarlo y ver de qué campos se olvidó -->
+                    <button type="submit" class="btn btn-primary px-4">
                         <i class="fa-solid fa-floppy-disk me-2"></i>
                         {{ modoEdicion ? 'Modificar' : 'Guardar' }}
                     </button>
                 </div>
             </form>
+
+            <!-- MENSAJE DE RESULTADOS (AGREGAR/EDITAR) -->
+            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm" role="alert">
+                <i class="fa-solid me-2" [ngClass]="tipoAlerta === 'success' ? 'fa-circle-check' : 'fa-triangle-exclamation'"></i>
+                <strong>{{ tipoAlerta === 'success' ? '¡Éxito!' : 'Atención:' }}</strong> {{ mensajeAlerta }}
+            </div>
+
         </div>
     </div>
 
+    <!-- SECCIÓN TABLA -->
     <div class="card shadow-sm border-0">
         <div class="card-body p-0 table-responsive">
             <table class="table table-hover table-striped align-middle mb-0">
