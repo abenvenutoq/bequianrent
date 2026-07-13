@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  bequianrent:
+    container_name: bequianrent
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - json-server-api
+
+  json-server-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: vehiculos-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./db.json:/app/db.json

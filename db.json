@@ -167,20 +167,6 @@
       "rendimiento": "16.3 km/l",
       "imagen": "img/autos/mazda2sport.jpg",
       "descripcion": "Divertido y compacto. Hatchback ideal para la ciudad con gran respuesta y diseño cautivador."
-    },
-    {
-      "id": 13,
-      "marca": "Angelo",
-      "modelo": "Angelo",
-      "tipo": "Sedán",
-      "anio": 2026,
-      "precio": 30000,
-      "disponible": true,
-      "transmision": "Manual",
-      "pasajeros": 2,
-      "rendimiento": "14",
-      "imagen": "img/autos/auto_placeholder.jpg",
-      "descripcion": "asdasd"
     }
   ]
 }

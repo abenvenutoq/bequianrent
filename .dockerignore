@@ -1,0 +1,23 @@
+# Dependencias de Node (¡El más importante!)
+node_modules/
+npm-debug.log
+
+# Carpetas de compilación local y caché
+dist/
+.angular/
+
+# Control de versiones
+.git/
+.gitignore
+
+# Configuraciones del editor de código
+.vscode/
+.idea/
+
+# Documentación (Como mencionaste que no es necesaria para correr la app)
+docs/
+
+# Archivos de Docker (No necesitan copiarse a sí mismos)
+Dockerfile
+docker-compose.yml
+.dockerignore

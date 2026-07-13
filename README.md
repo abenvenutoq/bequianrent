@@ -103,7 +103,11 @@ Se migro consumo de datos de Sucursal desde Github Pages hacia consumo mixto jun
 * **Componente Mantenedor solo admin:** [mantenedor-sucursales.ts](../bequianrent/src/app/pages/mantenedor-sucursales/mantenedor-sucursales.ts)
 
 ### 🚗 Datos de Vehiculos (JSON Server)
-Se migro data de vehiculos de LocalStorage hacia JSON Server
+Se migro data de vehiculos de LocalStorage hacia JSON Server 
+* **Archivo db.json:** [db.json](../bequianrent/db.json)
+* **Servicio:** [vehiculos-json-server.services.ts](../bequianrent/src/app/services/vehiculos-json-server.services.ts)
+* **Compponente Mantenedor solo admin:** [mantenedor-vehiculos.ts](../bequianrent/src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts)
+* **Componente lectura para visitantes y usuarios:** [ver-autos.ts](../bequianrent/src/app/pages/ver-autos/ver-autos.ts)
 
 
 ---
@@ -117,3 +121,54 @@ $env:PATH = "C:\Users\angelo.benvenuto\node-v24.16.0;" + $env:PATH
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
 ---
+
+# COMANDOS DOCKER 
+
+ docker compose up -d --build 
+
+🧪 Comandos Docker locales
+
+Construir imagen:
+```bash
+docker build -t mi-app-angular .
+```
+
+Ejecutar contenedor:
+```bash
+docker run --name mi-app-angular -p 8080:80 mi-app-angular
+```
+
+Abrir en navegador:
+
+http://localhost:8080
+
+Detener contenedor:
+```bash
+docker stop mi-app-angular
+```
+
+Eliminar contenedor:
+```bash
+docker rm mi-app-angular
+```
+
+Ver imágenes:
+```bash
+docker images
+```
+
+Ver contenedores activos:
+```bash
+docker ps
+```
+
+Ver todos los contenedores:
+```bash
+docker ps -a
+```
+
+Eliminar imagen:
+```bash
+docker rmi mi-app-angular
+```
+
