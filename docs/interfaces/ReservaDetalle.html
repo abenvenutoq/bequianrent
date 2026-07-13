@@ -234,12 +234,12 @@ para facilitar su visualización en el HTML (marca, modelo, imagen, etc.) sin ha
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, ChangeDetectorRef } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Router, RouterLink } from &#x27;@angular/router&#x27;;
 import { AuthService } from &#x27;../../services/auth.services&#x27;;
 import { ReservaService } from &#x27;../../services/reservas.services&#x27;;
-import { VehiculoService } from &#x27;../../services/vehiculos.services&#x27;;
+import { VehiculosJsonServerService } from &#x27;../../services/vehiculos-json-server.services&#x27;;
 import { Reserva, Vehiculo } from &#x27;../../models/modelos&#x27;;
 
 /**
@@ -273,9 +273,11 @@ export class MisReservas implements OnInit {
   /** Servicio para obtener el registro histórico global de reservas. */
   private reservaService &#x3D; inject(ReservaService);
   /** Servicio para recuperar los datos específicos de los autos arrendados. */
-  private vehiculoService &#x3D; inject(VehiculoService);
+  private vehiculoService &#x3D; inject(VehiculosJsonServerService);
   /** Servicio de enrutamiento para expulsar a usuarios no autenticados. */
   private router &#x3D; inject(Router);
+  /** Servicio para forzar la detección de cambios en la vista cuando se actualizan las reservas. */
+  private cdr &#x3D; inject(ChangeDetectorRef);
 
   /** * Colección de reservas filtradas y enriquecidas con los datos de los vehículos. 
    * Se utiliza directamente en el HTML para iterar las tarjetas o filas.
@@ -299,13 +301,7 @@ export class MisReservas implements OnInit {
       return;
     }
 
-    try {
-      this.cargarReservas(sesion.correo);
-    } catch (error) {
-      console.error(&quot;Error crítico cargando reservas:&quot;, error);
-    } finally {
-      this.cargando &#x3D; false;
-    }
+    this.cargarReservas(sesion.correo);
   }
 
   /**
@@ -317,7 +313,11 @@ export class MisReservas implements OnInit {
    * * @param {string} correoUsuario El correo electrónico extraído de la sesión activa actual.
    */
   cargarReservas(correoUsuario: string): void {
-    if (!correoUsuario) return;
+    if (!correoUsuario) {
+      this.cargando &#x3D; false;
+      this.cdr.detectChanges();
+      return;
+    }
 
     // Normalización de seguridad para evitar fallos por mayúsculas accidentales o espacios al final
     const correoLimpio &#x3D; correoUsuario.trim().toLowerCase();
@@ -329,28 +329,34 @@ export class MisReservas implements OnInit {
       return r &amp;&amp; r.correo &amp;&amp; r.correo.trim().toLowerCase() &#x3D;&#x3D;&#x3D; correoLimpio;
     });
 
-    // Enriquecemos la data combinando cada reserva con los detalles de su vehículo
-    this.misReservas &#x3D; reservasUsuario.map(reserva &#x3D;&gt; {
-      let vehiculoEncontrado: Vehiculo | undefined;
-      
-      try {
-        vehiculoEncontrado &#x3D; this.vehiculoService.getVehiculosPorId(reserva.idVehiculo);
-      } catch (e) {
-        // Si el admin eliminó el vehículo de la flota, mostramos una advertencia en consola pero no rompemos la app
-        console.warn(&#x60;No se pudo cargar el vehículo con ID ${reserva.idVehiculo}&#x60;, e);
+    this.vehiculoService.getVehiculo().subscribe({
+      next: (vehiculos) &#x3D;&gt; {
+        // Enriquecemos la data combinando cada reserva con los detalles de su vehículo
+        this.misReservas &#x3D; reservasUsuario.map(reserva &#x3D;&gt; {
+          const vehiculoEncontrado &#x3D; vehiculos.find(v &#x3D;&gt; Number(v.id) &#x3D;&#x3D;&#x3D; Number(reserva.idVehiculo));
+
+          return {
+            ...reserva,
+            vehiculo: vehiculoEncontrado
+          };
+        });
+
+        // Ordena las reservas por fecha.
+        this.misReservas.sort((a, b) &#x3D;&gt; {
+          const fechaA &#x3D; a.fechaDesde ? new Date(a.fechaDesde).getTime() : 0;
+          const fechaB &#x3D; b.fechaDesde ? new Date(b.fechaDesde).getTime() : 0;
+          return fechaB - fechaA;
+        });
+
+        this.cargando &#x3D; false;
+        this.cdr.detectChanges();
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Error cargando vehículos para enriquecer reservas:&#x27;, error);
+        this.misReservas &#x3D; reservasUsuario.map(reserva &#x3D;&gt; ({ ...reserva }));
+        this.cargando &#x3D; false;
+        this.cdr.detectChanges();
       }
-
-      return {
-        ...reserva,
-        vehiculo: vehiculoEncontrado
-      };
-    });
-
-    // Ordenas las reservas por fecha.
-    this.misReservas.sort((a, b) &#x3D;&gt; {
-      const fechaA &#x3D; a.fechaDesde ? new Date(a.fechaDesde).getTime() : 0;
-      const fechaB &#x3D; b.fechaDesde ? new Date(b.fechaDesde).getTime() : 0;
-      return fechaB - fechaA;
     });
   }
 }</code></pre>

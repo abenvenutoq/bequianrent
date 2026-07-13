@@ -163,7 +163,7 @@ Este servicio utiliza HttpClient para realizar solicitudes HTTP y obtener datos 
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#ulrVentasMensuales" >ulrVentasMensuales</a>
+                                <a href="#urlVentasMensuales" >urlVentasMensuales</a>
                             </li>
                         </ul>
                     </td>
@@ -293,12 +293,12 @@ Este servicio utiliza HttpClient para realizar solicitudes HTTP y obtener datos 
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ulrVentasMensuales"></a>
+                    <a name="urlVentasMensuales"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
                             <span class="modifier">Readonly</span>
-                        <span ><b>ulrVentasMensuales</b></span>
-                        <a href="#ulrVentasMensuales"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>urlVentasMensuales</b></span>
+                        <a href="#urlVentasMensuales"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -350,12 +350,12 @@ import { ArriendosMensuales } from &#x27;../models/modelos&#x27;;
  * Utiliza HttpClient para realizar solicitudes HTTP y devuelve un Observable con los datos de ventas mensuales.
  */
 export class EstadisticaService {
-    private readonly ulrVentasMensuales &#x3D; &#x27;/data/arriendos_mensuales.json&#x27;
+    private readonly urlVentasMensuales &#x3D; &#x27;/data/arriendos_mensuales.json&#x27;
 
     constructor(private readonly http: HttpClient) {}
 
     obtenerArriendosMensuales(): Observable&lt;ArriendosMensuales[]&gt; {
-        return this.http.get&lt;ArriendosMensuales[]&gt;(this.ulrVentasMensuales);
+        return this.http.get&lt;ArriendosMensuales[]&gt;(this.urlVentasMensuales);
     }
     
 }

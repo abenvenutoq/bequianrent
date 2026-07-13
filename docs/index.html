@@ -126,7 +126,7 @@
 <ul>
 <li><strong>Framework:</strong> Angular v22.0.0 (Componentes Standalone)</li>
 <li><strong>Estilos:</strong> Bootstrap v5.3 (Diseño responsivo y adaptativo)</li>
-<li><strong>Estrategia de Persistencia:</strong> LocalStorage y SessionStorage (Simulación de Base de Datos y Sesiones Activas)</li>
+<li><strong>Estrategia de Persistencia:</strong> LocalStorage y SessionStorage, consumo archivos JSON desde API&#39;s Externas, GithubPages y archivo local. Para la semana 8 se implemento CRUD en JSON Server. (Simulación de Base de Datos y Sesiones Activas)</li>
 <li><strong>Gestor de Pruebas:</strong> Vitest (Pruebas unitarias de lógica y comportamiento)</li>
 <li>*<strong>Documentación:</strong> Compodoc</li>
 </ul>
@@ -145,27 +145,35 @@ ng version</code></pre></div><p>Si ng no funciona, prueba:</p>
 <li><strong>Funcionamiento:</strong> Evalúa a través de <code>AuthService</code> si la sesión activa corresponde al rol <code>admin</code>. Si no es administrador, bloquea el acceso.</li>
 </ul>
 <h3>📈 Consumo API Externa (<code>mindicador.cl</code>)</h3>
-<p>Integración para obtener y mostrar el valor diario del Dólar, la UF y la UTM.</p>
+<p>Integración para obtener y mostrar el valor diario del Dólar, la UF y la UTM. Esta información se despliega en el footer.</p>
 <ul>
-<li><strong>Modelo:</strong> <code>indicadores.model.ts</code></li>
-<li><strong>Servicio:</strong> <code>indicadores.service.ts</code></li>
-<li><strong>Componente UI:</strong> <code>footer.ts</code></li>
+<li><strong>Servicio:</strong> <a href="../bequianrent/src/app/services/indicador-economico.service.ts">indicador-economico.service.ts</a></li>
+<li><strong>Componente UI:</strong> <a href="../bequianrent/src/app/components/footer/footer.ts">footer.ts</a></li>
 </ul>
 <h3>📊 Uso de Estadísticas</h3>
 <p>Se implementó una tabla para visualizar las estadísticas mensuales de arriendos desde la aplicación.</p>
 <ul>
-<li><strong>Servicio:</strong> <code>estadisticas.services.ts</code></li>
-<li><strong>Archivo JSON Local:</strong> <code>arriendos_mensuales.json</code></li>
-<li><strong>Componente:</strong> <code>estadisticas-arriendos.ts</code></li>
+<li><strong>Servicio:</strong> <a href="../bequianrent/src/app/services/estadisticas.services.ts">estadisticas.services.ts</a></li>
+<li><strong>Archivo JSON Local:</strong> <a href="../bequianrent/public/data/arriendos_mensuales.json">arriendos_mensuales.json</a></li>
+<li><strong>Componente:</strong> <a href="../bequianrent/src/app/pages/estadisticas-arriendos/estadisticas-arriendos.ts">estadisticas-arriendos.ts</a></li>
 </ul>
-<h3>🏢 Datos de Sucursales y Opiniones (GitHub Pages)</h3>
+<h3>🏢 Datos de Opiniones (GitHub Pages)</h3>
 <p>Se creó un repositorio externo con archivos JSON correspondientes a la data de sucursales y testimonios, obtenidos consumiendo una API estática alojada en GitHub Pages.</p>
 <ul>
-<li><strong>API Sucursales:</strong> <a href="https://abenvenutoq.github.io/bequianrent-api/sucursales.json">sucursales.json</a></li>
 <li><strong>API Testimonios:</strong> <a href="https://abenvenutoq.github.io/bequianrent-api/testimonios.json">testimonios.json</a></li>
-<li><strong>Servicios:</strong> <code>sucursales.services.ts</code> | <code>testimonios.services.ts</code></li>
-<li><strong>Componentes:</strong> <code>sucursales.ts</code> | <code>testimonios.ts</code></li>
+<li><strong>Servicios:</strong> <a href="../bequianrent/src/app/services/testimonios.services.ts">testimonios.services.ts</a></li>
+<li><strong>Componentes:</strong> <a href="../bequianrent/src/app/pages/sucursales/sucursales.ts">sucursales.ts</a> | <a href="../bequianrent/src/app/pages/testimonios/testimonios.ts">testimonios.ts</a></li>
 </ul>
+<h3>🏢 Datos Sucursales (Github Pages + LocalStorage)</h3>
+<p>Se migro consumo de datos de Sucursal desde Github Pages hacia consumo mixto junto a LocalStorage, se implemento CRUD para datos persistentes para simular backend.</p>
+<ul>
+<li><strong>API Sucursales:</strong> <a href="https://abenvenutoq.github.io/bequianrent-api/sucursales.json">sucursales.json</a></li>
+<li><strong>Servicios:</strong> <a href="../bequianrent/src/app/services/sucursales.services.ts">sucursales.services.ts</a></li>
+<li><strong>Componentes Lectura todos los usuarios:</strong> <a href="../bequianrent/src/app/pages/sucursales/sucursales.ts">sucursales.ts</a></li>
+<li><strong>Componente Mantenedor solo admin:</strong> <a href="../bequianrent/src/app/pages/mantenedor-sucursales/mantenedor-sucursales.ts">mantenedor-sucursales.ts</a></li>
+</ul>
+<h3>🚗 Datos de Vehiculos (JSON Server)</h3>
+<p>Se migro data de vehiculos de LocalStorage hacia JSON Server</p>
 <hr>
 <p><em>BequianRent - Proyecto Académico DuocUC</em></p>
 <h1>FIN README.MD</h1>

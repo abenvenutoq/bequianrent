@@ -376,8 +376,8 @@ Maneja errores en caso de que la API no esté disponible, mostrando un mensaje d
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/components/footer/footer.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/components/footer/footer.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -417,8 +417,8 @@ Maneja errores en caso de que la API no esté disponible, mostrando un mensaje d
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/components/footer/footer.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/components/footer/footer.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -928,6 +928,7 @@ export class Footer implements OnInit {
       error: (err) &#x3D;&gt; {
         console.error(&#x27;Error cargando API Dólar:&#x27;, err);
         this.mensajeDolar &#x3D; &#x27;Dólar no disponible&#x27;;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -951,6 +952,7 @@ export class Footer implements OnInit {
       error: (err) &#x3D;&gt; {
         console.error(&#x27;Error cargando API UF:&#x27;, err);
         this.mensajeUf &#x3D; &#x27;UF no disponible&#x27;;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -974,6 +976,7 @@ export class Footer implements OnInit {
       error: (err) &#x3D;&gt; {
         console.error(&#x27;Error cargando API UTM:&#x27;, err);
         this.mensajeUtm &#x3D; &#x27;UTM no disponible&#x27;;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -1027,35 +1030,46 @@ export class Footer implements OnInit {
                     &lt;/p&gt;
 
                     &lt;div class&#x3D;&quot;d-flex justify-content-around text-center&quot;&gt;
+    
                         &lt;div&gt;
                             &lt;small class&#x3D;&quot;d-block text-white-50 mb-1&quot;&gt;DÓLAR&lt;/small&gt;
-                            &lt;div *ngIf&#x3D;&quot;valorDolar !&#x3D;&#x3D; null; else DolarNoDisponible&quot;&gt;
+                            &lt;div *ngIf&#x3D;&quot;valorDolar !&#x3D;&#x3D; null; else DolarFallback&quot;&gt;
                                 &lt;span class&#x3D;&quot;fs-6 fw-bold text-warning&quot;&gt;{{ valorDolar | currency:&#x27;CLP&#x27;:&#x27;$ &#x27;:&#x27;1.0-0&#x27; }}&lt;/span&gt;
                             &lt;/div&gt;
-                            &lt;ng-template #DolarNoDisponible&gt;
-                                &lt;i class&#x3D;&quot;fa-solid fa-spinner fa-spin text-white-50 mt-1&quot; title&#x3D;&quot;Cargando...&quot;&gt;&lt;/i&gt;
+                            &lt;ng-template #DolarFallback&gt;
+                                &lt;span *ngIf&#x3D;&quot;mensajeDolar&quot; class&#x3D;&quot;text-danger small fw-bold&quot; [title]&#x3D;&quot;mensajeDolar&quot;&gt;
+                                    &lt;i class&#x3D;&quot;fa-solid fa-circle-xmark&quot;&gt;&lt;/i&gt; N/A
+                                &lt;/span&gt;
+                                &lt;i *ngIf&#x3D;&quot;!mensajeDolar&quot; class&#x3D;&quot;fa-solid fa-spinner fa-spin text-white-50 mt-1&quot; title&#x3D;&quot;Cargando...&quot;&gt;&lt;/i&gt;
                             &lt;/ng-template&gt;
                         &lt;/div&gt;
 
                         &lt;div&gt;
                             &lt;small class&#x3D;&quot;d-block text-white-50 mb-1&quot;&gt;UF&lt;/small&gt;
-                            &lt;div *ngIf&#x3D;&quot;valorUf !&#x3D;&#x3D; null; else UfNoDisponible&quot;&gt;
+                            &lt;div *ngIf&#x3D;&quot;valorUf !&#x3D;&#x3D; null; else UfFallback&quot;&gt;
                                 &lt;span class&#x3D;&quot;fs-6 fw-bold text-warning&quot;&gt;{{ valorUf | currency:&#x27;CLP&#x27;:&#x27;$ &#x27;:&#x27;1.0-0&#x27; }}&lt;/span&gt;
                             &lt;/div&gt;
-                            &lt;ng-template #UfNoDisponible&gt;
-                                &lt;i class&#x3D;&quot;fa-solid fa-spinner fa-spin text-white-50 mt-1&quot; title&#x3D;&quot;Cargando...&quot;&gt;&lt;/i&gt;
+                            &lt;ng-template #UfFallback&gt;
+                                &lt;span *ngIf&#x3D;&quot;mensajeUf&quot; class&#x3D;&quot;text-danger small fw-bold&quot; [title]&#x3D;&quot;mensajeUf&quot;&gt;
+                                    &lt;i class&#x3D;&quot;fa-solid fa-circle-xmark&quot;&gt;&lt;/i&gt; N/A
+                                &lt;/span&gt;
+                                &lt;i *ngIf&#x3D;&quot;!mensajeUf&quot; class&#x3D;&quot;fa-solid fa-spinner fa-spin text-white-50 mt-1&quot; title&#x3D;&quot;Cargando...&quot;&gt;&lt;/i&gt;
                             &lt;/ng-template&gt;
                         &lt;/div&gt;
 
                         &lt;div&gt;
                             &lt;small class&#x3D;&quot;d-block text-white-50 mb-1&quot;&gt;UTM&lt;/small&gt;
-                            &lt;div *ngIf&#x3D;&quot;valorUtm !&#x3D;&#x3D; null; else UtmNoDisponible&quot;&gt;
+                            &lt;div *ngIf&#x3D;&quot;valorUtm !&#x3D;&#x3D; null; else UtmFallback&quot;&gt;
                                 &lt;span class&#x3D;&quot;fs-6 fw-bold text-warning&quot;&gt;{{ valorUtm | currency:&#x27;CLP&#x27;:&#x27;$ &#x27;:&#x27;1.0-0&#x27; }}&lt;/span&gt;
                             &lt;/div&gt;
-                            &lt;ng-template #UtmNoDisponible&gt;
-                                &lt;i class&#x3D;&quot;fa-solid fa-spinner fa-spin text-white-50 mt-1&quot; title&#x3D;&quot;Cargando...&quot;&gt;&lt;/i&gt;
+                            &lt;ng-template #UtmFallback&gt;
+                                &lt;span *ngIf&#x3D;&quot;mensajeUtm&quot; class&#x3D;&quot;text-danger small fw-bold&quot; [title]&#x3D;&quot;mensajeUtm&quot;&gt;
+                                    &lt;i class&#x3D;&quot;fa-solid fa-circle-xmark&quot;&gt;&lt;/i&gt; N/A
+                                &lt;/span&gt;
+                                &lt;i *ngIf&#x3D;&quot;!mensajeUtm&quot; class&#x3D;&quot;fa-solid fa-spinner fa-spin text-white-50 mt-1&quot; title&#x3D;&quot;Cargando...&quot;&gt;&lt;/i&gt;
                             &lt;/ng-template&gt;
                         &lt;/div&gt;
+
                     &lt;/div&gt;
 
                     &lt;div class&#x3D;&quot;border-top border-secondary border-opacity-25 pt-2 mt-3 text-center&quot; *ngIf&#x3D;&quot;fechaDolar || fechaUf || fechaUtm&quot;&gt;
@@ -1098,8 +1112,8 @@ export class Footer implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><footer class="bg-dark text-white py-5 mt-auto border-top border-secondary">    <div class="container">        <div class="row g-4">                        <div class="col-12 col-md-6 col-lg-4">                <h5 class="fw-bold text-primary mb-3">                    <i class="fa-solid fa-car me-2"></i>BequianRent                </h5>                <p class="text-white-50 medium mb-3">                    Tu viaje empieza aquí. Conectamos tus destinos con la mejor variedad de autos. Reserva en minutos.                </p>                <div class="text-white-50 small mb-3">                    <p class="mb-1"><i class="fa-solid fa-location-dot text-warning me-2"></i><strong>Casa Matriz:</strong> Av. Vitacura 2900, Las Condes, Santiago</p>                    <p class="mb-0"><i class="fa-solid fa-phone text-success me-2"></i><strong>Contacto:</strong> +56 2 2840 5500</p>                </div>                <div class="d-flex gap-3 fs-5 mt-3">                    <a href="#" class="text-white-50 text-decoration-none" title="Facebook"><i class="fa-brands fa-facebook hover-primary"></i></a>                    <a href="#" class="text-white-50 text-decoration-none" title="Instagram"><i class="fa-brands fa-instagram hover-danger"></i></a>                    <a href="#" class="text-white-50 text-decoration-none" title="LinkedIn"><i class="fa-brands fa-linkedin hover-info"></i></a>                    <a href="#" class="text-white-50 text-decoration-none" title="WhatsApp"><i class="fa-brands fa-whatsapp hover-success"></i></a>                </div>            </div>            <div class="col-12 col-md-6 col-lg-4">                <h5 class="fw-bold text-light mb-3">Enlaces de Interés</h5>                <ul class="list-unstyled text-white-50 small">                    <li class="mb-2">                        <a routerLink="/sucursales" class="text-white-50 text-decoration-none"><i class="fa-solid fa-chevron-right me-1 small"></i> Nuestras Sucursales</a>                    </li>                    <li class="mb-2">                        <a routerLink="/testimonios" class="text-white-50 text-decoration-none"><i class="fa-solid fa-chevron-right me-1 small"></i> Opiniones de Clientes</a>                    </li>                </ul>                <small class="d-block text-white-50 mt-4">                    &copy; {{ anio }} BequianRent - <span class="text-warning fw-bold">Duoc</span><span class="fw-bold">UC</span>                </small>            </div>            <div class="col-12 col-lg-4 text-center text-md-start">                <div class="p-3 rounded-3 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 d-inline-block w-100" style="max-width: 400px;">                                        <p class="mb-3 fw-semibold text-success small text-uppercase tracking-wider text-center">                        <i class="fa-solid fa-chart-line me-1"></i> Indicadores Económicos                    </p>                    <div class="d-flex justify-content-around text-center">                        <div>                            <small class="d-block text-white-50 mb-1">DÓLAR</small>                            <div *ngIf="valorDolar !== null; else DolarNoDisponible">                                <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:\'CLP\':\'$ \':\'1.0-0\' }}</span>                            </div>                            <ng-template #DolarNoDisponible>                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>                            </ng-template>                        </div>                        <div>                            <small class="d-block text-white-50 mb-1">UF</small>                            <div *ngIf="valorUf !== null; else UfNoDisponible">                                <span class="fs-6 fw-bold text-warning">{{ valorUf | currency:\'CLP\':\'$ \':\'1.0-0\' }}</span>                            </div>                            <ng-template #UfNoDisponible>                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>                            </ng-template>                        </div>                        <div>                            <small class="d-block text-white-50 mb-1">UTM</small>                            <div *ngIf="valorUtm !== null; else UtmNoDisponible">                                <span class="fs-6 fw-bold text-warning">{{ valorUtm | currency:\'CLP\':\'$ \':\'1.0-0\' }}</span>                            </div>                            <ng-template #UtmNoDisponible>                                <i class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>                            </ng-template>                        </div>                    </div>                    <div class="border-top border-secondary border-opacity-25 pt-2 mt-3 text-center" *ngIf="fechaDolar || fechaUf || fechaUtm">                        <small class="text-white-50">                            <i class="fa-regular fa-clock me-1"></i> Actualizado: {{ fechaDolar || fechaUf || fechaUtm }}                        </small>                    </div>                </div>            </div>        </div>    </div></footer></div>'
-    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'Sucursal', 'selector': 'app-sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VehiculosTablaComponent', 'selector': 'app-vehiculos-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+        var COMPONENT_TEMPLATE = '<div><footer class="bg-dark text-white py-5 mt-auto border-top border-secondary">    <div class="container">        <div class="row g-4">                        <div class="col-12 col-md-6 col-lg-4">                <h5 class="fw-bold text-primary mb-3">                    <i class="fa-solid fa-car me-2"></i>BequianRent                </h5>                <p class="text-white-50 medium mb-3">                    Tu viaje empieza aquí. Conectamos tus destinos con la mejor variedad de autos. Reserva en minutos.                </p>                <div class="text-white-50 small mb-3">                    <p class="mb-1"><i class="fa-solid fa-location-dot text-warning me-2"></i><strong>Casa Matriz:</strong> Av. Vitacura 2900, Las Condes, Santiago</p>                    <p class="mb-0"><i class="fa-solid fa-phone text-success me-2"></i><strong>Contacto:</strong> +56 2 2840 5500</p>                </div>                <div class="d-flex gap-3 fs-5 mt-3">                    <a href="#" class="text-white-50 text-decoration-none" title="Facebook"><i class="fa-brands fa-facebook hover-primary"></i></a>                    <a href="#" class="text-white-50 text-decoration-none" title="Instagram"><i class="fa-brands fa-instagram hover-danger"></i></a>                    <a href="#" class="text-white-50 text-decoration-none" title="LinkedIn"><i class="fa-brands fa-linkedin hover-info"></i></a>                    <a href="#" class="text-white-50 text-decoration-none" title="WhatsApp"><i class="fa-brands fa-whatsapp hover-success"></i></a>                </div>            </div>            <div class="col-12 col-md-6 col-lg-4">                <h5 class="fw-bold text-light mb-3">Enlaces de Interés</h5>                <ul class="list-unstyled text-white-50 small">                    <li class="mb-2">                        <a routerLink="/sucursales" class="text-white-50 text-decoration-none"><i class="fa-solid fa-chevron-right me-1 small"></i> Nuestras Sucursales</a>                    </li>                    <li class="mb-2">                        <a routerLink="/testimonios" class="text-white-50 text-decoration-none"><i class="fa-solid fa-chevron-right me-1 small"></i> Opiniones de Clientes</a>                    </li>                </ul>                <small class="d-block text-white-50 mt-4">                    &copy; {{ anio }} BequianRent - <span class="text-warning fw-bold">Duoc</span><span class="fw-bold">UC</span>                </small>            </div>            <div class="col-12 col-lg-4 text-center text-md-start">                <div class="p-3 rounded-3 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 d-inline-block w-100" style="max-width: 400px;">                                        <p class="mb-3 fw-semibold text-success small text-uppercase tracking-wider text-center">                        <i class="fa-solid fa-chart-line me-1"></i> Indicadores Económicos                    </p>                    <div class="d-flex justify-content-around text-center">                            <div>                            <small class="d-block text-white-50 mb-1">DÓLAR</small>                            <div *ngIf="valorDolar !== null; else DolarFallback">                                <span class="fs-6 fw-bold text-warning">{{ valorDolar | currency:\'CLP\':\'$ \':\'1.0-0\' }}</span>                            </div>                            <ng-template #DolarFallback>                                <span *ngIf="mensajeDolar" class="text-danger small fw-bold" [title]="mensajeDolar">                                    <i class="fa-solid fa-circle-xmark"></i> N/A                                </span>                                <i *ngIf="!mensajeDolar" class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>                            </ng-template>                        </div>                        <div>                            <small class="d-block text-white-50 mb-1">UF</small>                            <div *ngIf="valorUf !== null; else UfFallback">                                <span class="fs-6 fw-bold text-warning">{{ valorUf | currency:\'CLP\':\'$ \':\'1.0-0\' }}</span>                            </div>                            <ng-template #UfFallback>                                <span *ngIf="mensajeUf" class="text-danger small fw-bold" [title]="mensajeUf">                                    <i class="fa-solid fa-circle-xmark"></i> N/A                                </span>                                <i *ngIf="!mensajeUf" class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>                            </ng-template>                        </div>                        <div>                            <small class="d-block text-white-50 mb-1">UTM</small>                            <div *ngIf="valorUtm !== null; else UtmFallback">                                <span class="fs-6 fw-bold text-warning">{{ valorUtm | currency:\'CLP\':\'$ \':\'1.0-0\' }}</span>                            </div>                            <ng-template #UtmFallback>                                <span *ngIf="mensajeUtm" class="text-danger small fw-bold" [title]="mensajeUtm">                                    <i class="fa-solid fa-circle-xmark"></i> N/A                                </span>                                <i *ngIf="!mensajeUtm" class="fa-solid fa-spinner fa-spin text-white-50 mt-1" title="Cargando..."></i>                            </ng-template>                        </div>                    </div>                    <div class="border-top border-secondary border-opacity-25 pt-2 mt-3 text-center" *ngIf="fechaDolar || fechaUf || fechaUtm">                        <small class="text-white-50">                            <i class="fa-regular fa-clock me-1"></i> Actualizado: {{ fechaDolar || fechaUf || fechaUtm }}                        </small>                    </div>                </div>            </div>        </div>    </div></footer></div>'
+    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'Footer'};
 </script>

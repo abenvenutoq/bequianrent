@@ -168,9 +168,6 @@
                         <li>
                             <a href="#USUARIOS" title="src/app/data/usuarios.data.ts" ><b>USUARIOS</b>&nbsp;&nbsp;&nbsp;(src/.../usuarios.data.ts)</a>
                         </li>
-                        <li>
-                            <a href="#VEHICULOS" title="src/app/data/vehiculos.data.ts" ><b>VEHICULOS</b>&nbsp;&nbsp;&nbsp;(src/.../vehiculos.data.ts)</a>
-                        </li>
                     </ul>
                 </td>
             </tr>
@@ -363,7 +360,8 @@
                         <i>Default value : </i><code>{
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), 
+    provideRouter(routes),
+    provideHttpClient(), /** Sugerencia de Profesor */
     provideClientHydration(),
 
     { provide: LOCALE_ID, useValue: &#x27;es-CL&#x27;}
@@ -495,7 +493,7 @@
         fechaDesde: &quot;2026-06-15&quot;,
         fechaHasta: &quot;2026-06-22&quot;,
         total: 350000,
-        estado: &quot;Confirmada&quot;
+        estado: &quot;Completada&quot;
     },
     {
         id: 2,
@@ -505,7 +503,7 @@
         fechaDesde: &quot;2026-06-16&quot;,
         fechaHasta: &quot;2026-06-23&quot;,
         total: 360000,
-        estado: &quot;Confirmada&quot;
+        estado: &quot;Completada&quot;
     },
     {
         id: 3,
@@ -515,7 +513,7 @@
         fechaDesde: &quot;2026-06-17&quot;,
         fechaHasta: &quot;2026-06-24&quot;,
         total: 340000,
-        estado: &quot;Confirmada&quot;
+        estado: &quot;Completada&quot;
     },
     {
         id: 4,
@@ -525,7 +523,7 @@
         fechaDesde: &quot;2026-06-18&quot;,
         fechaHasta: &quot;2026-06-25&quot;,
         total: 370000,
-        estado: &quot;Confirmada&quot;
+        estado: &quot;Completada&quot;
     }
 ]</code>
                     </td>
@@ -569,8 +567,10 @@
     { path: &#x27;admin-panel&#x27;, component: AdminPanel, canActivate: [adminGuard] },
     { path: &#x27;editar-reserva/:id&#x27;, component: EditarReserva, canActivate: [adminGuard]},
     { path: &#x27;estadisticas-arriendos&#x27;, component: AdminEstadisticaVenta, canActivate: [adminGuard]},
-    { path: &#x27;sucursales&#x27;, component: Sucursal},
+    { path: &#x27;sucursales&#x27;, component: SucursalesComponent},
     { path: &#x27;testimonios&#x27;, component: Testimonio},
+    { path: &#x27;mantenedor-sucursales&#x27;, component: MantenedorSucursales, canActivate: [adminGuard] },
+    { path: &#x27;mantenedor-vehiculos&#x27;, component: MantenedorVehiculos, canActivate: [adminGuard] },
     { path: &#x27;**&#x27;, redirectTo: &#x27;&#x27;, pathMatch: &#x27;full&#x27; }
 ]</code>
                     </td>
@@ -658,50 +658,6 @@
         password: &quot;*Qwe123&quot;,
         rol: &quot;cliente&quot;
     }
-]</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/app/data/vehiculos.data.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="VEHICULOS"></a>
-                    <span class="name">
-                        <span ><b>VEHICULOS</b></span>
-                        <a href="#VEHICULOS"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Vehiculo.html" target="_self" >Vehiculo[]</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[
-    { id: 1, marca: &quot;Toyota&quot;, modelo: &quot;Corolla&quot;, tipo: &quot;Sedán&quot;, anio: 2024, precio: 35000, disponible: false, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;15 km/l&quot;, imagen: &quot;img/autos/toyota_corolla.jpg&quot;, descripcion: &quot;Sedán confiable, cómodo y seguro. Ideal para ciudad y viajes largos con excelente rendimiento.&quot; },
-    { id: 2, marca: &quot;Toyota&quot;, modelo: &quot;Yaris&quot;, tipo: &quot;Sedán&quot;, anio: 2023, precio: 28000, disponible: false, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;17 km/l&quot;, imagen: &quot;img/autos/toyota_yaris.jpg&quot;, descripcion: &quot;Económico y práctico. Un sedán compacto perfecto para el día a día y fácil de estacionar.&quot; },
-    { id: 3, marca: &quot;Toyota&quot;, modelo: &quot;Yaris HB&quot;, tipo: &quot;Hatchback&quot;, anio: 2024, precio: 29000, disponible: false, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;16.5 km/l&quot;, imagen: &quot;img/autos/toyota_yaris_hb.jpg&quot;, descripcion: &quot;Diseño juvenil y versátil. Su formato hatchback ofrece gran agilidad en el tráfico urbano.&quot; },
-    { id: 4, marca: &quot;Toyota&quot;, modelo: &quot;Camry&quot;, tipo: &quot;Sedán&quot;, anio: 2025, precio: 50000, disponible: false, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;14 km/l&quot;, imagen: &quot;img/autos/toyota_camry.jpg&quot;, descripcion: &quot;Lujo y amplitud. Un sedán ejecutivo con marcha suave, tecnología avanzada y máxima comodidad.&quot; },
-    
-    { id: 5, marca: &quot;Volkswagen&quot;, modelo: &quot;Golf&quot;, tipo: &quot;Hatchback&quot;, anio: 2023, precio: 32000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;16 km/l&quot;, imagen: &quot;img/autos/vw_golf.jpg&quot;, descripcion: &quot;Un clásico moderno. Hatchback de manejo deportivo, interior refinado y excelente estabilidad.&quot; },
-    { id: 6, marca: &quot;Volkswagen&quot;, modelo: &quot;Polo&quot;, tipo: &quot;Hatchback&quot;, anio: 2024, precio: 27000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;18 km/l&quot;, imagen: &quot;img/autos/vw_polo.jpg&quot;, descripcion: &quot;Ágil y eficiente. Hatchback urbano con tecnología alemana, ideal para moverte por la ciudad.&quot; },
-    { id: 7, marca: &quot;Volkswagen&quot;, modelo: &quot;Virtus&quot;, tipo: &quot;Sedán&quot;, anio: 2024, precio: 30000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;15.5 km/l&quot;, imagen: &quot;img/autos/vw_virtus.jpg&quot;, descripcion: &quot;Sedán espacioso con gran maletero. Excelente conectividad y seguridad para toda la familia.&quot; },
-    { id: 8, marca: &quot;Volkswagen&quot;, modelo: &quot;Jetta&quot;, tipo: &quot;Sedán&quot;, anio: 2025, precio: 42000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;14.8 km/l&quot;, imagen: &quot;img/autos/vw_jetta.jpg&quot;, descripcion: &quot;Potencia y elegancia. Sedán robusto con manejo dinámico y confort premium en cada viaje.&quot; },
-
-    { id: 9, marca: &quot;Mazda&quot;, modelo: &quot;3 Sedán&quot;, tipo: &quot;Sedán&quot;, anio: 2024, precio: 38000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;14.5 km/l&quot;, imagen: &quot;img/autos/mazda3sedan.jpg&quot;, descripcion: &quot;Diseño elegante y manejo dinámico. Interior premium y tecnología que te conecta con el camino.&quot; },
-    { id: 10, marca: &quot;Mazda&quot;, modelo: &quot;3 Sport&quot;, tipo: &quot;Hatchback&quot;, anio: 2024, precio: 39000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;14.2 km/l&quot;, imagen: &quot;img/autos/mazda3sport.jpg&quot;, descripcion: &quot;Hatchback deportivo y audaz. Líneas fluidas y una experiencia de conducción emocionante.&quot; },
-    { id: 11, marca: &quot;Mazda&quot;, modelo: &quot;2 Sedán&quot;, tipo: &quot;Sedán&quot;, anio: 2023, precio: 26000, disponible: true, transmision: &quot;Manual&quot;, pasajeros: 5, rendimiento: &quot;16.8 km/l&quot;, imagen: &quot;img/autos/mazda2sedan.jpg&quot;, descripcion: &quot;Eficiencia con estilo. Un sedán subcompacto ágil, económico y con acabados de alta calidad.&quot; },
-    { id: 12, marca: &quot;Mazda&quot;, modelo: &quot;2 Sport&quot;, tipo: &quot;Hatchback&quot;, anio: 2023, precio: 27000, disponible: true, transmision: &quot;Automática&quot;, pasajeros: 5, rendimiento: &quot;16.3 km/l&quot;, imagen: &quot;img/autos/mazda2sport.jpg&quot;, descripcion: &quot;Divertido y compacto. Hatchback ideal para la ciudad con gran respuesta y diseño cautivador.&quot; }
 ]</code>
                     </td>
                 </tr>

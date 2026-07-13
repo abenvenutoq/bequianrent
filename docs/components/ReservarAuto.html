@@ -147,10 +147,10 @@
 <li>Funcionalidades principales:</li>
 </ul>
 <ul>
-<li>Carga dinámicamente los datos del vehículo seleccionado mediante el parámetro de la URL.</li>
+<li>Carga dinámicamente los datos del vehículo seleccionado desde JSON Server.</li>
 <li>Implementa un formulario reactivo para capturar las fechas de inicio y término del arriendo.</li>
 <li>Calcula en tiempo real la cantidad de días de reserva y el costo total a pagar.</li>
-<li>Procesa la transacción, registra la reserva, descuenta el vehículo del inventario y redirige al usuario.</li>
+<li>Procesa la transacción, registra la reserva, descuenta el vehículo del inventario en el servidor y redirige al usuario.</li>
 </ul>
 
     </p>
@@ -235,6 +235,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
                                 <a href="#diasReserva" >diasReserva</a>
                             </li>
                             <li>
@@ -257,6 +264,10 @@
                             <li>
                                 <a href="#vehiculo" >vehiculo</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#vehiculosService" >vehiculosService</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -271,6 +282,10 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#calcularTotal" >calcularTotal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cargarVehiculo" >cargarVehiculo</a>
                             </li>
                             <li>
                                 <a href="#confirmarReserva" >confirmarReserva</a>
@@ -296,12 +311,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, vehiculoService: <a href="../injectables/VehiculoService.html" target="_self">VehiculoService</a>, reservaService: <a href="../injectables/ReservaService.html" target="_self">ReservaService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, reservaService: <a href="../injectables/ReservaService.html" target="_self">ReservaService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:53</a></div>
                             </td>
                         </tr>
 
@@ -323,18 +338,6 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>vehiculoService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/VehiculoService.html" target="_self" >VehiculoService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -416,8 +419,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -425,21 +428,83 @@
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Ejecuta el cálculo matemático para determinar la duración y costo de la reserva.</p>
-<ul>
-<li>Lógica:</li>
-</ul>
-<ol>
-<li>Convierte las fechas a milisegundos y calcula su diferencia.</li>
-<li>Transforma la diferencia a días (1000ms * 60s * 60m * 24h).</li>
-<li>Aplica un mínimo de 1 día de cobro si el cliente arrienda y devuelve el mismo día.</li>
-<li>Multiplica los días por el precio diario del vehículo.</li>
-</ol>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarVehiculo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cargarVehiculo</b></span>
+                        <a href="#cargarVehiculo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cargarVehiculo(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene los datos del vehículo desde el servidor de forma asíncrona</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -464,22 +529,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:157</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Finaliza y persiste la transacción de arriendo.</p>
-<ol>
-<li>Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.</li>
-<li>Crea el objeto con el payload de la nueva reserva.</li>
-<li>Guarda la reserva mediante el <code>ReservaService</code>.</li>
-<li>Actualiza la disponibilidad del auto (<code>disponible: false</code>) usando el <code>VehiculoService</code>.</li>
-<li>Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).</li>
-</ol>
+                        <div class="io-description"><p>Finaliza y persiste la transacción de arriendo.
+Modificado para interactuar con JSON Server.</p>
 </div>
 
                         <div class="io-description">
@@ -510,8 +569,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -520,11 +579,10 @@
                 <td class="col-md-4">
                         <div class="io-description"><p>Ciclo de vida inicial del componente.</p>
 <ol>
-<li>Bloquea ejecución en SSR.</li>
 <li>Protege la ruta verificando que exista una sesión activa.</li>
 <li>Establece la fecha mínima de reserva al día actual.</li>
 <li>Inicializa el formulario reactivo con validaciones cruzadas.</li>
-<li>Recupera el ID del vehículo desde la URL y carga sus datos.</li>
+<li>Recupera el ID del vehículo desde la URL y hace la petición asíncrona para cargar sus datos.</li>
 </ol>
 </div>
 
@@ -542,6 +600,69 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargando"></a>
+                    <span class="name">
+                        <span ><b>cargando</b></span>
+                        <a href="#cargando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -566,7 +687,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -604,7 +725,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -636,7 +757,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -668,7 +789,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -705,7 +826,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -743,7 +864,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -775,7 +896,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -788,30 +909,70 @@
 
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="vehiculosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>vehiculosService</b></span>
+                        <a href="#vehiculosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(VehiculosJsonServerService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nuevo servicio asíncrono para consumir JSON Server</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ChangeDetectorRef, inject } from &#x27;@angular/core&#x27;;
 import { ActivatedRoute, Router, RouterLink } from &quot;@angular/router&quot;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
 import { AuthService } from &#x27;../../services/auth.services&#x27;;
-import { VehiculoService } from &#x27;../../services/vehiculos.services&#x27;;
 import { ReservaService } from &#x27;../../services/reservas.services&#x27;;
 import { Vehiculo } from &#x27;../../models/modelos&#x27;;
 import { ValidacionService } from &#x27;../../services/validacion.services&#x27;;
+
+// Importamos el nuevo servicio de JSON Server en lugar de VehiculoService
+import { VehiculosJsonServerService } from &#x27;../../services/vehiculos-json-server.services&#x27;;
 
 /**
  * @description
  * Componente encargado de gestionar el flujo de arriendo de un vehículo.
  * * Funcionalidades principales:
- * - Carga dinámicamente los datos del vehículo seleccionado mediante el parámetro de la URL.
+ * - Carga dinámicamente los datos del vehículo seleccionado desde JSON Server.
  * - Implementa un formulario reactivo para capturar las fechas de inicio y término del arriendo.
  * - Calcula en tiempo real la cantidad de días de reserva y el costo total a pagar.
- * - Procesa la transacción, registra la reserva, descuenta el vehículo del inventario y redirige al usuario.
+ * - Procesa la transacción, registra la reserva, descuenta el vehículo del inventario en el servidor y redirige al usuario.
  */
 @Component({
   selector: &#x27;app-reservar-auto&#x27;,
@@ -825,6 +986,9 @@ export class ReservarAuto implements OnInit {
   /** Objeto que almacena los detalles del vehículo actualmente en proceso de reserva. */
   vehiculo: Vehiculo | undefined;
   
+  // Agregamos estado de carga para la vista
+  cargando: boolean &#x3D; true;
+  
   /** Cantidad calculada de días totales que durará el arriendo. */
   diasReserva: number &#x3D; 0;
   /** Monto total a pagar calculado en base al precio diario del vehículo y los días de reserva. */
@@ -834,14 +998,17 @@ export class ReservarAuto implements OnInit {
 
   /** Formulario reactivo que controla las fechas de la reserva. */
   reservaForm!: FormGroup;
+  
   /** Servicio inyectado para la construcción ágil del formulario. */
   private fb &#x3D; inject(FormBuilder);
   /** Servicio de validaciones personalizadas de reglas de negocio. */
   private ValidacionService &#x3D; inject(ValidacionService);
+  /** Nuevo servicio asíncrono para consumir JSON Server */
+  private vehiculosService &#x3D; inject(VehiculosJsonServerService);
+  private cdr &#x3D; inject(ChangeDetectorRef);
 
   constructor(
     private authService: AuthService,
-    private vehiculoService: VehiculoService,
     private reservaService: ReservaService,
     private route: ActivatedRoute,
     private router: Router
@@ -849,13 +1016,18 @@ export class ReservarAuto implements OnInit {
 
   /**
    * Ciclo de vida inicial del componente.
-   * 1. Bloquea ejecución en SSR.
-   * 2. Protege la ruta verificando que exista una sesión activa.
-   * 3. Establece la fecha mínima de reserva al día actual.
-   * 4. Inicializa el formulario reactivo con validaciones cruzadas.
-   * 5. Recupera el ID del vehículo desde la URL y carga sus datos.
+   * 1. Protege la ruta verificando que exista una sesión activa.
+   * 2. Establece la fecha mínima de reserva al día actual.
+   * 3. Inicializa el formulario reactivo con validaciones cruzadas.
+   * 4. Recupera el ID del vehículo desde la URL y hace la petición asíncrona para cargar sus datos.
    */
   ngOnInit(): void {
+    // Si el usuario no está logueado, lo mandamos al login de inmediato
+    if (!this.authService.estaLogueado()) {
+      this.router.navigate([&#x27;/login&#x27;], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+
     const hoy &#x3D; new Date();
     this.fechaMinima &#x3D; hoy.toISOString().split(&#x27;T&#x27;)[0];
 
@@ -872,31 +1044,43 @@ export class ReservarAuto implements OnInit {
       this.calcularTotal();
     });
 
-    // Si el vehículo no existe o ya está arrendado, devolvemos al usuario al catálogo
-    if (!this.authService.estaLogueado()) {
-      this.router.navigate([&#x27;/login&#x27;], { queryParams: { returnUrl: this.router.url } });
-      return;
-    }
-
     const idParam &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
     
     if (idParam) {
-      this.vehiculo &#x3D; this.vehiculoService.getVehiculosPorId(idParam);
-      if (!this.vehiculo) {
-        this.router.navigate([&#x27;/ver-autos&#x27;]);
-      }
+      this.cargarVehiculo(idParam);
     } else {
       this.router.navigate([&#x27;/ver-autos&#x27;]);
     }
   }
 
   /**
+   * Obtiene los datos del vehículo desde el servidor de forma asíncrona
+   */
+  private cargarVehiculo(id: string): void {
+    this.cargando &#x3D; true;
+    
+    // Obtenemos el listado de vehículos y buscamos el que coincida con la ID
+    this.vehiculosService.getVehiculo().subscribe({
+      next: (vehiculos) &#x3D;&gt; {
+        this.vehiculo &#x3D; vehiculos.find(v &#x3D;&gt; v.id.toString() &#x3D;&#x3D;&#x3D; id);
+        
+        if (!this.vehiculo || !this.vehiculo.disponible) {
+          // Si no existe o no está disponible, lo sacamos de aquí
+          this.router.navigate([&#x27;/ver-autos&#x27;]);
+        } else {
+          this.cargando &#x3D; false;
+          this.cdr.detectChanges(); // Actualizamos la vista
+        }
+      },
+      error: (err) &#x3D;&gt; {
+        console.error(&#x27;Error al cargar el vehículo:&#x27;, err);
+        this.router.navigate([&#x27;/ver-autos&#x27;]);
+      }
+    });
+  }
+
+  /**
    * Ejecuta el cálculo matemático para determinar la duración y costo de la reserva.
-   * * Lógica:
-   * 1. Convierte las fechas a milisegundos y calcula su diferencia.
-   * 2. Transforma la diferencia a días (1000ms * 60s * 60m * 24h).
-   * 3. Aplica un mínimo de 1 día de cobro si el cliente arrienda y devuelve el mismo día.
-   * 4. Multiplica los días por el precio diario del vehículo.
    */
   calcularTotal(): void {
     const fechaDesde &#x3D; this.reservaForm.get(&#x27;fechaDesde&#x27;)?.value;
@@ -912,10 +1096,8 @@ export class ReservarAuto implements OnInit {
     const fin &#x3D; new Date(fechaHasta);
     const diferenciaML &#x3D; fin.getTime() - inicio.getTime();
 
-    // Math.ceil para redondear siempre hacia arriba en caso de fracciones de día
     this.diasReserva &#x3D; Math.ceil(diferenciaML / (1000 * 60 * 60 * 24));
 
-    // Si se arrienda y devuelve el mismo día, se cobra al menos 1 día
     if (this.diasReserva &lt;&#x3D; 0) {
       this.diasReserva &#x3D; 1;
     }
@@ -925,16 +1107,11 @@ export class ReservarAuto implements OnInit {
 
   /**
    * Finaliza y persiste la transacción de arriendo.
-   * 1. Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.
-   * 2. Crea el objeto con el payload de la nueva reserva.
-   * 3. Guarda la reserva mediante el &#x60;ReservaService&#x60;.
-   * 4. Actualiza la disponibilidad del auto (&#x60;disponible: false&#x60;) usando el &#x60;VehiculoService&#x60;.
-   * 5. Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).
+   * Modificado para interactuar con JSON Server.
    */
   confirmarReserva(): void {
     if (this.reservaForm.valid &amp;&amp; this.diasReserva &gt; 0 &amp;&amp; this.vehiculo) {
       
-      //1. Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.
       const sesion &#x3D; this.authService.obtenerSesion();
       if (!sesion) return;
 
@@ -946,7 +1123,6 @@ export class ReservarAuto implements OnInit {
         return;
       }
 
-      //2. Crea el objeto con el payload de la nueva reserva.
       const fechaDesde &#x3D; this.reservaForm.get(&#x27;fechaDesde&#x27;)?.value;
       const fechaHasta &#x3D; this.reservaForm.get(&#x27;fechaHasta&#x27;)?.value;
 
@@ -960,15 +1136,28 @@ export class ReservarAuto implements OnInit {
         estado: &#x27;Confirmada&#x27;
       };
 
-      // 3. Guarda la reserva mediante el &#x60;ReservaService&#x60;.
-      this.reservaService.crearReserva(nuevaReserva);
+      // Clonamos el vehículo actual y le cambiamos la disponibilidad a false
+      const vehiculoActualizado: Vehiculo &#x3D; { 
+        ...this.vehiculo, 
+        disponible: false 
+      };
 
-      // 4. Actualiza la disponibilidad del auto (&#x60;disponible: false&#x60;) usando el &#x60;VehiculoService&#x60;.
-      this.vehiculoService.actualizarDisponibilidad(this.vehiculo.id, false);
-
-      // 5. Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).
-      alert(&quot;¡Reserva confirmada con éxito!&quot;);
-      this.router.navigate([&#x27;/mis-reservas&#x27;]);
+      // 1. Primero actualizamos el vehículo en JSON Server de forma asíncrona
+      this.vehiculosService.updateVehiculo(vehiculoActualizado).subscribe({
+        next: () &#x3D;&gt; {
+          // 2. Si el vehículo se actualizó con éxito, guardamos la reserva
+          this.reservaService.crearReserva(nuevaReserva);
+          
+          alert(&quot;¡Reserva confirmada con éxito!&quot;);
+          this.router.navigate([&#x27;/mis-reservas&#x27;]);
+        },
+        error: (err) &#x3D;&gt; {
+          console.error(&quot;Error actualizando la disponibilidad:&quot;, err);
+          alert(&quot;Ocurrió un error al procesar tu reserva con el servidor. Intenta nuevamente.&quot;);
+        }
+      });
+    } else {
+      this.reservaForm.markAllAsTouched();
     }
   }
 }</code></pre>
@@ -980,85 +1169,85 @@ export class ReservarAuto implements OnInit {
     &lt;p class&#x3D;&quot;text-white&quot;&gt;¡Estás a un paso de disfrutar tu próximo viaje!&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div class&#x3D;&quot;container mb-5 flex-grow-1&quot;&gt;
-    &lt;div class&#x3D;&quot;row g-4&quot; id&#x3D;&quot;reserva-contenedor-principal&quot;&gt;
-        
-        &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
-            &lt;div class&#x3D;&quot;card shadow-sm border-0 h-100&quot; *ngIf&#x3D;&quot;vehiculo; else loading&quot;&gt;
-                &lt;img [src]&#x3D;&quot;vehiculo.imagen&quot; class&#x3D;&quot;card-img-top p-3&quot; alt&#x3D;&quot;Vehículo&quot; style&#x3D;&quot;border-radius: 15px; object-fit: contain; max-height: 300px;&quot;&gt;
-                &lt;div class&#x3D;&quot;card-body px-4 pb-4&quot;&gt;
-                    &lt;span class&#x3D;&quot;badge bg-primary mb-2&quot;&gt;{{ vehiculo.tipo }}&lt;/span&gt;
-                    &lt;h3 class&#x3D;&quot;card-title fw-bold text-dark&quot;&gt;{{ vehiculo.marca }} {{ vehiculo.modelo }}&lt;/h3&gt;
-                    &lt;h4 class&#x3D;&quot;text-success fw-bold mb-3&quot;&gt;{{ vehiculo.precio | currency:&#x27;CLP&#x27;:&#x27;symbol-narrow&#x27;:&#x27;1.0-0&#x27; }} &lt;small class&#x3D;&quot;text-muted fs-6 fw-normal&quot;&gt;/día&lt;/small&gt;&lt;/h4&gt;
-                    &lt;p class&#x3D;&quot;text-secondary&quot;&gt;{{ vehiculo.descripcion }}&lt;/p&gt;
-                    
-                    &lt;ul class&#x3D;&quot;list-group list-group-flush mt-3&quot;&gt;
-                        &lt;li class&#x3D;&quot;list-group-item bg-transparent px-0&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-calendar text-primary me-2&quot;&gt;&lt;/i&gt;&lt;strong&gt;Año:&lt;/strong&gt; {{ vehiculo.anio }}&lt;/li&gt;
-                        &lt;li class&#x3D;&quot;list-group-item bg-transparent px-0&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-users text-primary me-2&quot;&gt;&lt;/i&gt;&lt;strong&gt;Pasajeros:&lt;/strong&gt; {{ vehiculo.pasajeros }}&lt;/li&gt;
-                        &lt;li class&#x3D;&quot;list-group-item bg-transparent px-0&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-gear text-primary me-2&quot;&gt;&lt;/i&gt;&lt;strong&gt;Transmisión:&lt;/strong&gt; {{ vehiculo.transmision }}&lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;ng-template #loading&gt;
-                &lt;div class&#x3D;&quot;card shadow-sm border-0 h-100&quot;&gt;
-                    &lt;div class&#x3D;&quot;text-center p-5&quot;&gt;
-                        &lt;div class&#x3D;&quot;spinner-border text-primary&quot; role&#x3D;&quot;status&quot;&gt;
-                            &lt;span class&#x3D;&quot;visually-hidden&quot;&gt;Cargando vehículo...&lt;/span&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/ng-template&gt;
-        &lt;/div&gt;
-
-        &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
-            &lt;div class&#x3D;&quot;card shadow-sm border-0 p-4 bg-white h-100&quot; style&#x3D;&quot;border-radius: 10px;&quot;&gt;
-                &lt;h4 class&#x3D;&quot;fw-bold text-dark mb-4 border-bottom pb-2&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-calendar-days text-primary me-2&quot;&gt;&lt;/i&gt;Fechas del Arriendo&lt;/h4&gt;
-                
-                &lt;form [formGroup]&#x3D;&quot;reservaForm&quot; (ngSubmit)&#x3D;&quot;confirmarReserva()&quot;&gt;
-                    &lt;div class&#x3D;&quot;mb-3&quot;&gt;
-                        &lt;label for&#x3D;&quot;fechaDesde&quot; class&#x3D;&quot;form-label fw-semibold&quot;&gt;Fecha de Recogida (Inicio)&lt;/label&gt;
-                        &lt;input type&#x3D;&quot;date&quot; id&#x3D;&quot;fechaDesde&quot; class&#x3D;&quot;form-control form-control-lg&quot; formControlName&#x3D;&quot;fechaDesde&quot; [min]&#x3D;&quot;fechaMinima&quot;
-                            [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: reservaForm.get(&#x27;fechaDesde&#x27;)?.invalid &amp;&amp; (reservaForm.get(&#x27;fechaDesde&#x27;)?.dirty || reservaForm.get(&#x27;fechaDesde&#x27;)?.touched)}&quot;&gt;
-                        &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;La fecha de recogida es obligatoria.&lt;/div&gt;
-                    &lt;/div&gt;
-
-                    &lt;div class&#x3D;&quot;mb-4&quot;&gt;
-                        &lt;label for&#x3D;&quot;fechaHasta&quot; class&#x3D;&quot;form-label fw-semibold&quot;&gt;Fecha de Devolución (Término)&lt;/label&gt;
-                        &lt;input type&#x3D;&quot;date&quot; id&#x3D;&quot;fechaHasta&quot; class&#x3D;&quot;form-control form-control-lg&quot; formControlName&#x3D;&quot;fechaHasta&quot; [min]&#x3D;&quot;fechaMinima&quot;
-                            [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: reservaForm.get(&#x27;fechaHasta&#x27;)?.invalid &amp;&amp; (reservaForm.get(&#x27;fechaHasta&#x27;)?.dirty || reservaForm.get(&#x27;fechaHasta&#x27;)?.touched)}&quot;&gt;
-                        
-                        &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;reservaForm.get(&#x27;fechaHasta&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;
-                            La fecha de devolución es obligatoria.
-                        &lt;/div&gt;
-                        &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;reservaForm.get(&#x27;fechaHasta&#x27;)?.errors?.[&#x27;fechaAnterior&#x27;]&quot;&gt;
-                            La fecha de devolución no puede ser anterior a la fecha de recogida.
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-
-                    &lt;div class&#x3D;&quot;bg-light rounded p-3 mb-4 border text-dark&quot;&gt;
-                        &lt;div class&#x3D;&quot;d-flex justify-content-between mb-2&quot;&gt;
-                            &lt;span&gt;Cantidad de Días:&lt;/span&gt;
-                            &lt;span class&#x3D;&quot;fw-bold&quot;&gt;{{ diasReserva }} días&lt;/span&gt;
-                        &lt;/div&gt;
-                        &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center border-top pt-2 mt-2&quot;&gt;
-                            &lt;span class&#x3D;&quot;fs-5 fw-semibold&quot;&gt;Total a Pagar:&lt;/span&gt;
-                            &lt;span class&#x3D;&quot;fs-4 fw-bold text-success&quot;&gt;{{ totalPagar | currency:&#x27;CLP&#x27;:&#x27;symbol-narrow&#x27;:&#x27;1.0-0&#x27; }}&lt;/span&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-
-                    &lt;div class&#x3D;&quot;d-grid gap-2&quot;&gt;
-                        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary btn-lg fw-bold py-3 shadow-sm&quot; [disabled]&#x3D;&quot;reservaForm.invalid || diasReserva &lt;&#x3D; 0&quot;&gt;
-                            &lt;i class&#x3D;&quot;fa-solid fa-circle-check me-2&quot;&gt;&lt;/i&gt;Confirmar y Reservar
-                        &lt;/button&gt;
-                        &lt;a routerLink&#x3D;&quot;/ver-autos&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm mt-2&quot;&gt;Volver a la galería&lt;/a&gt;
-                    &lt;/div&gt;
-                &lt;/form&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-
+@if (cargando) {
+    &lt;div class&#x3D;&quot;text-center py-5&quot;&gt;
+        &lt;div class&#x3D;&quot;spinner-border text-primary mb-3&quot; role&#x3D;&quot;status&quot; style&#x3D;&quot;width: 3rem; height: 3rem;&quot;&gt;&lt;/div&gt;
+        &lt;p class&#x3D;&quot;mt-2 text-muted fs-5 fw-medium&quot;&gt;Cargando datos del vehículo...&lt;/p&gt;
     &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+} @else {
+    &lt;div class&#x3D;&quot;container mb-5 flex-grow-1&quot;&gt;
+        &lt;div class&#x3D;&quot;row g-4&quot; id&#x3D;&quot;reserva-contenedor-principal&quot;&gt;
+            
+            &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                &lt;!-- Usamos @if (vehiculo) solo por seguridad para TypeScript, ya no necesitamos el else --&gt;
+                @if (vehiculo) {
+                    &lt;div class&#x3D;&quot;card shadow-sm border-0 h-100&quot;&gt;
+                        &lt;img [src]&#x3D;&quot;vehiculo.imagen&quot; class&#x3D;&quot;card-img-top p-3&quot; alt&#x3D;&quot;Vehículo&quot; style&#x3D;&quot;border-radius: 15px; object-fit: contain; max-height: 300px;&quot; onerror&#x3D;&quot;this.src&#x3D;&#x27;assets/img/default-car.png&#x27;&quot;&gt;
+                        &lt;div class&#x3D;&quot;card-body px-4 pb-4&quot;&gt;
+                            &lt;span class&#x3D;&quot;badge bg-primary mb-2&quot;&gt;{{ vehiculo.tipo }}&lt;/span&gt;
+                            &lt;h3 class&#x3D;&quot;card-title fw-bold text-dark&quot;&gt;{{ vehiculo.marca }} {{ vehiculo.modelo }}&lt;/h3&gt;
+                            &lt;h4 class&#x3D;&quot;text-success fw-bold mb-3&quot;&gt;{{ vehiculo.precio | currency:&#x27;CLP&#x27;:&#x27;symbol-narrow&#x27;:&#x27;1.0-0&#x27; }} &lt;small class&#x3D;&quot;text-muted fs-6 fw-normal&quot;&gt;/día&lt;/small&gt;&lt;/h4&gt;
+                            &lt;p class&#x3D;&quot;text-secondary&quot;&gt;{{ vehiculo.descripcion }}&lt;/p&gt;
+                            
+                            &lt;ul class&#x3D;&quot;list-group list-group-flush mt-3&quot;&gt;
+                                &lt;li class&#x3D;&quot;list-group-item bg-transparent px-0&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-calendar text-primary me-2&quot;&gt;&lt;/i&gt;&lt;strong&gt;Año:&lt;/strong&gt; {{ vehiculo.anio }}&lt;/li&gt;
+                                &lt;li class&#x3D;&quot;list-group-item bg-transparent px-0&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-users text-primary me-2&quot;&gt;&lt;/i&gt;&lt;strong&gt;Pasajeros:&lt;/strong&gt; {{ vehiculo.pasajeros }}&lt;/li&gt;
+                                &lt;li class&#x3D;&quot;list-group-item bg-transparent px-0&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-gear text-primary me-2&quot;&gt;&lt;/i&gt;&lt;strong&gt;Transmisión:&lt;/strong&gt; {{ vehiculo.transmision }}&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                }
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                &lt;div class&#x3D;&quot;card shadow-sm border-0 p-4 bg-white h-100&quot; style&#x3D;&quot;border-radius: 10px;&quot;&gt;
+                    &lt;h4 class&#x3D;&quot;fw-bold text-dark mb-4 border-bottom pb-2&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-calendar-days text-primary me-2&quot;&gt;&lt;/i&gt;Fechas del Arriendo&lt;/h4&gt;
+                    
+                    &lt;form [formGroup]&#x3D;&quot;reservaForm&quot; (ngSubmit)&#x3D;&quot;confirmarReserva()&quot;&gt;
+                        &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+                            &lt;label for&#x3D;&quot;fechaDesde&quot; class&#x3D;&quot;form-label fw-semibold&quot;&gt;Fecha de Recogida (Inicio)&lt;/label&gt;
+                            &lt;input type&#x3D;&quot;date&quot; id&#x3D;&quot;fechaDesde&quot; class&#x3D;&quot;form-control form-control-lg&quot; formControlName&#x3D;&quot;fechaDesde&quot; [min]&#x3D;&quot;fechaMinima&quot;
+                                [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: reservaForm.get(&#x27;fechaDesde&#x27;)?.invalid &amp;&amp; (reservaForm.get(&#x27;fechaDesde&#x27;)?.dirty || reservaForm.get(&#x27;fechaDesde&#x27;)?.touched)}&quot;&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;La fecha de recogida es obligatoria.&lt;/div&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+                            &lt;label for&#x3D;&quot;fechaHasta&quot; class&#x3D;&quot;form-label fw-semibold&quot;&gt;Fecha de Devolución (Término)&lt;/label&gt;
+                            &lt;input type&#x3D;&quot;date&quot; id&#x3D;&quot;fechaHasta&quot; class&#x3D;&quot;form-control form-control-lg&quot; formControlName&#x3D;&quot;fechaHasta&quot; [min]&#x3D;&quot;fechaMinima&quot;
+                                [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: reservaForm.get(&#x27;fechaHasta&#x27;)?.invalid &amp;&amp; (reservaForm.get(&#x27;fechaHasta&#x27;)?.dirty || reservaForm.get(&#x27;fechaHasta&#x27;)?.touched)}&quot;&gt;
+                            
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;reservaForm.get(&#x27;fechaHasta&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;
+                                La fecha de devolución es obligatoria.
+                            &lt;/div&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;reservaForm.get(&#x27;fechaHasta&#x27;)?.errors?.[&#x27;fechaAnterior&#x27;]&quot;&gt;
+                                La fecha de devolución no puede ser anterior a la fecha de recogida.
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class&#x3D;&quot;bg-light rounded p-3 mb-4 border text-dark&quot;&gt;
+                            &lt;div class&#x3D;&quot;d-flex justify-content-between mb-2&quot;&gt;
+                                &lt;span&gt;Cantidad de Días:&lt;/span&gt;
+                                &lt;span class&#x3D;&quot;fw-bold&quot;&gt;{{ diasReserva }} días&lt;/span&gt;
+                            &lt;/div&gt;
+                            &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center border-top pt-2 mt-2&quot;&gt;
+                                &lt;span class&#x3D;&quot;fs-5 fw-semibold&quot;&gt;Total a Pagar:&lt;/span&gt;
+                                &lt;span class&#x3D;&quot;fs-4 fw-bold text-success&quot;&gt;{{ totalPagar | currency:&#x27;CLP&#x27;:&#x27;symbol-narrow&#x27;:&#x27;1.0-0&#x27; }}&lt;/span&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class&#x3D;&quot;d-grid gap-2&quot;&gt;
+                            &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary btn-lg fw-bold py-3 shadow-sm&quot; [disabled]&#x3D;&quot;reservaForm.invalid || diasReserva &lt;&#x3D; 0&quot;&gt;
+                                &lt;i class&#x3D;&quot;fa-solid fa-circle-check me-2&quot;&gt;&lt;/i&gt;Confirmar y Reservar
+                            &lt;/button&gt;
+                            &lt;a routerLink&#x3D;&quot;/ver-autos&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm mt-2&quot;&gt;Volver a la galería&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+}</code></pre>
     </div>
 
 
@@ -1087,8 +1276,8 @@ export class ReservarAuto implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-sliders me-2"></i>Configura tu Reserva</h2>    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p></div><div class="container mb-5 flex-grow-1">    <div class="row g-4" id="reserva-contenedor-principal">                <div class="col-md-6">            <div class="card shadow-sm border-0 h-100" *ngIf="vehiculo; else loading">                <img [src]="vehiculo.imagen" class="card-img-top p-3" alt="Vehículo" style="border-radius: 15px; object-fit: contain; max-height: 300px;">                <div class="card-body px-4 pb-4">                    <span class="badge bg-primary mb-2">{{ vehiculo.tipo }}</span>                    <h3 class="card-title fw-bold text-dark">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>                    <h4 class="text-success fw-bold mb-3">{{ vehiculo.precio | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }} <small class="text-muted fs-6 fw-normal">/día</small></h4>                    <p class="text-secondary">{{ vehiculo.descripcion }}</p>                                        <ul class="list-group list-group-flush mt-3">                        <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-calendar text-primary me-2"></i><strong>Año:</strong> {{ vehiculo.anio }}</li>                        <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-users text-primary me-2"></i><strong>Pasajeros:</strong> {{ vehiculo.pasajeros }}</li>                        <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-gear text-primary me-2"></i><strong>Transmisión:</strong> {{ vehiculo.transmision }}</li>                    </ul>                </div>            </div>            <ng-template #loading>                <div class="card shadow-sm border-0 h-100">                    <div class="text-center p-5">                        <div class="spinner-border text-primary" role="status">                            <span class="visually-hidden">Cargando vehículo...</span>                        </div>                    </div>                </div>            </ng-template>        </div>        <div class="col-md-6">            <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 10px;">                <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>                                <form [formGroup]="reservaForm" (ngSubmit)="confirmarReserva()">                    <div class="mb-3">                        <label for="fechaDesde" class="form-label fw-semibold">Fecha de Recogida (Inicio)</label>                        <input type="date" id="fechaDesde" class="form-control form-control-lg" formControlName="fechaDesde" [min]="fechaMinima"                            [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaDesde\')?.invalid && (reservaForm.get(\'fechaDesde\')?.dirty || reservaForm.get(\'fechaDesde\')?.touched)}">                        <div class="invalid-feedback">La fecha de recogida es obligatoria.</div>                    </div>                    <div class="mb-4">                        <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>                        <input type="date" id="fechaHasta" class="form-control form-control-lg" formControlName="fechaHasta" [min]="fechaMinima"                            [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaHasta\')?.invalid && (reservaForm.get(\'fechaHasta\')?.dirty || reservaForm.get(\'fechaHasta\')?.touched)}">                                                <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'required\']">                            La fecha de devolución es obligatoria.                        </div>                        <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'fechaAnterior\']">                            La fecha de devolución no puede ser anterior a la fecha de recogida.                        </div>                    </div>                    <div class="bg-light rounded p-3 mb-4 border text-dark">                        <div class="d-flex justify-content-between mb-2">                            <span>Cantidad de Días:</span>                            <span class="fw-bold">{{ diasReserva }} días</span>                        </div>                        <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">                            <span class="fs-5 fw-semibold">Total a Pagar:</span>                            <span class="fs-4 fw-bold text-success">{{ totalPagar | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }}</span>                        </div>                    </div>                    <div class="d-grid gap-2">                        <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" [disabled]="reservaForm.invalid || diasReserva <= 0">                            <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar                        </button>                        <a routerLink="/ver-autos" class="btn btn-outline-secondary btn-sm mt-2">Volver a la galería</a>                    </div>                </form>            </div>        </div>    </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'Sucursal', 'selector': 'app-sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VehiculosTablaComponent', 'selector': 'app-vehiculos-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-sliders me-2"></i>Configura tu Reserva</h2>    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p></div>@if (cargando) {    <div class="text-center py-5">        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>        <p class="mt-2 text-muted fs-5 fw-medium">Cargando datos del vehículo...</p>    </div>} @else {    <div class="container mb-5 flex-grow-1">        <div class="row g-4" id="reserva-contenedor-principal">                        <div class="col-md-6">                <!-- Usamos @if (vehiculo) solo por seguridad para TypeScript, ya no necesitamos el else -->                @if (vehiculo) {                    <div class="card shadow-sm border-0 h-100">                        <img [src]="vehiculo.imagen" class="card-img-top p-3" alt="Vehículo" style="border-radius: 15px; object-fit: contain; max-height: 300px;" onerror="this.src=\'assets/img/default-car.png\'">                        <div class="card-body px-4 pb-4">                            <span class="badge bg-primary mb-2">{{ vehiculo.tipo }}</span>                            <h3 class="card-title fw-bold text-dark">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>                            <h4 class="text-success fw-bold mb-3">{{ vehiculo.precio | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }} <small class="text-muted fs-6 fw-normal">/día</small></h4>                            <p class="text-secondary">{{ vehiculo.descripcion }}</p>                                                        <ul class="list-group list-group-flush mt-3">                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-calendar text-primary me-2"></i><strong>Año:</strong> {{ vehiculo.anio }}</li>                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-users text-primary me-2"></i><strong>Pasajeros:</strong> {{ vehiculo.pasajeros }}</li>                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-gear text-primary me-2"></i><strong>Transmisión:</strong> {{ vehiculo.transmision }}</li>                            </ul>                        </div>                    </div>                }            </div>            <div class="col-md-6">                <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 10px;">                    <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>                                        <form [formGroup]="reservaForm" (ngSubmit)="confirmarReserva()">                        <div class="mb-3">                            <label for="fechaDesde" class="form-label fw-semibold">Fecha de Recogida (Inicio)</label>                            <input type="date" id="fechaDesde" class="form-control form-control-lg" formControlName="fechaDesde" [min]="fechaMinima"                                [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaDesde\')?.invalid && (reservaForm.get(\'fechaDesde\')?.dirty || reservaForm.get(\'fechaDesde\')?.touched)}">                            <div class="invalid-feedback">La fecha de recogida es obligatoria.</div>                        </div>                        <div class="mb-4">                            <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>                            <input type="date" id="fechaHasta" class="form-control form-control-lg" formControlName="fechaHasta" [min]="fechaMinima"                                [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaHasta\')?.invalid && (reservaForm.get(\'fechaHasta\')?.dirty || reservaForm.get(\'fechaHasta\')?.touched)}">                                                        <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'required\']">                                La fecha de devolución es obligatoria.                            </div>                            <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'fechaAnterior\']">                                La fecha de devolución no puede ser anterior a la fecha de recogida.                            </div>                        </div>                        <div class="bg-light rounded p-3 mb-4 border text-dark">                            <div class="d-flex justify-content-between mb-2">                                <span>Cantidad de Días:</span>                                <span class="fw-bold">{{ diasReserva }} días</span>                            </div>                            <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">                                <span class="fs-5 fw-semibold">Total a Pagar:</span>                                <span class="fs-4 fw-bold text-success">{{ totalPagar | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }}</span>                            </div>                        </div>                        <div class="d-grid gap-2">                            <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" [disabled]="reservaForm.invalid || diasReserva <= 0">                                <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar                            </button>                            <a routerLink="/ver-autos" class="btn btn-outline-secondary btn-sm mt-2">Volver a la galería</a>                        </div>                    </form>                </div>            </div>        </div>    </div>}</div>'
+    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ReservarAuto'};
 </script>

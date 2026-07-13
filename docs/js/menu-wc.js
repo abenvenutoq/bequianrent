@@ -78,6 +78,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/Login.html" data-type="entity-link" >Login</a>
                             </li>
                             <li class="link">
+                                <a href="components/MantenedorSucursales.html" data-type="entity-link" >MantenedorSucursales</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MantenedorVehiculos.html" data-type="entity-link" >MantenedorVehiculos</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/MiPerfil.html" data-type="entity-link" >MiPerfil</a>
                             </li>
                             <li class="link">
@@ -96,16 +102,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ReservasTablaComponent.html" data-type="entity-link" >ReservasTablaComponent</a>
                             </li>
                             <li class="link">
-                                <a href="components/Sucursal.html" data-type="entity-link" >Sucursal</a>
+                                <a href="components/SucursalesComponent.html" data-type="entity-link" >SucursalesComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/Testimonio.html" data-type="entity-link" >Testimonio</a>
                             </li>
                             <li class="link">
                                 <a href="components/UsuariosTablaComponent.html" data-type="entity-link" >UsuariosTablaComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/VehiculosTablaComponent.html" data-type="entity-link" >VehiculosTablaComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/VerAutos.html" data-type="entity-link" >VerAutos</a>
@@ -142,7 +145,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/ValidacionService.html" data-type="entity-link" >ValidacionService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/VehiculoService.html" data-type="entity-link" >VehiculoService</a>
+                                    <a href="injectables/VehiculosJsonServerService.html" data-type="entity-link" >VehiculosJsonServerService</a>
                                 </li>
                             </ul>
                         </li>
