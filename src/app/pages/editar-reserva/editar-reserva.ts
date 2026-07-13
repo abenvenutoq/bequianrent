@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 import { ReservaService } from '../../services/reservas.services';
-import { VehiculoService } from '../../services/vehiculos.services';
+import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 import { Reserva, Vehiculo } from '../../models/modelos';
 import { ValidacionService } from '../../services/validacion.services';
 
@@ -36,9 +37,11 @@ export class EditarReserva implements OnInit {
   /** Servicio para la lectura y persistencia de reservas. */
   private reservaService = inject(ReservaService);
   /** Servicio para la lectura y gestión del inventario de vehículos. */
-  private vehiculoService = inject(VehiculoService);
+  private vehiculoService = inject(VehiculosJsonServerService);
   /** Servicio con utilidades de validación, usado para validar la coherencia de las fechas. */
   private validacionService = inject(ValidacionService);
+
+  private cdr = inject(ChangeDetectorRef);
 
   /** Formulario reactivo principal que contiene los campos de la reserva. */
   editarForm!: FormGroup;
@@ -77,8 +80,16 @@ export class EditarReserva implements OnInit {
       return;
     }
 
-    // Obtener vehículos para el Select
-    this.vehiculos = this.vehiculoService.getVehiculos(); 
+    // Obtener vehículos para el Select desde JSON Server
+    this.vehiculoService.getVehiculo().subscribe({
+      next: (vehiculos) => {
+        this.vehiculos = vehiculos;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.vehiculos = [];
+      }
+    });
 
     // Inicializar formulario con los datos actuales
     this.editarForm = this.fb.group({
@@ -124,7 +135,7 @@ export class EditarReserva implements OnInit {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     // Asigna el total basándose en el precio del vehículo
-    this.totalCalculado = diffDays * (autoSeleccionado.precio || autoSeleccionado.precio || 0);
+    this.totalCalculado = diffDays * (autoSeleccionado.precio || 0);
   }
 
   /**
@@ -134,29 +145,46 @@ export class EditarReserva implements OnInit {
    * * Actualiza el objeto de la reserva en el almacenamiento persistente.
    * * Redirige a la vista de "Reservas Realizadas" en el panel de administración.
    */
-  guardarCambios(): void {
+  async guardarCambios(): Promise<void> {
     if (this.editarForm.invalid || this.totalCalculado <= 0) return;
 
     const { vehiculoId, fechaDesde, fechaHasta } = this.editarForm.value;
+    const vehiculoIdNumerico = Number(vehiculoId);
 
-    // Lógica para actualizar estados de los vehículos si cambió de auto
-    if (String(this.reservaActual!.idVehiculo) !== String(vehiculoId)) {
+    // 1. Lógica para actualizar estados de los vehículos si cambió de auto
+    if (String(this.reservaActual!.idVehiculo) !== String(vehiculoIdNumerico)) {
+        
         const autoAntiguo = this.vehiculos.find(v => String(v.id) === String(this.reservaActual!.idVehiculo));
-        const autoNuevo = this.vehiculos.find(v => String(v.id) === String(vehiculoId));
+        const autoNuevo = this.vehiculos.find(v => String(v.id) === String(vehiculoIdNumerico));
 
         if (autoAntiguo) autoAntiguo.disponible = true;  // Liberamos el anterior
         if (autoNuevo) autoNuevo.disponible = false;     // Ocupamos el nuevo
 
-        // Guardar cambios de flota en el persistente
-        this.vehiculoService.saveVehiculos(this.vehiculos);
+        try {
+          const actualizaciones: Promise<unknown>[] = [];
+
+          if (autoAntiguo) {
+            actualizaciones.push(firstValueFrom(this.vehiculoService.updateVehiculo(autoAntiguo)));
+          }
+
+          if (autoNuevo) {
+            actualizaciones.push(firstValueFrom(this.vehiculoService.updateVehiculo(autoNuevo)));
+          }
+
+          await Promise.all(actualizaciones);
+        } catch {
+          if (autoAntiguo) autoAntiguo.disponible = false;
+          if (autoNuevo) autoNuevo.disponible = true;
+          alert('No se pudieron actualizar los vehículos en el servidor.');
+          return;
+        }
     }
 
-    // Actualizar la reserva en la base de datos
     const todasReservas = this.reservaService.obtenerReservas();
     const index = todasReservas.findIndex(r => String(r.id) === String(this.reservaId));
     
     if (index !== -1) {
-        todasReservas[index].idVehiculo = vehiculoId;
+        todasReservas[index].idVehiculo = vehiculoIdNumerico;
         todasReservas[index].fechaDesde = fechaDesde;
         todasReservas[index].fechaHasta = fechaHasta;
         todasReservas[index].total = this.totalCalculado;

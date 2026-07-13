@@ -4,9 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ReservarAuto } from './reservar-auto';
 import { AuthService } from '../../services/auth.services';
-import { VehiculoService } from '../../services/vehiculos.services';
+import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 import { ReservaService } from '../../services/reservas.services';
 import { ValidacionService } from '../../services/validacion.services';
+import { of } from 'rxjs';
 
 /**
  * @description
@@ -32,8 +33,8 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
   
   /** Mock del servicio de vehículos */
   const mockVehiculoService = {
-    getVehiculosPorId: vi.fn().mockReturnValue(mockVehiculo),
-    actualizarDisponibilidad: vi.fn()
+    getVehiculo: vi.fn().mockReturnValue(of([mockVehiculo])),
+    updateVehiculo: vi.fn((vehiculo) => of(vehiculo))
   };
 
   /** Mock del servicio de reservas */
@@ -72,7 +73,7 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
       imports: [ReservarAuto, ReactiveFormsModule],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
-        { provide: VehiculoService, useValue: mockVehiculoService },
+        { provide: VehiculosJsonServerService, useValue: mockVehiculoService },
         { provide: ReservaService, useValue: mockReservaService },
         { provide: Router, useValue: mockRouter },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
@@ -111,7 +112,7 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
   /** @test 2. Función confirmarReserva */
   it('Debe crear la reserva, bloquear el auto y redirigir si el formulario es válido', () => {
     const spyCrearReserva = vi.spyOn(mockReservaService, 'crearReserva');
-    const spyActualizarDisp = vi.spyOn(mockVehiculoService, 'actualizarDisponibilidad');
+    const spyActualizarDisp = vi.spyOn(mockVehiculoService, 'updateVehiculo');
     
     // 1. Simulamos un formulario válido
     component.reservaForm.patchValue({
@@ -135,7 +136,7 @@ describe('Pruebas Unitarias - Componente ReservarAuto', () => {
     });
     
     // Verifica que el auto se marcó como no disponible
-    expect(spyActualizarDisp).toHaveBeenCalledWith(10, false); 
+    expect(spyActualizarDisp).toHaveBeenCalledWith(expect.objectContaining({ id: 10, disponible: false })); 
     
     // Verifica que redirecciona al perfil
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/mis-reservas']);

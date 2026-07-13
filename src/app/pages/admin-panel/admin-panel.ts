@@ -1,19 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../services/auth.services';
 import { ReservaService } from '../../services/reservas.services';
-import { VehiculoService } from '../../services/vehiculos.services';
+import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 import { Usuario, Reserva, Vehiculo } from '../../models/modelos';
 
 /**
  * @description
  * Componente que representa el panel de administración.
- * Permite cambiar entre las vistas de usuarios, reservas y vehículos.
+ * Permite cambiar entre las vistas de usuarios y reservas.
  */
 import { UsuariosTablaComponent } from './components/usuarios-tabla/usuarios-tabla';
 import { ReservasTablaComponent } from './components/reservas-tabla/reservas-tabla';
-import { VehiculosTablaComponent } from './components/vehiculos-tabla/vehiculos-tabla';
 
 /**
  * @description
@@ -23,7 +22,7 @@ import { VehiculosTablaComponent } from './components/vehiculos-tabla/vehiculos-
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [CommonModule, UsuariosTablaComponent, ReservasTablaComponent, VehiculosTablaComponent], 
+  imports: [CommonModule, UsuariosTablaComponent, ReservasTablaComponent], 
   templateUrl: './admin-panel.html',
   styleUrl: './admin-panel.css'
 })
@@ -36,15 +35,15 @@ import { VehiculosTablaComponent } from './components/vehiculos-tabla/vehiculos-
 export class AdminPanel implements OnInit {
   private authService = inject(AuthService);
   private reservaService = inject(ReservaService);
-  private vehiculoService = inject(VehiculoService);
+  private vehiculoService = inject(VehiculosJsonServerService);
 
 
   /** 
    * @description
    * Variable que almacena la vista actual del panel de administración.
-   * Puede ser 'usuarios', 'reservas' o 'vehiculos'.
+    * Puede ser 'usuarios' o 'reservas'.
    */
-  vistaActual: string = 'usuarios';
+  vistaActual: 'usuarios' | 'reservas' = 'usuarios';
   usuarios: Usuario[] = [];
   reservas: Reserva[] = [];
   vehiculos: Vehiculo[] = [];
@@ -58,16 +57,27 @@ export class AdminPanel implements OnInit {
     // Carga inicial de datos
     this.usuarios = this.authService.obtenerUsuario() || [];
     this.reservas = this.reservaService.obtenerReservas() || [];
-    this.vehiculos = this.vehiculoService.getVehiculos() || [];
-    
+
+    this.cargarVehiculos();
+  }
+
+  private cargarVehiculos(): void {
+    this.vehiculoService.getVehiculo().subscribe({
+      next: (vehiculos) => {
+        this.vehiculos = vehiculos;
+      },
+      error: () => {
+        this.vehiculos = [];
+      }
+    });
   }
 
   /**
    * @description
    * Método que cambia la vista actual del panel de administración.
-   * @param vista La vista a la que se desea cambiar ('usuarios', 'reservas' o 'vehiculos').
+    * @param vista La vista a la que se desea cambiar ('usuarios' o 'reservas').
    */
-  cambiarVista(vista: string): void {
+  cambiarVista(vista: 'usuarios' | 'reservas'): void {
     this.vistaActual = vista;
   }
 
@@ -77,20 +87,42 @@ export class AdminPanel implements OnInit {
    * Emite un evento con la reserva y el nuevo estado.
    * @param evento Objeto que contiene la reserva y el nuevo estado.
    */
-  actualizarEstadoReserva(evento: {reserva: Reserva, nuevoEstado: string}): void {
+  async actualizarEstadoReserva(evento: {reserva: Reserva, nuevoEstado: string}): Promise<void> {
     const { reserva, nuevoEstado } = evento;
-    const antiguaReserva = { ...reserva };
-    reserva.estado = nuevoEstado;
+    const estadoAnterior = reserva.estado;
 
-    if (nuevoEstado === 'Completada' || nuevoEstado === 'Cancelada') {
-      const auto = this.vehiculos.find(v => Number(v.id) === Number(reserva.idVehiculo));
-      if (auto) auto.disponible = true;
-    } else if (antiguaReserva.estado === 'Completada' || antiguaReserva.estado === 'Cancelada') {
-      const auto = this.vehiculos.find(v => Number(v.id) === Number(reserva.idVehiculo));
-      if (auto) auto.disponible = false;
+    if (estadoAnterior === nuevoEstado) {
+      return;
     }
 
-    this.vehiculoService.saveVehiculos(this.vehiculos);
+    reserva.estado = nuevoEstado;
     this.reservaService.guardarReservas(this.reservas);
+
+    const seLibera = nuevoEstado === 'Completada' || nuevoEstado === 'Cancelada';
+    const estabaLiberada = estadoAnterior === 'Completada' || estadoAnterior === 'Cancelada';
+
+    if (seLibera === estabaLiberada) {
+      return;
+    }
+
+    const auto = this.vehiculos.find(v => Number(v.id) === Number(reserva.idVehiculo));
+    if (!auto) {
+      return;
+    }
+
+    const disponibilidadNueva = seLibera;
+    if (auto.disponible === disponibilidadNueva) {
+      return;
+    }
+
+    auto.disponible = disponibilidadNueva;
+
+    try {
+      await firstValueFrom(this.vehiculoService.updateVehiculo(auto));
+    } catch {
+      auto.disponible = !disponibilidadNueva;
+      reserva.estado = estadoAnterior;
+      this.reservaService.guardarReservas(this.reservas);
+    }
   }
 }

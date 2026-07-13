@@ -69,7 +69,9 @@ export class MantenedorSucursales implements OnInit {
 
   /**
    * @description
-   *  funcion para valdar campos validos
+   * Verifica si un campo del formulario es inválido y ha sido tocado o modificado.
+   * @param campo Nombre del campo a verificar.
+   * @returns true si el campo es inválido y ha sido tocado o modificado, false en caso contrario.
    */
   esCampoInvalido(campo: string): boolean {
     const control = this.sucursalesForm.get(campo);
@@ -85,11 +87,6 @@ export class MantenedorSucursales implements OnInit {
   mostrarAlerta(mensaje: string, tipo: 'success' | 'danger'): void {
     this.mensajeAlerta = mensaje;
     this.tipoAlerta = tipo;
-    
-    // El mensaje desaparece solo después de 5 segundos
-    setTimeout(() => {
-      this.mensajeAlerta = null;
-    }, 5000);
   }
 
   /**
@@ -121,7 +118,6 @@ export class MantenedorSucursales implements OnInit {
     }
 
     if (this.modoEdicion && this.idEditando !== null) {
-      // EDITAR
       const sucursalModificada: Sucursales = { id: this.idEditando, ...formValues };
       this.sucursalesService.editarSucursal(sucursalModificada).subscribe({
         next: (dataActualizada) => {
@@ -132,7 +128,6 @@ export class MantenedorSucursales implements OnInit {
         error: () => this.mostrarAlerta('No editado: Ocurrió un error al intentar modificar.', 'danger')
       });
     } else {
-      // AGREGAR
       this.sucursalesService.agregarSucursal(formValues).subscribe({
         next: (dataActualizada) => {
           this.sucursales = dataActualizada;

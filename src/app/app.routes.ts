@@ -15,6 +15,7 @@ import { AdminEstadisticaVenta } from './pages/estadisticas-arriendos/estadistic
 import { SucursalesComponent } from './pages/sucursales/sucursales';
 import { Testimonio } from './pages/testimonios/testimonios';
 import { MantenedorSucursales } from './pages/mantenedor-sucursales/mantenedor-sucursales';
+import { MantenedorVehiculos } from './pages/mantenedor-vehiculos/mantenedor-vehiculos';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -32,5 +33,6 @@ export const routes: Routes = [
     { path: 'sucursales', component: SucursalesComponent},
     { path: 'testimonios', component: Testimonio},
     { path: 'mantenedor-sucursales', component: MantenedorSucursales, canActivate: [adminGuard] },
+    { path: 'mantenedor-vehiculos', component: MantenedorVehiculos, canActivate: [adminGuard] },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

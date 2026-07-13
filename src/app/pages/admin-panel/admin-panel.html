@@ -18,11 +18,6 @@
                             (click)="cambiarVista('reservas')">
                         <i class="fa-solid fa-calendar-days me-2"></i>Reservas Realizadas
                     </button>
-                    <button class="btn w-100 text-start fw-semibold py-2" 
-                            [ngClass]="vistaActual === 'vehiculos' ? 'btn-primary' : 'btn-light'"
-                            (click)="cambiarVista('vehiculos')">
-                        <i class="fa-solid fa-car me-2"></i>Vehículos en Flota
-                    </button>
                 </div>
             </div>
         </div>
@@ -40,11 +35,6 @@
                 [listaVehiculos]="vehiculos"
                 (onEstadoCambiado)="actualizarEstadoReserva($event)">
             </app-reservas-tabla>
-
-            <app-vehiculos-tabla 
-                *ngIf="vistaActual === 'vehiculos'" 
-                [listaVehiculos]="vehiculos">
-            </app-vehiculos-tabla>
 
         </div>
     </div>

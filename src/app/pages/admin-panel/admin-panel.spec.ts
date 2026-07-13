@@ -7,7 +7,7 @@ import { Reserva } from '../../models/modelos';
 import { AdminPanel } from './admin-panel';
 import { AuthService } from '../../services/auth.services';
 import { ReservaService } from '../../services/reservas.services';
-import { VehiculoService } from '../../services/vehiculos.services';
+import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 
 /**
  * @description
@@ -49,8 +49,8 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
   };
 
   const mockVehiculoService = {
-    getVehiculos: vi.fn(() => mockVehiculos),
-    saveVehiculos: vi.fn() // Espía para ver si el Padre guarda la disponibilidad del auto
+    getVehiculo: vi.fn(() => of(mockVehiculos)),
+    updateVehiculo: vi.fn((vehiculo) => of(vehiculo))
   };
 
   const mockRouter = {
@@ -68,7 +68,7 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: ReservaService, useValue: mockReservaService },
-        { provide: VehiculoService, useValue: mockVehiculoService },
+        { provide: VehiculosJsonServerService, useValue: mockVehiculoService },
         { provide: Router, useValue: mockRouter },
         { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
@@ -101,11 +101,11 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
   });
 
   /** @test Integración Padre-Hijo: Liberación de vehículos */
-  it('Debe actualizar estado a Completada, liberar el vehículo y guardar cambios', () => {
+  it('Debe actualizar estado a Completada, liberar el vehículo y guardar cambios', async () => {
     const reservaSimulada = mockReservas[0];
     
     // Act: Simulamos que el componente hijo emitió el evento de cambio
-    component.actualizarEstadoReserva({
+    await component.actualizarEstadoReserva({
       reserva: reservaSimulada, 
       nuevoEstado: 'Completada'
     });
@@ -118,7 +118,10 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
     expect(vehiculoModificado?.disponible).toBe(true);
 
     // Assert 3: Se debieron llamar a los servicios de guardado para la persistencia
-    expect(mockVehiculoService.saveVehiculos).toHaveBeenCalledWith(component.vehiculos);
+    expect(mockVehiculoService.updateVehiculo).toHaveBeenCalledWith(expect.objectContaining({
+      id: 10,
+      disponible: true
+    }));
     expect(mockReservaService.guardarReservas).toHaveBeenCalledWith(component.reservas);
   });
 });

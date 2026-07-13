@@ -1,21 +1,23 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.services';
-import { VehiculoService } from '../../services/vehiculos.services';
 import { ReservaService } from '../../services/reservas.services';
 import { Vehiculo } from '../../models/modelos';
 import { ValidacionService } from '../../services/validacion.services';
+
+// Importamos el nuevo servicio de JSON Server en lugar de VehiculoService
+import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 
 /**
  * @description
  * Componente encargado de gestionar el flujo de arriendo de un vehículo.
  * * Funcionalidades principales:
- * - Carga dinámicamente los datos del vehículo seleccionado mediante el parámetro de la URL.
+ * - Carga dinámicamente los datos del vehículo seleccionado desde JSON Server.
  * - Implementa un formulario reactivo para capturar las fechas de inicio y término del arriendo.
  * - Calcula en tiempo real la cantidad de días de reserva y el costo total a pagar.
- * - Procesa la transacción, registra la reserva, descuenta el vehículo del inventario y redirige al usuario.
+ * - Procesa la transacción, registra la reserva, descuenta el vehículo del inventario en el servidor y redirige al usuario.
  */
 @Component({
   selector: 'app-reservar-auto',
@@ -29,6 +31,9 @@ export class ReservarAuto implements OnInit {
   /** Objeto que almacena los detalles del vehículo actualmente en proceso de reserva. */
   vehiculo: Vehiculo | undefined;
   
+  // Agregamos estado de carga para la vista
+  cargando: boolean = true;
+  
   /** Cantidad calculada de días totales que durará el arriendo. */
   diasReserva: number = 0;
   /** Monto total a pagar calculado en base al precio diario del vehículo y los días de reserva. */
@@ -38,14 +43,17 @@ export class ReservarAuto implements OnInit {
 
   /** Formulario reactivo que controla las fechas de la reserva. */
   reservaForm!: FormGroup;
+  
   /** Servicio inyectado para la construcción ágil del formulario. */
   private fb = inject(FormBuilder);
   /** Servicio de validaciones personalizadas de reglas de negocio. */
   private ValidacionService = inject(ValidacionService);
+  /** Nuevo servicio asíncrono para consumir JSON Server */
+  private vehiculosService = inject(VehiculosJsonServerService);
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(
     private authService: AuthService,
-    private vehiculoService: VehiculoService,
     private reservaService: ReservaService,
     private route: ActivatedRoute,
     private router: Router
@@ -53,13 +61,18 @@ export class ReservarAuto implements OnInit {
 
   /**
    * Ciclo de vida inicial del componente.
-   * 1. Bloquea ejecución en SSR.
-   * 2. Protege la ruta verificando que exista una sesión activa.
-   * 3. Establece la fecha mínima de reserva al día actual.
-   * 4. Inicializa el formulario reactivo con validaciones cruzadas.
-   * 5. Recupera el ID del vehículo desde la URL y carga sus datos.
+   * 1. Protege la ruta verificando que exista una sesión activa.
+   * 2. Establece la fecha mínima de reserva al día actual.
+   * 3. Inicializa el formulario reactivo con validaciones cruzadas.
+   * 4. Recupera el ID del vehículo desde la URL y hace la petición asíncrona para cargar sus datos.
    */
   ngOnInit(): void {
+    // Si el usuario no está logueado, lo mandamos al login de inmediato
+    if (!this.authService.estaLogueado()) {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+      return;
+    }
+
     const hoy = new Date();
     this.fechaMinima = hoy.toISOString().split('T')[0];
 
@@ -76,31 +89,43 @@ export class ReservarAuto implements OnInit {
       this.calcularTotal();
     });
 
-    // Si el vehículo no existe o ya está arrendado, devolvemos al usuario al catálogo
-    if (!this.authService.estaLogueado()) {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
-      return;
-    }
-
     const idParam = this.route.snapshot.paramMap.get('id');
     
     if (idParam) {
-      this.vehiculo = this.vehiculoService.getVehiculosPorId(idParam);
-      if (!this.vehiculo) {
-        this.router.navigate(['/ver-autos']);
-      }
+      this.cargarVehiculo(idParam);
     } else {
       this.router.navigate(['/ver-autos']);
     }
   }
 
   /**
+   * Obtiene los datos del vehículo desde el servidor de forma asíncrona
+   */
+  private cargarVehiculo(id: string): void {
+    this.cargando = true;
+    
+    // Obtenemos el listado de vehículos y buscamos el que coincida con la ID
+    this.vehiculosService.getVehiculo().subscribe({
+      next: (vehiculos) => {
+        this.vehiculo = vehiculos.find(v => v.id.toString() === id);
+        
+        if (!this.vehiculo || !this.vehiculo.disponible) {
+          // Si no existe o no está disponible, lo sacamos de aquí
+          this.router.navigate(['/ver-autos']);
+        } else {
+          this.cargando = false;
+          this.cdr.detectChanges(); // Actualizamos la vista
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar el vehículo:', err);
+        this.router.navigate(['/ver-autos']);
+      }
+    });
+  }
+
+  /**
    * Ejecuta el cálculo matemático para determinar la duración y costo de la reserva.
-   * * Lógica:
-   * 1. Convierte las fechas a milisegundos y calcula su diferencia.
-   * 2. Transforma la diferencia a días (1000ms * 60s * 60m * 24h).
-   * 3. Aplica un mínimo de 1 día de cobro si el cliente arrienda y devuelve el mismo día.
-   * 4. Multiplica los días por el precio diario del vehículo.
    */
   calcularTotal(): void {
     const fechaDesde = this.reservaForm.get('fechaDesde')?.value;
@@ -116,10 +141,8 @@ export class ReservarAuto implements OnInit {
     const fin = new Date(fechaHasta);
     const diferenciaML = fin.getTime() - inicio.getTime();
 
-    // Math.ceil para redondear siempre hacia arriba en caso de fracciones de día
     this.diasReserva = Math.ceil(diferenciaML / (1000 * 60 * 60 * 24));
 
-    // Si se arrienda y devuelve el mismo día, se cobra al menos 1 día
     if (this.diasReserva <= 0) {
       this.diasReserva = 1;
     }
@@ -129,16 +152,11 @@ export class ReservarAuto implements OnInit {
 
   /**
    * Finaliza y persiste la transacción de arriendo.
-   * 1. Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.
-   * 2. Crea el objeto con el payload de la nueva reserva.
-   * 3. Guarda la reserva mediante el `ReservaService`.
-   * 4. Actualiza la disponibilidad del auto (`disponible: false`) usando el `VehiculoService`.
-   * 5. Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).
+   * Modificado para interactuar con JSON Server.
    */
   confirmarReserva(): void {
     if (this.reservaForm.valid && this.diasReserva > 0 && this.vehiculo) {
       
-      //1. Valida el estado del formulario y asocia la sesión al usuario registrado en la base de datos.
       const sesion = this.authService.obtenerSesion();
       if (!sesion) return;
 
@@ -150,7 +168,6 @@ export class ReservarAuto implements OnInit {
         return;
       }
 
-      //2. Crea el objeto con el payload de la nueva reserva.
       const fechaDesde = this.reservaForm.get('fechaDesde')?.value;
       const fechaHasta = this.reservaForm.get('fechaHasta')?.value;
 
@@ -164,15 +181,28 @@ export class ReservarAuto implements OnInit {
         estado: 'Confirmada'
       };
 
-      // 3. Guarda la reserva mediante el `ReservaService`.
-      this.reservaService.crearReserva(nuevaReserva);
+      // Clonamos el vehículo actual y le cambiamos la disponibilidad a false
+      const vehiculoActualizado: Vehiculo = { 
+        ...this.vehiculo, 
+        disponible: false 
+      };
 
-      // 4. Actualiza la disponibilidad del auto (`disponible: false`) usando el `VehiculoService`.
-      this.vehiculoService.actualizarDisponibilidad(this.vehiculo.id, false);
-
-      // 5. Emite una alerta de éxito y redirige al panel de usuario (Mi Perfil).
-      alert("¡Reserva confirmada con éxito!");
-      this.router.navigate(['/mis-reservas']);
+      // 1. Primero actualizamos el vehículo en JSON Server de forma asíncrona
+      this.vehiculosService.updateVehiculo(vehiculoActualizado).subscribe({
+        next: () => {
+          // 2. Si el vehículo se actualizó con éxito, guardamos la reserva
+          this.reservaService.crearReserva(nuevaReserva);
+          
+          alert("¡Reserva confirmada con éxito!");
+          this.router.navigate(['/mis-reservas']);
+        },
+        error: (err) => {
+          console.error("Error actualizando la disponibilidad:", err);
+          alert("Ocurrió un error al procesar tu reserva con el servidor. Intenta nuevamente.");
+        }
+      });
+    } else {
+      this.reservaForm.markAllAsTouched();
     }
   }
 }

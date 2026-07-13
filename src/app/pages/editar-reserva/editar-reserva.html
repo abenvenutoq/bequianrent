@@ -16,9 +16,9 @@
                     <select class="form-select" formControlName="vehiculoId">
                         <option *ngFor="let v of vehiculos" 
                                 [value]="v.id" 
-                                [disabled]="!v.disponible && v.id !== reservaActual?.idVehiculo">
+                                [disabled]="!v.disponible && v.id !== reservaActual?.id">
                             ID: {{ v.id }} - {{ v.marca }} {{ v.modelo }} 
-                            <span *ngIf="!v.disponible && v.id !== reservaActual?.idVehiculo">(No Disponible)</span>
+                            <span *ngIf="!v.disponible && v.id !== reservaActual?.id">(No Disponible)</span>
                         </option>
                     </select>
                 </div>

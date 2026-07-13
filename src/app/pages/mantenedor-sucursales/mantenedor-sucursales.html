@@ -1,79 +1,89 @@
-<!-- ENCABEZADO ORIGINAL -->
 <div class="bg-primary text-white py-4 mb-4 text-center header-global">
-    <h2 class="fw-bold"><i class="fa-solid fa-shop-lock me-3"></i>Mantenedor Sucursales</h2>
+    <h2 class="fw-bold"><i class="fa-solid fa-shop-lock me-2"></i>Mantenedor Sucursales</h2>
     <p class="text-white">Panel mantenedor de sucursales Bequianrent</p>
 </div>
 
 <div class="container mb-5">
 
-    <div class="container mb-3 d-flex justify-content-end">
-        <button type="button" class="btn btn-warning text-dark fw-bold shadow-sm" (click)="restaurarDatosGP()">
+    <div class="container mb-4 d-flex justify-content-end px-0">
+        <button type="button" class="btn btn-warning text-dark fw-bold shadow-sm rounded-pill px-4" (click)="restaurarDatosGP()">
             <i class="fa-solid fa-rotate-left me-2"></i>Restaurar Datos desde Github Pages
         </button>
     </div>
     
-    <div class="card shadow-sm mb-5 border-0">
-        <div class="card-header bg-white border-bottom py-3">
+    <div class="card shadow-lg mb-5 border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-white border-bottom-0 py-3">
             <h5 class="mb-0 fw-bold text-primary">
+                <i class="fa-solid me-2" [ngClass]="modoEdicion ? 'fa-pen-to-square' : 'fa-plus'"></i>
                 {{ modoEdicion ? 'Editar Sucursal' : 'Agregar Nueva Sucursal' }}
             </h5>
         </div>
-        <div class="card-body bg-light">
+        <div class="card-body bg-light p-4">
             <form [formGroup]="sucursalesForm" (ngSubmit)="guardarSucursal()">
                 <div class="row g-3">
+                    
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold small">Nombre de Sucursal</label>
-                        <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Sucursal Centro"
-                               [ngClass]="{'is-invalid': esCampoInvalido('nombre')}">
-                        <div class="invalid-feedback" *ngIf="sucursalesForm.get('nombre')?.hasError('required')">El nombre es obligatorio.</div>
-                        <div class="invalid-feedback" *ngIf="sucursalesForm.get('nombre')?.hasError('minlength')">Debe tener al menos 3 caracteres.</div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="nombre" id="floatingNombre" placeholder="Ej: Sucursal Centro" [ngClass]="{'is-invalid': esCampoInvalido('nombre')}">
+                            <label for="floatingNombre">Nombre de Sucursal</label>
+                            <div class="invalid-feedback" *ngIf="sucursalesForm.get('nombre')?.hasError('required')">El nombre es obligatorio.</div>
+                            <div class="invalid-feedback" *ngIf="sucursalesForm.get('nombre')?.hasError('minlength')">Debe tener al menos 3 caracteres.</div>
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold small">Ciudad</label>
-                        <input type="text" class="form-control" formControlName="ciudad" placeholder="Ej: Santiago"
-                               [ngClass]="{'is-invalid': esCampoInvalido('ciudad')}">
-                        <div class="invalid-feedback">La ciudad es obligatoria.</div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="ciudad" id="floatingCiudad" placeholder="Ej: Santiago" [ngClass]="{'is-invalid': esCampoInvalido('ciudad')}">
+                            <label for="floatingCiudad">Ciudad</label>
+                            <div class="invalid-feedback">La ciudad es obligatoria.</div>
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold small">Dirección</label>
-                        <input type="text" class="form-control" formControlName="direccion" placeholder="Ej: Av. Providencia 123"
-                               [ngClass]="{'is-invalid': esCampoInvalido('direccion')}">
-                        <div class="invalid-feedback">La dirección es obligatoria.</div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="direccion" id="floatingDireccion" placeholder="Ej: Av. Providencia 123" [ngClass]="{'is-invalid': esCampoInvalido('direccion')}">
+                            <label for="floatingDireccion">Dirección</label>
+                            <div class="invalid-feedback">La dirección es obligatoria.</div>
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold small">Teléfono</label>
-                        <input type="text" class="form-control" formControlName="telefono" placeholder="Ej: +569 1234 5678"
-                               [ngClass]="{'is-invalid': esCampoInvalido('telefono')}">
-                        <div class="invalid-feedback">El teléfono es obligatorio.</div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="telefono" id="floatingTelefono" placeholder="Ej: +569 1234 5678" [ngClass]="{'is-invalid': esCampoInvalido('telefono')}">
+                            <label for="floatingTelefono">Teléfono</label>
+                            <div class="invalid-feedback">El teléfono es obligatorio.</div>
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold small">Jefe de Sucursal</label>
-                        <input type="text" class="form-control" formControlName="jefeSucursal" placeholder="Ej: Juan Pérez"
-                               [ngClass]="{'is-invalid': esCampoInvalido('jefeSucursal')}">
-                        <div class="invalid-feedback">El jefe de sucursal es obligatorio.</div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="jefeSucursal" id="floatingJefe" placeholder="Ej: Juan Pérez" [ngClass]="{'is-invalid': esCampoInvalido('jefeSucursal')}">
+                            <label for="floatingJefe">Jefe de Sucursal</label>
+                            <div class="invalid-feedback">El jefe de sucursal es obligatorio.</div>
+                        </div>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold small">Horario</label>
-                        <input type="text" class="form-control" formControlName="horario" placeholder="Ej: Lun-Vie 09:00 a 18:00"
-                               [ngClass]="{'is-invalid': esCampoInvalido('horario')}">
-                        <div class="invalid-feedback">El horario es obligatorio.</div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="horario" id="floatingHorario" placeholder="Ej: Lun-Vie 09:00 a 18:00" [ngClass]="{'is-invalid': esCampoInvalido('horario')}">
+                            <label for="floatingHorario">Horario</label>
+                            <div class="invalid-feedback">El horario es obligatorio.</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mt-4 d-flex gap-2 justify-content-end">
-                    <button type="button" class="btn btn-secondary px-4" (click)="cancelarEdicion()">
+                <div class="mt-4 d-flex gap-2 justify-content-end border-top pt-3">
+                    <button type="button" class="btn btn-outline-secondary px-4 fw-semibold rounded-pill" (click)="cancelarEdicion()">
                         {{ modoEdicion ? 'Cancelar' : 'Limpiar' }}
                     </button>
-                    <!-- Eliminé el [disabled] de este botón para que el usuario pueda presionarlo y ver de qué campos se olvidó -->
-                    <button type="submit" class="btn btn-primary px-4">
+                    <button type="submit" class="btn btn-primary px-4 fw-semibold rounded-pill">
                         <i class="fa-solid fa-floppy-disk me-2"></i>
                         {{ modoEdicion ? 'Modificar' : 'Guardar' }}
                     </button>
                 </div>
             </form>
 
-            <!-- MENSAJE DE RESULTADOS (AGREGAR/EDITAR) -->
-            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm" role="alert">
+            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm border-0 border-start border-4 border-{{tipoAlerta}}" role="alert">
                 <i class="fa-solid me-2" [ngClass]="tipoAlerta === 'success' ? 'fa-circle-check' : 'fa-triangle-exclamation'"></i>
                 <strong>{{ tipoAlerta === 'success' ? '¡Éxito!' : 'Atención:' }}</strong> {{ mensajeAlerta }}
             </div>
@@ -81,37 +91,39 @@
         </div>
     </div>
 
-    <!-- SECCIÓN TABLA -->
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
         <div class="card-body p-0 table-responsive">
-            <table class="table table-hover table-striped align-middle mb-0">
-                <thead class="table-dark">
+            <table class="table table-hover align-middle mb-0 text-center text-nowrap">
+                <thead class="table-light text-secondary">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Ciudad</th>
                         <th>Jefe Sucursal</th>
-                        <th class="text-center">Opciones</th>
+                        <th>Horario</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="border-top-0">
                     <tr *ngFor="let sucursal of sucursales">
-                        <td class="fw-bold">{{ sucursal.id }}</td>
-                        <td>{{ sucursal.nombre }}</td>
-                        <td>{{ sucursal.ciudad }}</td>
+                        <td class="text-muted fw-bold">#{{ sucursal.id }}</td>
+                        <td class="fw-bold text-dark">{{ sucursal.nombre }}</td>
+                        <td class="fw-bold text-success">{{ sucursal.ciudad }}</td>
                         <td>{{ sucursal.jefeSucursal }}</td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-outline-primary me-2" (click)="editarSucursal(sucursal)" title="Editar">
+                        <td>{{ sucursal.horario }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-light text-primary me-2 shadow-sm" (click)="editarSucursal(sucursal)" title="Editar">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
-                            <button class="btn btn-sm btn-outline-danger" (click)="eliminarSucursal(sucursal.id)" title="Eliminar">
+                            <button class="btn btn-sm btn-light text-danger shadow-sm" (click)="eliminarSucursal(sucursal.id)" title="Eliminar">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                     <tr *ngIf="sucursales.length === 0">
-                        <td colspan="5" class="text-center py-4 text-muted">
-                            No hay sucursales registradas.
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="fa-solid fa-store-slash display-4 mb-3 text-black-50"></i>
+                            <p class="fs-5 mb-0">No hay sucursales registradas.</p>
                         </td>
                     </tr>
                 </tbody>

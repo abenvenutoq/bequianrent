@@ -22,4 +22,5 @@ describe('ReservasTabla', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

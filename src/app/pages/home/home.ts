@@ -1,12 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { RouterLink } from "@angular/router";
-import { VehiculoService } from '../../services/vehiculos.services';
+import { Vehiculo } from '../../models/modelos';
+import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 
 /**
  * @description
  * Componente home o pagina inicial
- * muestra de manera aleatoria 3 vehiculos de localstorage
+ * Obtiene los vehículos desde la API y muestra 3 de manera aleatoria.
  */
 @Component({
   selector: 'app-home',
@@ -17,16 +18,33 @@ import { VehiculoService } from '../../services/vehiculos.services';
 })
 export class Home implements OnInit {
   
-  private vehiculos = inject(VehiculoService);
+  private vehiculos = inject(VehiculosJsonServerService);
+  private cdr = inject(ChangeDetectorRef); // Inyectamos el ChangeDetectorRef
 
-  vehiculosDestacados: any[] = [];
+  vehiculosDestacados: Vehiculo[] = [];
+  cargando = true;
+  errorCarga = false;
 
   ngOnInit(): void {
-
-    const todosLosAutos = this.vehiculos.getVehiculosDisp(true);
-    
-    const autosMezclados = [...todosLosAutos].sort(() => 0.5 - Math.random());
-    
-    this.vehiculosDestacados = autosMezclados.slice(0, 3);
+    this.vehiculos.getVehiculo().subscribe({
+      next: (todosLosAutos) => {
+        // 1. Filtramos solo los disponibles
+        const autosDisponibles = todosLosAutos.filter(auto => auto.disponible);
+        // 2. Los mezclamos aleatoriamente
+        const autosMezclados = [...autosDisponibles].sort(() => 0.5 - Math.random());
+        // 3. Tomamos los primeros 3
+        this.vehiculosDestacados = autosMezclados.slice(0, 3);
+        
+        // 4. Actualizamos el estado y la vista
+        this.cargando = false;
+        this.cdr.detectChanges(); // Le avisamos a Angular que ya tenemos los autos
+      },
+      error: () => {
+        this.vehiculosDestacados = [];
+        this.errorCarga = true;
+        this.cargando = false;
+        this.cdr.detectChanges(); // Le avisamos a Angular que muestre el error
+      }
+    });
   }
 }

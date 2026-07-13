@@ -1,0 +1,197 @@
+<div class="bg-primary text-white py-4 mb-4 text-center header-global">
+    <h2 class="fw-bold"><i class="fa-solid fa-car-side me-2"></i>Mantenedor Vehículos</h2>
+    <p class="text-white">Panel mantenedor de vehículos Bequianrent</p>
+</div>
+
+<div class="container mb-5">
+    
+    <div class="card shadow-lg mb-5 border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-white text-white border-bottom-0 py-3">
+            <h5 class="mb-0 fw-bold text-primary">
+                <i class="fa-solid me-2" [ngClass]="modoEdicion ? 'fa-pen-to-square' : 'fa-plus'"></i>
+                {{ modoEdicion ? 'Modificar Datos del Vehículo' : 'Ingresar Nuevo Vehículo' }}
+            </h5>
+        </div>
+        <div class="card-body bg-light p-4">
+            <form [formGroup]="vehiculosForm" (ngSubmit)="guardarVehiculo()">
+                <div class="row g-3">
+                    
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="marca" id="floatingMarca" placeholder="Toyota" [ngClass]="{'is-invalid': esCampoInvalido('marca')}">
+                            <label for="floatingMarca">Marca</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="modelo" id="floatingModelo" placeholder="Yaris" [ngClass]="{'is-invalid': esCampoInvalido('modelo')}">
+                            <label for="floatingModelo">Modelo</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <select class="form-select" formControlName="tipo" id="floatingTipo" [ngClass]="{'is-invalid': esCampoInvalido('tipo')}">
+                                <option value="" disabled selected>Seleccione...</option>
+                                <option value="Sedán">Sedán</option>
+                                <option value="Hatchback">Hatchback</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Camioneta">Camioneta</option>
+                            </select>
+                            <label for="floatingTipo">Categoría (Tipo)</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" formControlName="anio" id="floatingAnio" placeholder="2024" [ngClass]="{'is-invalid': esCampoInvalido('anio')}">
+                            <label for="floatingAnio">Año</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <select class="form-select" formControlName="transmision" id="floatingTransmision" [ngClass]="{'is-invalid': esCampoInvalido('transmision')}">
+                                <option value="" disabled selected>Seleccione...</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Automática">Automática</option>
+                            </select>
+                            <label for="floatingTransmision">Transmisión</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" formControlName="pasajeros" id="floatingPasajeros" placeholder="5" [ngClass]="{'is-invalid': esCampoInvalido('pasajeros')}">
+                            <label for="floatingPasajeros">Pasajeros</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" formControlName="rendimiento" id="floatingRendimiento" placeholder="15 km/l" [ngClass]="{'is-invalid': esCampoInvalido('rendimiento')}">
+                            <label for="floatingRendimiento">Rendimiento</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" formControlName="precio" id="floatingPrecio" placeholder="25000" [ngClass]="{'is-invalid': esCampoInvalido('precio')}">
+                            <label for="floatingPrecio">Precio Diario ($)</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <select class="form-select" formControlName="disponible" id="floatingDisponible" [ngClass]="{'is-invalid': esCampoInvalido('disponible')}">
+                                <option [ngValue]="true" class="text-success">Sí, Disponible</option>
+                                <option [ngValue]="false" class="text-danger">No, Ocupado</option>
+                            </select>
+                            <label for="floatingDisponible">Disponibilidad</label>
+                            <div class="invalid-feedback">Requerido.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="url" class="form-control" formControlName="imagen" id="floatingImagen" placeholder="https://..." [ngClass]="{'is-invalid': esCampoInvalido('imagen')}">
+                            <label for="floatingImagen">URL de la Fotografía</label>
+                            <div class="invalid-feedback">La ruta de la imagen es obligatoria.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" formControlName="descripcion" id="floatingDescripcion" style="height: 100px" placeholder="Reseña..." [ngClass]="{'is-invalid': esCampoInvalido('descripcion')}"></textarea>
+                            <label for="floatingDescripcion">Descripción o reseña del vehículo</label>
+                            <div class="invalid-feedback">La descripción es obligatoria.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex gap-2 justify-content-end border-top pt-3">
+                    <button type="button" class="btn btn-outline-secondary px-4 fw-semibold rounded-pill" (click)="cancelarEdicion()">
+                        {{ modoEdicion ? 'Cancelar' : 'Limpiar' }}
+                    </button>
+                    <button type="submit" class="btn btn-primary px-4 fw-semibold rounded-pill">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        {{ modoEdicion ? 'Actualizar Vehículo' : 'Registrar Vehículo' }}
+                    </button>
+                </div>
+            </form>
+
+            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm border-0 border-start border-4 border-{{tipoAlerta}}" role="alert">
+                <i class="fa-solid me-2" [ngClass]="tipoAlerta === 'success' ? 'fa-circle-check' : 'fa-triangle-exclamation'"></i>
+                <strong>{{ tipoAlerta === 'success' ? '¡Listo!' : 'Atención:' }}</strong> {{ mensajeAlerta }}
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+        <div class="card-body p-0 table-responsive">
+            <table class="table table-hover align-middle mb-0 text-center">
+                <thead class="table-light text-secondary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Marca / Modelo</th>
+                        <th>Categoría</th>
+                        <th>Año</th>
+                        <th>Precio / Día</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="border-top-0">
+                    <tr *ngFor="let vehiculo of vehiculos">
+                        <td class="text-muted fw-bold">#{{ vehiculo.id }}</td>
+                        <td><img [src]="vehiculo.imagen" alt="Auto" class="rounded me-2 object-fit-cover shadow-sm" style="width: 40px; height: 40px;" onerror="this.src='assets/img/default-car.png'"></td>
+                        <td class="fw-bold text-dark text-center">
+                            <div>
+                                <div>
+                                    {{ vehiculo.marca }}
+                                    <span class="text-muted fw-normal">{{ vehiculo.modelo }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        
+                        <td class="fw-bold text-dark">{{ vehiculo.tipo }}</td>
+                        <td>{{ vehiculo.anio }}</td>
+                        <td class="text-success fw-semibold">{{ vehiculo.precio | currency:'CLP':'$ ':'1.0-0' }}</td>
+                        
+                        <td>
+                            <span class="badge rounded-pill" 
+                                  [ngClass]="vehiculo.disponible ? 'bg-success' : 'bg-danger'">
+                                {{ vehiculo.disponible ? 'Disponible' : 'Ocupado' }}
+                            </span>
+                        </td>
+                        
+                        <td>
+                            <button class="btn btn-sm btn-light text-primary me-2 shadow-sm" (click)="editarVehiculo(vehiculo)" title="Editar">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light text-danger shadow-sm" (click)="eliminarVehiculo(vehiculo.id)" title="Eliminar">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="vehiculos.length === 0">
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <i class="fa-solid fa-car-tunnel display-4 mb-3 text-black-50"></i>
+                            <p class="fs-5 mb-0">No hay vehículos registrados en la flota.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -9,7 +9,7 @@ export const RESERVAS: Reserva[] = [
         fechaDesde: "2026-06-15",
         fechaHasta: "2026-06-22",
         total: 350000,
-        estado: "Confirmada"
+        estado: "Completada"
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ export const RESERVAS: Reserva[] = [
         fechaDesde: "2026-06-16",
         fechaHasta: "2026-06-23",
         total: 360000,
-        estado: "Confirmada"
+        estado: "Completada"
     },
     {
         id: 3,
@@ -29,7 +29,7 @@ export const RESERVAS: Reserva[] = [
         fechaDesde: "2026-06-17",
         fechaHasta: "2026-06-24",
         total: 340000,
-        estado: "Confirmada"
+        estado: "Completada"
     },
     {
         id: 4,
@@ -39,6 +39,6 @@ export const RESERVAS: Reserva[] = [
         fechaDesde: "2026-06-18",
         fechaHasta: "2026-06-25",
         total: 370000,
-        estado: "Confirmada"
+        estado: "Completada"
     }
 ]
