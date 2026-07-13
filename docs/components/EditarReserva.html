@@ -1,0 +1,1326 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bequianrent documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bequianrent documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  EditarReserva</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/editar-reserva/editar-reserva.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente dedicado a la edición de reservas existentes por parte del administrador.
+Permite reasignar vehículos, modificar fechas de arriendo y recalcula automáticamente
+el valor total a pagar basándose en la diferencia de días.</p>
+<ul>
+<li>@usageNotes</li>
+</ul>
+<ul>
+<li>Este componente está protegido por el Guard de administrador (<code>adminGuard</code>).</li>
+<li>Se encarga de gestionar la disponibilidad cruzada: si se cambia el vehículo de la reserva,
+libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li>
+</ul>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-editar-reserva</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./editar-reserva.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./editar-reserva.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
+                                <a href="#editarForm" >editarForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#fechaMinima" >fechaMinima</a>
+                            </li>
+                            <li>
+                                <a href="#reservaActual" >reservaActual</a>
+                            </li>
+                            <li>
+                                <a href="#reservaId" >reservaId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#reservaService" >reservaService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <a href="#totalCalculado" >totalCalculado</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#validacionService" >validacionService</a>
+                            </li>
+                            <li>
+                                <a href="#vehiculos" >vehiculos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#vehiculoService" >vehiculoService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#guardarCambios" >guardarCambios</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#recalcularTotal" >recalcularTotal</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarCambios"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>guardarCambios</b></span>
+                        <a href="#guardarCambios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>guardarCambios()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Procesa la solicitud final de guardado de los cambios de la reserva.</p>
+<ul>
+<li>Valida el formulario y la coherencia del precio.</li>
+<li>Intercambia los estados de disponibilidad si el administrador seleccionó un vehículo distinto.</li>
+<li>Actualiza el objeto de la reserva en el almacenamiento persistente.</li>
+<li>Redirige a la vista de &quot;Reservas Realizadas&quot; en el panel de administración.</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Iniciación del componente.</p>
+<ol>
+<li>Captura el ID de la reserva desde los parámetros de la ruta.</li>
+<li>Recupera la reserva correspondiente y los vehículos del sistema.</li>
+<li>Inicializa el formulario reactivo pre-rellenando los datos.</li>
+<li>Se suscribe a los cambios del formulario para disparar el recálculo matemático automático.</li>
+</ol>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recalcularTotal"></a>
+                    <span class="name">
+                        <span ><b>recalcularTotal</b></span>
+                        <a href="#recalcularTotal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>recalcularTotal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método encargado de realizar la matemática financiera de la reserva.</p>
+<ul>
+<li>Calcula la diferencia en días exactos entre <code>fechaDesde</code> y <code>fechaHasta</code>.</li>
+<li>Multiplica la cantidad de días por la tarifa diaria del vehículo seleccionado.</li>
+<li>Si las fechas son inválidas (ej. fecha de fin menor a la de inicio), el total se fija en 0.</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editarForm"></a>
+                    <span class="name">
+                        <span ><b>editarForm</b></span>
+                        <a href="#editarForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:47</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo principal que contiene los campos de la reserva.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:32</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creador de formularios reactivos inyectado para la gestión de campos.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaMinima"></a>
+                    <span class="name">
+                        <span ><b>fechaMinima</b></span>
+                        <a href="#fechaMinima"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:53</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena la fecha actual formateada para bloquear la selección de fechas pasadas en el HTML.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservaActual"></a>
+                    <span class="name">
+                        <span ><b>reservaActual</b></span>
+                        <a href="#reservaActual"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Reserva.html" target="_self" >Reserva | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:51</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Objeto que almacena los datos originales de la reserva antes de ser modificados.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservaId"></a>
+                    <span class="name">
+                        <span ><b>reservaId</b></span>
+                        <a href="#reservaId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | number</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identificador único de la reserva extraído de la URL.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservaService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>reservaService</b></span>
+                        <a href="#reservaService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReservaService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:38</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para la lectura y persistencia de reservas.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:34</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para obtener parámetros de la URL activa (ej. el ID de la reserva a editar).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:36</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de enrutamiento para redireccionar tras guardar o cancelar.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalCalculado"></a>
+                    <span class="name">
+                        <span ><b>totalCalculado</b></span>
+                        <a href="#totalCalculado"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Valor monetario calculado dinámicamente según las fechas ingresadas y el vehículo seleccionado.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validacionService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>validacionService</b></span>
+                        <a href="#validacionService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ValidacionService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio con utilidades de validación, usado para validar la coherencia de las fechas.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="vehiculos"></a>
+                    <span class="name">
+                        <span ><b>vehiculos</b></span>
+                        <a href="#vehiculos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Vehiculo.html" target="_self" >Vehiculo[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:56</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista completa de vehículos disponibles y no disponibles para nutrir el elemento select.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="vehiculoService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>vehiculoService</b></span>
+                        <a href="#vehiculoService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(VehiculosJsonServerService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:40</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio para la lectura y gestión del inventario de vehículos.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, ChangeDetectorRef } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute, Router, RouterLink } from &#x27;@angular/router&#x27;;
+import { firstValueFrom } from &#x27;rxjs&#x27;;
+
+import { ReservaService } from &#x27;../../services/reservas.services&#x27;;
+import { VehiculosJsonServerService } from &#x27;../../services/vehiculos-json-server.services&#x27;;
+import { Reserva, Vehiculo } from &#x27;../../models/modelos&#x27;;
+import { ValidacionService } from &#x27;../../services/validacion.services&#x27;;
+
+/**
+ * @description
+ * Componente dedicado a la edición de reservas existentes por parte del administrador.
+ * Permite reasignar vehículos, modificar fechas de arriendo y recalcula automáticamente
+ * el valor total a pagar basándose en la diferencia de días.
+ * * @usageNotes
+ * - Este componente está protegido por el Guard de administrador (&#x60;adminGuard&#x60;).
+ * - Se encarga de gestionar la disponibilidad cruzada: si se cambia el vehículo de la reserva,
+ * libera automáticamente el vehículo anterior y marca como ocupado el nuevo.
+ */
+@Component({
+  selector: &#x27;app-editar-reserva&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  templateUrl: &#x27;./editar-reserva.html&#x27;,
+  styleUrls: [&#x27;./editar-reserva.css&#x27;]
+})
+export class EditarReserva implements OnInit {
+  
+  /** Creador de formularios reactivos inyectado para la gestión de campos. */
+  private fb &#x3D; inject(FormBuilder);
+  /** Servicio para obtener parámetros de la URL activa (ej. el ID de la reserva a editar). */
+  private route &#x3D; inject(ActivatedRoute);
+  /** Servicio de enrutamiento para redireccionar tras guardar o cancelar. */
+  private router &#x3D; inject(Router);
+  /** Servicio para la lectura y persistencia de reservas. */
+  private reservaService &#x3D; inject(ReservaService);
+  /** Servicio para la lectura y gestión del inventario de vehículos. */
+  private vehiculoService &#x3D; inject(VehiculosJsonServerService);
+  /** Servicio con utilidades de validación, usado para validar la coherencia de las fechas. */
+  private validacionService &#x3D; inject(ValidacionService);
+
+  private cdr &#x3D; inject(ChangeDetectorRef);
+
+  /** Formulario reactivo principal que contiene los campos de la reserva. */
+  editarForm!: FormGroup;
+  /** Identificador único de la reserva extraído de la URL. */
+  reservaId!: string | number;
+  /** Objeto que almacena los datos originales de la reserva antes de ser modificados. */
+  reservaActual: Reserva | undefined;
+  /** Almacena la fecha actual formateada para bloquear la selección de fechas pasadas en el HTML. */
+  fechaMinima!: string;
+  
+  /** Lista completa de vehículos disponibles y no disponibles para nutrir el elemento select. */
+  vehiculos: Vehiculo[] &#x3D; [];
+  /** Valor monetario calculado dinámicamente según las fechas ingresadas y el vehículo seleccionado. */
+  totalCalculado: number &#x3D; 0;
+
+  /**
+   * Iniciación del componente.
+   * 1. Captura el ID de la reserva desde los parámetros de la ruta.
+   * 2. Recupera la reserva correspondiente y los vehículos del sistema.
+   * 3. Inicializa el formulario reactivo pre-rellenando los datos.
+   * 4. Se suscribe a los cambios del formulario para disparar el recálculo matemático automático.
+   */
+  ngOnInit(): void {
+    // Obtener el ID de la reserva desde la URL
+    this.reservaId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;)!;
+    const hoy &#x3D; new Date();
+    this.fechaMinima &#x3D; hoy.toISOString().split(&#x27;T&#x27;)[0];
+    
+    // Buscar la reserva
+    const todasReservas &#x3D; this.reservaService.obtenerReservas();
+    this.reservaActual &#x3D; todasReservas.find(r &#x3D;&gt; String(r.id) &#x3D;&#x3D;&#x3D; String(this.reservaId));
+
+    if (!this.reservaActual) {
+      alert(&#x27;Reserva no encontrada&#x27;);
+      this.router.navigate([&#x27;/admin-panel&#x27;]);
+      return;
+    }
+
+    // Obtener vehículos para el Select desde JSON Server
+    this.vehiculoService.getVehiculo().subscribe({
+      next: (vehiculos) &#x3D;&gt; {
+        this.vehiculos &#x3D; vehiculos;
+        this.cdr.detectChanges();
+      },
+      error: () &#x3D;&gt; {
+        this.vehiculos &#x3D; [];
+      }
+    });
+
+    // Inicializar formulario con los datos actuales
+    this.editarForm &#x3D; this.fb.group({
+      vehiculoId: [this.reservaActual.idVehiculo, Validators.required],
+      fechaDesde: [this.reservaActual.fechaDesde, Validators.required],
+      fechaHasta: [this.reservaActual.fechaHasta, Validators.required]
+    }, {
+        // Validación personalizada a nivel de grupo para asegurar que la fecha final sea lógica
+        validators: [this.validacionService.validarFechasReserva.bind(this.validacionService)]
+    });
+
+    this.totalCalculado &#x3D; this.reservaActual.total || 0;
+
+    // Escuchar cambios dinámicos en el formulario para recalcular el precio
+    this.editarForm.valueChanges.subscribe(() &#x3D;&gt; {
+      this.recalcularTotal();
+    });
+  }
+
+  /**
+   * Método encargado de realizar la matemática financiera de la reserva.
+   * * Calcula la diferencia en días exactos entre &#x60;fechaDesde&#x60; y &#x60;fechaHasta&#x60;.
+   * * Multiplica la cantidad de días por la tarifa diaria del vehículo seleccionado.
+   * * Si las fechas son inválidas (ej. fecha de fin menor a la de inicio), el total se fija en 0.
+   */
+  recalcularTotal(): void {
+    const { vehiculoId, fechaDesde, fechaHasta } &#x3D; this.editarForm.value;
+    if (!vehiculoId || !fechaDesde || !fechaHasta) return;
+
+    const autoSeleccionado &#x3D; this.vehiculos.find(v &#x3D;&gt; String(v.id) &#x3D;&#x3D;&#x3D; String(vehiculoId));
+    if (!autoSeleccionado) return;
+
+    const inicio &#x3D; new Date(fechaDesde);
+    const fin &#x3D; new Date(fechaHasta);
+    
+    // Si la fecha de fin es menor o igual a la de inicio, no calculamos
+    if (fin &lt;&#x3D; inicio) {
+        this.totalCalculado &#x3D; 0;
+        return;
+    }
+
+    const diffTime &#x3D; Math.abs(fin.getTime() - inicio.getTime());
+    const diffDays &#x3D; Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    // Asigna el total basándose en el precio del vehículo
+    this.totalCalculado &#x3D; diffDays * (autoSeleccionado.precio || 0);
+  }
+
+  /**
+   * Procesa la solicitud final de guardado de los cambios de la reserva.
+   * * Valida el formulario y la coherencia del precio.
+   * * Intercambia los estados de disponibilidad si el administrador seleccionó un vehículo distinto.
+   * * Actualiza el objeto de la reserva en el almacenamiento persistente.
+   * * Redirige a la vista de &quot;Reservas Realizadas&quot; en el panel de administración.
+   */
+  async guardarCambios(): Promise&lt;void&gt; {
+    if (this.editarForm.invalid || this.totalCalculado &lt;&#x3D; 0) return;
+
+    const { vehiculoId, fechaDesde, fechaHasta } &#x3D; this.editarForm.value;
+    const vehiculoIdNumerico &#x3D; Number(vehiculoId);
+
+    // 1. Lógica para actualizar estados de los vehículos si cambió de auto
+    if (String(this.reservaActual!.idVehiculo) !&#x3D;&#x3D; String(vehiculoIdNumerico)) {
+        
+        const autoAntiguo &#x3D; this.vehiculos.find(v &#x3D;&gt; String(v.id) &#x3D;&#x3D;&#x3D; String(this.reservaActual!.idVehiculo));
+        const autoNuevo &#x3D; this.vehiculos.find(v &#x3D;&gt; String(v.id) &#x3D;&#x3D;&#x3D; String(vehiculoIdNumerico));
+
+        if (autoAntiguo) autoAntiguo.disponible &#x3D; true;  // Liberamos el anterior
+        if (autoNuevo) autoNuevo.disponible &#x3D; false;     // Ocupamos el nuevo
+
+        try {
+          const actualizaciones: Promise&lt;unknown&gt;[] &#x3D; [];
+
+          if (autoAntiguo) {
+            actualizaciones.push(firstValueFrom(this.vehiculoService.updateVehiculo(autoAntiguo)));
+          }
+
+          if (autoNuevo) {
+            actualizaciones.push(firstValueFrom(this.vehiculoService.updateVehiculo(autoNuevo)));
+          }
+
+          await Promise.all(actualizaciones);
+        } catch {
+          if (autoAntiguo) autoAntiguo.disponible &#x3D; false;
+          if (autoNuevo) autoNuevo.disponible &#x3D; true;
+          alert(&#x27;No se pudieron actualizar los vehículos en el servidor.&#x27;);
+          return;
+        }
+    }
+
+    const todasReservas &#x3D; this.reservaService.obtenerReservas();
+    const index &#x3D; todasReservas.findIndex(r &#x3D;&gt; String(r.id) &#x3D;&#x3D;&#x3D; String(this.reservaId));
+    
+    if (index !&#x3D;&#x3D; -1) {
+        todasReservas[index].idVehiculo &#x3D; vehiculoIdNumerico;
+        todasReservas[index].fechaDesde &#x3D; fechaDesde;
+        todasReservas[index].fechaHasta &#x3D; fechaHasta;
+        todasReservas[index].total &#x3D; this.totalCalculado;
+        
+        this.reservaService.guardarReservas(todasReservas);
+        
+        alert(&#x27;Reserva modificada con éxito&#x27;);
+        this.router.navigate([&#x27;/admin-panel&#x27;], { queryParams: { vista: &#x27;reservas&#x27; } });
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-primary text-white py-4 mb-4 text-center header-global&quot;&gt;
+    &lt;h2 class&#x3D;&quot;fw-bold&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-users-gear me-2&quot;&gt;&lt;/i&gt;Panel Administración / Editar Reservas&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;text-white&quot;&gt;Panel de gestión y control de BequianRent&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;container my-5&quot;&gt;
+    &lt;div class&#x3D;&quot;card shadow-sm border-0&quot; style&#x3D;&quot;max-width: 600px; margin: 0 auto;&quot;&gt;
+        &lt;div class&#x3D;&quot;card-header bg-primary text-white py-3&quot;&gt;
+            &lt;h4 class&#x3D;&quot;mb-0 text-center&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-pen-to-square me-2&quot;&gt;&lt;/i&gt;Editar Reserva #{{ reservaId }}&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;card-body p-4&quot;&gt;
+            &lt;form [formGroup]&#x3D;&quot;editarForm&quot; (ngSubmit)&#x3D;&quot;guardarCambios()&quot;&gt;
+                
+                &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+                    &lt;label class&#x3D;&quot;form-label fw-bold&quot;&gt;Vehículo&lt;/label&gt;
+                    &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;vehiculoId&quot;&gt;
+                        &lt;option *ngFor&#x3D;&quot;let v of vehiculos&quot; 
+                                [value]&#x3D;&quot;v.id&quot; 
+                                [disabled]&#x3D;&quot;!v.disponible &amp;&amp; v.id !&#x3D;&#x3D; reservaActual?.id&quot;&gt;
+                            ID: {{ v.id }} - {{ v.marca }} {{ v.modelo }} 
+                            &lt;span *ngIf&#x3D;&quot;!v.disponible &amp;&amp; v.id !&#x3D;&#x3D; reservaActual?.id&quot;&gt;(No Disponible)&lt;/span&gt;
+                        &lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-6 mb-3&quot;&gt;
+                        &lt;label class&#x3D;&quot;form-label fw-bold&quot;&gt;Fecha Desde&lt;/label&gt;
+                        &lt;input type&#x3D;&quot;date&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;fechaDesde&quot; [min]&#x3D;&quot;fechaMinima&quot;&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-6 mb-3&quot;&gt;
+                        &lt;label class&#x3D;&quot;form-label fw-bold&quot;&gt;Fecha Hasta&lt;/label&gt;
+                        &lt;input type&#x3D;&quot;date&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;fechaHasta&quot; [min]&#x3D;&quot;fechaMinima&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;alert alert-info d-flex justify-content-between align-items-center mt-3&quot;&gt;
+                    &lt;span class&#x3D;&quot;fw-bold&quot;&gt;Nuevo Total Calculado:&lt;/span&gt;
+                    &lt;span class&#x3D;&quot;fs-5 fw-bold&quot;&gt;{{ totalCalculado | currency:&#x27;CLP&#x27;:&#x27;symbol-narrow&#x27; }}&lt;/span&gt;
+                &lt;/div&gt;
+                
+                &lt;div *ngIf&#x3D;&quot;totalCalculado &#x3D;&#x3D;&#x3D; 0 &amp;&amp; editarForm.touched&quot; class&#x3D;&quot;text-danger small mb-3&quot;&gt;
+                    La fecha final debe ser mayor a la fecha de inicio.
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;d-flex justify-content-end gap-2 mt-4&quot;&gt;
+                    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; [routerLink]&#x3D;&quot;[&#x27;/admin-panel&#x27;]&quot;&gt;Cancelar&lt;/button&gt;
+                    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary&quot; [disabled]&#x3D;&quot;editarForm.invalid || totalCalculado &lt;&#x3D; 0&quot;&gt;
+                        Guardar Cambios
+                    &lt;/button&gt;
+                &lt;/div&gt;
+
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./editar-reserva.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-users-gear me-2"></i>Panel Administración / Editar Reservas</h2>    <p class="text-white">Panel de gestión y control de BequianRent</p></div><div class="container my-5">    <div class="card shadow-sm border-0" style="max-width: 600px; margin: 0 auto;">        <div class="card-header bg-primary text-white py-3">            <h4 class="mb-0 text-center"><i class="fa-solid fa-pen-to-square me-2"></i>Editar Reserva #{{ reservaId }}</h4>        </div>        <div class="card-body p-4">            <form [formGroup]="editarForm" (ngSubmit)="guardarCambios()">                                <div class="mb-3">                    <label class="form-label fw-bold">Vehículo</label>                    <select class="form-select" formControlName="vehiculoId">                        <option *ngFor="let v of vehiculos"                                 [value]="v.id"                                 [disabled]="!v.disponible && v.id !== reservaActual?.id">                            ID: {{ v.id }} - {{ v.marca }} {{ v.modelo }}                             <span *ngIf="!v.disponible && v.id !== reservaActual?.id">(No Disponible)</span>                        </option>                    </select>                </div>                <div class="row">                    <div class="col-md-6 mb-3">                        <label class="form-label fw-bold">Fecha Desde</label>                        <input type="date" class="form-control" formControlName="fechaDesde" [min]="fechaMinima">                    </div>                    <div class="col-md-6 mb-3">                        <label class="form-label fw-bold">Fecha Hasta</label>                        <input type="date" class="form-control" formControlName="fechaHasta" [min]="fechaMinima">                    </div>                </div>                <div class="alert alert-info d-flex justify-content-between align-items-center mt-3">                    <span class="fw-bold">Nuevo Total Calculado:</span>                    <span class="fs-5 fw-bold">{{ totalCalculado | currency:\'CLP\':\'symbol-narrow\' }}</span>                </div>                                <div *ngIf="totalCalculado === 0 && editarForm.touched" class="text-danger small mb-3">                    La fecha final debe ser mayor a la fecha de inicio.                </div>                <div class="d-flex justify-content-end gap-2 mt-4">                    <button type="button" class="btn btn-secondary" [routerLink]="[\'/admin-panel\']">Cancelar</button>                    <button type="submit" class="btn btn-primary" [disabled]="editarForm.invalid || totalCalculado <= 0">                        Guardar Cambios                    </button>                </div>            </form>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'EditarReserva'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditarReserva.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

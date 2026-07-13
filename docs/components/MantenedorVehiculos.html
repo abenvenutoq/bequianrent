@@ -1,0 +1,1669 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>bequianrent documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">bequianrent documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MantenedorVehiculos</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que representa el mantenedor de vehículos.
+Permite agregar, editar y eliminar vehículos.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>mantenedor-vehiculos</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./mantenedor-vehiculos.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./mantenedor-vehiculos.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
+                                <a href="#idEditando" >idEditando</a>
+                            </li>
+                            <li>
+                                <a href="#mensajeAlerta" >mensajeAlerta</a>
+                            </li>
+                            <li>
+                                <a href="#modoEdicion" >modoEdicion</a>
+                            </li>
+                            <li>
+                                <a href="#tipoAlerta" >tipoAlerta</a>
+                            </li>
+                            <li>
+                                <a href="#vehiculos" >vehiculos</a>
+                            </li>
+                            <li>
+                                <a href="#vehiculosForm" >vehiculosForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cancelarEdicion" >cancelarEdicion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cargarDatos" >cargarDatos</a>
+                            </li>
+                            <li>
+                                <a href="#editarVehiculo" >editarVehiculo</a>
+                            </li>
+                            <li>
+                                <a href="#eliminarVehiculo" >eliminarVehiculo</a>
+                            </li>
+                            <li>
+                                <a href="#esCampoInvalido" >esCampoInvalido</a>
+                            </li>
+                            <li>
+                                <a href="#guardarVehiculo" >guardarVehiculo</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarAlerta" >mostrarAlerta</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, vehiculosService: <a href="../injectables/VehiculosJsonServerService.html" target="_self">VehiculosJsonServerService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:33</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente.
+Inicializa el formulario reactivo con sus validaciones.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>vehiculosService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/VehiculosJsonServerService.html" target="_self" >VehiculosJsonServerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelarEdicion"></a>
+                    <span class="name">
+                        <span ><b>cancelarEdicion</b></span>
+                        <a href="#cancelarEdicion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelarEdicion(limpiarAlertas: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cancela el modo de edición y resetea el formulario.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>limpiarAlertas</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Determina si se deben borrar las alertas en pantalla (por defecto: true).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarDatos"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cargarDatos</b></span>
+                        <a href="#cargarDatos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cargarDatos()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga los datos de los vehículos desde el servicio y los asigna a la propiedad <code>vehiculos</code>.
+Maneja errores de conexión mostrando un mensaje de alerta.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editarVehiculo"></a>
+                    <span class="name">
+                        <span ><b>editarVehiculo</b></span>
+                        <a href="#editarVehiculo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editarVehiculo(vehiculo: <a href="../interfaces/Vehiculo.html" target="_self">Vehiculo</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Prepara el formulario para editar un vehículo existente.
+Carga los datos del vehículo seleccionado en el formulario y activa el modo de edición.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>vehiculo</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Vehiculo.html" target="_self" >Vehiculo</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>El vehículo que se desea editar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarVehiculo"></a>
+                    <span class="name">
+                        <span ><b>eliminarVehiculo</b></span>
+                        <a href="#eliminarVehiculo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eliminarVehiculo(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un vehículo existente después de confirmar la acción con el usuario.
+Actualiza la lista de vehículos y muestra un mensaje de alerta según el resultado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>El ID del vehículo que se desea eliminar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="esCampoInvalido"></a>
+                    <span class="name">
+                        <span ><b>esCampoInvalido</b></span>
+                        <a href="#esCampoInvalido"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>esCampoInvalido(campo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Verifica si un campo del formulario es inválido y ha sido tocado o modificado.
+Esto se utiliza para mostrar mensajes de error de validación en la interfaz.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>campo</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>El nombre del campo a verificar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p><code>true</code> si el campo es inválido y ha sido tocado o modificado, <code>false</code> en caso contrario.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarVehiculo"></a>
+                    <span class="name">
+                        <span ><b>guardarVehiculo</b></span>
+                        <a href="#guardarVehiculo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardarVehiculo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Guarda un vehículo nuevo o actualiza uno existente según el estado de <code>modoEdicion</code>.
+Valida el formulario antes de enviar los datos al servicio.
+Muestra mensajes de alerta según el resultado de la operación.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarAlerta"></a>
+                    <span class="name">
+                        <span ><b>mostrarAlerta</b></span>
+                        <a href="#mostrarAlerta"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mostrarAlerta(mensaje: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, tipo: "success" | "danger" | "warning")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Muestra un mensaje de alerta en la interfaz durante 3 segundos.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>mensaje</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>El mensaje a mostrar.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>tipo</td>
+                                            <td>
+                                                        <code>&quot;success&quot; | &quot;danger&quot; | &quot;warning&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>El tipo de alerta, puede ser &#39;success&#39;, &#39;warning&#39; o &#39;danger&#39;.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="idEditando"></a>
+                    <span class="name">
+                        <span ><b>idEditando</b></span>
+                        <a href="#idEditando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mensajeAlerta"></a>
+                    <span class="name">
+                        <span ><b>mensajeAlerta</b></span>
+                        <a href="#mensajeAlerta"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modoEdicion"></a>
+                    <span class="name">
+                        <span ><b>modoEdicion</b></span>
+                        <a href="#modoEdicion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoAlerta"></a>
+                    <span class="name">
+                        <span ><b>tipoAlerta</b></span>
+                        <a href="#tipoAlerta"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;success&quot; | &quot;danger&quot; | &quot;warning&quot; | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="vehiculos"></a>
+                    <span class="name">
+                        <span ><b>vehiculos</b></span>
+                        <a href="#vehiculos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Vehiculo.html" target="_self" >Vehiculo[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="vehiculosForm"></a>
+                    <span class="name">
+                        <span ><b>vehiculosForm</b></span>
+                        <a href="#vehiculosForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:26</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo para manejar los datos de los vehículos.
+Incluye validaciones para cada campo.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ChangeDetectorRef, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { VehiculosJsonServerService } from &#x27;../../services/vehiculos-json-server.services&#x27;;
+import { Vehiculo } from &#x27;../../models/modelos&#x27;;
+
+/**
+ * @description
+ * Componente que representa el mantenedor de vehículos.
+ * Permite agregar, editar y eliminar vehículos.
+ */
+@Component({
+  selector: &#x27;mantenedor-vehiculos&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: &#x27;./mantenedor-vehiculos.html&#x27;,
+  styleUrls: [&#x27;./mantenedor-vehiculos.css&#x27;]
+})
+export class MantenedorVehiculos implements OnInit {
+  
+  /**
+   * @description
+   * Formulario reactivo para manejar los datos de los vehículos.
+   * Incluye validaciones para cada campo.
+   */
+  vehiculosForm: FormGroup;
+  vehiculos: Vehiculo[] &#x3D; [];
+  modoEdicion &#x3D; false;
+  idEditando: number | null &#x3D; null;
+  mensajeAlerta: string | null &#x3D; null;
+  tipoAlerta: &#x27;success&#x27; | &#x27;danger&#x27; | &#x27;warning&#x27; | null &#x3D; null; // Agregamos &#x27;warning&#x27; para validaciones
+
+  private cdr &#x3D; inject(ChangeDetectorRef);
+
+  /**
+   * @description
+   * Constructor del componente.
+   * Inicializa el formulario reactivo con sus validaciones.
+   */
+  constructor(
+    private fb: FormBuilder,
+    private vehiculosService: VehiculosJsonServerService
+  ) {
+    this.vehiculosForm &#x3D; this.fb.group({
+      marca: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+      modelo: [&#x27;&#x27;, Validators.required],
+      tipo: [&#x27;&#x27;, Validators.required],
+      anio: [&#x27;&#x27;, [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
+      precio: [&#x27;&#x27;, [Validators.required, Validators.min(0)]],
+      disponible: [true, Validators.required],
+      transmision: [&#x27;&#x27;, Validators.required],
+      pasajeros: [&#x27;&#x27;, [Validators.required, Validators.min(1)]],
+      rendimiento: [&#x27;&#x27;, Validators.required],
+      imagen: [&#x27;&#x27;, Validators.required],
+      descripcion: [&#x27;&#x27;, Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+  /**
+   * @description
+   * Carga los datos de los vehículos desde el servicio y los asigna a la propiedad &#x60;vehiculos&#x60;.
+   * Maneja errores de conexión mostrando un mensaje de alerta.
+   * @returns {void}
+   */
+  private cargarDatos(): void {
+    this.vehiculosService.getVehiculo().subscribe({
+      next: (vehiculos) &#x3D;&gt; {
+        this.vehiculos &#x3D; vehiculos;
+        this.cdr.markForCheck();
+      },
+      error: (err) &#x3D;&gt; {
+        this.mostrarAlerta(&#x27;Error al conectar con el servidor para cargar los vehículos.&#x27;, &#x27;danger&#x27;);
+      }
+    });
+  }
+
+  /**
+   * @description
+   * Verifica si un campo del formulario es inválido y ha sido tocado o modificado.
+   * Esto se utiliza para mostrar mensajes de error de validación en la interfaz.
+   * @param campo El nombre del campo a verificar.
+   * @returns {boolean} &#x60;true&#x60; si el campo es inválido y ha sido tocado o modificado, &#x60;false&#x60; en caso contrario.
+   */
+  esCampoInvalido(campo: string): boolean {
+    const control &#x3D; this.vehiculosForm.get(campo);
+    return !!(control &amp;&amp; control.invalid &amp;&amp; (control.dirty || control.touched));
+  }
+
+  /**
+   * @description
+   * Muestra un mensaje de alerta en la interfaz durante 3 segundos.
+   * @param mensaje El mensaje a mostrar.
+   * @param tipo El tipo de alerta, puede ser &#x27;success&#x27;, &#x27;warning&#x27; o &#x27;danger&#x27;.
+   * @returns {void}
+   */
+  mostrarAlerta(mensaje: string, tipo: &#x27;success&#x27; | &#x27;danger&#x27; | &#x27;warning&#x27;): void {
+    this.mensajeAlerta &#x3D; mensaje;
+    this.tipoAlerta &#x3D; tipo;
+    this.cdr.detectChanges(); // Forzamos la actualización de la vista de inmediato
+  }
+
+  /**
+   * @description
+   * Guarda un vehículo nuevo o actualiza uno existente según el estado de &#x60;modoEdicion&#x60;.
+   * Valida el formulario antes de enviar los datos al servicio.
+   * Muestra mensajes de alerta según el resultado de la operación.
+   * @returns {void}
+   */
+  guardarVehiculo(): void {
+    // 1. Validamos el formulario y marcamos los campos para que se pinten de rojo
+    if (this.vehiculosForm.invalid) {
+      this.vehiculosForm.markAllAsTouched(); 
+      this.mostrarAlerta(&#x27;Por favor, completa correctamente los campos marcados en rojo.&#x27;, &#x27;warning&#x27;);
+      return;
+    }
+
+    const vehiculoData &#x3D; this.vehiculosForm.value as Omit&lt;Vehiculo, &#x27;id&#x27;&gt;;
+
+    // 2. Lógica de edición
+    if (this.modoEdicion &amp;&amp; this.idEditando !&#x3D;&#x3D; null) {
+      const vehiculoActualizado: Vehiculo &#x3D; { id: this.idEditando, ...vehiculoData };
+      
+      this.vehiculosService.updateVehiculo(vehiculoActualizado).subscribe({
+        next: (vehiculo) &#x3D;&gt; {
+          const index &#x3D; this.vehiculos.findIndex(v &#x3D;&gt; v.id &#x3D;&#x3D;&#x3D; vehiculo.id);
+          if (index !&#x3D;&#x3D; -1) {
+            this.vehiculos[index] &#x3D; vehiculo;
+          }
+          // IMPORTANTE: Primero cancelamos la edición (reseteamos el form) y LUEGO mostramos la alerta
+          this.cancelarEdicion(false); 
+          this.mostrarAlerta(&#x27;Vehículo actualizado exitosamente.&#x27;, &#x27;success&#x27;);
+        },
+        error: () &#x3D;&gt; {
+          this.mostrarAlerta(&#x27;Error al actualizar el vehículo en el servidor.&#x27;, &#x27;danger&#x27;);
+        }
+      });
+    } 
+    // 3. Lógica de creación
+    else {
+      this.vehiculosService.addVehiculo(vehiculoData).subscribe({
+        next: (vehiculo) &#x3D;&gt; {
+          this.vehiculos.push(vehiculo);
+          // IMPORTANTE: Primero cancelamos la edición (reseteamos el form) y LUEGO mostramos la alerta
+          this.cancelarEdicion(false); 
+          this.mostrarAlerta(&#x27;Vehículo agregado exitosamente a la flota.&#x27;, &#x27;success&#x27;);
+        },
+        error: () &#x3D;&gt; {
+          this.mostrarAlerta(&#x27;Error al agregar el vehículo al servidor.&#x27;, &#x27;danger&#x27;);
+        }
+      });
+    }
+  }
+
+  /**
+   * @description
+   * Prepara el formulario para editar un vehículo existente.
+   * Carga los datos del vehículo seleccionado en el formulario y activa el modo de edición.
+   * @param vehiculo El vehículo que se desea editar.
+   * @returns {void}
+   */
+  editarVehiculo(vehiculo: Vehiculo): void {
+    this.modoEdicion &#x3D; true;
+    this.idEditando &#x3D; vehiculo.id;
+    this.vehiculosForm.patchValue(vehiculo);
+    // Hacemos scroll hacia arriba para que el usuario vea el formulario
+    window.scrollTo({ top: 0, behavior: &#x27;smooth&#x27; });
+  }
+
+  /**
+   * @description
+   * Elimina un vehículo existente después de confirmar la acción con el usuario.
+   * Actualiza la lista de vehículos y muestra un mensaje de alerta según el resultado.
+   * @param id El ID del vehículo que se desea eliminar.
+   * @returns {void}
+   */
+  eliminarVehiculo(id: number): void {
+    if (confirm(&#x27;¿Está seguro de que desea eliminar este vehículo de forma permanente?&#x27;)) {
+      this.vehiculosService.deleteVehiculo(id).subscribe({
+        next: () &#x3D;&gt; {
+          this.vehiculos &#x3D; this.vehiculos.filter(v &#x3D;&gt; v.id !&#x3D;&#x3D; id);
+          this.mostrarAlerta(&#x27;Vehículo eliminado exitosamente.&#x27;, &#x27;success&#x27;);
+        },
+        error: () &#x3D;&gt; {
+          this.mostrarAlerta(&#x27;Error al intentar eliminar el vehículo.&#x27;, &#x27;danger&#x27;);
+        }
+      });
+    }
+  }
+
+  /**
+   * @description
+   * Cancela el modo de edición y resetea el formulario.
+   * @param limpiarAlertas Determina si se deben borrar las alertas en pantalla (por defecto: true).
+   * @returns {void}
+   */
+  cancelarEdicion(limpiarAlertas: boolean &#x3D; true): void {
+    this.modoEdicion &#x3D; false;
+    this.idEditando &#x3D; null;
+    
+    // Al resetear, volvemos a dejar &quot;disponible&quot; en true para que el select no quede en blanco
+    this.vehiculosForm.reset({ disponible: true }); 
+    
+    // Solo borramos las alertas si es una cancelación manual, no tras un guardado exitoso
+    if (limpiarAlertas) {
+      this.mensajeAlerta &#x3D; null;
+      this.tipoAlerta &#x3D; null;
+    }
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-primary text-white py-4 mb-4 text-center header-global&quot;&gt;
+    &lt;h2 class&#x3D;&quot;fw-bold&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-car-side me-2&quot;&gt;&lt;/i&gt;Mantenedor Vehículos&lt;/h2&gt;
+    &lt;p class&#x3D;&quot;text-white&quot;&gt;Panel mantenedor de vehículos Bequianrent&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;container mb-5&quot;&gt;
+    
+    &lt;div class&#x3D;&quot;card shadow-lg mb-5 border-0 rounded-4 overflow-hidden&quot;&gt;
+        &lt;div class&#x3D;&quot;card-header bg-white text-white border-bottom-0 py-3&quot;&gt;
+            &lt;h5 class&#x3D;&quot;mb-0 fw-bold text-primary&quot;&gt;
+                &lt;i class&#x3D;&quot;fa-solid me-2&quot; [ngClass]&#x3D;&quot;modoEdicion ? &#x27;fa-pen-to-square&#x27; : &#x27;fa-plus&#x27;&quot;&gt;&lt;/i&gt;
+                {{ modoEdicion ? &#x27;Modificar Datos del Vehículo&#x27; : &#x27;Ingresar Nuevo Vehículo&#x27; }}
+            &lt;/h5&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;card-body bg-light p-4&quot;&gt;
+            &lt;form [formGroup]&#x3D;&quot;vehiculosForm&quot; (ngSubmit)&#x3D;&quot;guardarVehiculo()&quot;&gt;
+                &lt;div class&#x3D;&quot;row g-3&quot;&gt;
+                    
+                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;marca&quot; id&#x3D;&quot;floatingMarca&quot; placeholder&#x3D;&quot;Toyota&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;marca&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingMarca&quot;&gt;Marca&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;modelo&quot; id&#x3D;&quot;floatingModelo&quot; placeholder&#x3D;&quot;Yaris&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;modelo&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingModelo&quot;&gt;Modelo&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;tipo&quot; id&#x3D;&quot;floatingTipo&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;tipo&#x27;)}&quot;&gt;
+                                &lt;option value&#x3D;&quot;&quot; disabled selected&gt;Seleccione...&lt;/option&gt;
+                                &lt;option value&#x3D;&quot;Sedán&quot;&gt;Sedán&lt;/option&gt;
+                                &lt;option value&#x3D;&quot;Hatchback&quot;&gt;Hatchback&lt;/option&gt;
+                                &lt;option value&#x3D;&quot;SUV&quot;&gt;SUV&lt;/option&gt;
+                                &lt;option value&#x3D;&quot;Camioneta&quot;&gt;Camioneta&lt;/option&gt;
+                            &lt;/select&gt;
+                            &lt;label for&#x3D;&quot;floatingTipo&quot;&gt;Categoría (Tipo)&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;anio&quot; id&#x3D;&quot;floatingAnio&quot; placeholder&#x3D;&quot;2024&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;anio&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingAnio&quot;&gt;Año&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;transmision&quot; id&#x3D;&quot;floatingTransmision&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;transmision&#x27;)}&quot;&gt;
+                                &lt;option value&#x3D;&quot;&quot; disabled selected&gt;Seleccione...&lt;/option&gt;
+                                &lt;option value&#x3D;&quot;Manual&quot;&gt;Manual&lt;/option&gt;
+                                &lt;option value&#x3D;&quot;Automática&quot;&gt;Automática&lt;/option&gt;
+                            &lt;/select&gt;
+                            &lt;label for&#x3D;&quot;floatingTransmision&quot;&gt;Transmisión&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-2&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;pasajeros&quot; id&#x3D;&quot;floatingPasajeros&quot; placeholder&#x3D;&quot;5&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;pasajeros&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingPasajeros&quot;&gt;Pasajeros&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-2&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;rendimiento&quot; id&#x3D;&quot;floatingRendimiento&quot; placeholder&#x3D;&quot;15 km/l&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;rendimiento&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingRendimiento&quot;&gt;Rendimiento&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-2&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;precio&quot; id&#x3D;&quot;floatingPrecio&quot; placeholder&#x3D;&quot;25000&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;precio&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingPrecio&quot;&gt;Precio Diario ($)&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;disponible&quot; id&#x3D;&quot;floatingDisponible&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;disponible&#x27;)}&quot;&gt;
+                                &lt;option [ngValue]&#x3D;&quot;true&quot; class&#x3D;&quot;text-success&quot;&gt;Sí, Disponible&lt;/option&gt;
+                                &lt;option [ngValue]&#x3D;&quot;false&quot; class&#x3D;&quot;text-danger&quot;&gt;No, Ocupado&lt;/option&gt;
+                            &lt;/select&gt;
+                            &lt;label for&#x3D;&quot;floatingDisponible&quot;&gt;Disponibilidad&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;input type&#x3D;&quot;url&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;imagen&quot; id&#x3D;&quot;floatingImagen&quot; placeholder&#x3D;&quot;https://...&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;imagen&#x27;)}&quot;&gt;
+                            &lt;label for&#x3D;&quot;floatingImagen&quot;&gt;URL de la Fotografía&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;La ruta de la imagen es obligatoria.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
+                        &lt;div class&#x3D;&quot;form-floating&quot;&gt;
+                            &lt;textarea class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;descripcion&quot; id&#x3D;&quot;floatingDescripcion&quot; style&#x3D;&quot;height: 100px&quot; placeholder&#x3D;&quot;Reseña...&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;descripcion&#x27;)}&quot;&gt;&lt;/textarea&gt;
+                            &lt;label for&#x3D;&quot;floatingDescripcion&quot;&gt;Descripción o reseña del vehículo&lt;/label&gt;
+                            &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;La descripción es obligatoria.&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;mt-4 d-flex gap-2 justify-content-end border-top pt-3&quot;&gt;
+                    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary px-4 fw-semibold rounded-pill&quot; (click)&#x3D;&quot;cancelarEdicion()&quot;&gt;
+                        {{ modoEdicion ? &#x27;Cancelar&#x27; : &#x27;Limpiar&#x27; }}
+                    &lt;/button&gt;
+                    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary px-4 fw-semibold rounded-pill&quot;&gt;
+                        &lt;i class&#x3D;&quot;fa-solid fa-floppy-disk me-2&quot;&gt;&lt;/i&gt;
+                        {{ modoEdicion ? &#x27;Actualizar Vehículo&#x27; : &#x27;Registrar Vehículo&#x27; }}
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+
+            &lt;div *ngIf&#x3D;&quot;mensajeAlerta&quot; class&#x3D;&quot;alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm border-0 border-start border-4 border-{{tipoAlerta}}&quot; role&#x3D;&quot;alert&quot;&gt;
+                &lt;i class&#x3D;&quot;fa-solid me-2&quot; [ngClass]&#x3D;&quot;tipoAlerta &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? &#x27;fa-circle-check&#x27; : &#x27;fa-triangle-exclamation&#x27;&quot;&gt;&lt;/i&gt;
+                &lt;strong&gt;{{ tipoAlerta &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? &#x27;¡Listo!&#x27; : &#x27;Atención:&#x27; }}&lt;/strong&gt; {{ mensajeAlerta }}
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;card shadow-sm border-0 rounded-4 overflow-hidden&quot;&gt;
+        &lt;div class&#x3D;&quot;card-body p-0 table-responsive&quot;&gt;
+            &lt;table class&#x3D;&quot;table table-hover align-middle mb-0 text-center&quot;&gt;
+                &lt;thead class&#x3D;&quot;table-light text-secondary&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;ID&lt;/th&gt;
+                        &lt;th&gt;Imagen&lt;/th&gt;
+                        &lt;th&gt;Marca / Modelo&lt;/th&gt;
+                        &lt;th&gt;Categoría&lt;/th&gt;
+                        &lt;th&gt;Año&lt;/th&gt;
+                        &lt;th&gt;Precio / Día&lt;/th&gt;
+                        &lt;th&gt;Estado&lt;/th&gt;
+                        &lt;th&gt;Acciones&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody class&#x3D;&quot;border-top-0&quot;&gt;
+                    &lt;tr *ngFor&#x3D;&quot;let vehiculo of vehiculos&quot;&gt;
+                        &lt;td class&#x3D;&quot;text-muted fw-bold&quot;&gt;#{{ vehiculo.id }}&lt;/td&gt;
+                        &lt;td&gt;&lt;img [src]&#x3D;&quot;vehiculo.imagen&quot; alt&#x3D;&quot;Auto&quot; class&#x3D;&quot;rounded me-2 object-fit-cover shadow-sm&quot; style&#x3D;&quot;width: 40px; height: 40px;&quot; onerror&#x3D;&quot;this.src&#x3D;&#x27;assets/img/default-car.png&#x27;&quot;&gt;&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;fw-bold text-dark text-center&quot;&gt;
+                            &lt;div&gt;
+                                &lt;div&gt;
+                                    {{ vehiculo.marca }}
+                                    &lt;span class&#x3D;&quot;text-muted fw-normal&quot;&gt;{{ vehiculo.modelo }}&lt;/span&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/td&gt;
+                        
+                        &lt;td class&#x3D;&quot;fw-bold text-dark&quot;&gt;{{ vehiculo.tipo }}&lt;/td&gt;
+                        &lt;td&gt;{{ vehiculo.anio }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;text-success fw-semibold&quot;&gt;{{ vehiculo.precio | currency:&#x27;CLP&#x27;:&#x27;$ &#x27;:&#x27;1.0-0&#x27; }}&lt;/td&gt;
+                        
+                        &lt;td&gt;
+                            &lt;span class&#x3D;&quot;badge rounded-pill&quot; 
+                                  [ngClass]&#x3D;&quot;vehiculo.disponible ? &#x27;bg-success&#x27; : &#x27;bg-danger&#x27;&quot;&gt;
+                                {{ vehiculo.disponible ? &#x27;Disponible&#x27; : &#x27;Ocupado&#x27; }}
+                            &lt;/span&gt;
+                        &lt;/td&gt;
+                        
+                        &lt;td&gt;
+                            &lt;button class&#x3D;&quot;btn btn-sm btn-light text-primary me-2 shadow-sm&quot; (click)&#x3D;&quot;editarVehiculo(vehiculo)&quot; title&#x3D;&quot;Editar&quot;&gt;
+                                &lt;i class&#x3D;&quot;fa-solid fa-pen&quot;&gt;&lt;/i&gt;
+                            &lt;/button&gt;
+                            &lt;button class&#x3D;&quot;btn btn-sm btn-light text-danger shadow-sm&quot; (click)&#x3D;&quot;eliminarVehiculo(vehiculo.id)&quot; title&#x3D;&quot;Eliminar&quot;&gt;
+                                &lt;i class&#x3D;&quot;fa-solid fa-trash&quot;&gt;&lt;/i&gt;
+                            &lt;/button&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr *ngIf&#x3D;&quot;vehiculos.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+                        &lt;td colspan&#x3D;&quot;7&quot; class&#x3D;&quot;text-center py-5 text-muted&quot;&gt;
+                            &lt;i class&#x3D;&quot;fa-solid fa-car-tunnel display-4 mb-3 text-black-50&quot;&gt;&lt;/i&gt;
+                            &lt;p class&#x3D;&quot;fs-5 mb-0&quot;&gt;No hay vehículos registrados en la flota.&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./mantenedor-vehiculos.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-car-side me-2"></i>Mantenedor Vehículos</h2>    <p class="text-white">Panel mantenedor de vehículos Bequianrent</p></div><div class="container mb-5">        <div class="card shadow-lg mb-5 border-0 rounded-4 overflow-hidden">        <div class="card-header bg-white text-white border-bottom-0 py-3">            <h5 class="mb-0 fw-bold text-primary">                <i class="fa-solid me-2" [ngClass]="modoEdicion ? \'fa-pen-to-square\' : \'fa-plus\'"></i>                {{ modoEdicion ? \'Modificar Datos del Vehículo\' : \'Ingresar Nuevo Vehículo\' }}            </h5>        </div>        <div class="card-body bg-light p-4">            <form [formGroup]="vehiculosForm" (ngSubmit)="guardarVehiculo()">                <div class="row g-3">                                        <div class="col-md-3">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="marca" id="floatingMarca" placeholder="Toyota" [ngClass]="{\'is-invalid\': esCampoInvalido(\'marca\')}">                            <label for="floatingMarca">Marca</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="modelo" id="floatingModelo" placeholder="Yaris" [ngClass]="{\'is-invalid\': esCampoInvalido(\'modelo\')}">                            <label for="floatingModelo">Modelo</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <select class="form-select" formControlName="tipo" id="floatingTipo" [ngClass]="{\'is-invalid\': esCampoInvalido(\'tipo\')}">                                <option value="" disabled selected>Seleccione...</option>                                <option value="Sedán">Sedán</option>                                <option value="Hatchback">Hatchback</option>                                <option value="SUV">SUV</option>                                <option value="Camioneta">Camioneta</option>                            </select>                            <label for="floatingTipo">Categoría (Tipo)</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="anio" id="floatingAnio" placeholder="2024" [ngClass]="{\'is-invalid\': esCampoInvalido(\'anio\')}">                            <label for="floatingAnio">Año</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <select class="form-select" formControlName="transmision" id="floatingTransmision" [ngClass]="{\'is-invalid\': esCampoInvalido(\'transmision\')}">                                <option value="" disabled selected>Seleccione...</option>                                <option value="Manual">Manual</option>                                <option value="Automática">Automática</option>                            </select>                            <label for="floatingTransmision">Transmisión</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-2">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="pasajeros" id="floatingPasajeros" placeholder="5" [ngClass]="{\'is-invalid\': esCampoInvalido(\'pasajeros\')}">                            <label for="floatingPasajeros">Pasajeros</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-2">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="rendimiento" id="floatingRendimiento" placeholder="15 km/l" [ngClass]="{\'is-invalid\': esCampoInvalido(\'rendimiento\')}">                            <label for="floatingRendimiento">Rendimiento</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-2">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="precio" id="floatingPrecio" placeholder="25000" [ngClass]="{\'is-invalid\': esCampoInvalido(\'precio\')}">                            <label for="floatingPrecio">Precio Diario ($)</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <select class="form-select" formControlName="disponible" id="floatingDisponible" [ngClass]="{\'is-invalid\': esCampoInvalido(\'disponible\')}">                                <option [ngValue]="true" class="text-success">Sí, Disponible</option>                                <option [ngValue]="false" class="text-danger">No, Ocupado</option>                            </select>                            <label for="floatingDisponible">Disponibilidad</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-12">                        <div class="form-floating">                            <input type="url" class="form-control" formControlName="imagen" id="floatingImagen" placeholder="https://..." [ngClass]="{\'is-invalid\': esCampoInvalido(\'imagen\')}">                            <label for="floatingImagen">URL de la Fotografía</label>                            <div class="invalid-feedback">La ruta de la imagen es obligatoria.</div>                        </div>                    </div>                    <div class="col-md-12">                        <div class="form-floating">                            <textarea class="form-control" formControlName="descripcion" id="floatingDescripcion" style="height: 100px" placeholder="Reseña..." [ngClass]="{\'is-invalid\': esCampoInvalido(\'descripcion\')}"></textarea>                            <label for="floatingDescripcion">Descripción o reseña del vehículo</label>                            <div class="invalid-feedback">La descripción es obligatoria.</div>                        </div>                    </div>                </div>                <div class="mt-4 d-flex gap-2 justify-content-end border-top pt-3">                    <button type="button" class="btn btn-outline-secondary px-4 fw-semibold rounded-pill" (click)="cancelarEdicion()">                        {{ modoEdicion ? \'Cancelar\' : \'Limpiar\' }}                    </button>                    <button type="submit" class="btn btn-primary px-4 fw-semibold rounded-pill">                        <i class="fa-solid fa-floppy-disk me-2"></i>                        {{ modoEdicion ? \'Actualizar Vehículo\' : \'Registrar Vehículo\' }}                    </button>                </div>            </form>            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm border-0 border-start border-4 border-{{tipoAlerta}}" role="alert">                <i class="fa-solid me-2" [ngClass]="tipoAlerta === \'success\' ? \'fa-circle-check\' : \'fa-triangle-exclamation\'"></i>                <strong>{{ tipoAlerta === \'success\' ? \'¡Listo!\' : \'Atención:\' }}</strong> {{ mensajeAlerta }}            </div>        </div>    </div>    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">        <div class="card-body p-0 table-responsive">            <table class="table table-hover align-middle mb-0 text-center">                <thead class="table-light text-secondary">                    <tr>                        <th>ID</th>                        <th>Imagen</th>                        <th>Marca / Modelo</th>                        <th>Categoría</th>                        <th>Año</th>                        <th>Precio / Día</th>                        <th>Estado</th>                        <th>Acciones</th>                    </tr>                </thead>                <tbody class="border-top-0">                    <tr *ngFor="let vehiculo of vehiculos">                        <td class="text-muted fw-bold">#{{ vehiculo.id }}</td>                        <td><img [src]="vehiculo.imagen" alt="Auto" class="rounded me-2 object-fit-cover shadow-sm" style="width: 40px; height: 40px;" onerror="this.src=\'assets/img/default-car.png\'"></td>                        <td class="fw-bold text-dark text-center">                            <div>                                <div>                                    {{ vehiculo.marca }}                                    <span class="text-muted fw-normal">{{ vehiculo.modelo }}</span>                                </div>                            </div>                        </td>                                                <td class="fw-bold text-dark">{{ vehiculo.tipo }}</td>                        <td>{{ vehiculo.anio }}</td>                        <td class="text-success fw-semibold">{{ vehiculo.precio | currency:\'CLP\':\'$ \':\'1.0-0\' }}</td>                                                <td>                            <span class="badge rounded-pill"                                   [ngClass]="vehiculo.disponible ? \'bg-success\' : \'bg-danger\'">                                {{ vehiculo.disponible ? \'Disponible\' : \'Ocupado\' }}                            </span>                        </td>                                                <td>                            <button class="btn btn-sm btn-light text-primary me-2 shadow-sm" (click)="editarVehiculo(vehiculo)" title="Editar">                                <i class="fa-solid fa-pen"></i>                            </button>                            <button class="btn btn-sm btn-light text-danger shadow-sm" (click)="eliminarVehiculo(vehiculo.id)" title="Eliminar">                                <i class="fa-solid fa-trash"></i>                            </button>                        </td>                    </tr>                    <tr *ngIf="vehiculos.length === 0">                        <td colspan="7" class="text-center py-5 text-muted">                            <i class="fa-solid fa-car-tunnel display-4 mb-3 text-black-50"></i>                            <p class="fs-5 mb-0">No hay vehículos registrados en la flota.</p>                        </td>                    </tr>                </tbody>            </table>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MantenedorVehiculos'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MantenedorVehiculos.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
