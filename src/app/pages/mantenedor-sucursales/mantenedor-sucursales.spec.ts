@@ -19,17 +19,13 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
   let fixture: ComponentFixture<MantenedorSucursales>;
   let sucursalesServiceMock: any;
 
-  /**
-   * Datos mock de sucursales para simular la carga inicial y las operaciones CRUD.
-   */
+  /** Datos mock de sucursales para simular la carga inicial y las operaciones CRUD. */
   const mockSucursales: Sucursales[] = [
     { id: 1, nombre: 'Sucursal Central', direccion: 'Avenida 1', ciudad: 'Santiago', telefono: '12345678', jefeSucursal: 'Juan Pérez', horario: '09:00 - 18:00' },
     { id: 2, nombre: 'Sucursal Norte', direccion: 'Avenida 2', ciudad: 'Antofagasta', telefono: '87654321', jefeSucursal: 'Ana Gómez', horario: '10:00 - 19:00' }
   ];
 
-  /**
-   * Datos mock de una nueva sucursal válida para pruebas de creación.
-   */
+  /** Datos mock de una nueva sucursal válida para pruebas de creación.*/
   const nuevaSucursalValida = {
     nombre: 'Sucursal Sur',
     direccion: 'Avenida 3',
@@ -39,12 +35,8 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     horario: '08:00 - 17:00'
   };
 
-  /**
-   * Configuración inicial de TestBed y creación del componente antes de cada prueba.
-   * Se inyectan los servicios mock para simular el comportamiento real sin depender de la implementación.
-   */
+  /** Configuración inicial de TestBed y creación del componente antes de cada prueba. */
   beforeEach(async () => {
-    // Simulamos todas las funciones del servicio
     sucursalesServiceMock = {
       obtenerSucursales: vi.fn().mockReturnValue(of(mockSucursales)),
       agregarSucursal: vi.fn().mockReturnValue(of([...mockSucursales, { id: 3, ...nuevaSucursalValida }])),
@@ -68,20 +60,12 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     fixture.detectChanges(); 
   });
 
-  /**
-   * @description
-   * Limpia los mocks después de cada prueba para evitar efectos colaterales entre pruebas.
-   */
+  /** Limpia los mocks después de cada prueba para evitar efectos colaterales entre pruebas. */
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  /**
-   * @test
-   * Verifica que el componente se cree correctamente y que la lista de sucursales se cargue desde el servicio simulado.
-   * Se espera que el método obtenerSucursales del servicio sea llamado y que la propiedad sucursales del componente
-   * contenga los datos mock proporcionados.
-   */
+  /** @test Debe crear el componente y cargar la lista de sucursales */
   it('Debe crear el componente y cargar la lista de sucursales', () => {
     expect(component).toBeTruthy();
     expect(sucursalesServiceMock.obtenerSucursales).toHaveBeenCalled();
@@ -89,12 +73,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(component.sucursales[0].nombre).toBe('Sucursal Central');
   });
 
-  /**
-   * @test
-   * Verifica que el método guardarSucursal rechace el guardado si faltan campos obligatorios en el formulario.
-   * Se espera que el formulario sea marcado como "touched", que se muestre un mensaje de alerta de tipo "danger",
-   * y que no se llame al método agregarSucursal del servicio simulado.
-   */
+  /** @test Verifica que el método guardarSucursal rechace el guardado si faltan campos obligatorios. */
   it('Debe rechazar el guardado y mostrar alerta si faltan campos obligatorios', () => {
     component.sucursalesForm.reset();
     
@@ -106,11 +85,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(sucursalesServiceMock.agregarSucursal).not.toHaveBeenCalled();
   });
 
-  /**
-   * @test
-   * Verifica que el método guardarSucursal rechace el guardado si se intenta usar un nombre de sucursal que ya existe.
-   * Se espera que se muestre un mensaje de alerta de tipo "danger" y que no se llame al método agregarSucursal del servicio simulado.
-   */
+  /** @test Verifica que el método guardarSucursal rechace el guardado si se intenta usar un nombre que ya existe */
   it('Debe rechazar el guardado si se intenta usar un nombre que ya existe', () => {
     component.sucursalesForm.patchValue({
       ...nuevaSucursalValida,
@@ -124,12 +99,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(sucursalesServiceMock.agregarSucursal).not.toHaveBeenCalled();
   });
 
-  /**
-   * @test
-   * Verifica que el método guardarSucursal llame al servicio agregarSucursal y resetee el formulario al enviar datos válidos.
-   * Se espera que el método agregarSucursal del servicio simulado sea llamado con los datos correctos,
-   * que se muestre un mensaje de alerta de tipo "success" y que el formulario se resetee a su estado inicial.
-   */
+  /** @test Verifica que el método guardarSucursal llame al servicio agregarSucursal y resetee el formulario al enviar datos válidos */
   it('Debe llamar a agregarSucursal y resetear el formulario al enviar datos válidos', () => {
     component.sucursalesForm.patchValue(nuevaSucursalValida);
     component.modoEdicion = false;
@@ -141,12 +111,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(component.sucursalesForm.value.nombre).toBeNull(); // Se reseteó el formulario
   });
 
-  /**
-   * @test
-   * Verifica que el método editarSucursal cargue correctamente los datos de la sucursal seleccionada en el formulario.
-   * Se espera que el modoEdicion se active, que el idEditando se establezca con el ID de la sucursal,
-   * y que los campos del formulario reflejen los valores de la sucursal a editar.
-   */
+  /** @test Verifica que el método editarSucursal cargue correctamente los datos de la sucursal seleccionada en el formulario */
   it('Debe cargar los datos al formulario al iniciar la edición', () => {
     component.editarSucursal(mockSucursales[0]);
 
@@ -156,12 +121,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(component.sucursalesForm.value.ciudad).toBe('Santiago');
   });
 
-  /**
-   * @test
-   * Verifica que el método guardarSucursal llame al servicio editarSucursal y salga del modo edición al guardar cambios.
-   * Se espera que el método editarSucursal del servicio simulado sea llamado con los datos modificados,
-   * que el modoEdicion se desactive, y que se muestre un mensaje de alerta de tipo "success".
-   */
+  /** @test Verifica que el método guardarSucursal llame al servicio editarSucursal y salga del modo edición al guardar cambios */
   it('Debe llamar a editarSucursal al guardar los cambios en modo edición', () => {
     component.editarSucursal(mockSucursales[0]);
     
@@ -177,11 +137,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(component.tipoAlerta).toBe('success');
   });
 
-  /**
-   * @test
-   * Verifica que el método eliminarSucursal llame al servicio eliminarSucursal si el usuario confirma la acción.
-   * Se espera que se muestre un mensaje de alerta de tipo "success" y que la sucursal sea eliminada de la lista.
-   */
+  /** @test Verifica que el método eliminarSucursal llame al servicio eliminarSucursal si el usuario confirma la acción */
   it('Debe llamar a eliminarSucursal si el usuario confirma la acción', () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true);
 
@@ -192,11 +148,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(component.tipoAlerta).toBe('success');
   });
 
-  /**
-   * @test
-   * Verifica que el método eliminarSucursal no llame al servicio eliminarSucursal si el usuario cancela la acción.
-   * Se espera que no se muestre ningún mensaje de alerta y que la lista de sucursales permanezca intacta.
-   */
+  /** @test Verifica que el método eliminarSucursal no llame al servicio eliminarSucursal si el usuario cancela la acción */
   it('No debe llamar a eliminarSucursal si el usuario cancela la acción', () => {
     vi.spyOn(window, 'confirm').mockReturnValue(false);
 
@@ -205,11 +157,7 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(sucursalesServiceMock.eliminarSucursal).not.toHaveBeenCalled();
   });
 
-  /**
-   * @test
-   * Verifica que el método restaurarDatosGP llame al servicio restaurarDatosDesdeAPI si el usuario confirma la acción.
-   * Se espera que se muestre un mensaje de alerta de tipo "success" y que la lista de sucursales se actualice con los datos restaurados.
-   */
+  /** @test Verifica que el método restaurarDatosGP llame al servicio restaurarDatosDesdeAPI si el usuario confirma la acción */
   it('Debe restaurar los datos desde la API si el usuario acepta la confirmación', () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true);
 
@@ -219,13 +167,9 @@ describe('MantenedorSucursales - Pruebas de Negocio', () => {
     expect(component.tipoAlerta).toBe('success');
   });
 
-  /**
-   * @test
-   * Verifica que el método restaurarDatosGP no llame al servicio restaurarDatosDesdeAPI si el usuario cancela la acción.
-   * Se espera que no se muestre ningún mensaje de alerta y que la lista de sucursales permanezca intacta.
-   */
+  /** @test Verifica que el método restaurarDatosGP no llame al servicio restaurarDatosDesdeAPI si el usuario cancela la acción */
   it('Debe cancelar la edición y resetear el formulario al presionar cancelarEdicion', () => {
-    component.editarSucursal(mockSucursales[0]); // Entramos a edición primero
+    component.editarSucursal(mockSucursales[0]);
     
     component.cancelarEdicion();
 

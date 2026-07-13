@@ -5,12 +5,17 @@ import { vi, describe, beforeEach, it, expect } from 'vitest'; // Importamos las
 import { MantenedorVehiculos } from './mantenedor-vehiculos';
 import { VehiculosJsonServerService } from '../../services/vehiculos-json-server.services';
 
+/**
+ * @description
+ * Suite de Pruebas Unitarias para el componente {@link MantenedorVehiculos}.
+ * Verifica la lógica de negocio, validaciones del formulario y la interacción
+ * con el servicio {@link VehiculosJsonServerService}.
+ */
 describe('MantenedorVehiculos - Pruebas de Negocio', () => {
   let component: MantenedorVehiculos;
   let fixture: ComponentFixture<MantenedorVehiculos>;
   let vehiculosServiceMock: any;
 
-  // Creamos un vehículo de prueba válido para reutilizar en los tests
   const vehiculoValido = {
     id: 1,
     marca: 'Toyota',
@@ -26,8 +31,8 @@ describe('MantenedorVehiculos - Pruebas de Negocio', () => {
     descripcion: 'Un auto genial'
   };
 
+  /** Configuración inicial antes de cada prueba.*/
   beforeEach(async () => {
-    // 1. Simulamos el servicio usando la sintaxis de Vitest (vi.fn)
     vehiculosServiceMock = {
       getVehiculo: vi.fn().mockReturnValue(of([vehiculoValido])),
       addVehiculo: vi.fn().mockReturnValue(of({ ...vehiculoValido, id: 2 })),
@@ -45,41 +50,33 @@ describe('MantenedorVehiculos - Pruebas de Negocio', () => {
     fixture = TestBed.createComponent(MantenedorVehiculos);
     component = fixture.componentInstance;
     
-    // 2. Simulamos el scroll para que el entorno de pruebas (jsdom) no arroje error
     vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
 
-    fixture.detectChanges(); // Ejecuta ngOnInit
+    fixture.detectChanges();
   });
 
-  // --- SECCIÓN: CARGA INICIAL ---
-
+  /** @test Verifica la carga inicial de vehículos */
   it('Debería cargar la lista de vehículos al inicializar el componente', () => {
     expect(vehiculosServiceMock.getVehiculo).toHaveBeenCalled();
     expect(component.vehiculos.length).toBe(1);
     expect(component.vehiculos[0].marca).toBe('Toyota');
   });
 
-  // --- SECCIÓN: VALIDACIONES DEL FORMULARIO ---
-
+  /** @test Verifica las validaciones del formulario */
   it('Debería rechazar el formulario y mostrar alerta si faltan campos obligatorios', () => {
-    // Forzamos un formulario vacío (inválido por defecto)
     component.vehiculosForm.reset(); 
     
     component.guardarVehiculo();
 
-    // Comprobamos que NO se llamó al servicio de creación
     expect(vehiculosServiceMock.addVehiculo).not.toHaveBeenCalled();
-    // Comprobamos que mostró la alerta correcta
     expect(component.tipoAlerta).toBe('warning');
     expect(component.mensajeAlerta).toContain('completa correctamente los campos');
   });
 
-  // --- SECCIÓN: CREACIÓN ---
-
+  /** @test Verifica la creación de un vehículo */
   it('Debería llamar a addVehiculo y mostrar éxito cuando el formulario es válido', () => {
-    // Llenamos el formulario con datos válidos
     component.vehiculosForm.patchValue(vehiculoValido);
-    component.modoEdicion = false; // Aseguramos modo creación
+    component.modoEdicion = false;
 
     component.guardarVehiculo();
 
@@ -88,8 +85,7 @@ describe('MantenedorVehiculos - Pruebas de Negocio', () => {
     expect(component.mensajeAlerta).toBe('Vehículo agregado exitosamente a la flota.');
   });
 
-  // --- SECCIÓN: EDICIÓN ---
-
+  /** @test Verifica la edición de un vehículo */
   it('Debería cargar los datos en el formulario y subir el scroll al hacer clic en "Editar"', () => {
     component.editarVehiculo(vehiculoValido);
 
@@ -99,23 +95,20 @@ describe('MantenedorVehiculos - Pruebas de Negocio', () => {
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
   });
 
+  /** @test Verifica la actualización de un vehículo */
   it('Debería llamar a updateVehiculo al guardar los cambios de una edición', () => {
-    // Preparamos el componente para editar
     component.editarVehiculo(vehiculoValido);
-    // Cambiamos un dato para simular la edición
     component.vehiculosForm.patchValue({ precio: 30000 });
 
     component.guardarVehiculo();
 
     expect(vehiculosServiceMock.updateVehiculo).toHaveBeenCalled();
-    expect(component.modoEdicion).toBe(false); // Debería haber reseteado la edición
+    expect(component.modoEdicion).toBe(false);
     expect(component.tipoAlerta).toBe('success');
   });
 
-  // --- SECCIÓN: ELIMINACIÓN ---
-
+  /** @test Verifica la eliminación de un vehículo */
   it('Debería llamar a deleteVehiculo solo si el usuario confirma la alerta', () => {
-    // Simulamos que el usuario hizo clic en "Aceptar" usando vi.spyOn
     vi.spyOn(window, 'confirm').mockReturnValue(true);
 
     component.eliminarVehiculo(1);
@@ -125,8 +118,8 @@ describe('MantenedorVehiculos - Pruebas de Negocio', () => {
     expect(component.tipoAlerta).toBe('success');
   });
 
+  /** @test Verifica que no se elimine un vehículo si el usuario cancela la alerta */
   it('NO debería llamar a deleteVehiculo si el usuario cancela la alerta', () => {
-    // Simulamos que el usuario hizo clic en "Cancelar"
     vi.spyOn(window, 'confirm').mockReturnValue(false);
 
     component.eliminarVehiculo(1);
