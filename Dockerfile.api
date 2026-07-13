@@ -1,7 +1,19 @@
 # Dockerfile for JSON Server API
+
+# Imagen base de Node.js
 FROM node:26.3.0-alpine
+
+# Definir el directorio de trabajo
 WORKDIR /app
+
+# Instalar JSON Server globalmente
 RUN npm install -g json-server@0.17.4
+
+# Copiar el archivo db.json al contenedor
 COPY db.json .
+
+# Exponer el puerto 3000 para acceder a la API
 EXPOSE 3000
+
+# Comando para iniciar JSON Server y servir la API en el puerto 3000
 CMD ["json-server", "--watch", "db.json", "--host", "0.0.0.0", "--port", "3000"]

@@ -1,21 +1,27 @@
 version: "3.8"
 
 services:
-  bequianrent:
-    container_name: bequianrent
+  # ======================================
+  # Servicio de la aplicación Angular
+  # ======================================
+  angular-app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: bequianrent-container
     ports:
       - "8080:80"
     depends_on:
       - json-server-api
 
   json-server-api:
+  # ======================================
+  # Servicio del servidor JSON
+  # ======================================
     build:
       context: .
       dockerfile: Dockerfile.api
-    container_name: vehiculos-api
+    container_name: bequianrent-json-server-container
     ports:
       - "3000:3000"
     volumes:

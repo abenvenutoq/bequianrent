@@ -62,8 +62,8 @@ export class MantenedorVehiculos implements OnInit {
 
   /**
    * @description
-   * Carga los vehículos desde el servicio y los almacena en la variable local.
-   * Maneja errores de carga mostrando un mensaje de alerta.
+   * Carga los datos de los vehículos desde el servicio y los asigna a la propiedad `vehiculos`.
+   * Maneja errores de conexión mostrando un mensaje de alerta.
    * @returns {void}
    */
   private cargarDatos(): void {
