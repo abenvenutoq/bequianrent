@@ -67,12 +67,8 @@ export class ReservarAuto implements OnInit {
    * 4. Recupera el ID del vehículo desde la URL y hace la petición asíncrona para cargar sus datos.
    */
   ngOnInit(): void {
-    // Si el usuario no está logueado, lo mandamos al login de inmediato
-    if (!this.authService.estaLogueado()) {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
-      return;
-    }
-
+    if (!this.authService.isBrowser()) return;
+    
     const hoy = new Date();
     this.fechaMinima = hoy.toISOString().split('T')[0];
 

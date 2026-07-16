@@ -42,12 +42,7 @@ describe('Pruebas unitarias para adminGuard', () => {
     });
   });
 
-  /**
-   * @description
-   * Prueba que verifica que el guard permita el paso (retorne true) si el usuario es administrador.
-   * Se simula que el AuthService responde afirmativamente a la pregunta de si el usuario es admin.
-   * Se espera que el guard retorne true y que no se intente redirigir al login.
-   */
+  /** @test Prueba que permite el paso si el usuario es administrador */
   it('Debe permitir el paso (retornar true) si el usuario es Administrador', () => {
     authServiceSpy.esAdmin.mockReturnValue(true);
 
@@ -57,12 +52,7 @@ describe('Pruebas unitarias para adminGuard', () => {
     expect(routerSpy.navigate).not.toHaveBeenCalled();
   });
 
-  /**
-   * @description
-   * Prueba que verifica que el guard bloquee el paso (retorne false) y redirija al login si el usuario no es administrador.
-   * Se simula que el AuthService responde negativamente a la pregunta de si el usuario es admin.
-   * Se espera que el guard retorne false y que se intente redirigir al login.
-   */
+  /** @test Prueba que bloquea el paso y redirige al login si el usuario no es administrador */
   it('Debe bloquear el paso (retornar false) y redirigir al /login si el usuario NO es Administrador', () => {
     authServiceSpy.esAdmin.mockReturnValue(false);
 

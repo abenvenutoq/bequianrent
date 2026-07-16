@@ -65,22 +65,17 @@ export class MiPerfil implements OnInit {
     }
 
     const sesionActual = this.authService.obtenerSesion();
-    if (!sesionActual || !sesionActual.loged) {
-      this.router.navigate(['/login']);
-      return;
-    }
 
     const todosLosUsuarios = this.authService.obtenerUsuario();
-    const usuarioEncontrado = todosLosUsuarios.find(u => u.correo === sesionActual.correo);
+    const usuarioEncontrado = todosLosUsuarios.find(u => u.correo === sesionActual?.correo);
 
-    if (usuarioEncontrado) {
+    if ( usuarioEncontrado ) {
       this.usuario = usuarioEncontrado;
     } else {
       this.authService.cerrarSesion();
       this.router.navigate(['/login']);
-      return;
     }
-    
+      
     /** Inicializa el formulario reactivo con los validadores correspondientes */
     this.perfilForm = this.fb.group({
       nombre: ['', [Validators.required, this.ValidacionService.isEmpty]],

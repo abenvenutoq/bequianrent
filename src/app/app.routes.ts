@@ -16,6 +16,7 @@ import { SucursalesComponent } from './pages/sucursales/sucursales';
 import { Testimonio } from './pages/testimonios/testimonios';
 import { MantenedorSucursales } from './pages/mantenedor-sucursales/mantenedor-sucursales';
 import { MantenedorVehiculos } from './pages/mantenedor-vehiculos/mantenedor-vehiculos';
+import { clienteGuard } from './guards/cliente.guard';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -24,9 +25,9 @@ export const routes: Routes = [
     { path: 'ver-autos', component: VerAutos },
     { path: 'app-navbar', component: Navbar},
     { path: 'app-footer', component: Footer},
-    { path: 'mi-perfil', component: MiPerfil},
-    { path: 'reservar-auto/:id', component: ReservarAuto }, 
-    { path: 'mis-reservas', component: MisReservas },
+    { path: 'mi-perfil', component: MiPerfil, canActivate: [clienteGuard] },
+    { path: 'reservar-auto/:id', component: ReservarAuto, canActivate: [clienteGuard] }, 
+    { path: 'mis-reservas', component: MisReservas, canActivate: [clienteGuard] },
     { path: 'admin-panel', component: AdminPanel, canActivate: [adminGuard] },
     { path: 'editar-reserva/:id', component: EditarReserva, canActivate: [adminGuard]},
     { path: 'estadisticas-arriendos', component: AdminEstadisticaVenta, canActivate: [adminGuard]},
