@@ -296,12 +296,11 @@ export class MisReservas implements OnInit {
     if (!this.authService.isBrowser()) return;
 
     const sesion &#x3D; this.authService.obtenerSesion();
-    if (!sesion || !sesion.loged) {
-      this.router.navigate([&#x27;/login&#x27;]);
-      return;
+    
+    if (sesion?.correo)
+    {
+      this.cargarReservas(sesion.correo);
     }
-
-    this.cargarReservas(sesion.correo);
   }
 
   /**

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "marca": "Toyota",
-      "modelo": "Corolla",
+      "modelo": "Prueba CRUD",
       "tipo": "Sedán",
       "anio": 2024,
       "precio": 35000,

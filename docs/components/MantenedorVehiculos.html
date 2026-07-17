@@ -516,8 +516,8 @@ Maneja errores de conexión mostrando un mensaje de alerta.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/pages/mantenedor-vehiculos/mantenedor-vehiculos.ts:166</a></div>
                         </td>
                     </tr>
 
@@ -1155,7 +1155,7 @@ export class MantenedorVehiculos implements OnInit {
   modoEdicion &#x3D; false;
   idEditando: number | null &#x3D; null;
   mensajeAlerta: string | null &#x3D; null;
-  tipoAlerta: &#x27;success&#x27; | &#x27;danger&#x27; | &#x27;warning&#x27; | null &#x3D; null; // Agregamos &#x27;warning&#x27; para validaciones
+  tipoAlerta: &#x27;success&#x27; | &#x27;danger&#x27; | &#x27;warning&#x27; | null &#x3D; null;
 
   private cdr &#x3D; inject(ChangeDetectorRef);
 
@@ -1178,7 +1178,7 @@ export class MantenedorVehiculos implements OnInit {
       transmision: [&#x27;&#x27;, Validators.required],
       pasajeros: [&#x27;&#x27;, [Validators.required, Validators.min(1)]],
       rendimiento: [&#x27;&#x27;, Validators.required],
-      imagen: [&#x27;&#x27;, Validators.required],
+      imagen: [&#x27;&#x27;],
       descripcion: [&#x27;&#x27;, Validators.required]
     });
   }
@@ -1227,7 +1227,7 @@ export class MantenedorVehiculos implements OnInit {
   mostrarAlerta(mensaje: string, tipo: &#x27;success&#x27; | &#x27;danger&#x27; | &#x27;warning&#x27;): void {
     this.mensajeAlerta &#x3D; mensaje;
     this.tipoAlerta &#x3D; tipo;
-    this.cdr.detectChanges(); // Forzamos la actualización de la vista de inmediato
+    this.cdr.detectChanges();
   }
 
   /**
@@ -1238,16 +1238,20 @@ export class MantenedorVehiculos implements OnInit {
    * @returns {void}
    */
   guardarVehiculo(): void {
-    // 1. Validamos el formulario y marcamos los campos para que se pinten de rojo
     if (this.vehiculosForm.invalid) {
       this.vehiculosForm.markAllAsTouched(); 
       this.mostrarAlerta(&#x27;Por favor, completa correctamente los campos marcados en rojo.&#x27;, &#x27;warning&#x27;);
       return;
     }
 
-    const vehiculoData &#x3D; this.vehiculosForm.value as Omit&lt;Vehiculo, &#x27;id&#x27;&gt;;
+    const vehiculoData &#x3D; { ...this.vehiculosForm.value } as Omit&lt;Vehiculo, &#x27;id&#x27;&gt;;
 
-    // 2. Lógica de edición
+    let imagenIngresada &#x3D; vehiculoData.imagen ? vehiculoData.imagen.trim() : &#x27;&#x27;;
+    if (!imagenIngresada) {
+      imagenIngresada &#x3D; &#x27;img/autos/auto_placeholder.jpg&#x27;;
+    }
+    vehiculoData.imagen &#x3D; imagenIngresada;
+
     if (this.modoEdicion &amp;&amp; this.idEditando !&#x3D;&#x3D; null) {
       const vehiculoActualizado: Vehiculo &#x3D; { id: this.idEditando, ...vehiculoData };
       
@@ -1257,7 +1261,6 @@ export class MantenedorVehiculos implements OnInit {
           if (index !&#x3D;&#x3D; -1) {
             this.vehiculos[index] &#x3D; vehiculo;
           }
-          // IMPORTANTE: Primero cancelamos la edición (reseteamos el form) y LUEGO mostramos la alerta
           this.cancelarEdicion(false); 
           this.mostrarAlerta(&#x27;Vehículo actualizado exitosamente.&#x27;, &#x27;success&#x27;);
         },
@@ -1266,12 +1269,10 @@ export class MantenedorVehiculos implements OnInit {
         }
       });
     } 
-    // 3. Lógica de creación
     else {
       this.vehiculosService.addVehiculo(vehiculoData).subscribe({
         next: (vehiculo) &#x3D;&gt; {
           this.vehiculos.push(vehiculo);
-          // IMPORTANTE: Primero cancelamos la edición (reseteamos el form) y LUEGO mostramos la alerta
           this.cancelarEdicion(false); 
           this.mostrarAlerta(&#x27;Vehículo agregado exitosamente a la flota.&#x27;, &#x27;success&#x27;);
         },
@@ -1293,7 +1294,6 @@ export class MantenedorVehiculos implements OnInit {
     this.modoEdicion &#x3D; true;
     this.idEditando &#x3D; vehiculo.id;
     this.vehiculosForm.patchValue(vehiculo);
-    // Hacemos scroll hacia arriba para que el usuario vea el formulario
     window.scrollTo({ top: 0, behavior: &#x27;smooth&#x27; });
   }
 
@@ -1328,10 +1328,8 @@ export class MantenedorVehiculos implements OnInit {
     this.modoEdicion &#x3D; false;
     this.idEditando &#x3D; null;
     
-    // Al resetear, volvemos a dejar &quot;disponible&quot; en true para que el select no quede en blanco
     this.vehiculosForm.reset({ disponible: true }); 
     
-    // Solo borramos las alertas si es una cancelación manual, no tras un guardado exitoso
     if (limpiarAlertas) {
       this.mensajeAlerta &#x3D; null;
       this.tipoAlerta &#x3D; null;
@@ -1360,7 +1358,7 @@ export class MantenedorVehiculos implements OnInit {
             &lt;form [formGroup]&#x3D;&quot;vehiculosForm&quot; (ngSubmit)&#x3D;&quot;guardarVehiculo()&quot;&gt;
                 &lt;div class&#x3D;&quot;row g-3&quot;&gt;
                     
-                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-3&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;marca&quot; id&#x3D;&quot;floatingMarca&quot; placeholder&#x3D;&quot;Toyota&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;marca&#x27;)}&quot;&gt;
                             &lt;label for&#x3D;&quot;floatingMarca&quot;&gt;Marca&lt;/label&gt;
@@ -1368,7 +1366,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-3&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;modelo&quot; id&#x3D;&quot;floatingModelo&quot; placeholder&#x3D;&quot;Yaris&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;modelo&#x27;)}&quot;&gt;
                             &lt;label for&#x3D;&quot;floatingModelo&quot;&gt;Modelo&lt;/label&gt;
@@ -1376,7 +1374,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-3&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;tipo&quot; id&#x3D;&quot;floatingTipo&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;tipo&#x27;)}&quot;&gt;
                                 &lt;option value&#x3D;&quot;&quot; disabled selected&gt;Seleccione...&lt;/option&gt;
@@ -1390,7 +1388,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-3&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;anio&quot; id&#x3D;&quot;floatingAnio&quot; placeholder&#x3D;&quot;2024&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;anio&#x27;)}&quot;&gt;
                             &lt;label for&#x3D;&quot;floatingAnio&quot;&gt;Año&lt;/label&gt;
@@ -1398,7 +1396,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-3&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;transmision&quot; id&#x3D;&quot;floatingTransmision&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;transmision&#x27;)}&quot;&gt;
                                 &lt;option value&#x3D;&quot;&quot; disabled selected&gt;Seleccione...&lt;/option&gt;
@@ -1410,7 +1408,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-2&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-3 col-lg-2&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;pasajeros&quot; id&#x3D;&quot;floatingPasajeros&quot; placeholder&#x3D;&quot;5&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;pasajeros&#x27;)}&quot;&gt;
                             &lt;label for&#x3D;&quot;floatingPasajeros&quot;&gt;Pasajeros&lt;/label&gt;
@@ -1418,7 +1416,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-2&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-3 col-lg-2&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;rendimiento&quot; id&#x3D;&quot;floatingRendimiento&quot; placeholder&#x3D;&quot;15 km/l&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;rendimiento&#x27;)}&quot;&gt;
                             &lt;label for&#x3D;&quot;floatingRendimiento&quot;&gt;Rendimiento&lt;/label&gt;
@@ -1426,15 +1424,15 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-2&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-2&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;precio&quot; id&#x3D;&quot;floatingPrecio&quot; placeholder&#x3D;&quot;25000&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;precio&#x27;)}&quot;&gt;
-                            &lt;label for&#x3D;&quot;floatingPrecio&quot;&gt;Precio Diario ($)&lt;/label&gt;
+                            &lt;label for&#x3D;&quot;floatingPrecio&quot;&gt;Precio ($)&lt;/label&gt;
                             &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;Requerido.&lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-3&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-3&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;disponible&quot; id&#x3D;&quot;floatingDisponible&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;disponible&#x27;)}&quot;&gt;
                                 &lt;option [ngValue]&#x3D;&quot;true&quot; class&#x3D;&quot;text-success&quot;&gt;Sí, Disponible&lt;/option&gt;
@@ -1445,7 +1443,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;input type&#x3D;&quot;url&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;imagen&quot; id&#x3D;&quot;floatingImagen&quot; placeholder&#x3D;&quot;https://...&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;imagen&#x27;)}&quot;&gt;
                             &lt;label for&#x3D;&quot;floatingImagen&quot;&gt;URL de la Fotografía&lt;/label&gt;
@@ -1453,7 +1451,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/div&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12&quot;&gt;
                         &lt;div class&#x3D;&quot;form-floating&quot;&gt;
                             &lt;textarea class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;descripcion&quot; id&#x3D;&quot;floatingDescripcion&quot; style&#x3D;&quot;height: 100px&quot; placeholder&#x3D;&quot;Reseña...&quot; [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: esCampoInvalido(&#x27;descripcion&#x27;)}&quot;&gt;&lt;/textarea&gt;
                             &lt;label for&#x3D;&quot;floatingDescripcion&quot;&gt;Descripción o reseña del vehículo&lt;/label&gt;
@@ -1462,7 +1460,7 @@ export class MantenedorVehiculos implements OnInit {
                     &lt;/div&gt;
                 &lt;/div&gt;
 
-                &lt;div class&#x3D;&quot;mt-4 d-flex gap-2 justify-content-end border-top pt-3&quot;&gt;
+                &lt;div class&#x3D;&quot;mt-4 d-grid gap-2 d-sm-flex justify-content-sm-end border-top pt-3&quot;&gt;
                     &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary px-4 fw-semibold rounded-pill&quot; (click)&#x3D;&quot;cancelarEdicion()&quot;&gt;
                         {{ modoEdicion ? &#x27;Cancelar&#x27; : &#x27;Limpiar&#x27; }}
                     &lt;/button&gt;
@@ -1482,7 +1480,7 @@ export class MantenedorVehiculos implements OnInit {
 
     &lt;div class&#x3D;&quot;card shadow-sm border-0 rounded-4 overflow-hidden&quot;&gt;
         &lt;div class&#x3D;&quot;card-body p-0 table-responsive&quot;&gt;
-            &lt;table class&#x3D;&quot;table table-hover align-middle mb-0 text-center&quot;&gt;
+            &lt;table class&#x3D;&quot;table table-hover align-middle mb-0 text-center text-nowrap&quot;&gt;
                 &lt;thead class&#x3D;&quot;table-light text-secondary&quot;&gt;
                     &lt;tr&gt;
                         &lt;th&gt;ID&lt;/th&gt;
@@ -1529,7 +1527,7 @@ export class MantenedorVehiculos implements OnInit {
                         &lt;/td&gt;
                     &lt;/tr&gt;
                     &lt;tr *ngIf&#x3D;&quot;vehiculos.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
-                        &lt;td colspan&#x3D;&quot;7&quot; class&#x3D;&quot;text-center py-5 text-muted&quot;&gt;
+                        &lt;td colspan&#x3D;&quot;8&quot; class&#x3D;&quot;text-center py-5 text-muted&quot;&gt;
                             &lt;i class&#x3D;&quot;fa-solid fa-car-tunnel display-4 mb-3 text-black-50&quot;&gt;&lt;/i&gt;
                             &lt;p class&#x3D;&quot;fs-5 mb-0&quot;&gt;No hay vehículos registrados en la flota.&lt;/p&gt;
                         &lt;/td&gt;
@@ -1573,7 +1571,7 @@ export class MantenedorVehiculos implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-car-side me-2"></i>Mantenedor Vehículos</h2>    <p class="text-white">Panel mantenedor de vehículos Bequianrent</p></div><div class="container mb-5">        <div class="card shadow-lg mb-5 border-0 rounded-4 overflow-hidden">        <div class="card-header bg-white text-white border-bottom-0 py-3">            <h5 class="mb-0 fw-bold text-primary">                <i class="fa-solid me-2" [ngClass]="modoEdicion ? \'fa-pen-to-square\' : \'fa-plus\'"></i>                {{ modoEdicion ? \'Modificar Datos del Vehículo\' : \'Ingresar Nuevo Vehículo\' }}            </h5>        </div>        <div class="card-body bg-light p-4">            <form [formGroup]="vehiculosForm" (ngSubmit)="guardarVehiculo()">                <div class="row g-3">                                        <div class="col-md-3">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="marca" id="floatingMarca" placeholder="Toyota" [ngClass]="{\'is-invalid\': esCampoInvalido(\'marca\')}">                            <label for="floatingMarca">Marca</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="modelo" id="floatingModelo" placeholder="Yaris" [ngClass]="{\'is-invalid\': esCampoInvalido(\'modelo\')}">                            <label for="floatingModelo">Modelo</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <select class="form-select" formControlName="tipo" id="floatingTipo" [ngClass]="{\'is-invalid\': esCampoInvalido(\'tipo\')}">                                <option value="" disabled selected>Seleccione...</option>                                <option value="Sedán">Sedán</option>                                <option value="Hatchback">Hatchback</option>                                <option value="SUV">SUV</option>                                <option value="Camioneta">Camioneta</option>                            </select>                            <label for="floatingTipo">Categoría (Tipo)</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="anio" id="floatingAnio" placeholder="2024" [ngClass]="{\'is-invalid\': esCampoInvalido(\'anio\')}">                            <label for="floatingAnio">Año</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <select class="form-select" formControlName="transmision" id="floatingTransmision" [ngClass]="{\'is-invalid\': esCampoInvalido(\'transmision\')}">                                <option value="" disabled selected>Seleccione...</option>                                <option value="Manual">Manual</option>                                <option value="Automática">Automática</option>                            </select>                            <label for="floatingTransmision">Transmisión</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-2">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="pasajeros" id="floatingPasajeros" placeholder="5" [ngClass]="{\'is-invalid\': esCampoInvalido(\'pasajeros\')}">                            <label for="floatingPasajeros">Pasajeros</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-2">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="rendimiento" id="floatingRendimiento" placeholder="15 km/l" [ngClass]="{\'is-invalid\': esCampoInvalido(\'rendimiento\')}">                            <label for="floatingRendimiento">Rendimiento</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-2">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="precio" id="floatingPrecio" placeholder="25000" [ngClass]="{\'is-invalid\': esCampoInvalido(\'precio\')}">                            <label for="floatingPrecio">Precio Diario ($)</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-3">                        <div class="form-floating">                            <select class="form-select" formControlName="disponible" id="floatingDisponible" [ngClass]="{\'is-invalid\': esCampoInvalido(\'disponible\')}">                                <option [ngValue]="true" class="text-success">Sí, Disponible</option>                                <option [ngValue]="false" class="text-danger">No, Ocupado</option>                            </select>                            <label for="floatingDisponible">Disponibilidad</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-md-12">                        <div class="form-floating">                            <input type="url" class="form-control" formControlName="imagen" id="floatingImagen" placeholder="https://..." [ngClass]="{\'is-invalid\': esCampoInvalido(\'imagen\')}">                            <label for="floatingImagen">URL de la Fotografía</label>                            <div class="invalid-feedback">La ruta de la imagen es obligatoria.</div>                        </div>                    </div>                    <div class="col-md-12">                        <div class="form-floating">                            <textarea class="form-control" formControlName="descripcion" id="floatingDescripcion" style="height: 100px" placeholder="Reseña..." [ngClass]="{\'is-invalid\': esCampoInvalido(\'descripcion\')}"></textarea>                            <label for="floatingDescripcion">Descripción o reseña del vehículo</label>                            <div class="invalid-feedback">La descripción es obligatoria.</div>                        </div>                    </div>                </div>                <div class="mt-4 d-flex gap-2 justify-content-end border-top pt-3">                    <button type="button" class="btn btn-outline-secondary px-4 fw-semibold rounded-pill" (click)="cancelarEdicion()">                        {{ modoEdicion ? \'Cancelar\' : \'Limpiar\' }}                    </button>                    <button type="submit" class="btn btn-primary px-4 fw-semibold rounded-pill">                        <i class="fa-solid fa-floppy-disk me-2"></i>                        {{ modoEdicion ? \'Actualizar Vehículo\' : \'Registrar Vehículo\' }}                    </button>                </div>            </form>            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm border-0 border-start border-4 border-{{tipoAlerta}}" role="alert">                <i class="fa-solid me-2" [ngClass]="tipoAlerta === \'success\' ? \'fa-circle-check\' : \'fa-triangle-exclamation\'"></i>                <strong>{{ tipoAlerta === \'success\' ? \'¡Listo!\' : \'Atención:\' }}</strong> {{ mensajeAlerta }}            </div>        </div>    </div>    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">        <div class="card-body p-0 table-responsive">            <table class="table table-hover align-middle mb-0 text-center">                <thead class="table-light text-secondary">                    <tr>                        <th>ID</th>                        <th>Imagen</th>                        <th>Marca / Modelo</th>                        <th>Categoría</th>                        <th>Año</th>                        <th>Precio / Día</th>                        <th>Estado</th>                        <th>Acciones</th>                    </tr>                </thead>                <tbody class="border-top-0">                    <tr *ngFor="let vehiculo of vehiculos">                        <td class="text-muted fw-bold">#{{ vehiculo.id }}</td>                        <td><img [src]="vehiculo.imagen" alt="Auto" class="rounded me-2 object-fit-cover shadow-sm" style="width: 40px; height: 40px;" onerror="this.src=\'assets/img/default-car.png\'"></td>                        <td class="fw-bold text-dark text-center">                            <div>                                <div>                                    {{ vehiculo.marca }}                                    <span class="text-muted fw-normal">{{ vehiculo.modelo }}</span>                                </div>                            </div>                        </td>                                                <td class="fw-bold text-dark">{{ vehiculo.tipo }}</td>                        <td>{{ vehiculo.anio }}</td>                        <td class="text-success fw-semibold">{{ vehiculo.precio | currency:\'CLP\':\'$ \':\'1.0-0\' }}</td>                                                <td>                            <span class="badge rounded-pill"                                   [ngClass]="vehiculo.disponible ? \'bg-success\' : \'bg-danger\'">                                {{ vehiculo.disponible ? \'Disponible\' : \'Ocupado\' }}                            </span>                        </td>                                                <td>                            <button class="btn btn-sm btn-light text-primary me-2 shadow-sm" (click)="editarVehiculo(vehiculo)" title="Editar">                                <i class="fa-solid fa-pen"></i>                            </button>                            <button class="btn btn-sm btn-light text-danger shadow-sm" (click)="eliminarVehiculo(vehiculo.id)" title="Eliminar">                                <i class="fa-solid fa-trash"></i>                            </button>                        </td>                    </tr>                    <tr *ngIf="vehiculos.length === 0">                        <td colspan="7" class="text-center py-5 text-muted">                            <i class="fa-solid fa-car-tunnel display-4 mb-3 text-black-50"></i>                            <p class="fs-5 mb-0">No hay vehículos registrados en la flota.</p>                        </td>                    </tr>                </tbody>            </table>        </div>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-car-side me-2"></i>Mantenedor Vehículos</h2>    <p class="text-white">Panel mantenedor de vehículos Bequianrent</p></div><div class="container mb-5">        <div class="card shadow-lg mb-5 border-0 rounded-4 overflow-hidden">        <div class="card-header bg-white text-white border-bottom-0 py-3">            <h5 class="mb-0 fw-bold text-primary">                <i class="fa-solid me-2" [ngClass]="modoEdicion ? \'fa-pen-to-square\' : \'fa-plus\'"></i>                {{ modoEdicion ? \'Modificar Datos del Vehículo\' : \'Ingresar Nuevo Vehículo\' }}            </h5>        </div>        <div class="card-body bg-light p-4">            <form [formGroup]="vehiculosForm" (ngSubmit)="guardarVehiculo()">                <div class="row g-3">                                        <div class="col-12 col-md-6 col-lg-3">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="marca" id="floatingMarca" placeholder="Toyota" [ngClass]="{\'is-invalid\': esCampoInvalido(\'marca\')}">                            <label for="floatingMarca">Marca</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-6 col-lg-3">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="modelo" id="floatingModelo" placeholder="Yaris" [ngClass]="{\'is-invalid\': esCampoInvalido(\'modelo\')}">                            <label for="floatingModelo">Modelo</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-6 col-lg-3">                        <div class="form-floating">                            <select class="form-select" formControlName="tipo" id="floatingTipo" [ngClass]="{\'is-invalid\': esCampoInvalido(\'tipo\')}">                                <option value="" disabled selected>Seleccione...</option>                                <option value="Sedán">Sedán</option>                                <option value="Hatchback">Hatchback</option>                                <option value="SUV">SUV</option>                                <option value="Camioneta">Camioneta</option>                            </select>                            <label for="floatingTipo">Categoría (Tipo)</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-6 col-lg-3">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="anio" id="floatingAnio" placeholder="2024" [ngClass]="{\'is-invalid\': esCampoInvalido(\'anio\')}">                            <label for="floatingAnio">Año</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-6 col-lg-3">                        <div class="form-floating">                            <select class="form-select" formControlName="transmision" id="floatingTransmision" [ngClass]="{\'is-invalid\': esCampoInvalido(\'transmision\')}">                                <option value="" disabled selected>Seleccione...</option>                                <option value="Manual">Manual</option>                                <option value="Automática">Automática</option>                            </select>                            <label for="floatingTransmision">Transmisión</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-3 col-lg-2">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="pasajeros" id="floatingPasajeros" placeholder="5" [ngClass]="{\'is-invalid\': esCampoInvalido(\'pasajeros\')}">                            <label for="floatingPasajeros">Pasajeros</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-3 col-lg-2">                        <div class="form-floating">                            <input type="text" class="form-control" formControlName="rendimiento" id="floatingRendimiento" placeholder="15 km/l" [ngClass]="{\'is-invalid\': esCampoInvalido(\'rendimiento\')}">                            <label for="floatingRendimiento">Rendimiento</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-6 col-lg-2">                        <div class="form-floating">                            <input type="number" class="form-control" formControlName="precio" id="floatingPrecio" placeholder="25000" [ngClass]="{\'is-invalid\': esCampoInvalido(\'precio\')}">                            <label for="floatingPrecio">Precio ($)</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12 col-md-6 col-lg-3">                        <div class="form-floating">                            <select class="form-select" formControlName="disponible" id="floatingDisponible" [ngClass]="{\'is-invalid\': esCampoInvalido(\'disponible\')}">                                <option [ngValue]="true" class="text-success">Sí, Disponible</option>                                <option [ngValue]="false" class="text-danger">No, Ocupado</option>                            </select>                            <label for="floatingDisponible">Disponibilidad</label>                            <div class="invalid-feedback">Requerido.</div>                        </div>                    </div>                    <div class="col-12">                        <div class="form-floating">                            <input type="url" class="form-control" formControlName="imagen" id="floatingImagen" placeholder="https://..." [ngClass]="{\'is-invalid\': esCampoInvalido(\'imagen\')}">                            <label for="floatingImagen">URL de la Fotografía</label>                            <div class="invalid-feedback">La ruta de la imagen es obligatoria.</div>                        </div>                    </div>                    <div class="col-12">                        <div class="form-floating">                            <textarea class="form-control" formControlName="descripcion" id="floatingDescripcion" style="height: 100px" placeholder="Reseña..." [ngClass]="{\'is-invalid\': esCampoInvalido(\'descripcion\')}"></textarea>                            <label for="floatingDescripcion">Descripción o reseña del vehículo</label>                            <div class="invalid-feedback">La descripción es obligatoria.</div>                        </div>                    </div>                </div>                <div class="mt-4 d-grid gap-2 d-sm-flex justify-content-sm-end border-top pt-3">                    <button type="button" class="btn btn-outline-secondary px-4 fw-semibold rounded-pill" (click)="cancelarEdicion()">                        {{ modoEdicion ? \'Cancelar\' : \'Limpiar\' }}                    </button>                    <button type="submit" class="btn btn-primary px-4 fw-semibold rounded-pill">                        <i class="fa-solid fa-floppy-disk me-2"></i>                        {{ modoEdicion ? \'Actualizar Vehículo\' : \'Registrar Vehículo\' }}                    </button>                </div>            </form>            <div *ngIf="mensajeAlerta" class="alert mt-4 mb-0 alert-{{tipoAlerta}} alert-dismissible fade show shadow-sm border-0 border-start border-4 border-{{tipoAlerta}}" role="alert">                <i class="fa-solid me-2" [ngClass]="tipoAlerta === \'success\' ? \'fa-circle-check\' : \'fa-triangle-exclamation\'"></i>                <strong>{{ tipoAlerta === \'success\' ? \'¡Listo!\' : \'Atención:\' }}</strong> {{ mensajeAlerta }}            </div>        </div>    </div>    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">        <div class="card-body p-0 table-responsive">            <table class="table table-hover align-middle mb-0 text-center text-nowrap">                <thead class="table-light text-secondary">                    <tr>                        <th>ID</th>                        <th>Imagen</th>                        <th>Marca / Modelo</th>                        <th>Categoría</th>                        <th>Año</th>                        <th>Precio / Día</th>                        <th>Estado</th>                        <th>Acciones</th>                    </tr>                </thead>                <tbody class="border-top-0">                    <tr *ngFor="let vehiculo of vehiculos">                        <td class="text-muted fw-bold">#{{ vehiculo.id }}</td>                        <td><img [src]="vehiculo.imagen" alt="Auto" class="rounded me-2 object-fit-cover shadow-sm" style="width: 40px; height: 40px;" onerror="this.src=\'assets/img/default-car.png\'"></td>                        <td class="fw-bold text-dark text-center">                            <div>                                <div>                                    {{ vehiculo.marca }}                                    <span class="text-muted fw-normal">{{ vehiculo.modelo }}</span>                                </div>                            </div>                        </td>                                                <td class="fw-bold text-dark">{{ vehiculo.tipo }}</td>                        <td>{{ vehiculo.anio }}</td>                        <td class="text-success fw-semibold">{{ vehiculo.precio | currency:\'CLP\':\'$ \':\'1.0-0\' }}</td>                                                <td>                            <span class="badge rounded-pill"                                   [ngClass]="vehiculo.disponible ? \'bg-success\' : \'bg-danger\'">                                {{ vehiculo.disponible ? \'Disponible\' : \'Ocupado\' }}                            </span>                        </td>                                                <td>                            <button class="btn btn-sm btn-light text-primary me-2 shadow-sm" (click)="editarVehiculo(vehiculo)" title="Editar">                                <i class="fa-solid fa-pen"></i>                            </button>                            <button class="btn btn-sm btn-light text-danger shadow-sm" (click)="eliminarVehiculo(vehiculo.id)" title="Eliminar">                                <i class="fa-solid fa-trash"></i>                            </button>                        </td>                    </tr>                    <tr *ngIf="vehiculos.length === 0">                        <td colspan="8" class="text-center py-5 text-muted">                            <i class="fa-solid fa-car-tunnel display-4 mb-3 text-black-50"></i>                            <p class="fs-5 mb-0">No hay vehículos registrados en la flota.</p>                        </td>                    </tr>                </tbody>            </table>        </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MantenedorVehiculos'};

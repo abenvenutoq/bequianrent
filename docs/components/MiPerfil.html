@@ -350,8 +350,8 @@ para actualizar los datos personales, validando en tiempo real las reglas de neg
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -391,8 +391,8 @@ basándose en la información actual guardada en el estado local del componente.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:145</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:140</a></div>
                         </td>
                     </tr>
 
@@ -430,8 +430,8 @@ basándose en la información actual guardada en el estado local del componente.
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="156"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:156</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -524,8 +524,8 @@ Ejecuta las siguientes acciones críticas:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -563,8 +563,8 @@ Ejecuta las siguientes acciones críticas:</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -1016,7 +1016,7 @@ Ejecuta las siguientes acciones críticas:</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:108</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/pages/mi-perfil/mi-perfil.ts:103</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1104,22 +1104,17 @@ export class MiPerfil implements OnInit {
     }
 
     const sesionActual &#x3D; this.authService.obtenerSesion();
-    if (!sesionActual || !sesionActual.loged) {
-      this.router.navigate([&#x27;/login&#x27;]);
-      return;
-    }
 
     const todosLosUsuarios &#x3D; this.authService.obtenerUsuario();
-    const usuarioEncontrado &#x3D; todosLosUsuarios.find(u &#x3D;&gt; u.correo &#x3D;&#x3D;&#x3D; sesionActual.correo);
+    const usuarioEncontrado &#x3D; todosLosUsuarios.find(u &#x3D;&gt; u.correo &#x3D;&#x3D;&#x3D; sesionActual?.correo);
 
-    if (usuarioEncontrado) {
+    if ( usuarioEncontrado ) {
       this.usuario &#x3D; usuarioEncontrado;
     } else {
       this.authService.cerrarSesion();
       this.router.navigate([&#x27;/login&#x27;]);
-      return;
     }
-    
+      
     /** Inicializa el formulario reactivo con los validadores correspondientes */
     this.perfilForm &#x3D; this.fb.group({
       nombre: [&#x27;&#x27;, [Validators.required, this.ValidacionService.isEmpty]],
@@ -1242,11 +1237,11 @@ export class MiPerfil implements OnInit {
 
 &lt;main class&#x3D;&quot;container my-5 flex-grow-1&quot; *ngIf&#x3D;&quot;usuario&quot;&gt;
     &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
-        &lt;div class&#x3D;&quot;col-12 col-lg-10&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 col-md-10 col-lg-10&quot;&gt;
             &lt;div class&#x3D;&quot;card shadow rounded-4 overflow-hidden border-0&quot;&gt;
                 &lt;div class&#x3D;&quot;row g-0&quot;&gt;
                     
-                    &lt;div class&#x3D;&quot;col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-5&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-4 p-md-5&quot;&gt;
                         &lt;div class&#x3D;&quot;avatar-circle mb-3 mx-auto&quot;&gt;
                             &lt;i class&#x3D;&quot;fa-solid fa-user&quot; id&#x3D;&quot;avatarIcon&quot;&gt;&lt;/i&gt;
                         &lt;/div&gt;
@@ -1257,7 +1252,7 @@ export class MiPerfil implements OnInit {
                         &lt;/span&gt;
                     &lt;/div&gt;
 
-                    &lt;div class&#x3D;&quot;col-md-8 p-5&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12 col-md-8 p-4 p-md-5&quot;&gt;
                         
                         &lt;div *ngIf&#x3D;&quot;!editando&quot;&gt;
                             &lt;div class&#x3D;&quot;d-flex justify-content-between align-items-center mb-4 border-bottom pb-3&quot;&gt;
@@ -1265,25 +1260,25 @@ export class MiPerfil implements OnInit {
                             &lt;/div&gt;
 
                             &lt;div class&#x3D;&quot;row g-4&quot;&gt;
-                                &lt;div class&#x3D;&quot;col-md-6 text-nowrap&quot;&gt;
+                                &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                     &lt;label class&#x3D;&quot;text-muted small fw-bold text-uppercase mb-1&quot;&gt;RUT&lt;/label&gt;
                                     &lt;p class&#x3D;&quot;fs-5 mb-0&quot;&gt;{{ usuario.rut }}&lt;/p&gt;
                                 &lt;/div&gt;
-                                &lt;div class&#x3D;&quot;col-md-6 text-nowrap&quot;&gt;
+                                &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6 text-break&quot;&gt;
                                     &lt;label class&#x3D;&quot;text-muted small fw-bold text-uppercase mb-1&quot;&gt;Correo Electrónico&lt;/label&gt;
                                     &lt;p class&#x3D;&quot;fs-5 mb-0&quot;&gt;{{ usuario.correo }}&lt;/p&gt;
                                 &lt;/div&gt;
-                                &lt;div class&#x3D;&quot;col-md-6 text-nowrap&quot;&gt;
+                                &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                     &lt;label class&#x3D;&quot;text-muted small fw-bold text-uppercase mb-1&quot;&gt;Fecha de Nacimiento&lt;/label&gt;
                                     &lt;p class&#x3D;&quot;fs-5 mb-0&quot;&gt;{{ usuario.fechaNacimiento | date: &#x27;dd-MM-yyyy&#x27;}}&lt;/p&gt;
                                 &lt;/div&gt;
-                                &lt;div class&#x3D;&quot;col-md-6 text-nowrap&quot;&gt;
+                                &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                     &lt;label class&#x3D;&quot;text-muted small fw-bold text-uppercase mb-1&quot;&gt;Dirección&lt;/label&gt;
                                     &lt;p class&#x3D;&quot;fs-5 mb-0&quot;&gt;{{ usuario.direccion || &#x27;No registrada&#x27; }}&lt;/p&gt;
                                 &lt;/div&gt;
                             &lt;/div&gt;
 
-                            &lt;div class&#x3D;&quot;mt-5 pt-3&quot;&gt;
+                            &lt;div class&#x3D;&quot;mt-5 pt-3 d-grid d-sm-block&quot;&gt;
                                 &lt;button (click)&#x3D;&quot;activarEdicion()&quot; class&#x3D;&quot;btn btn-outline-primary px-4&quot;&gt;
                                     &lt;i class&#x3D;&quot;fa-solid fa-pen me-2&quot;&gt;&lt;/i&gt; Editar Datos
                                 &lt;/button&gt;
@@ -1304,34 +1299,34 @@ export class MiPerfil implements OnInit {
 
                             &lt;form [formGroup]&#x3D;&quot;perfilForm&quot; (ngSubmit)&#x3D;&quot;guardarCambios()&quot; novalidate&gt;
                                 &lt;div class&#x3D;&quot;row g-3&quot;&gt;
-                                    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Nombre *&lt;/label&gt;
                                         &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;nombre&quot; 
                                             [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: f[&#x27;nombre&#x27;].invalid &amp;&amp; (f[&#x27;nombre&#x27;].dirty || f[&#x27;nombre&#x27;].touched)}&quot;&gt;
                                         &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;El nombre es obligatorio.&lt;/div&gt;
                                     &lt;/div&gt;
-                                    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Apellido *&lt;/label&gt;
                                         &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;apellido&quot; 
                                             [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: f[&#x27;apellido&#x27;].invalid &amp;&amp; (f[&#x27;apellido&#x27;].dirty || f[&#x27;apellido&#x27;].touched)}&quot;&gt;
                                         &lt;div class&#x3D;&quot;invalid-feedback&quot;&gt;El apellido es obligatorio.&lt;/div&gt;
                                     &lt;/div&gt;
 
-                                    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Fecha de Nacimiento *&lt;/label&gt;
                                         &lt;input type&#x3D;&quot;date&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;fechaNacimiento&quot; 
                                             [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: f[&#x27;fechaNacimiento&#x27;].invalid &amp;&amp; (f[&#x27;fechaNacimiento&#x27;].dirty || f[&#x27;fechaNacimiento&#x27;].touched)}&quot;&gt;
                                         &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;f[&#x27;fechaNacimiento&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;La fecha es obligatoria.&lt;/div&gt;
                                         &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;f[&#x27;fechaNacimiento&#x27;].errors?.[&#x27;menorDeEdad&#x27;]&quot;&gt;Debes ser mayor de 13 años.&lt;/div&gt;
                                     &lt;/div&gt;
-                                    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Dirección&lt;/label&gt;
                                         &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;direccion&quot; 
                                             [ngClass]&#x3D;&quot;{&#x27;is-invalid&#x27;: f[&#x27;direccion&#x27;].invalid &amp;&amp; (f[&#x27;direccion&#x27;].dirty || f[&#x27;direccion&#x27;].touched)}&quot;&gt;
                                         &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;f[&#x27;direccion&#x27;].errors?.[&#x27;direccionInvalida&#x27;]&quot;&gt;No puede ser un espacio en blanco&lt;/div&gt;
                                     &lt;/div&gt;
 
-                                    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Contraseña *&lt;/label&gt;
                                         &lt;div class&#x3D;&quot;input-group has-validation&quot;&gt;
                                             &lt;input [type]&#x3D;&quot;verPass ? &#x27;text&#x27; : &#x27;password&#x27;&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;password&quot; autocomplete&#x3D;&quot;new-password&quot;
@@ -1344,7 +1339,7 @@ export class MiPerfil implements OnInit {
                                             &lt;div class&#x3D;&quot;invalid-feedback&quot; *ngIf&#x3D;&quot;f[&#x27;password&#x27;].errors?.[&#x27;pattern&#x27;]&quot;&gt;Debe tener 1 mayúscula, 1 número y 1 carácter especial.&lt;/div&gt;
                                         &lt;/div&gt;
                                     &lt;/div&gt;
-                                    &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
+                                    &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                                         &lt;label class&#x3D;&quot;form-label fw-bold small text-muted&quot;&gt;Repetir Contraseña *&lt;/label&gt;
                                         &lt;div class&#x3D;&quot;input-group has-validation&quot;&gt;
                                             &lt;input [type]&#x3D;&quot;verConfirm ? &#x27;text&#x27; : &#x27;password&#x27;&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;confirmPassword&quot; autocomplete&#x3D;&quot;new-password&quot;
@@ -1358,7 +1353,7 @@ export class MiPerfil implements OnInit {
                                     &lt;/div&gt;
                                 &lt;/div&gt;
 
-                                &lt;div class&#x3D;&quot;mt-5 pt-3 d-flex gap-2&quot;&gt;
+                                &lt;div class&#x3D;&quot;mt-5 pt-3 d-grid gap-2 d-sm-flex&quot;&gt;
                                     &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary px-4&quot; [disabled]&#x3D;&quot;perfilForm.invalid&quot;&gt;
                                         &lt;i class&#x3D;&quot;fa-solid fa-floppy-disk me-2&quot;&gt;&lt;/i&gt; Guardar Cambios
                                     &lt;/button&gt;
@@ -1404,7 +1399,7 @@ export class MiPerfil implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>Mi Perfil</h2>    <p class="text-white">Gestiona tu información personal</p></div><main class="container my-5 flex-grow-1" *ngIf="usuario">    <div class="row justify-content-center">        <div class="col-12 col-lg-10">            <div class="card shadow rounded-4 overflow-hidden border-0">                <div class="row g-0">                                        <div class="col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-5">                        <div class="avatar-circle mb-3 mx-auto">                            <i class="fa-solid fa-user" id="avatarIcon"></i>                        </div>                        <h4 class="fw-bold mb-1 text-center">{{ usuario.nombre }} {{ usuario.apellido }}</h4>                        <span class="badge px-3 py-2 rounded-pill mt-2"                               [ngClass]="usuario.rol === \'admin\' ? \'bg-danger\' : \'bg-primary\'">                            {{ usuario.rol | uppercase }}                        </span>                    </div>                    <div class="col-md-8 p-5">                                                <div *ngIf="!editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Información Personal</h4>                            </div>                            <div class="row g-4">                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>                                    <p class="fs-5 mb-0">{{ usuario.rut }}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>                                    <p class="fs-5 mb-0">{{ usuario.correo }}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Fecha de Nacimiento</label>                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento | date: \'dd-MM-yyyy\'}}</p>                                </div>                                <div class="col-md-6 text-nowrap">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>                                    <p class="fs-5 mb-0">{{ usuario.direccion || \'No registrada\' }}</p>                                </div>                            </div>                            <div class="mt-5 pt-3">                                <button (click)="activarEdicion()" class="btn btn-outline-primary px-4">                                    <i class="fa-solid fa-pen me-2"></i> Editar Datos                                </button>                            </div>                        </div>                        <div *ngIf="editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Editar Información</h4>                            </div>                            <div *ngIf="mensajeError" class="alert alert-danger text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeError }}                            </div>                            <div *ngIf="mensajeExito" class="alert alert-success text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}                            </div>                            <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>                                <div class="row g-3">                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Nombre *</label>                                        <input type="text" class="form-control" formControlName="nombre"                                             [ngClass]="{\'is-invalid\': f[\'nombre\'].invalid && (f[\'nombre\'].dirty || f[\'nombre\'].touched)}">                                        <div class="invalid-feedback">El nombre es obligatorio.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Apellido *</label>                                        <input type="text" class="form-control" formControlName="apellido"                                             [ngClass]="{\'is-invalid\': f[\'apellido\'].invalid && (f[\'apellido\'].dirty || f[\'apellido\'].touched)}">                                        <div class="invalid-feedback">El apellido es obligatorio.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Fecha de Nacimiento *</label>                                        <input type="date" class="form-control" formControlName="fechaNacimiento"                                             [ngClass]="{\'is-invalid\': f[\'fechaNacimiento\'].invalid && (f[\'fechaNacimiento\'].dirty || f[\'fechaNacimiento\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'required\']">La fecha es obligatoria.</div>                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'menorDeEdad\']">Debes ser mayor de 13 años.</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Dirección</label>                                        <input type="text" class="form-control" formControlName="direccion"                                             [ngClass]="{\'is-invalid\': f[\'direccion\'].invalid && (f[\'direccion\'].dirty || f[\'direccion\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'direccion\'].errors?.[\'direccionInvalida\']">No puede ser un espacio en blanco</div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verPass ? \'text\' : \'password\'" class="form-control" formControlName="password" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'password\'].invalid && (f[\'password\'].dirty || f[\'password\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">                                                <i class="fa-solid" [ngClass]="verPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'required\']">La contraseña es obligatoria.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'minlength\'] || f[\'password\'].errors?.[\'maxlength\']">Debe tener entre 6 y 18 caracteres.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'pattern\']">Debe tener 1 mayúscula, 1 número y 1 carácter especial.</div>                                        </div>                                    </div>                                    <div class="col-md-6">                                        <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verConfirm ? \'text\' : \'password\'" class="form-control" formControlName="confirmPassword" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'confirmPassword\'].invalid && (f[\'confirmPassword\'].dirty || f[\'confirmPassword\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">                                                <i class="fa-solid" [ngClass]="verConfirm ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'required\']">Debes confirmar tu contraseña.</div>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'noCoinciden\']">Las contraseñas no coinciden.</div>                                        </div>                                    </div>                                </div>                                <div class="mt-5 pt-3 d-flex gap-2">                                    <button type="submit" class="btn btn-primary px-4" [disabled]="perfilForm.invalid">                                        <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios                                    </button>                                    <button type="button" (click)="cancelarEdicion()" class="btn btn-outline-secondary px-4">                                        Cancelar                                    </button>                                </div>                            </form>                        </div>                    </div>                </div>            </div>        </div>    </div></main></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-address-card me-2"></i>Mi Perfil</h2>    <p class="text-white">Gestiona tu información personal</p></div><main class="container my-5 flex-grow-1" *ngIf="usuario">    <div class="row justify-content-center">        <div class="col-12 col-md-10 col-lg-10">            <div class="card shadow rounded-4 overflow-hidden border-0">                <div class="row g-0">                                        <div class="col-12 col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-4 p-md-5">                        <div class="avatar-circle mb-3 mx-auto">                            <i class="fa-solid fa-user" id="avatarIcon"></i>                        </div>                        <h4 class="fw-bold mb-1 text-center">{{ usuario.nombre }} {{ usuario.apellido }}</h4>                        <span class="badge px-3 py-2 rounded-pill mt-2"                               [ngClass]="usuario.rol === \'admin\' ? \'bg-danger\' : \'bg-primary\'">                            {{ usuario.rol | uppercase }}                        </span>                    </div>                    <div class="col-12 col-md-8 p-4 p-md-5">                                                <div *ngIf="!editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Información Personal</h4>                            </div>                            <div class="row g-4">                                <div class="col-12 col-md-6 col-lg-6">                                    <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>                                    <p class="fs-5 mb-0">{{ usuario.rut }}</p>                                </div>                                <div class="col-12 col-md-6 col-lg-6 text-break">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>                                    <p class="fs-5 mb-0">{{ usuario.correo }}</p>                                </div>                                <div class="col-12 col-md-6 col-lg-6">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Fecha de Nacimiento</label>                                    <p class="fs-5 mb-0">{{ usuario.fechaNacimiento | date: \'dd-MM-yyyy\'}}</p>                                </div>                                <div class="col-12 col-md-6 col-lg-6">                                    <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>                                    <p class="fs-5 mb-0">{{ usuario.direccion || \'No registrada\' }}</p>                                </div>                            </div>                            <div class="mt-5 pt-3 d-grid d-sm-block">                                <button (click)="activarEdicion()" class="btn btn-outline-primary px-4">                                    <i class="fa-solid fa-pen me-2"></i> Editar Datos                                </button>                            </div>                        </div>                        <div *ngIf="editando">                            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">                                <h4 class="fw-bold text-primary mb-0">Editar Información</h4>                            </div>                            <div *ngIf="mensajeError" class="alert alert-danger text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-triangle-exclamation me-2"></i> {{ mensajeError }}                            </div>                            <div *ngIf="mensajeExito" class="alert alert-success text-center animate__animated animate__fadeIn mb-3" role="alert">                                <i class="fa-solid fa-circle-check me-2"></i> {{ mensajeExito }}                            </div>                            <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>                                <div class="row g-3">                                    <div class="col-12 col-md-6 col-lg-6">                                        <label class="form-label fw-bold small text-muted">Nombre *</label>                                        <input type="text" class="form-control" formControlName="nombre"                                             [ngClass]="{\'is-invalid\': f[\'nombre\'].invalid && (f[\'nombre\'].dirty || f[\'nombre\'].touched)}">                                        <div class="invalid-feedback">El nombre es obligatorio.</div>                                    </div>                                    <div class="col-12 col-md-6 col-lg-6">                                        <label class="form-label fw-bold small text-muted">Apellido *</label>                                        <input type="text" class="form-control" formControlName="apellido"                                             [ngClass]="{\'is-invalid\': f[\'apellido\'].invalid && (f[\'apellido\'].dirty || f[\'apellido\'].touched)}">                                        <div class="invalid-feedback">El apellido es obligatorio.</div>                                    </div>                                    <div class="col-12 col-md-6 col-lg-6">                                        <label class="form-label fw-bold small text-muted">Fecha de Nacimiento *</label>                                        <input type="date" class="form-control" formControlName="fechaNacimiento"                                             [ngClass]="{\'is-invalid\': f[\'fechaNacimiento\'].invalid && (f[\'fechaNacimiento\'].dirty || f[\'fechaNacimiento\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'required\']">La fecha es obligatoria.</div>                                        <div class="invalid-feedback" *ngIf="f[\'fechaNacimiento\'].errors?.[\'menorDeEdad\']">Debes ser mayor de 13 años.</div>                                    </div>                                    <div class="col-12 col-md-6 col-lg-6">                                        <label class="form-label fw-bold small text-muted">Dirección</label>                                        <input type="text" class="form-control" formControlName="direccion"                                             [ngClass]="{\'is-invalid\': f[\'direccion\'].invalid && (f[\'direccion\'].dirty || f[\'direccion\'].touched)}">                                        <div class="invalid-feedback" *ngIf="f[\'direccion\'].errors?.[\'direccionInvalida\']">No puede ser un espacio en blanco</div>                                    </div>                                    <div class="col-12 col-md-6 col-lg-6">                                        <label class="form-label fw-bold small text-muted">Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verPass ? \'text\' : \'password\'" class="form-control" formControlName="password" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'password\'].invalid && (f[\'password\'].dirty || f[\'password\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="togglePass()">                                                <i class="fa-solid" [ngClass]="verPass ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'required\']">La contraseña es obligatoria.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'minlength\'] || f[\'password\'].errors?.[\'maxlength\']">Debe tener entre 6 y 18 caracteres.</div>                                            <div class="invalid-feedback" *ngIf="f[\'password\'].errors?.[\'pattern\']">Debe tener 1 mayúscula, 1 número y 1 carácter especial.</div>                                        </div>                                    </div>                                    <div class="col-12 col-md-6 col-lg-6">                                        <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>                                        <div class="input-group has-validation">                                            <input [type]="verConfirm ? \'text\' : \'password\'" class="form-control" formControlName="confirmPassword" autocomplete="new-password"                                                [ngClass]="{\'is-invalid\': f[\'confirmPassword\'].invalid && (f[\'confirmPassword\'].dirty || f[\'confirmPassword\'].touched)}">                                            <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">                                                <i class="fa-solid" [ngClass]="verConfirm ? \'fa-eye-slash\' : \'fa-eye\'"></i>                                            </span>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'required\']">Debes confirmar tu contraseña.</div>                                            <div class="invalid-feedback" *ngIf="f[\'confirmPassword\'].errors?.[\'noCoinciden\']">Las contraseñas no coinciden.</div>                                        </div>                                    </div>                                </div>                                <div class="mt-5 pt-3 d-grid gap-2 d-sm-flex">                                    <button type="submit" class="btn btn-primary px-4" [disabled]="perfilForm.invalid">                                        <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios                                    </button>                                    <button type="button" (click)="cancelarEdicion()" class="btn btn-outline-secondary px-4">                                        Cancelar                                    </button>                                </div>                            </form>                        </div>                    </div>                </div>            </div>        </div>    </div></main></div>'
     var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MiPerfil'};

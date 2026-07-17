@@ -419,8 +419,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:130</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -460,8 +460,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -529,8 +529,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/pages/reservar-auto/reservar-auto.ts:153</a></div>
                         </td>
                     </tr>
 
@@ -1022,12 +1022,8 @@ export class ReservarAuto implements OnInit {
    * 4. Recupera el ID del vehículo desde la URL y hace la petición asíncrona para cargar sus datos.
    */
   ngOnInit(): void {
-    // Si el usuario no está logueado, lo mandamos al login de inmediato
-    if (!this.authService.estaLogueado()) {
-      this.router.navigate([&#x27;/login&#x27;], { queryParams: { returnUrl: this.router.url } });
-      return;
-    }
-
+    if (!this.authService.isBrowser()) return;
+    
     const hoy &#x3D; new Date();
     this.fechaMinima &#x3D; hoy.toISOString().split(&#x27;T&#x27;)[0];
 
@@ -1178,8 +1174,7 @@ export class ReservarAuto implements OnInit {
     &lt;div class&#x3D;&quot;container mb-5 flex-grow-1&quot;&gt;
         &lt;div class&#x3D;&quot;row g-4&quot; id&#x3D;&quot;reserva-contenedor-principal&quot;&gt;
             
-            &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
-                &lt;!-- Usamos @if (vehiculo) solo por seguridad para TypeScript, ya no necesitamos el else --&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
                 @if (vehiculo) {
                     &lt;div class&#x3D;&quot;card shadow-sm border-0 h-100&quot;&gt;
                         &lt;img [src]&#x3D;&quot;vehiculo.imagen&quot; class&#x3D;&quot;card-img-top p-3&quot; alt&#x3D;&quot;Vehículo&quot; style&#x3D;&quot;border-radius: 15px; object-fit: contain; max-height: 300px;&quot; onerror&#x3D;&quot;this.src&#x3D;&#x27;assets/img/default-car.png&#x27;&quot;&gt;
@@ -1199,8 +1194,8 @@ export class ReservarAuto implements OnInit {
                 }
             &lt;/div&gt;
 
-            &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
-                &lt;div class&#x3D;&quot;card shadow-sm border-0 p-4 bg-white h-100&quot; style&#x3D;&quot;border-radius: 10px;&quot;&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6 col-lg-6&quot;&gt;
+                &lt;div class&#x3D;&quot;card shadow-sm border-0 p-3 p-md-4 bg-white h-100&quot; style&#x3D;&quot;border-radius: 10px;&quot;&gt;
                     &lt;h4 class&#x3D;&quot;fw-bold text-dark mb-4 border-bottom pb-2&quot;&gt;&lt;i class&#x3D;&quot;fa-solid fa-calendar-days text-primary me-2&quot;&gt;&lt;/i&gt;Fechas del Arriendo&lt;/h4&gt;
                     
                     &lt;form [formGroup]&#x3D;&quot;reservaForm&quot; (ngSubmit)&#x3D;&quot;confirmarReserva()&quot;&gt;
@@ -1235,11 +1230,11 @@ export class ReservarAuto implements OnInit {
                             &lt;/div&gt;
                         &lt;/div&gt;
 
-                        &lt;div class&#x3D;&quot;d-grid gap-2&quot;&gt;
+                        &lt;div class&#x3D;&quot;d-grid gap-3&quot;&gt;
                             &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary btn-lg fw-bold py-3 shadow-sm&quot; [disabled]&#x3D;&quot;reservaForm.invalid || diasReserva &lt;&#x3D; 0&quot;&gt;
                                 &lt;i class&#x3D;&quot;fa-solid fa-circle-check me-2&quot;&gt;&lt;/i&gt;Confirmar y Reservar
                             &lt;/button&gt;
-                            &lt;a routerLink&#x3D;&quot;/ver-autos&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm mt-2&quot;&gt;Volver a la galería&lt;/a&gt;
+                            &lt;a routerLink&#x3D;&quot;/ver-autos&quot; class&#x3D;&quot;btn btn-outline-secondary w-100&quot;&gt;Volver a la galería&lt;/a&gt;
                         &lt;/div&gt;
                     &lt;/form&gt;
                 &lt;/div&gt;
@@ -1276,7 +1271,7 @@ export class ReservarAuto implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-sliders me-2"></i>Configura tu Reserva</h2>    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p></div>@if (cargando) {    <div class="text-center py-5">        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>        <p class="mt-2 text-muted fs-5 fw-medium">Cargando datos del vehículo...</p>    </div>} @else {    <div class="container mb-5 flex-grow-1">        <div class="row g-4" id="reserva-contenedor-principal">                        <div class="col-md-6">                <!-- Usamos @if (vehiculo) solo por seguridad para TypeScript, ya no necesitamos el else -->                @if (vehiculo) {                    <div class="card shadow-sm border-0 h-100">                        <img [src]="vehiculo.imagen" class="card-img-top p-3" alt="Vehículo" style="border-radius: 15px; object-fit: contain; max-height: 300px;" onerror="this.src=\'assets/img/default-car.png\'">                        <div class="card-body px-4 pb-4">                            <span class="badge bg-primary mb-2">{{ vehiculo.tipo }}</span>                            <h3 class="card-title fw-bold text-dark">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>                            <h4 class="text-success fw-bold mb-3">{{ vehiculo.precio | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }} <small class="text-muted fs-6 fw-normal">/día</small></h4>                            <p class="text-secondary">{{ vehiculo.descripcion }}</p>                                                        <ul class="list-group list-group-flush mt-3">                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-calendar text-primary me-2"></i><strong>Año:</strong> {{ vehiculo.anio }}</li>                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-users text-primary me-2"></i><strong>Pasajeros:</strong> {{ vehiculo.pasajeros }}</li>                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-gear text-primary me-2"></i><strong>Transmisión:</strong> {{ vehiculo.transmision }}</li>                            </ul>                        </div>                    </div>                }            </div>            <div class="col-md-6">                <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 10px;">                    <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>                                        <form [formGroup]="reservaForm" (ngSubmit)="confirmarReserva()">                        <div class="mb-3">                            <label for="fechaDesde" class="form-label fw-semibold">Fecha de Recogida (Inicio)</label>                            <input type="date" id="fechaDesde" class="form-control form-control-lg" formControlName="fechaDesde" [min]="fechaMinima"                                [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaDesde\')?.invalid && (reservaForm.get(\'fechaDesde\')?.dirty || reservaForm.get(\'fechaDesde\')?.touched)}">                            <div class="invalid-feedback">La fecha de recogida es obligatoria.</div>                        </div>                        <div class="mb-4">                            <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>                            <input type="date" id="fechaHasta" class="form-control form-control-lg" formControlName="fechaHasta" [min]="fechaMinima"                                [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaHasta\')?.invalid && (reservaForm.get(\'fechaHasta\')?.dirty || reservaForm.get(\'fechaHasta\')?.touched)}">                                                        <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'required\']">                                La fecha de devolución es obligatoria.                            </div>                            <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'fechaAnterior\']">                                La fecha de devolución no puede ser anterior a la fecha de recogida.                            </div>                        </div>                        <div class="bg-light rounded p-3 mb-4 border text-dark">                            <div class="d-flex justify-content-between mb-2">                                <span>Cantidad de Días:</span>                                <span class="fw-bold">{{ diasReserva }} días</span>                            </div>                            <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">                                <span class="fs-5 fw-semibold">Total a Pagar:</span>                                <span class="fs-4 fw-bold text-success">{{ totalPagar | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }}</span>                            </div>                        </div>                        <div class="d-grid gap-2">                            <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" [disabled]="reservaForm.invalid || diasReserva <= 0">                                <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar                            </button>                            <a routerLink="/ver-autos" class="btn btn-outline-secondary btn-sm mt-2">Volver a la galería</a>                        </div>                    </form>                </div>            </div>        </div>    </div>}</div>'
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-sliders me-2"></i>Configura tu Reserva</h2>    <p class="text-white">¡Estás a un paso de disfrutar tu próximo viaje!</p></div>@if (cargando) {    <div class="text-center py-5">        <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>        <p class="mt-2 text-muted fs-5 fw-medium">Cargando datos del vehículo...</p>    </div>} @else {    <div class="container mb-5 flex-grow-1">        <div class="row g-4" id="reserva-contenedor-principal">                        <div class="col-12 col-md-6 col-lg-6">                @if (vehiculo) {                    <div class="card shadow-sm border-0 h-100">                        <img [src]="vehiculo.imagen" class="card-img-top p-3" alt="Vehículo" style="border-radius: 15px; object-fit: contain; max-height: 300px;" onerror="this.src=\'assets/img/default-car.png\'">                        <div class="card-body px-4 pb-4">                            <span class="badge bg-primary mb-2">{{ vehiculo.tipo }}</span>                            <h3 class="card-title fw-bold text-dark">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h3>                            <h4 class="text-success fw-bold mb-3">{{ vehiculo.precio | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }} <small class="text-muted fs-6 fw-normal">/día</small></h4>                            <p class="text-secondary">{{ vehiculo.descripcion }}</p>                                                        <ul class="list-group list-group-flush mt-3">                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-calendar text-primary me-2"></i><strong>Año:</strong> {{ vehiculo.anio }}</li>                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-users text-primary me-2"></i><strong>Pasajeros:</strong> {{ vehiculo.pasajeros }}</li>                                <li class="list-group-item bg-transparent px-0"><i class="fa-solid fa-gear text-primary me-2"></i><strong>Transmisión:</strong> {{ vehiculo.transmision }}</li>                            </ul>                        </div>                    </div>                }            </div>            <div class="col-12 col-md-6 col-lg-6">                <div class="card shadow-sm border-0 p-3 p-md-4 bg-white h-100" style="border-radius: 10px;">                    <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>                                        <form [formGroup]="reservaForm" (ngSubmit)="confirmarReserva()">                        <div class="mb-3">                            <label for="fechaDesde" class="form-label fw-semibold">Fecha de Recogida (Inicio)</label>                            <input type="date" id="fechaDesde" class="form-control form-control-lg" formControlName="fechaDesde" [min]="fechaMinima"                                [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaDesde\')?.invalid && (reservaForm.get(\'fechaDesde\')?.dirty || reservaForm.get(\'fechaDesde\')?.touched)}">                            <div class="invalid-feedback">La fecha de recogida es obligatoria.</div>                        </div>                        <div class="mb-4">                            <label for="fechaHasta" class="form-label fw-semibold">Fecha de Devolución (Término)</label>                            <input type="date" id="fechaHasta" class="form-control form-control-lg" formControlName="fechaHasta" [min]="fechaMinima"                                [ngClass]="{\'is-invalid\': reservaForm.get(\'fechaHasta\')?.invalid && (reservaForm.get(\'fechaHasta\')?.dirty || reservaForm.get(\'fechaHasta\')?.touched)}">                                                        <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'required\']">                                La fecha de devolución es obligatoria.                            </div>                            <div class="invalid-feedback" *ngIf="reservaForm.get(\'fechaHasta\')?.errors?.[\'fechaAnterior\']">                                La fecha de devolución no puede ser anterior a la fecha de recogida.                            </div>                        </div>                        <div class="bg-light rounded p-3 mb-4 border text-dark">                            <div class="d-flex justify-content-between mb-2">                                <span>Cantidad de Días:</span>                                <span class="fw-bold">{{ diasReserva }} días</span>                            </div>                            <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">                                <span class="fs-5 fw-semibold">Total a Pagar:</span>                                <span class="fs-4 fw-bold text-success">{{ totalPagar | currency:\'CLP\':\'symbol-narrow\':\'1.0-0\' }}</span>                            </div>                        </div>                        <div class="d-grid gap-3">                            <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" [disabled]="reservaForm.invalid || diasReserva <= 0">                                <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar                            </button>                            <a routerLink="/ver-autos" class="btn btn-outline-secondary w-100">Volver a la galería</a>                        </div>                    </form>                </div>            </div>        </div>    </div>}</div>'
     var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ReservarAuto'};

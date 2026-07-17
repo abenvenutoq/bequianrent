@@ -905,9 +905,9 @@ export class AdminPanel implements OnInit {
 
 &lt;div class&#x3D;&quot;container my-5&quot;&gt;
     &lt;div class&#x3D;&quot;row&quot;&gt;
-        &lt;div class&#x3D;&quot;col-md-3 mb-4&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 col-md-4 col-lg-3 mb-4&quot;&gt;
             &lt;div class&#x3D;&quot;card shadow-sm border-0 p-3 bg-white mb-4&quot; style&#x3D;&quot;border-radius: 10px;&quot;&gt;
-                &lt;div class&#x3D;&quot;d-flex flex-column gap-2&quot;&gt;
+                &lt;div class&#x3D;&quot;d-flex flex-column flex-sm-row flex-md-column gap-2&quot;&gt;
                     &lt;button class&#x3D;&quot;btn w-100 text-start fw-semibold py-2&quot; 
                             [ngClass]&#x3D;&quot;vistaActual &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27; ? &#x27;btn-primary&#x27; : &#x27;btn-light&#x27;&quot;
                             (click)&#x3D;&quot;cambiarVista(&#x27;usuarios&#x27;)&quot;&gt;
@@ -922,19 +922,21 @@ export class AdminPanel implements OnInit {
             &lt;/div&gt;
         &lt;/div&gt;
 
-        &lt;div class&#x3D;&quot;col-md-9&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 col-md-8 col-lg-9&quot;&gt;
             
-            &lt;app-usuarios-tabla 
-                *ngIf&#x3D;&quot;vistaActual &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27;&quot; 
-                [listaUsuarios]&#x3D;&quot;usuarios&quot;&gt;
-            &lt;/app-usuarios-tabla&gt;
+            &lt;div class&#x3D;&quot;panel-contenido-wrapper&quot;&gt;
+                &lt;app-usuarios-tabla 
+                    *ngIf&#x3D;&quot;vistaActual &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27;&quot; 
+                    [listaUsuarios]&#x3D;&quot;usuarios&quot;&gt;
+                &lt;/app-usuarios-tabla&gt;
 
-            &lt;app-reservas-tabla 
-                *ngIf&#x3D;&quot;vistaActual &#x3D;&#x3D;&#x3D; &#x27;reservas&#x27;&quot; 
-                [listaReservas]&#x3D;&quot;reservas&quot;
-                [listaVehiculos]&#x3D;&quot;vehiculos&quot;
-                (onEstadoCambiado)&#x3D;&quot;actualizarEstadoReserva($event)&quot;&gt;
-            &lt;/app-reservas-tabla&gt;
+                &lt;app-reservas-tabla 
+                    *ngIf&#x3D;&quot;vistaActual &#x3D;&#x3D;&#x3D; &#x27;reservas&#x27;&quot; 
+                    [listaReservas]&#x3D;&quot;reservas&quot;
+                    [listaVehiculos]&#x3D;&quot;vehiculos&quot;
+                    (onEstadoCambiado)&#x3D;&quot;actualizarEstadoReserva($event)&quot;&gt;
+                &lt;/app-reservas-tabla&gt;
+            &lt;/div&gt;
 
         &lt;/div&gt;
     &lt;/div&gt;
@@ -967,7 +969,7 @@ export class AdminPanel implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-users-gear me-2"></i>Panel Administración</h2>    <p class="text-white">Panel de gestión y control de BequianRent</p></div><div class="container my-5">    <div class="row">        <div class="col-md-3 mb-4">            <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">                <div class="d-flex flex-column gap-2">                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'usuarios\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'usuarios\')">                        <i class="fa-solid fa-users me-2"></i>Usuarios Registrados                    </button>                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'reservas\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'reservas\')">                        <i class="fa-solid fa-calendar-days me-2"></i>Reservas Realizadas                    </button>                </div>            </div>        </div>        <div class="col-md-9">                        <app-usuarios-tabla                 *ngIf="vistaActual === \'usuarios\'"                 [listaUsuarios]="usuarios">            </app-usuarios-tabla>            <app-reservas-tabla                 *ngIf="vistaActual === \'reservas\'"                 [listaReservas]="reservas"                [listaVehiculos]="vehiculos"                (onEstadoCambiado)="actualizarEstadoReserva($event)">            </app-reservas-tabla>        </div>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="bg-primary text-white py-4 mb-4 text-center header-global">    <h2 class="fw-bold"><i class="fa-solid fa-users-gear me-2"></i>Panel Administración</h2>    <p class="text-white">Panel de gestión y control de BequianRent</p></div><div class="container my-5">    <div class="row">        <div class="col-12 col-md-4 col-lg-3 mb-4">            <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">                <div class="d-flex flex-column flex-sm-row flex-md-column gap-2">                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'usuarios\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'usuarios\')">                        <i class="fa-solid fa-users me-2"></i>Usuarios Registrados                    </button>                    <button class="btn w-100 text-start fw-semibold py-2"                             [ngClass]="vistaActual === \'reservas\' ? \'btn-primary\' : \'btn-light\'"                            (click)="cambiarVista(\'reservas\')">                        <i class="fa-solid fa-calendar-days me-2"></i>Reservas Realizadas                    </button>                </div>            </div>        </div>        <div class="col-12 col-md-8 col-lg-9">                        <div class="panel-contenido-wrapper">                <app-usuarios-tabla                     *ngIf="vistaActual === \'usuarios\'"                     [listaUsuarios]="usuarios">                </app-usuarios-tabla>                <app-reservas-tabla                     *ngIf="vistaActual === \'reservas\'"                     [listaReservas]="reservas"                    [listaVehiculos]="vehiculos"                    (onEstadoCambiado)="actualizarEstadoReserva($event)">                </app-reservas-tabla>            </div>        </div>    </div></div></div>'
     var COMPONENTS = [{'name': 'AdminEstadisticaVenta', 'selector': 'app-estadisticas-ventas'},{'name': 'AdminPanel', 'selector': 'app-admin-panel'},{'name': 'App', 'selector': 'app-root'},{'name': 'EditarReserva', 'selector': 'app-editar-reserva'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'MantenedorSucursales', 'selector': 'mantenedor-sucursales'},{'name': 'MantenedorVehiculos', 'selector': 'mantenedor-vehiculos'},{'name': 'MiPerfil', 'selector': 'app-mi-perfil'},{'name': 'MisReservas', 'selector': 'app-mis-reservas'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'Registro', 'selector': 'app-registro'},{'name': 'ReservarAuto', 'selector': 'app-reservar-auto'},{'name': 'ReservasTablaComponent', 'selector': 'app-reservas-tabla'},{'name': 'SucursalesComponent', 'selector': 'Sucursales'},{'name': 'Testimonio', 'selector': 'app-testimonios'},{'name': 'UsuariosTablaComponent', 'selector': 'app-usuarios-tabla'},{'name': 'VerAutos', 'selector': 'app-ver-autos'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AdminPanel'};
