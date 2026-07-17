@@ -146,17 +146,7 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Componente dedicado a la edición de reservas existentes por parte del administrador.
-Permite reasignar vehículos, modificar fechas de arriendo y recalcula automáticamente
-el valor total a pagar basándose en la diferencia de días.</p>
-<ul>
-<li>@usageNotes</li>
-</ul>
-<ul>
-<li>Este componente está protegido por el Guard de administrador (<code>adminGuard</code>).</li>
-<li>Se encarga de gestionar la disponibilidad cruzada: si se cambia el vehículo de la reserva,
-libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li>
-</ul>
+        <p>Componente para editar una reserva existente. Permite modificar el vehículo, las fechas y recalcula el total de la reserva.</p>
 
     </p>
 
@@ -307,6 +297,9 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                             <li>
                                 <a href="#recalcularTotal" >recalcularTotal</a>
                             </li>
+                            <li>
+                                <a href="#refrescarFlota" >refrescarFlota</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -351,27 +344,26 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:145</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Procesa la solicitud final de guardado de los cambios de la reserva.</p>
-<ul>
-<li>Valida el formulario y la coherencia del precio.</li>
-<li>Intercambia los estados de disponibilidad si el administrador seleccionó un vehículo distinto.</li>
-<li>Actualiza el objeto de la reserva en el almacenamiento persistente.</li>
-<li>Redirige a la vista de &quot;Reservas Realizadas&quot; en el panel de administración.</li>
-</ul>
+                        <div class="io-description"><p>Guarda los cambios realizados en la reserva. Actualiza la disponibilidad de los vehículos si se ha cambiado el vehículo seleccionado.
+Si el formulario es inválido o el total calculado es menor o igual a 0, no realiza ninguna acción.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>Una promesa que se resuelve cuando los cambios se han guardado correctamente.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -396,21 +388,15 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:67</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Iniciación del componente.</p>
-<ol>
-<li>Captura el ID de la reserva desde los parámetros de la ruta.</li>
-<li>Recupera la reserva correspondiente y los vehículos del sistema.</li>
-<li>Inicializa el formulario reactivo pre-rellenando los datos.</li>
-<li>Se suscribe a los cambios del formulario para disparar el recálculo matemático automático.</li>
-</ol>
+                        <div class="io-description"><p>Inicializa el componente, carga la reserva actual y configura el formulario de edición.</p>
 </div>
 
                         <div class="io-description">
@@ -449,18 +435,57 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Método encargado de realizar la matemática financiera de la reserva.</p>
-<ul>
-<li>Calcula la diferencia en días exactos entre <code>fechaDesde</code> y <code>fechaHasta</code>.</li>
-<li>Multiplica la cantidad de días por la tarifa diaria del vehículo seleccionado.</li>
-<li>Si las fechas son inválidas (ej. fecha de fin menor a la de inicio), el total se fija en 0.</li>
-</ul>
+                        <div class="io-description"><p>Recalcula el total de la reserva basado en el vehículo seleccionado y las fechas ingresadas.
+Si las fechas son inválidas o el vehículo no está seleccionado, el total se establece en 0.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refrescarFlota"></a>
+                    <span class="name">
+                        <span ><b>refrescarFlota</b></span>
+                        <a href="#refrescarFlota"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refrescarFlota()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Refresca la lista de vehículos disponibles desde el servidor.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Una promesa que se resuelve cuando la lista se ha actualizado.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -496,10 +521,16 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Instancia ChangeDetectorRef para detectar cambios manualmente</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -522,13 +553,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:41</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Formulario reactivo principal que contiene los campos de la reserva.</p>
+                    <div class="io-description"><p>Instancia del formulario de edición</p>
 </div>
                 </td>
             </tr>
@@ -560,13 +591,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:26</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Creador de formularios reactivos inyectado para la gestión de campos.</p>
+                    <div class="io-description"><p>Instancia FormBuilder para crear formularios reactivos</p>
 </div>
                 </td>
             </tr>
@@ -592,13 +623,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:47</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Almacena la fecha actual formateada para bloquear la selección de fechas pasadas en el HTML.</p>
+                    <div class="io-description"><p>Fecha mínima permitida para la reserva</p>
 </div>
                 </td>
             </tr>
@@ -624,13 +655,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:45</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Objeto que almacena los datos originales de la reserva antes de ser modificados.</p>
+                    <div class="io-description"><p>Reserva actual que se está editando</p>
 </div>
                 </td>
             </tr>
@@ -656,13 +687,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:43</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Identificador único de la reserva extraído de la URL.</p>
+                    <div class="io-description"><p>Identificador del vehículo seleccionado</p>
 </div>
                 </td>
             </tr>
@@ -694,13 +725,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:32</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio para la lectura y persistencia de reservas.</p>
+                    <div class="io-description"><p>Instancia del servicio de reservas</p>
 </div>
                 </td>
             </tr>
@@ -732,13 +763,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:28</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio para obtener parámetros de la URL activa (ej. el ID de la reserva a editar).</p>
+                    <div class="io-description"><p>Instancia ActivatedRoute para acceder a los parámetros de la ruta</p>
 </div>
                 </td>
             </tr>
@@ -770,13 +801,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:30</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio de enrutamiento para redireccionar tras guardar o cancelar.</p>
+                    <div class="io-description"><p>Instancia router para la navegación</p>
 </div>
                 </td>
             </tr>
@@ -807,13 +838,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:52</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Valor monetario calculado dinámicamente según las fechas ingresadas y el vehículo seleccionado.</p>
+                    <div class="io-description"><p>Total calculado de la reserva</p>
 </div>
                 </td>
             </tr>
@@ -845,13 +876,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:36</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio con utilidades de validación, usado para validar la coherencia de las fechas.</p>
+                    <div class="io-description"><p>Instancia del servicio de validación</p>
 </div>
                 </td>
             </tr>
@@ -882,13 +913,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:50</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Lista completa de vehículos disponibles y no disponibles para nutrir el elemento select.</p>
+                    <div class="io-description"><p>Lista de vehículos disponibles</p>
 </div>
                 </td>
             </tr>
@@ -920,13 +951,13 @@ libera automáticamente el vehículo anterior y marca como ocupado el nuevo.</li
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/editar-reserva/editar-reserva.ts:34</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio para la lectura y gestión del inventario de vehículos.</p>
+                    <div class="io-description"><p>Instancia del servicio de vehículos</p>
 </div>
                 </td>
             </tr>
@@ -952,13 +983,7 @@ import { ValidacionService } from &#x27;../../services/validacion.services&#x27;
 
 /**
  * @description
- * Componente dedicado a la edición de reservas existentes por parte del administrador.
- * Permite reasignar vehículos, modificar fechas de arriendo y recalcula automáticamente
- * el valor total a pagar basándose en la diferencia de días.
- * * @usageNotes
- * - Este componente está protegido por el Guard de administrador (&#x60;adminGuard&#x60;).
- * - Se encarga de gestionar la disponibilidad cruzada: si se cambia el vehículo de la reserva,
- * libera automáticamente el vehículo anterior y marca como ocupado el nuevo.
+ * Componente para editar una reserva existente. Permite modificar el vehículo, las fechas y recalcula el total de la reserva.
  */
 @Component({
   selector: &#x27;app-editar-reserva&#x27;,
@@ -967,51 +992,47 @@ import { ValidacionService } from &#x27;../../services/validacion.services&#x27;
   templateUrl: &#x27;./editar-reserva.html&#x27;,
   styleUrls: [&#x27;./editar-reserva.css&#x27;]
 })
-export class EditarReserva implements OnInit {
-  
-  /** Creador de formularios reactivos inyectado para la gestión de campos. */
-  private fb &#x3D; inject(FormBuilder);
-  /** Servicio para obtener parámetros de la URL activa (ej. el ID de la reserva a editar). */
-  private route &#x3D; inject(ActivatedRoute);
-  /** Servicio de enrutamiento para redireccionar tras guardar o cancelar. */
-  private router &#x3D; inject(Router);
-  /** Servicio para la lectura y persistencia de reservas. */
-  private reservaService &#x3D; inject(ReservaService);
-  /** Servicio para la lectura y gestión del inventario de vehículos. */
-  private vehiculoService &#x3D; inject(VehiculosJsonServerService);
-  /** Servicio con utilidades de validación, usado para validar la coherencia de las fechas. */
-  private validacionService &#x3D; inject(ValidacionService);
 
+export class EditarReserva implements OnInit {
+  /** Instancia FormBuilder para crear formularios reactivos */
+  private fb &#x3D; inject(FormBuilder);
+  /** Instancia ActivatedRoute para acceder a los parámetros de la ruta */
+  private route &#x3D; inject(ActivatedRoute);
+  /** Instancia router para la navegación */
+  private router &#x3D; inject(Router);
+  /** Instancia del servicio de reservas */
+  private reservaService &#x3D; inject(ReservaService);
+  /** Instancia del servicio de vehículos */
+  private vehiculoService &#x3D; inject(VehiculosJsonServerService);
+  /** Instancia del servicio de validación */
+  private validacionService &#x3D; inject(ValidacionService);
+  /** Instancia ChangeDetectorRef para detectar cambios manualmente */
   private cdr &#x3D; inject(ChangeDetectorRef);
 
-  /** Formulario reactivo principal que contiene los campos de la reserva. */
+  /** Instancia del formulario de edición */
   editarForm!: FormGroup;
-  /** Identificador único de la reserva extraído de la URL. */
+  /** Identificador del vehículo seleccionado */
   reservaId!: string | number;
-  /** Objeto que almacena los datos originales de la reserva antes de ser modificados. */
+  /** Reserva actual que se está editando */
   reservaActual: Reserva | undefined;
-  /** Almacena la fecha actual formateada para bloquear la selección de fechas pasadas en el HTML. */
+  /** Fecha mínima permitida para la reserva */
   fechaMinima!: string;
   
-  /** Lista completa de vehículos disponibles y no disponibles para nutrir el elemento select. */
+  /** Lista de vehículos disponibles */
   vehiculos: Vehiculo[] &#x3D; [];
-  /** Valor monetario calculado dinámicamente según las fechas ingresadas y el vehículo seleccionado. */
+  /** Total calculado de la reserva */
   totalCalculado: number &#x3D; 0;
 
+
   /**
-   * Iniciación del componente.
-   * 1. Captura el ID de la reserva desde los parámetros de la ruta.
-   * 2. Recupera la reserva correspondiente y los vehículos del sistema.
-   * 3. Inicializa el formulario reactivo pre-rellenando los datos.
-   * 4. Se suscribe a los cambios del formulario para disparar el recálculo matemático automático.
+   * @description
+   * Inicializa el componente, carga la reserva actual y configura el formulario de edición.
    */
   ngOnInit(): void {
-    // Obtener el ID de la reserva desde la URL
     this.reservaId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;)!;
     const hoy &#x3D; new Date();
     this.fechaMinima &#x3D; hoy.toISOString().split(&#x27;T&#x27;)[0];
     
-    // Buscar la reserva
     const todasReservas &#x3D; this.reservaService.obtenerReservas();
     this.reservaActual &#x3D; todasReservas.find(r &#x3D;&gt; String(r.id) &#x3D;&#x3D;&#x3D; String(this.reservaId));
 
@@ -1021,40 +1042,50 @@ export class EditarReserva implements OnInit {
       return;
     }
 
-    // Obtener vehículos para el Select desde JSON Server
-    this.vehiculoService.getVehiculo().subscribe({
-      next: (vehiculos) &#x3D;&gt; {
-        this.vehiculos &#x3D; vehiculos;
-        this.cdr.detectChanges();
-      },
-      error: () &#x3D;&gt; {
-        this.vehiculos &#x3D; [];
-      }
-    });
+    /** Refresca la lista de vehículos disponibles */
+    this.refrescarFlota();
 
-    // Inicializar formulario con los datos actuales
     this.editarForm &#x3D; this.fb.group({
       vehiculoId: [this.reservaActual.idVehiculo, Validators.required],
       fechaDesde: [this.reservaActual.fechaDesde, Validators.required],
       fechaHasta: [this.reservaActual.fechaHasta, Validators.required]
     }, {
-        // Validación personalizada a nivel de grupo para asegurar que la fecha final sea lógica
         validators: [this.validacionService.validarFechasReserva.bind(this.validacionService)]
     });
 
     this.totalCalculado &#x3D; this.reservaActual.total || 0;
 
-    // Escuchar cambios dinámicos en el formulario para recalcular el precio
     this.editarForm.valueChanges.subscribe(() &#x3D;&gt; {
       this.recalcularTotal();
     });
   }
 
+ 
   /**
-   * Método encargado de realizar la matemática financiera de la reserva.
-   * * Calcula la diferencia en días exactos entre &#x60;fechaDesde&#x60; y &#x60;fechaHasta&#x60;.
-   * * Multiplica la cantidad de días por la tarifa diaria del vehículo seleccionado.
-   * * Si las fechas son inválidas (ej. fecha de fin menor a la de inicio), el total se fija en 0.
+   * @description
+   * Refresca la lista de vehículos disponibles desde el servidor.
+   * @returns Una promesa que se resuelve cuando la lista se ha actualizado.
+   */
+  refrescarFlota(): Promise&lt;void&gt; {
+    return new Promise((resolve) &#x3D;&gt; {
+      this.vehiculoService.getVehiculo().subscribe({
+        next: (vehiculos) &#x3D;&gt; {
+          this.vehiculos &#x3D; vehiculos;
+          this.cdr.detectChanges();
+          resolve(); // Avisamos que ya terminó de cargar
+        },
+        error: () &#x3D;&gt; {
+          this.vehiculos &#x3D; [];
+          resolve();
+        }
+      });
+    });
+  }
+
+  /**
+   * @description
+   * Recalcula el total de la reserva basado en el vehículo seleccionado y las fechas ingresadas.
+   * Si las fechas son inválidas o el vehículo no está seleccionado, el total se establece en 0.
    */
   recalcularTotal(): void {
     const { vehiculoId, fechaDesde, fechaHasta } &#x3D; this.editarForm.value;
@@ -1066,7 +1097,6 @@ export class EditarReserva implements OnInit {
     const inicio &#x3D; new Date(fechaDesde);
     const fin &#x3D; new Date(fechaHasta);
     
-    // Si la fecha de fin es menor o igual a la de inicio, no calculamos
     if (fin &lt;&#x3D; inicio) {
         this.totalCalculado &#x3D; 0;
         return;
@@ -1075,16 +1105,14 @@ export class EditarReserva implements OnInit {
     const diffTime &#x3D; Math.abs(fin.getTime() - inicio.getTime());
     const diffDays &#x3D; Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
-    // Asigna el total basándose en el precio del vehículo
     this.totalCalculado &#x3D; diffDays * (autoSeleccionado.precio || 0);
   }
 
   /**
-   * Procesa la solicitud final de guardado de los cambios de la reserva.
-   * * Valida el formulario y la coherencia del precio.
-   * * Intercambia los estados de disponibilidad si el administrador seleccionó un vehículo distinto.
-   * * Actualiza el objeto de la reserva en el almacenamiento persistente.
-   * * Redirige a la vista de &quot;Reservas Realizadas&quot; en el panel de administración.
+   * @description
+   * Guarda los cambios realizados en la reserva. Actualiza la disponibilidad de los vehículos si se ha cambiado el vehículo seleccionado.
+   * Si el formulario es inválido o el total calculado es menor o igual a 0, no realiza ninguna acción.
+   * @returns Una promesa que se resuelve cuando los cambios se han guardado correctamente.
    */
   async guardarCambios(): Promise&lt;void&gt; {
     if (this.editarForm.invalid || this.totalCalculado &lt;&#x3D; 0) return;
@@ -1092,14 +1120,13 @@ export class EditarReserva implements OnInit {
     const { vehiculoId, fechaDesde, fechaHasta } &#x3D; this.editarForm.value;
     const vehiculoIdNumerico &#x3D; Number(vehiculoId);
 
-    // 1. Lógica para actualizar estados de los vehículos si cambió de auto
     if (String(this.reservaActual!.idVehiculo) !&#x3D;&#x3D; String(vehiculoIdNumerico)) {
         
         const autoAntiguo &#x3D; this.vehiculos.find(v &#x3D;&gt; String(v.id) &#x3D;&#x3D;&#x3D; String(this.reservaActual!.idVehiculo));
         const autoNuevo &#x3D; this.vehiculos.find(v &#x3D;&gt; String(v.id) &#x3D;&#x3D;&#x3D; String(vehiculoIdNumerico));
 
-        if (autoAntiguo) autoAntiguo.disponible &#x3D; true;  // Liberamos el anterior
-        if (autoNuevo) autoNuevo.disponible &#x3D; false;     // Ocupamos el nuevo
+        if (autoAntiguo) autoAntiguo.disponible &#x3D; true;
+        if (autoNuevo) autoNuevo.disponible &#x3D; false;
 
         try {
           const actualizaciones: Promise&lt;unknown&gt;[] &#x3D; [];
@@ -1113,6 +1140,10 @@ export class EditarReserva implements OnInit {
           }
 
           await Promise.all(actualizaciones);
+          
+          /** Refrescamos la flota desde el servidor para asegurar sincronización total antes de continuar */
+          await this.refrescarFlota();
+
         } catch {
           if (autoAntiguo) autoAntiguo.disponible &#x3D; false;
           if (autoNuevo) autoNuevo.disponible &#x3D; true;

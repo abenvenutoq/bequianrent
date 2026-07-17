@@ -62,7 +62,10 @@ export class AdminEstadisticaVenta implements OnInit {
   }
 
   /**
-   * @description Obtiene el total de arriendos realizados
+   * @description
+   * Método totalArriendos
+   * Este método calcula el total de arriendos sumando la propiedad totalArriendos de cada elemento en el arreglo arriendosMensuales.
+   * @returns {number} El total de arriendos.
    */
   get totalArriendos(): number {
     return this.arriendosMensuales.reduce(
@@ -72,7 +75,10 @@ export class AdminEstadisticaVenta implements OnInit {
   }
 
   /**
-   * @description Obtiene el total de ingresos generados
+   * @description
+   * Método totalIngresos
+   * Este método calcula el total de ingresos generados sumando la propiedad ingresosGenerados de cada elemento en el arreglo arriendosMensuales.
+   * @returns {number} El total de ingresos generados.
    */
   get totalIngresos(): number {
     return this.arriendosMensuales.reduce(
@@ -82,7 +88,10 @@ export class AdminEstadisticaVenta implements OnInit {
   }
 
   /**
-   * @description Obtiene el ingreso promedio por arriendo
+   * @description
+   * Método ingresoPromedio
+   * Este método calcula el ingreso promedio dividiendo el total de ingresos generados entre el total de arriendos.
+   * @returns {number} El ingreso promedio por arriendo.
    */
   get ingresoPromedio(): number {
     return this.totalIngresos / this.totalArriendos;
