@@ -103,11 +103,14 @@ describe('Pruebas Unitarias - Componente Admin Panel', () => {
   /** @test Integración Padre-Hijo: Liberación de vehículos */
   it('Debe actualizar estado a Completada, liberar el vehículo y guardar cambios', async () => {
     const reservaSimulada = mockReservas[0];
+    const estadoOriginal = reservaSimulada.estado;
     
     // Act: Simulamos que el componente hijo emitió el evento de cambio
     await component.actualizarEstadoReserva({
       reserva: reservaSimulada, 
-      nuevoEstado: 'Completada'
+      nuevoEstado: 'Completada',
+      index: 0,
+      estadoAnterior: estadoOriginal
     });
 
     // Assert 1: La reserva en memoria local debió cambiar
