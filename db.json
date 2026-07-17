@@ -7,7 +7,7 @@
       "tipo": "Sedán",
       "anio": 2024,
       "precio": 35000,
-      "disponible": false,
+      "disponible": true,
       "transmision": "Automática",
       "pasajeros": 5,
       "rendimiento": "15 km/l",

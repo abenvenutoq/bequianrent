@@ -1,3 +1,11 @@
+<div *ngIf="notificacion" class="alert alert-{{notificacion.tipo}} d-flex align-items-center shadow-sm mb-3 border-0 rounded-3" role="alert">
+    <i class="fa-solid fs-4 me-3" [ngClass]="notificacion.tipo === 'success' ? 'fa-circle-check text-success' : 'fa-circle-xmark text-danger'"></i>
+    <div>
+        <h6 class="fw-bold mb-0">{{ notificacion.tipo === 'success' ? '¡Actualizado!' : 'Acción Revertida' }}</h6>
+        <p class="mb-0 small">{{ notificacion.texto }}</p>
+    </div>
+</div>
+
 <div class="table-responsive" [formGroup]="adminForm">
     <table class="table table-hover text-center align-middle">
         <thead class="table-light text-nowrap">
@@ -32,9 +40,9 @@
                     <select class="form-select form-select-sm fw-semibold" 
                             formControlName="estado"
                             [ngClass]="{
-                                'text-success border-success': listaReservas[i].estado === 'Confirmada',
-                                'text-secondary border-secondary': listaReservas[i].estado === 'Completada',
-                                'text-danger border-danger': listaReservas[i].estado === 'Cancelada'
+                                'text-success border-success': control.get('estado')?.value === 'Confirmada',
+                                'text-secondary border-secondary': control.get('estado')?.value === 'Completada',
+                                'text-danger border-danger': control.get('estado')?.value === 'Cancelada'
                             }">
                         <option value="Confirmada">✅ Confirmada</option>
                         <option value="Completada">🆗 Completada</option>

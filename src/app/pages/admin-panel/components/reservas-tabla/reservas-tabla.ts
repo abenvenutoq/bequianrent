@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -13,24 +13,22 @@ import { Reserva, Vehiculo } from '../../../../models/modelos';
 })
 export class ReservasTablaComponent implements OnInit {
   
-  /** 
-   * @description 
-   * Lista de reservas a mostrar */
   @Input() listaReservas: Reserva[] = [];
   @Input() listaVehiculos: Vehiculo[] = []; 
 
   /** 
    * @description 
-   * Emite un evento cuando el estado de una reserva cambia */
-  @Output() onEstadoCambiado = new EventEmitter<{reserva: Reserva, nuevoEstado: string}>();
+   * Modificamos el evento para enviar más contexto al padre (index y estadoAnterior)
+   */
+  @Output() onEstadoCambiado = new EventEmitter<{reserva: Reserva, nuevoEstado: string, index: number, estadoAnterior: string}>();
 
   private fb = inject(FormBuilder);
+  private cdr = inject(ChangeDetectorRef);
   adminForm!: FormGroup;
+  
+  /** Variable para manejar la alerta visual en el HTML */
+  notificacion: { texto: string, tipo: 'success' | 'danger' } | null = null;
 
-  /**
-   * @description Inicializa el formulario reactivo y construye los controles para cada reserva
-   * en la lista de reservas. También se suscribe a los cambios de estado para emitir eventos al componente padre.
-   */
   ngOnInit(): void {
     this.adminForm = this.fb.group({
       reservasControls: this.fb.array([])
@@ -39,29 +37,26 @@ export class ReservasTablaComponent implements OnInit {
     this.construirFormulario();
   }
 
-  /** 
-   * @description Obtiene el FormArray que contiene los controles para cada reserva
-   * @returns {FormArray} El FormArray de reservas
-   */
   get reservasFormArray(): FormArray {
     return this.adminForm.get('reservasControls') as FormArray;
   }
 
-  /**
-   * @description Construye el formulario reactivo para cada reserva en la lista de reservas.
-   * Crea un FormGroup para cada reserva y se suscribe a los cambios de estado para emitir eventos al componente padre.
-   * Este método es llamado en ngOnInit para inicializar el formulario.
-   */
   private construirFormulario(): void {
-    this.listaReservas.forEach(reserva => {
+    // Agregamos el 'index' al forEach
+    this.listaReservas.forEach((reserva, index) => {
       const grupo = this.fb.group({
         estado: [reserva.estado]
       });
 
-      /** @description Suscribe a los cambios de estado para emitir eventos al componente padre */
       grupo.get('estado')?.valueChanges.subscribe(nuevoEstado => {
-        if (nuevoEstado) {
-          this.onEstadoCambiado.emit({ reserva, nuevoEstado });
+        if (nuevoEstado && nuevoEstado !== reserva.estado) {
+          // Emitimos toda la información necesaria para que el padre pueda actuar
+          this.onEstadoCambiado.emit({ 
+              reserva, 
+              nuevoEstado, 
+              index, 
+              estadoAnterior: reserva.estado 
+          });
         }
       });
 
@@ -69,14 +64,33 @@ export class ReservasTablaComponent implements OnInit {
     });
   }
 
-  /**
-   * @description Obtiene el nombre completo del vehículo asociado a una reserva dado su ID.
-   * Busca en la lista de vehículos y devuelve una cadena con la marca y el modelo del vehículo.
-   * @param {number | string} idVehiculo - El ID del vehículo a buscar.
-   * @returns {string} El nombre completo del vehículo o un mensaje si no se encuentra.
-   */
   obtenerNombreAuto(idVehiculo: number | string): string {
     const auto = this.listaVehiculos.find(v => Number(v.id) === Number(idVehiculo));
     return auto ? `${auto.marca} ${auto.modelo}` : 'Vehículo no encontrado';
+  }
+
+  /**
+   * @description Muestra una alerta temporal en la parte superior de la tabla.
+   */
+  mostrarMensaje(texto: string, tipo: 'success' | 'danger') {
+    this.notificacion = { texto, tipo };
+    this.cdr.detectChanges(); // Forzamos la detección de cambios para que la alerta se muestre inmediatamente
+    // Ocultar automáticamente después de 4 segundos
+    setTimeout(() => {
+        this.notificacion = null;
+        this.cdr.detectChanges(); // Forzamos la detección de cambios para que la alerta desaparezca inmediatamente
+    }, 4000);
+  }
+
+  /**
+   * @description Revierte visualmente el select al estado anterior si el servidor falla.
+   * El parámetro { emitEvent: false } evita que se vuelva a disparar el ciclo infinito.
+   */
+  revertirEstado(index: number, estadoAnterior: string) {
+    const control = this.reservasFormArray.at(index).get('estado');
+    if (control) {
+        control.setValue(estadoAnterior, { emitEvent: false });
+    }
+    this.mostrarMensaje('Fallo de conexión: El cambio de estado fue revertido.', 'danger');
   }
 }
