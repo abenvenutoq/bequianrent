@@ -3,11 +3,11 @@
     {
       "id": 1,
       "marca": "Toyota",
-      "modelo": "Prueba CRUD",
+      "modelo": "Corolla",
       "tipo": "Sedán",
       "anio": 2024,
       "precio": 35000,
-      "disponible": true,
+      "disponible": false,
       "transmision": "Automática",
       "pasajeros": 5,
       "rendimiento": "15 km/l",

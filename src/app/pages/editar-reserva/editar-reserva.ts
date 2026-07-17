@@ -11,13 +11,7 @@ import { ValidacionService } from '../../services/validacion.services';
 
 /**
  * @description
- * Componente dedicado a la edición de reservas existentes por parte del administrador.
- * Permite reasignar vehículos, modificar fechas de arriendo y recalcula automáticamente
- * el valor total a pagar basándose en la diferencia de días.
- * * @usageNotes
- * - Este componente está protegido por el Guard de administrador (`adminGuard`).
- * - Se encarga de gestionar la disponibilidad cruzada: si se cambia el vehículo de la reserva,
- * libera automáticamente el vehículo anterior y marca como ocupado el nuevo.
+ * Componente para editar una reserva existente. Permite modificar el vehículo, las fechas y recalcula el total de la reserva.
  */
 @Component({
   selector: 'app-editar-reserva',
@@ -26,51 +20,47 @@ import { ValidacionService } from '../../services/validacion.services';
   templateUrl: './editar-reserva.html',
   styleUrls: ['./editar-reserva.css']
 })
-export class EditarReserva implements OnInit {
-  
-  /** Creador de formularios reactivos inyectado para la gestión de campos. */
-  private fb = inject(FormBuilder);
-  /** Servicio para obtener parámetros de la URL activa (ej. el ID de la reserva a editar). */
-  private route = inject(ActivatedRoute);
-  /** Servicio de enrutamiento para redireccionar tras guardar o cancelar. */
-  private router = inject(Router);
-  /** Servicio para la lectura y persistencia de reservas. */
-  private reservaService = inject(ReservaService);
-  /** Servicio para la lectura y gestión del inventario de vehículos. */
-  private vehiculoService = inject(VehiculosJsonServerService);
-  /** Servicio con utilidades de validación, usado para validar la coherencia de las fechas. */
-  private validacionService = inject(ValidacionService);
 
+export class EditarReserva implements OnInit {
+  /** Instancia FormBuilder para crear formularios reactivos */
+  private fb = inject(FormBuilder);
+  /** Instancia ActivatedRoute para acceder a los parámetros de la ruta */
+  private route = inject(ActivatedRoute);
+  /** Instancia router para la navegación */
+  private router = inject(Router);
+  /** Instancia del servicio de reservas */
+  private reservaService = inject(ReservaService);
+  /** Instancia del servicio de vehículos */
+  private vehiculoService = inject(VehiculosJsonServerService);
+  /** Instancia del servicio de validación */
+  private validacionService = inject(ValidacionService);
+  /** Instancia ChangeDetectorRef para detectar cambios manualmente */
   private cdr = inject(ChangeDetectorRef);
 
-  /** Formulario reactivo principal que contiene los campos de la reserva. */
+  /** Instancia del formulario de edición */
   editarForm!: FormGroup;
-  /** Identificador único de la reserva extraído de la URL. */
+  /** Identificador del vehículo seleccionado */
   reservaId!: string | number;
-  /** Objeto que almacena los datos originales de la reserva antes de ser modificados. */
+  /** Reserva actual que se está editando */
   reservaActual: Reserva | undefined;
-  /** Almacena la fecha actual formateada para bloquear la selección de fechas pasadas en el HTML. */
+  /** Fecha mínima permitida para la reserva */
   fechaMinima!: string;
   
-  /** Lista completa de vehículos disponibles y no disponibles para nutrir el elemento select. */
+  /** Lista de vehículos disponibles */
   vehiculos: Vehiculo[] = [];
-  /** Valor monetario calculado dinámicamente según las fechas ingresadas y el vehículo seleccionado. */
+  /** Total calculado de la reserva */
   totalCalculado: number = 0;
 
+
   /**
-   * Iniciación del componente.
-   * 1. Captura el ID de la reserva desde los parámetros de la ruta.
-   * 2. Recupera la reserva correspondiente y los vehículos del sistema.
-   * 3. Inicializa el formulario reactivo pre-rellenando los datos.
-   * 4. Se suscribe a los cambios del formulario para disparar el recálculo matemático automático.
+   * @description
+   * Inicializa el componente, carga la reserva actual y configura el formulario de edición.
    */
   ngOnInit(): void {
-    // Obtener el ID de la reserva desde la URL
     this.reservaId = this.route.snapshot.paramMap.get('id')!;
     const hoy = new Date();
     this.fechaMinima = hoy.toISOString().split('T')[0];
     
-    // Buscar la reserva
     const todasReservas = this.reservaService.obtenerReservas();
     this.reservaActual = todasReservas.find(r => String(r.id) === String(this.reservaId));
 
@@ -80,40 +70,50 @@ export class EditarReserva implements OnInit {
       return;
     }
 
-    // Obtener vehículos para el Select desde JSON Server
-    this.vehiculoService.getVehiculo().subscribe({
-      next: (vehiculos) => {
-        this.vehiculos = vehiculos;
-        this.cdr.detectChanges();
-      },
-      error: () => {
-        this.vehiculos = [];
-      }
-    });
+    /** Refresca la lista de vehículos disponibles */
+    this.refrescarFlota();
 
-    // Inicializar formulario con los datos actuales
     this.editarForm = this.fb.group({
       vehiculoId: [this.reservaActual.idVehiculo, Validators.required],
       fechaDesde: [this.reservaActual.fechaDesde, Validators.required],
       fechaHasta: [this.reservaActual.fechaHasta, Validators.required]
     }, {
-        // Validación personalizada a nivel de grupo para asegurar que la fecha final sea lógica
         validators: [this.validacionService.validarFechasReserva.bind(this.validacionService)]
     });
 
     this.totalCalculado = this.reservaActual.total || 0;
 
-    // Escuchar cambios dinámicos en el formulario para recalcular el precio
     this.editarForm.valueChanges.subscribe(() => {
       this.recalcularTotal();
     });
   }
 
+ 
   /**
-   * Método encargado de realizar la matemática financiera de la reserva.
-   * * Calcula la diferencia en días exactos entre `fechaDesde` y `fechaHasta`.
-   * * Multiplica la cantidad de días por la tarifa diaria del vehículo seleccionado.
-   * * Si las fechas son inválidas (ej. fecha de fin menor a la de inicio), el total se fija en 0.
+   * @description
+   * Refresca la lista de vehículos disponibles desde el servidor.
+   * @returns Una promesa que se resuelve cuando la lista se ha actualizado.
+   */
+  refrescarFlota(): Promise<void> {
+    return new Promise((resolve) => {
+      this.vehiculoService.getVehiculo().subscribe({
+        next: (vehiculos) => {
+          this.vehiculos = vehiculos;
+          this.cdr.detectChanges();
+          resolve(); // Avisamos que ya terminó de cargar
+        },
+        error: () => {
+          this.vehiculos = [];
+          resolve();
+        }
+      });
+    });
+  }
+
+  /**
+   * @description
+   * Recalcula el total de la reserva basado en el vehículo seleccionado y las fechas ingresadas.
+   * Si las fechas son inválidas o el vehículo no está seleccionado, el total se establece en 0.
    */
   recalcularTotal(): void {
     const { vehiculoId, fechaDesde, fechaHasta } = this.editarForm.value;
@@ -125,7 +125,6 @@ export class EditarReserva implements OnInit {
     const inicio = new Date(fechaDesde);
     const fin = new Date(fechaHasta);
     
-    // Si la fecha de fin es menor o igual a la de inicio, no calculamos
     if (fin <= inicio) {
         this.totalCalculado = 0;
         return;
@@ -134,16 +133,14 @@ export class EditarReserva implements OnInit {
     const diffTime = Math.abs(fin.getTime() - inicio.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
-    // Asigna el total basándose en el precio del vehículo
     this.totalCalculado = diffDays * (autoSeleccionado.precio || 0);
   }
 
   /**
-   * Procesa la solicitud final de guardado de los cambios de la reserva.
-   * * Valida el formulario y la coherencia del precio.
-   * * Intercambia los estados de disponibilidad si el administrador seleccionó un vehículo distinto.
-   * * Actualiza el objeto de la reserva en el almacenamiento persistente.
-   * * Redirige a la vista de "Reservas Realizadas" en el panel de administración.
+   * @description
+   * Guarda los cambios realizados en la reserva. Actualiza la disponibilidad de los vehículos si se ha cambiado el vehículo seleccionado.
+   * Si el formulario es inválido o el total calculado es menor o igual a 0, no realiza ninguna acción.
+   * @returns Una promesa que se resuelve cuando los cambios se han guardado correctamente.
    */
   async guardarCambios(): Promise<void> {
     if (this.editarForm.invalid || this.totalCalculado <= 0) return;
@@ -151,14 +148,13 @@ export class EditarReserva implements OnInit {
     const { vehiculoId, fechaDesde, fechaHasta } = this.editarForm.value;
     const vehiculoIdNumerico = Number(vehiculoId);
 
-    // 1. Lógica para actualizar estados de los vehículos si cambió de auto
     if (String(this.reservaActual!.idVehiculo) !== String(vehiculoIdNumerico)) {
         
         const autoAntiguo = this.vehiculos.find(v => String(v.id) === String(this.reservaActual!.idVehiculo));
         const autoNuevo = this.vehiculos.find(v => String(v.id) === String(vehiculoIdNumerico));
 
-        if (autoAntiguo) autoAntiguo.disponible = true;  // Liberamos el anterior
-        if (autoNuevo) autoNuevo.disponible = false;     // Ocupamos el nuevo
+        if (autoAntiguo) autoAntiguo.disponible = true;
+        if (autoNuevo) autoNuevo.disponible = false;
 
         try {
           const actualizaciones: Promise<unknown>[] = [];
@@ -172,6 +168,10 @@ export class EditarReserva implements OnInit {
           }
 
           await Promise.all(actualizaciones);
+          
+          /** Refrescamos la flota desde el servidor para asegurar sincronización total antes de continuar */
+          await this.refrescarFlota();
+
         } catch {
           if (autoAntiguo) autoAntiguo.disponible = false;
           if (autoNuevo) autoNuevo.disponible = true;
