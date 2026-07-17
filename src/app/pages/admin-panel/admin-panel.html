@@ -5,9 +5,9 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-3 mb-4">
+        <div class="col-12 col-md-4 col-lg-3 mb-4">
             <div class="card shadow-sm border-0 p-3 bg-white mb-4" style="border-radius: 10px;">
-                <div class="d-flex flex-column gap-2">
+                <div class="d-flex flex-column flex-sm-row flex-md-column gap-2">
                     <button class="btn w-100 text-start fw-semibold py-2" 
                             [ngClass]="vistaActual === 'usuarios' ? 'btn-primary' : 'btn-light'"
                             (click)="cambiarVista('usuarios')">
@@ -22,19 +22,21 @@
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-12 col-md-8 col-lg-9">
             
-            <app-usuarios-tabla 
-                *ngIf="vistaActual === 'usuarios'" 
-                [listaUsuarios]="usuarios">
-            </app-usuarios-tabla>
+            <div class="panel-contenido-wrapper">
+                <app-usuarios-tabla 
+                    *ngIf="vistaActual === 'usuarios'" 
+                    [listaUsuarios]="usuarios">
+                </app-usuarios-tabla>
 
-            <app-reservas-tabla 
-                *ngIf="vistaActual === 'reservas'" 
-                [listaReservas]="reservas"
-                [listaVehiculos]="vehiculos"
-                (onEstadoCambiado)="actualizarEstadoReserva($event)">
-            </app-reservas-tabla>
+                <app-reservas-tabla 
+                    *ngIf="vistaActual === 'reservas'" 
+                    [listaReservas]="reservas"
+                    [listaVehiculos]="vehiculos"
+                    (onEstadoCambiado)="actualizarEstadoReserva($event)">
+                </app-reservas-tabla>
+            </div>
 
         </div>
     </div>

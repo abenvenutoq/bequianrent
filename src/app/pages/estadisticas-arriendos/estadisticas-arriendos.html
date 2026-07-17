@@ -3,12 +3,9 @@
     <p class="text-white">Resumen histórico de arriendos e ingresos mensuales</p>
 </div>
 
-<!-- KPI CARDS -->
 <div class="container px-4 mb-4">
     <div class="row g-4">
-
-        <!-- Total Ventas -->
-        <div class="col-lg-4 col-md-6">
+        <div class="col-12 col-md-6 col-lg-4">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -31,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-md-6">
+        <div class="col-12 col-md-6 col-lg-4">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -54,7 +51,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-md-12">
+        <div class="col-12 col-md-12 col-lg-4">
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -80,7 +77,6 @@
     </div>
 </div>
 
-<!-- TABLA -->
 <div class="container px-4">
     <div class="card border-0 shadow-lg">
         <div class="card-body p-0">
@@ -98,7 +94,7 @@
             </div>
 
             <div class="table-responsive" *ngIf="!cargando && !mensajeError">
-                <table class="table table-borderless table-hover align-middle mb-0 text-center">
+                <table class="table table-borderless table-hover align-middle mb-0 text-center text-nowrap">
                     <thead class="bg-light border-bottom border-secondary border-opacity-25">
                         <tr>
                             <th class="py-3 text-secondary small text-uppercase fw-bold tracking-wider">Año</th>

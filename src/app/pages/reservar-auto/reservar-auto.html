@@ -12,8 +12,7 @@
     <div class="container mb-5 flex-grow-1">
         <div class="row g-4" id="reserva-contenedor-principal">
             
-            <div class="col-md-6">
-                <!-- Usamos @if (vehiculo) solo por seguridad para TypeScript, ya no necesitamos el else -->
+            <div class="col-12 col-md-6 col-lg-6">
                 @if (vehiculo) {
                     <div class="card shadow-sm border-0 h-100">
                         <img [src]="vehiculo.imagen" class="card-img-top p-3" alt="Vehículo" style="border-radius: 15px; object-fit: contain; max-height: 300px;" onerror="this.src='assets/img/default-car.png'">
@@ -33,8 +32,8 @@
                 }
             </div>
 
-            <div class="col-md-6">
-                <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 10px;">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card shadow-sm border-0 p-3 p-md-4 bg-white h-100" style="border-radius: 10px;">
                     <h4 class="fw-bold text-dark mb-4 border-bottom pb-2"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Fechas del Arriendo</h4>
                     
                     <form [formGroup]="reservaForm" (ngSubmit)="confirmarReserva()">
@@ -69,11 +68,11 @@
                             </div>
                         </div>
 
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-3">
                             <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 shadow-sm" [disabled]="reservaForm.invalid || diasReserva <= 0">
                                 <i class="fa-solid fa-circle-check me-2"></i>Confirmar y Reservar
                             </button>
-                            <a routerLink="/ver-autos" class="btn btn-outline-secondary btn-sm mt-2">Volver a la galería</a>
+                            <a routerLink="/ver-autos" class="btn btn-outline-secondary w-100">Volver a la galería</a>
                         </div>
                     </form>
                 </div>

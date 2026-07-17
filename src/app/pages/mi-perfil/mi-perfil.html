@@ -5,11 +5,11 @@
 
 <main class="container my-5 flex-grow-1" *ngIf="usuario">
     <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
+        <div class="col-12 col-md-10 col-lg-10">
             <div class="card shadow rounded-4 overflow-hidden border-0">
                 <div class="row g-0">
                     
-                    <div class="col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-5">
+                    <div class="col-12 col-md-4 bg-light border-end d-flex flex-column align-items-center justify-content-center p-4 p-md-5">
                         <div class="avatar-circle mb-3 mx-auto">
                             <i class="fa-solid fa-user" id="avatarIcon"></i>
                         </div>
@@ -20,7 +20,7 @@
                         </span>
                     </div>
 
-                    <div class="col-md-8 p-5">
+                    <div class="col-12 col-md-8 p-4 p-md-5">
                         
                         <div *ngIf="!editando">
                             <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
@@ -28,25 +28,25 @@
                             </div>
 
                             <div class="row g-4">
-                                <div class="col-md-6 text-nowrap">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">RUT</label>
                                     <p class="fs-5 mb-0">{{ usuario.rut }}</p>
                                 </div>
-                                <div class="col-md-6 text-nowrap">
+                                <div class="col-12 col-md-6 col-lg-6 text-break">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Correo Electrónico</label>
                                     <p class="fs-5 mb-0">{{ usuario.correo }}</p>
                                 </div>
-                                <div class="col-md-6 text-nowrap">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Fecha de Nacimiento</label>
                                     <p class="fs-5 mb-0">{{ usuario.fechaNacimiento | date: 'dd-MM-yyyy'}}</p>
                                 </div>
-                                <div class="col-md-6 text-nowrap">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <label class="text-muted small fw-bold text-uppercase mb-1">Dirección</label>
                                     <p class="fs-5 mb-0">{{ usuario.direccion || 'No registrada' }}</p>
                                 </div>
                             </div>
 
-                            <div class="mt-5 pt-3">
+                            <div class="mt-5 pt-3 d-grid d-sm-block">
                                 <button (click)="activarEdicion()" class="btn btn-outline-primary px-4">
                                     <i class="fa-solid fa-pen me-2"></i> Editar Datos
                                 </button>
@@ -67,34 +67,34 @@
 
                             <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>
                                 <div class="row g-3">
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <label class="form-label fw-bold small text-muted">Nombre *</label>
                                         <input type="text" class="form-control" formControlName="nombre" 
                                             [ngClass]="{'is-invalid': f['nombre'].invalid && (f['nombre'].dirty || f['nombre'].touched)}">
                                         <div class="invalid-feedback">El nombre es obligatorio.</div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <label class="form-label fw-bold small text-muted">Apellido *</label>
                                         <input type="text" class="form-control" formControlName="apellido" 
                                             [ngClass]="{'is-invalid': f['apellido'].invalid && (f['apellido'].dirty || f['apellido'].touched)}">
                                         <div class="invalid-feedback">El apellido es obligatorio.</div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <label class="form-label fw-bold small text-muted">Fecha de Nacimiento *</label>
                                         <input type="date" class="form-control" formControlName="fechaNacimiento" 
                                             [ngClass]="{'is-invalid': f['fechaNacimiento'].invalid && (f['fechaNacimiento'].dirty || f['fechaNacimiento'].touched)}">
                                         <div class="invalid-feedback" *ngIf="f['fechaNacimiento'].errors?.['required']">La fecha es obligatoria.</div>
                                         <div class="invalid-feedback" *ngIf="f['fechaNacimiento'].errors?.['menorDeEdad']">Debes ser mayor de 13 años.</div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <label class="form-label fw-bold small text-muted">Dirección</label>
                                         <input type="text" class="form-control" formControlName="direccion" 
                                             [ngClass]="{'is-invalid': f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)}">
                                         <div class="invalid-feedback" *ngIf="f['direccion'].errors?.['direccionInvalida']">No puede ser un espacio en blanco</div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <label class="form-label fw-bold small text-muted">Contraseña *</label>
                                         <div class="input-group has-validation">
                                             <input [type]="verPass ? 'text' : 'password'" class="form-control" formControlName="password" autocomplete="new-password"
@@ -107,7 +107,7 @@
                                             <div class="invalid-feedback" *ngIf="f['password'].errors?.['pattern']">Debe tener 1 mayúscula, 1 número y 1 carácter especial.</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6 col-lg-6">
                                         <label class="form-label fw-bold small text-muted">Repetir Contraseña *</label>
                                         <div class="input-group has-validation">
                                             <input [type]="verConfirm ? 'text' : 'password'" class="form-control" formControlName="confirmPassword" autocomplete="new-password"
@@ -121,7 +121,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-5 pt-3 d-flex gap-2">
+                                <div class="mt-5 pt-3 d-grid gap-2 d-sm-flex">
                                     <button type="submit" class="btn btn-primary px-4" [disabled]="perfilForm.invalid">
                                         <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Cambios
                                     </button>

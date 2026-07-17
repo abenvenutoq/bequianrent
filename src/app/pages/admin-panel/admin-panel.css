@@ -1,0 +1,17 @@
+.panel-contenido-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 575.98px) {
+    .btn i {
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    .btn {
+        text-align: center !important;
+        font-size: 0.9rem;
+    }
+}

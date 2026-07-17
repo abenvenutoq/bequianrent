@@ -1,9 +1,9 @@
 <div class="bg-primary text-white py-4 mb-4 text-center header-global">
-    <h2 class="fw-bold"><i class="fa-solid fa-list-check me-2"></i> Opiniones de Clientes</h2>
-    <p class="text-white">Esto es lo que piensan nuestros clientes!</p>
+    <h2 class="fw-bold"><i class="fa-solid fa-comments me-2"></i> Opiniones de Clientes</h2>
+    <p class="text-white">¡Esto es lo que piensan nuestros clientes!</p>
 </div>
 
-<div class="container mb-5 overflow-hidden-x">
+<div class="container mb-5 overflow-x-hidden">
     
     <div *ngIf="cargando" class="text-center py-5">
         <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
@@ -86,8 +86,11 @@
                             </div>
 
                         </div>
-                    </div> </div>
-            </div> <button type="button" class="btn-carousel btn-next" (click)="siguiente()" aria-label="Siguiente">
+                    </div> 
+                </div>
+            </div> 
+            
+            <button type="button" class="btn-carousel btn-next" (click)="siguiente()" aria-label="Siguiente">
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
             

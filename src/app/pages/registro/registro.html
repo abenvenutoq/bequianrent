@@ -5,7 +5,7 @@
 
 <div class="container my-4">
     <div class="row justify-content-center">
-        <div class="col-12 col-xl-10">
+        <div class="col-12 col-md-10 col-lg-8">
             <div class="card shadow-lg border-0 form-container">
                 <div class="card-body p-4 p-md-5">
                     
@@ -23,9 +23,9 @@
                     <form [formGroup]="registroForm" (ngSubmit)="registrar()" novalidate>
                         <div class="row g-4">
                             
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="nombre" class="form-label fw-semibold">Nombre *</label>
-                                <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Juan" 
+                                <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Juan" autocomplete="given-name" 
                                     [ngClass]="{'is-invalid': f['nombre'].invalid && (f['nombre'].dirty || f['nombre'].touched)}">
 
                                 <div class="invalid-feedback" *ngIf="f['nombre'].errors?.['required']">El nombre es obligatorio.</div>
@@ -33,47 +33,47 @@
 
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="apellido" class="form-label fw-semibold">Apellidos *</label>
-                                <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Pérez" 
+                                <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Pérez" autocomplete="family-name"
                                     [ngClass]="{'is-invalid': f['apellido'].invalid && (f['apellido'].dirty || f['apellido'].touched)}">
                                 <div class="invalid-feedback" *ngIf="f['apellido'].errors?.['required']">El apellido es obligatorio.</div>
                                 <div class="invalid-feedback" *ngIf="f['apellido'].errors?.['isEmpty']">El apellido no puede estar vacío.</div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="rut" class="form-label fw-semibold">RUT *</label>
-                                <input type="text" class="form-control" id="rut" formControlName="rut" placeholder="12345678-9" 
+                                <input type="text" class="form-control" id="rut" formControlName="rut" placeholder="12345678-9" autocomplete="off" 
                                     [ngClass]="{'is-invalid': f['rut'].invalid && (f['rut'].dirty || f['rut'].touched)}">
                                 
                                 <div class="invalid-feedback" *ngIf="f['rut'].errors?.['required']">El RUT es obligatorio.</div>
                                 <div class="invalid-feedback" *ngIf="f['rut'].errors?.['rutInvalido']">El RUT ingresado no es válido.</div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="correo" class="form-label fw-semibold">Correo Electrónico *</label>
-                                <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="juan@correo.cl" 
+                                <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="juan@correo.cl" autocomplete="email" 
                                     [ngClass]="{'is-invalid': f['correo'].invalid && (f['correo'].dirty || f['correo'].touched)}">
                                 <div class="invalid-feedback" *ngIf="f['correo'].errors?.['required']">El correo es obligatorio.</div>
                                 <div class="invalid-feedback" *ngIf="f['correo'].errors?.['emailInvalido']">Introduce un formato válido (Ej: algo@algo.cl)</div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="fechaNacimiento" class="form-label fw-semibold">Fecha de Nacimiento *</label>
-                                <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" 
+                                <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento" autocomplete="off" placeholder="dd/mm/aaaa" 
                                     [ngClass]="{'is-invalid': f['fechaNacimiento'].invalid && (f['fechaNacimiento'].dirty || f['fechaNacimiento'].touched)}">
                                 <div class="invalid-feedback" *ngIf="f['fechaNacimiento'].errors?.['required']">La fecha es obligatoria.</div>
                                 <div class="invalid-feedback" *ngIf="f['fechaNacimiento'].errors?.['menorDeEdad']">Debes tener al menos 13 años para registrarte.</div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="direccion" class="form-label fw-semibold">Dirección de Despacho (Opcional)</label>
-                                <input type="text" class="form-control" id="direccion" formControlName="direccion" placeholder="Av. Principal 123" 
+                                <input type="text" class="form-control" id="direccion" formControlName="direccion" autocomplete="address-line1" placeholder="Av. Principal 123" 
                                     [ngClass]="{'is-invalid': f['direccion'].invalid && (f['direccion'].dirty || f['direccion'].touched)}">
                                 <div class="invalid-feedback" *ngIf="f['direccion'].errors?.['direccionInvalida']">No puede ser un espacio en blanco</div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="password" class="form-label fw-semibold">Contraseña *</label>
                                 <div class="input-group has-validation">
                                     <input [type]="verPass ? 'text' : 'password'" class="form-control" id="password" formControlName="password" autocomplete="new-password" placeholder="••••••••" 
@@ -88,10 +88,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-6 col-lg-6">
                                 <label for="confirmPassword" class="form-label fw-semibold">Repetir Contraseña *</label>
                                 <div class="input-group has-validation">
-                                    <input [type]="verConfirm ? 'text' : 'password'" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="••••••••" 
+                                    <input [type]="verConfirm ? 'text' : 'password'" class="form-control" id="confirmPassword" autocomplete="new-password" formControlName="confirmPassword" placeholder="••••••••" 
                                         [ngClass]="{'is-invalid': f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)}">
                                     <span class="input-group-text user-select-none" style="cursor: pointer;" (click)="toggleConfirm()">
                                         <i class="fa-solid" [ngClass]="verConfirm ? 'fa-eye-slash' : 'fa-eye'"></i>
@@ -104,7 +104,7 @@
                         </div> 
                         
                         <div class="mt-3 mb-4">
-                            <small class="text-muted">* Todos los campos son obligatorios excepto la Dirección.</small>
+                            <small class="text-muted">* Campos obligatorios.</small>
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end border-top pt-4">

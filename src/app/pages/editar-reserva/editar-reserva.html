@@ -4,53 +4,57 @@
 </div>
 
 <div class="container my-5">
-    <div class="card shadow-sm border-0" style="max-width: 600px; margin: 0 auto;">
-        <div class="card-header bg-primary text-white py-3">
-            <h4 class="mb-0 text-center"><i class="fa-solid fa-pen-to-square me-2"></i>Editar Reserva #{{ reservaId }}</h4>
-        </div>
-        <div class="card-body p-4">
-            <form [formGroup]="editarForm" (ngSubmit)="guardarCambios()">
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Vehículo</label>
-                    <select class="form-select" formControlName="vehiculoId">
-                        <option *ngFor="let v of vehiculos" 
-                                [value]="v.id" 
-                                [disabled]="!v.disponible && v.id !== reservaActual?.id">
-                            ID: {{ v.id }} - {{ v.marca }} {{ v.modelo }} 
-                            <span *ngIf="!v.disponible && v.id !== reservaActual?.id">(No Disponible)</span>
-                        </option>
-                    </select>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0 text-center"><i class="fa-solid fa-pen-to-square me-2"></i>Editar Reserva #{{ reservaId }}</h4>
                 </div>
+                <div class="card-body p-4">
+                    <form [formGroup]="editarForm" (ngSubmit)="guardarCambios()">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Vehículo</label>
+                            <select class="form-select" formControlName="vehiculoId">
+                                <option *ngFor="let v of vehiculos" 
+                                        [value]="v.id" 
+                                        [disabled]="!v.disponible && v.id !== reservaActual?.id">
+                                    ID: {{ v.id }} - {{ v.marca }} {{ v.modelo }} 
+                                    <span *ngIf="!v.disponible && v.id !== reservaActual?.id">(No Disponible)</span>
+                                </option>
+                            </select>
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Fecha Desde</label>
-                        <input type="date" class="form-control" formControlName="fechaDesde" [min]="fechaMinima">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Fecha Hasta</label>
-                        <input type="date" class="form-control" formControlName="fechaHasta" [min]="fechaMinima">
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3">
+                                <label class="form-label fw-bold">Fecha Desde</label>
+                                <input type="date" class="form-control" formControlName="fechaDesde" [min]="fechaMinima">
+                            </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <label class="form-label fw-bold">Fecha Hasta</label>
+                                <input type="date" class="form-control" formControlName="fechaHasta" [min]="fechaMinima">
+                            </div>
+                        </div>
 
-                <div class="alert alert-info d-flex justify-content-between align-items-center mt-3">
-                    <span class="fw-bold">Nuevo Total Calculado:</span>
-                    <span class="fs-5 fw-bold">{{ totalCalculado | currency:'CLP':'symbol-narrow' }}</span>
-                </div>
-                
-                <div *ngIf="totalCalculado === 0 && editarForm.touched" class="text-danger small mb-3">
-                    La fecha final debe ser mayor a la fecha de inicio.
-                </div>
+                        <div class="alert alert-info d-flex justify-content-between align-items-center mt-3">
+                            <span class="fw-bold">Nuevo Total Calculado:</span>
+                            <span class="fs-5 fw-bold">{{ totalCalculado | currency:'CLP':'symbol-narrow' }}</span>
+                        </div>
+                        
+                        <div *ngIf="totalCalculado === 0 && editarForm.touched" class="text-danger small mb-3">
+                            La fecha final debe ser mayor a la fecha de inicio.
+                        </div>
 
-                <div class="d-flex justify-content-end gap-2 mt-4">
-                    <button type="button" class="btn btn-secondary" [routerLink]="['/admin-panel']">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" [disabled]="editarForm.invalid || totalCalculado <= 0">
-                        Guardar Cambios
-                    </button>
-                </div>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-end mt-4">
+                            <button type="button" class="btn btn-secondary" [routerLink]="['/admin-panel']">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="editarForm.invalid || totalCalculado <= 0">
+                                Guardar Cambios
+                            </button>
+                        </div>
 
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

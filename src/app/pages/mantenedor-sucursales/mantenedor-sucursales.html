@@ -5,7 +5,7 @@
 
 <div class="container mb-5">
 
-    <div class="container mb-4 d-flex justify-content-end px-0">
+    <div class="container mb-4 d-grid gap-2 d-sm-flex justify-content-sm-end px-0">
         <button type="button" class="btn btn-warning text-dark fw-bold shadow-sm rounded-pill px-4" (click)="restaurarDatosGP()">
             <i class="fa-solid fa-rotate-left me-2"></i>Restaurar Datos desde Github Pages
         </button>
@@ -22,7 +22,7 @@
             <form [formGroup]="sucursalesForm" (ngSubmit)="guardarSucursal()">
                 <div class="row g-3">
                     
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" formControlName="nombre" id="floatingNombre" placeholder="Ej: Sucursal Centro" [ngClass]="{'is-invalid': esCampoInvalido('nombre')}">
                             <label for="floatingNombre">Nombre de Sucursal</label>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" formControlName="ciudad" id="floatingCiudad" placeholder="Ej: Santiago" [ngClass]="{'is-invalid': esCampoInvalido('ciudad')}">
                             <label for="floatingCiudad">Ciudad</label>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" formControlName="direccion" id="floatingDireccion" placeholder="Ej: Av. Providencia 123" [ngClass]="{'is-invalid': esCampoInvalido('direccion')}">
                             <label for="floatingDireccion">Dirección</label>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" formControlName="telefono" id="floatingTelefono" placeholder="Ej: +569 1234 5678" [ngClass]="{'is-invalid': esCampoInvalido('telefono')}">
                             <label for="floatingTelefono">Teléfono</label>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" formControlName="jefeSucursal" id="floatingJefe" placeholder="Ej: Juan Pérez" [ngClass]="{'is-invalid': esCampoInvalido('jefeSucursal')}">
                             <label for="floatingJefe">Jefe de Sucursal</label>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" formControlName="horario" id="floatingHorario" placeholder="Ej: Lun-Vie 09:00 a 18:00" [ngClass]="{'is-invalid': esCampoInvalido('horario')}">
                             <label for="floatingHorario">Horario</label>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="mt-4 d-flex gap-2 justify-content-end border-top pt-3">
+                <div class="mt-4 d-grid gap-2 d-sm-flex justify-content-sm-end border-top pt-3">
                     <button type="button" class="btn btn-outline-secondary px-4 fw-semibold rounded-pill" (click)="cancelarEdicion()">
                         {{ modoEdicion ? 'Cancelar' : 'Limpiar' }}
                     </button>

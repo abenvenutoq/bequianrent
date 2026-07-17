@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { clienteGuard } from './cliente.guard';
 import { AuthService } from '../services/auth.services';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -14,6 +14,9 @@ describe('Pruebas unitarias para clienteGuard', () => {
 
     let routerSpy: any;
     let authServiceSpy: any;
+    
+    let mockRoute: ActivatedRouteSnapshot;
+    let mockState: RouterStateSnapshot;
 
     /**
      * @description
@@ -25,8 +28,12 @@ describe('Pruebas unitarias para clienteGuard', () => {
             navigate: vi.fn() 
         };
         authServiceSpy = {
-            esCliente: vi.fn()
+            esCliente: vi.fn(),
+            esAdmin: vi.fn()
         };
+
+        mockRoute = {} as ActivatedRouteSnapshot;
+        mockState = { url: '/mi-cuenta' } as RouterStateSnapshot;
 
         /** Configuramos el Testbed de Angular para inyectar los espias en lugar de los servicios reales 
          * Esto nos permite controlar el comportamiento de los servicios durante las pruebas.
@@ -42,23 +49,26 @@ describe('Pruebas unitarias para clienteGuard', () => {
     /** @test Prueba que permite el paso si el usuario es cliente */
     it('Debe permitir el paso (retornar true) si el usuario es Cliente', () => {
         authServiceSpy.esCliente.mockReturnValue(true);
+        authServiceSpy.esAdmin.mockReturnValue(false);
         
-        const resultado = TestBed.runInInjectionContext(() => clienteGuard());
+        const resultado = TestBed.runInInjectionContext(() => clienteGuard(mockRoute, mockState));
 
         expect(resultado).toBe(true);
         expect(routerSpy.navigate).not.toHaveBeenCalled();
     });
 
     /** @test Prueba que bloquea el paso y redirige al login si el usuario no es cliente */
-    it('Debe redirigir al login (retornar false) si el usuario no es Cliente', () => {
+    it('Debe redirigir al login (retornar false) si el usuario no es Cliente ni Admin', () => {
         authServiceSpy.esCliente.mockReturnValue(false);
+        authServiceSpy.esAdmin.mockReturnValue(false);
 
-        const resultado = TestBed.runInInjectionContext(() => clienteGuard());
+        const resultado = TestBed.runInInjectionContext(() => clienteGuard(mockRoute, mockState));
 
         expect(resultado).toBe(false);
-        expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
+        expect(routerSpy.navigate).toHaveBeenCalledWith(
+            ['/login'], 
+            { queryParams: { returnUrl: '/mi-cuenta' } }
+        );
     });
-
-
 
 });

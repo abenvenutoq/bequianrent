@@ -28,7 +28,7 @@ export class MantenedorVehiculos implements OnInit {
   modoEdicion = false;
   idEditando: number | null = null;
   mensajeAlerta: string | null = null;
-  tipoAlerta: 'success' | 'danger' | 'warning' | null = null; // Agregamos 'warning' para validaciones
+  tipoAlerta: 'success' | 'danger' | 'warning' | null = null;
 
   private cdr = inject(ChangeDetectorRef);
 
@@ -51,7 +51,7 @@ export class MantenedorVehiculos implements OnInit {
       transmision: ['', Validators.required],
       pasajeros: ['', [Validators.required, Validators.min(1)]],
       rendimiento: ['', Validators.required],
-      imagen: ['', Validators.required],
+      imagen: [''],
       descripcion: ['', Validators.required]
     });
   }
@@ -100,7 +100,7 @@ export class MantenedorVehiculos implements OnInit {
   mostrarAlerta(mensaje: string, tipo: 'success' | 'danger' | 'warning'): void {
     this.mensajeAlerta = mensaje;
     this.tipoAlerta = tipo;
-    this.cdr.detectChanges(); // Forzamos la actualización de la vista de inmediato
+    this.cdr.detectChanges();
   }
 
   /**
@@ -111,16 +111,20 @@ export class MantenedorVehiculos implements OnInit {
    * @returns {void}
    */
   guardarVehiculo(): void {
-    // 1. Validamos el formulario y marcamos los campos para que se pinten de rojo
     if (this.vehiculosForm.invalid) {
       this.vehiculosForm.markAllAsTouched(); 
       this.mostrarAlerta('Por favor, completa correctamente los campos marcados en rojo.', 'warning');
       return;
     }
 
-    const vehiculoData = this.vehiculosForm.value as Omit<Vehiculo, 'id'>;
+    const vehiculoData = { ...this.vehiculosForm.value } as Omit<Vehiculo, 'id'>;
 
-    // 2. Lógica de edición
+    let imagenIngresada = vehiculoData.imagen ? vehiculoData.imagen.trim() : '';
+    if (!imagenIngresada) {
+      imagenIngresada = 'img/autos/auto_placeholder.jpg';
+    }
+    vehiculoData.imagen = imagenIngresada;
+
     if (this.modoEdicion && this.idEditando !== null) {
       const vehiculoActualizado: Vehiculo = { id: this.idEditando, ...vehiculoData };
       
@@ -130,7 +134,6 @@ export class MantenedorVehiculos implements OnInit {
           if (index !== -1) {
             this.vehiculos[index] = vehiculo;
           }
-          // IMPORTANTE: Primero cancelamos la edición (reseteamos el form) y LUEGO mostramos la alerta
           this.cancelarEdicion(false); 
           this.mostrarAlerta('Vehículo actualizado exitosamente.', 'success');
         },
@@ -139,12 +142,10 @@ export class MantenedorVehiculos implements OnInit {
         }
       });
     } 
-    // 3. Lógica de creación
     else {
       this.vehiculosService.addVehiculo(vehiculoData).subscribe({
         next: (vehiculo) => {
           this.vehiculos.push(vehiculo);
-          // IMPORTANTE: Primero cancelamos la edición (reseteamos el form) y LUEGO mostramos la alerta
           this.cancelarEdicion(false); 
           this.mostrarAlerta('Vehículo agregado exitosamente a la flota.', 'success');
         },
@@ -166,7 +167,6 @@ export class MantenedorVehiculos implements OnInit {
     this.modoEdicion = true;
     this.idEditando = vehiculo.id;
     this.vehiculosForm.patchValue(vehiculo);
-    // Hacemos scroll hacia arriba para que el usuario vea el formulario
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -201,10 +201,8 @@ export class MantenedorVehiculos implements OnInit {
     this.modoEdicion = false;
     this.idEditando = null;
     
-    // Al resetear, volvemos a dejar "disponible" en true para que el select no quede en blanco
     this.vehiculosForm.reset({ disponible: true }); 
     
-    // Solo borramos las alertas si es una cancelación manual, no tras un guardado exitoso
     if (limpiarAlertas) {
       this.mensajeAlerta = null;
       this.tipoAlerta = null;

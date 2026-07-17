@@ -1,6 +1,6 @@
 <div class="bg-primary text-white py-4 mb-4 text-center header-global">
     <h2 class="fw-bold"><i class="fa-solid fa-list-check me-2"></i>Mis Reservas</h2>
-    <p class="text-white">Revisa el historial y estado de tus arriendos</p>
+    <p class="text-white">Revisa el historial y estado de tus Reservas</p>
 </div>
 
 <div class="container mb-5 flex-grow-1">
@@ -10,16 +10,19 @@
             <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
                 <span class="visually-hidden">Cargando reservas...</span>
             </div>
-            <p class="mt-2 text-muted fs-5 fw-medium">Buscando tu historial de viajes...</p>
+            <p class="mt-2 text-muted fs-5 fw-medium">Buscando tu historial de Reservas...</p>
         </div>
     } @else {
         
         @if (misReservas.length === 0) {
-            <div class="text-center py-5 bg-light rounded-4 border border-dashed shadow-sm">
+            <div class="text-center py-5 px-3 bg-light rounded-4 border border-dashed shadow-sm">
                 <i class="fa-solid fa-car-side fa-4x text-muted mb-3"></i>
                 <h3 class="text-secondary fw-bold">Aún no tienes reservas</h3>
                 <p class="text-muted mb-4">¡Explora nuestra flota y planifica tu próximo viaje!</p>
-                <a routerLink="/ver-autos" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">Ver Catálogo de Autos</a>
+                
+                <div class="d-grid d-sm-block">
+                    <a routerLink="/ver-autos" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">Ver Catálogo de Autos</a>
+                </div>
             </div>
         } 
         
